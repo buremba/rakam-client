@@ -1,0 +1,15 @@
+{
+  "name": "",
+  "version": "0.2",
+  "description": "An analytics platform API that lets you create your own analytics services.",
+  "main": "index.js",
+  "keywords": [
+    "swagger"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "connect": "^3.2.0",
+    "swagger-tools": "0.8.*"
+  }
+}

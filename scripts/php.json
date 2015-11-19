@@ -1,0 +1,10 @@
+{
+  "packagePath":"RakamClient",
+  "artifactVersion":null,
+  "invokerPackage": "Rakam",
+  "apiPackage": "client.api",
+  "modelPackage": "client.model",
+  "composerProjectName": "rakam-client",
+  "composerVendor": "rakam",
+  "sortParamsByRequiredFlag": false
+}
