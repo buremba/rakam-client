@@ -6,11 +6,7 @@
   <packaging>jar</packaging>
   <name>rakam-client</name>
   <version>0.2</version>
-  <scm>
-    <connection>scm:git:git@github.com:swagger-api/swagger-mustache.git</connection>
-    <developerConnection>scm:git:git@github.com:swagger-api/swagger-codegen.git</developerConnection>
-    <url>https://github.com/swagger-api/swagger-codegen</url>
-  </scm>
+
   <prerequisites>
     <maven>2.2.0</maven>
   </prerequisites>
@@ -168,4 +164,18 @@
     <maven-plugin-version>1.0.0</maven-plugin-version>
     <junit-version>4.8.1</junit-version>
   </properties>
+
+    <scm>
+        <connection>scm:git:https://github.com/buremba/rakam-client.git</connection>
+        <developerConnection>scm:git:git@github.com:buremba/rakam-client.git</developerConnection>
+        <url>https://github.com/buremba/rakam-client</url>
+        <tag>HEAD</tag>
+    </scm>
+
+  <distributionManagement>
+        <repository>
+            <id>bintray-repo-maven</id>
+            <url>https://api.bintray.com/maven/buremba/maven/rakam-client/;publish=1</url>
+        </repository>
+    </distributionManagement>
 </project>
