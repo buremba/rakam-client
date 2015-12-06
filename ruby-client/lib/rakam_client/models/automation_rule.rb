@@ -1,13 +1,10 @@
 module RakamClient
   # 
   class AutomationRule < BaseObject
-    attr_accessor :id, :project, :is_active, :scenarios, :actions, :custom_data
+    attr_accessor :project, :is_active, :scenarios, :actions, :custom_data, :id
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
-        
-        # 
-        :'id' => :'id',
         
         # 
         :'project' => :'project',
@@ -22,7 +19,10 @@ module RakamClient
         :'actions' => :'actions',
         
         # 
-        :'custom_data' => :'custom_data'
+        :'custom_data' => :'custom_data',
+        
+        # 
+        :'id' => :'id'
         
       }
     end
@@ -30,12 +30,12 @@ module RakamClient
     # attribute type
     def self.swagger_types
       {
-        :'id' => :'Integer',
         :'project' => :'String',
         :'is_active' => :'BOOLEAN',
         :'scenarios' => :'Array<ScenarioStep>',
-        :'actions' => :'Array<Action>',
-        :'custom_data' => :'String'
+        :'actions' => :'Array<SerializableAction>',
+        :'custom_data' => :'String',
+        :'id' => :'Integer'
         
       }
     end
@@ -46,10 +46,6 @@ module RakamClient
       # convert string to symbol for hash key
       attributes = attributes.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
 
-      
-      if attributes[:'id']
-        self.id = attributes[:'id']
-      end
       
       if attributes[:'project']
         self.project = attributes[:'project']
@@ -73,6 +69,10 @@ module RakamClient
       
       if attributes[:'custom_data']
         self.custom_data = attributes[:'custom_data']
+      end
+      
+      if attributes[:'id']
+        self.id = attributes[:'id']
       end
       
     end

@@ -17,14 +17,13 @@ import org.rakam.client.model.JsonResponse;
 import org.rakam.client.model.MetadataResponse;
 import org.rakam.client.model.QueryResult;
 import org.rakam.client.model.SearchUsers;
-import org.rakam.client.model.SetUserPropertyOnce;
 import org.rakam.client.model.SetUserProperties;
 
 import java.io.File;
 import java.util.Map;
 import java.util.HashMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-11-19T22:59:17.166+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
 public class UserApi {
   private ApiClient apiClient;
 
@@ -420,18 +419,18 @@ public class UserApi {
   }
   
   /**
-   * Set user property
+   * Set user properties once
    * 
-   * @param setUserPropertyOnce 
-   * @return JsonResponse
+   * @param setUserProperties 
+   * @return void
    */
-  public JsonResponse setUserPropertyOnce (SetUserPropertyOnce setUserPropertyOnce) throws ApiException {
-    Object postBody = setUserPropertyOnce;
+  public void setUserPropertiesOnce (SetUserProperties setUserProperties) throws ApiException {
+    Object postBody = setUserProperties;
     byte[] postBinaryBody = null;
     
-     // verify the required parameter 'setUserPropertyOnce' is set
-     if (setUserPropertyOnce == null) {
-        throw new ApiException(400, "Missing the required parameter 'setUserPropertyOnce' when calling setUserPropertyOnce");
+     // verify the required parameter 'setUserProperties' is set
+     if (setUserProperties == null) {
+        throw new ApiException(400, "Missing the required parameter 'setUserProperties' when calling setUserPropertiesOnce");
      }
      
     // create path and map variables
@@ -464,8 +463,7 @@ public class UserApi {
 
     
     
-    TypeRef returnType = new TypeRef<JsonResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
+    apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, null);
     
     
 
@@ -473,12 +471,12 @@ public class UserApi {
   }
   
   /**
-   * Set user property
+   * Set user properties
    * 
    * @param setUserProperties 
-   * @return JsonResponse
+   * @return Integer
    */
-  public JsonResponse setUserProperties (SetUserProperties setUserProperties) throws ApiException {
+  public Integer setUserProperties (SetUserProperties setUserProperties) throws ApiException {
     Object postBody = setUserProperties;
     byte[] postBinaryBody = null;
     
@@ -517,7 +515,7 @@ public class UserApi {
 
     
     
-    TypeRef returnType = new TypeRef<JsonResponse>() {};
+    TypeRef returnType = new TypeRef<Integer>() {};
     return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
     

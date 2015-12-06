@@ -123,7 +123,7 @@ class AutomationApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def add_rule(self, **kwargs):
+    def add_rule(self, automation_rule, **kwargs):
         """
         Add scenario
         
@@ -134,16 +134,20 @@ class AutomationApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.add_rule(callback=callback_function)
+        >>> thread = api.add_rule(automation_rule, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
+        :param AutomationRule automation_rule:  (required)
         :return: JsonResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
+        # verify the required parameter 'automation_rule' is set
+        if automation_rule is None:
+            raise ValueError("Missing the required parameter `automation_rule` when calling `add_rule`")
 
-        all_params = []
+        all_params = ['automation_rule']
         all_params.append('callback')
 
         params = locals()
@@ -169,6 +173,8 @@ class AutomationApi(object):
         files = {}
 
         body_params = None
+        if 'automation_rule' in params:
+            body_params = params['automation_rule']
 
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
@@ -334,7 +340,7 @@ class AutomationApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = ['master_key']
+        auth_settings = ['read_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,

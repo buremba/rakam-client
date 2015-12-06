@@ -162,6 +162,55 @@ module RakamClient
       end
       return result
     end
+
+    # Explain query
+    # 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :query 
+    # @return [Object]
+    def explain(opts = {})
+      if Configuration.debugging
+        Configuration.logger.debug "Calling API: EventApi#explain ..."
+      end
+      
+      # resource path
+      path = "/query/explain".sub('{format}','json')
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+
+      # HTTP header 'Accept' (if needed)
+      _header_accept = ['application/json']
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
+
+      # HTTP header 'Content-Type'
+      _header_content_type = ['application/json']
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
+
+      # form parameters
+      form_params = {}
+      form_params["query"] = opts[:'query'] if opts[:'query']
+
+      # http body (model)
+      post_body = nil
+      
+
+      auth_names = ['read_key']
+      result = @api_client.call_api(:POST, path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Object')
+      if Configuration.debugging
+        Configuration.logger.debug "API called: EventApi#explain. Result: #{result.inspect}"
+      end
+      return result
+    end
   end
 end
 

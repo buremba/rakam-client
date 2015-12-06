@@ -78,6 +78,26 @@ namespace Rakam.Client.Api
         /// <returns>QueryResult</returns>
         System.Threading.Tasks.Task<QueryResult> ExecuteAsync (string project, string query, int? limit);
         
+        /// <summary>
+        /// Explain query
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="query"></param>
+        /// <returns>Object</returns>
+        Object Explain (string query);
+  
+        /// <summary>
+        /// Explain query
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="query"></param>
+        /// <returns>Object</returns>
+        System.Threading.Tasks.Task<Object> ExplainAsync (string query);
+        
     }
   
     /// <summary>
@@ -440,6 +460,103 @@ namespace Rakam.Client.Api
                 throw new ApiException ((int)response.StatusCode, "Error calling Execute: " + response.Content, response.Content);
 
             return (QueryResult) ApiClient.Deserialize(response.Content, typeof(QueryResult), response.Headers);
+        }
+        
+        /// <summary>
+        /// Explain query 
+        /// </summary>
+        /// <param name="query"></param> 
+        /// <returns>Object</returns>            
+        public Object Explain (string query)
+        {
+            
+    
+            var path = "/query/explain";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>();
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            if (query != null) formParams.Add("query", ApiClient.ParameterToString(query)); // form parameter
+            
+            
+    
+            // authentication setting, if any
+            String[] authSettings = new String[] { "read_key" };
+    
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
+    
+            if (((int)response.StatusCode) >= 400)
+                throw new ApiException ((int)response.StatusCode, "Error calling Explain: " + response.Content, response.Content);
+            else if (((int)response.StatusCode) == 0)
+                throw new ApiException ((int)response.StatusCode, "Error calling Explain: " + response.ErrorMessage, response.ErrorMessage);
+    
+            return (Object) ApiClient.Deserialize(response.Content, typeof(Object), response.Headers);
+        }
+    
+        /// <summary>
+        /// Explain query 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns>Object</returns>
+        public async System.Threading.Tasks.Task<Object> ExplainAsync (string query)
+        {
+            
+    
+            var path = "/query/explain";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>();
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            if (query != null) formParams.Add("query", ApiClient.ParameterToString(query)); // form parameter
+            
+            
+    
+            // authentication setting, if any
+            String[] authSettings = new String[] { "read_key" };
+    
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
+            if (((int)response.StatusCode) >= 400)
+                throw new ApiException ((int)response.StatusCode, "Error calling Explain: " + response.Content, response.Content);
+
+            return (Object) ApiClient.Deserialize(response.Content, typeof(Object), response.Headers);
         }
         
     }

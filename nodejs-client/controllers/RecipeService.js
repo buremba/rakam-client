@@ -58,7 +58,7 @@ exports.export = function(project) {
     return examples[Object.keys(examples)[0]];
   
 }
-exports.install = function(recipe) {
+exports.install = function() {
 
   var examples = {};
   

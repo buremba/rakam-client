@@ -17,7 +17,7 @@ import java.io.File;
 import java.util.Map;
 import java.util.HashMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-11-19T22:59:17.166+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
 public class AutomationApi {
   private ApiClient apiClient;
 
@@ -94,12 +94,18 @@ public class AutomationApi {
   /**
    * Add scenario
    * 
+   * @param automationRule 
    * @return JsonResponse
    */
-  public JsonResponse addRule () throws ApiException {
-    Object postBody = null;
+  public JsonResponse addRule (AutomationRule automationRule) throws ApiException {
+    Object postBody = automationRule;
     byte[] postBinaryBody = null;
     
+     // verify the required parameter 'automationRule' is set
+     if (automationRule == null) {
+        throw new ApiException(400, "Missing the required parameter 'automationRule' when calling addRule");
+     }
+     
     // create path and map variables
     String path = "/automation/add".replaceAll("\\{format\\}","json");
 
@@ -227,7 +233,7 @@ public class AutomationApi {
     };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
 
-    String[] authNames = new String[] { "master_key" };
+    String[] authNames = new String[] { "read_key" };
 
     
 

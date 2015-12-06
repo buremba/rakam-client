@@ -15,7 +15,7 @@ exports.activateRule = function(project, id) {
     return examples[Object.keys(examples)[0]];
   
 }
-exports.addRule = function() {
+exports.addRule = function(automationRule) {
 
   var examples = {};
   
@@ -52,7 +52,6 @@ exports.listRules = function(project) {
   examples['application/json'] = [ {
   "is_active" : true,
   "project" : "aeiou",
-  "id" : 123,
   "scenarios" : [ {
     "filter" : "aeiou",
     "threshold" : {
@@ -62,9 +61,10 @@ exports.listRules = function(project) {
     },
     "collection" : "aeiou"
   } ],
+  "id" : 123,
   "actions" : [ {
     "type" : "aeiou",
-    "value" : "aeiou"
+    "value" : "{}"
   } ],
   "custom_data" : "aeiou"
 } ];

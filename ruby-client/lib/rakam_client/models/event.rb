@@ -1,7 +1,7 @@
 module RakamClient
   # 
   class Event < BaseObject
-    attr_accessor :project, :collection, :context, :properties
+    attr_accessor :project, :collection, :api, :properties
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
@@ -13,7 +13,7 @@ module RakamClient
         :'collection' => :'collection',
         
         # 
-        :'context' => :'context',
+        :'api' => :'api',
         
         # 
         :'properties' => :'properties'
@@ -26,7 +26,7 @@ module RakamClient
       {
         :'project' => :'String',
         :'collection' => :'String',
-        :'context' => :'EventContext',
+        :'api' => :'EventContext',
         :'properties' => :'Object'
         
       }
@@ -47,8 +47,8 @@ module RakamClient
         self.collection = attributes[:'collection']
       end
       
-      if attributes[:'context']
-        self.context = attributes[:'context']
+      if attributes[:'api']
+        self.api = attributes[:'api']
       end
       
       if attributes[:'properties']

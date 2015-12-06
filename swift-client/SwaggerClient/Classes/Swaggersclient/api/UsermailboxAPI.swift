@@ -61,7 +61,7 @@ extension SwaggerClientAPI {
          
          Get connected users
          
-         - POST /user/mailbox/getOnlineUsers
+         - POST /user/mailbox/get_online_users
          - 
          - API Key:
            - type: apiKey read_key 
@@ -75,7 +75,7 @@ extension SwaggerClientAPI {
          - returns: RequestBuilder<[[String:String]]> 
          */
         public class func getConnectedUsers(project project: String?) -> RequestBuilder<[[String:String]]> {
-            let path = "/user/mailbox/getOnlineUsers"
+            let path = "/user/mailbox/get_online_users"
             let URLString = SwaggerClientAPI.basePath + path
             
             let nillableParameters: [String:AnyObject?] = [
@@ -120,54 +120,6 @@ extension SwaggerClientAPI {
             let parameters = APIHelper.rejectNil(nillableParameters)
 
             let requestBuilder: RequestBuilder<JsonResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
-        }
-    
-        /**
-         
-         Send mail to user
-         
-         - POST /user/mailbox/send
-         - Sends a mail to users mailbox
-         - API Key:
-           - type: apiKey write_key 
-           - name: write_key
-         - examples: [{contentType=application/json, example={
-  "to_user" : "{}",
-  "project" : "aeiou",
-  "id" : 123,
-  "time" : 123456789,
-  "content" : "aeiou",
-  "parentId" : 123,
-  "seen" : true,
-  "from_user" : "{}"
-}}]
-         
-         - parameter project: (form) 
-         - parameter fromUser: (form) 
-         - parameter toUser: (form) 
-         - parameter parent: (form) 
-         - parameter message: (form) 
-         - parameter timestamp: (form) 
-
-         - returns: RequestBuilder<Message> 
-         */
-        public class func send(project project: String?, fromUser: String?, toUser: String?, parent: Int?, message: String?, timestamp: Int?) -> RequestBuilder<Message> {
-            let path = "/user/mailbox/send"
-            let URLString = SwaggerClientAPI.basePath + path
-            
-            let nillableParameters: [String:AnyObject?] = [
-                "project": project,
-                "fromUser": fromUser,
-                "toUser": toUser,
-                "parent": parent,
-                "message": message,
-                "timestamp": timestamp
-            ]
-            let parameters = APIHelper.rejectNil(nillableParameters)
-
-            let requestBuilder: RequestBuilder<Message>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
             return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
         }

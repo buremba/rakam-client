@@ -57,3 +57,15 @@ exports.execute = function(project, query, limit) {
     return examples[Object.keys(examples)[0]];
   
 }
+exports.explain = function(query) {
+
+  var examples = {};
+  
+  examples['application/json'] = "{}";
+  
+
+  
+  if(Object.keys(examples).length > 0)
+    return examples[Object.keys(examples)[0]];
+  
+}

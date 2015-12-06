@@ -367,18 +367,18 @@ module RakamClient
       return result
     end
 
-    # Set user property
+    # Set user properties once
     # 
-    # @param set_user_property_once 
+    # @param set_user_properties 
     # @param [Hash] opts the optional parameters
-    # @return [JsonResponse]
-    def set_user_property_once(set_user_property_once, opts = {})
+    # @return [nil]
+    def set_user_properties_once(set_user_properties, opts = {})
       if Configuration.debugging
-        Configuration.logger.debug "Calling API: UserApi#set_user_property_once ..."
+        Configuration.logger.debug "Calling API: UserApi#set_user_properties_once ..."
       end
       
-      # verify the required parameter 'set_user_property_once' is set
-      fail "Missing the required parameter 'set_user_property_once' when calling set_user_property_once" if set_user_property_once.nil?
+      # verify the required parameter 'set_user_properties' is set
+      fail "Missing the required parameter 'set_user_properties' when calling set_user_properties_once" if set_user_properties.nil?
       
       # resource path
       path = "/user/set_once".sub('{format}','json')
@@ -401,28 +401,27 @@ module RakamClient
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(set_user_property_once)
+      post_body = @api_client.object_to_http_body(set_user_properties)
       
 
       auth_names = []
-      result = @api_client.call_api(:POST, path,
+      @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names,
-        :return_type => 'JsonResponse')
+        :auth_names => auth_names)
       if Configuration.debugging
-        Configuration.logger.debug "API called: UserApi#set_user_property_once. Result: #{result.inspect}"
+        Configuration.logger.debug "API called: UserApi#set_user_properties_once"
       end
-      return result
+      return nil
     end
 
-    # Set user property
+    # Set user properties
     # 
     # @param set_user_properties 
     # @param [Hash] opts the optional parameters
-    # @return [JsonResponse]
+    # @return [Integer]
     def set_user_properties(set_user_properties, opts = {})
       if Configuration.debugging
         Configuration.logger.debug "Calling API: UserApi#set_user_properties ..."
@@ -462,7 +461,7 @@ module RakamClient
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'JsonResponse')
+        :return_type => 'Integer')
       if Configuration.debugging
         Configuration.logger.debug "API called: UserApi#set_user_properties. Result: #{result.inspect}"
       end

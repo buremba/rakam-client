@@ -51,12 +51,12 @@ class AutomationRule implements ArrayAccess
       * @var string[]
       */
     static $swaggerTypes = array(
-        'id' => 'int',
         'project' => 'string',
         'is_active' => 'bool',
         'scenarios' => '\client.model\ScenarioStep[]',
-        'actions' => '\client.model\Action[]',
-        'custom_data' => 'string'
+        'actions' => '\client.model\SerializableAction[]',
+        'custom_data' => 'string',
+        'id' => 'int'
     );
   
     /** 
@@ -64,12 +64,12 @@ class AutomationRule implements ArrayAccess
       * @var string[] 
       */
     static $attributeMap = array(
-        'id' => 'id',
         'project' => 'project',
         'is_active' => 'is_active',
         'scenarios' => 'scenarios',
         'actions' => 'actions',
-        'custom_data' => 'custom_data'
+        'custom_data' => 'custom_data',
+        'id' => 'id'
     );
   
     /**
@@ -77,12 +77,12 @@ class AutomationRule implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'id' => 'setId',
         'project' => 'setProject',
         'is_active' => 'setIsActive',
         'scenarios' => 'setScenarios',
         'actions' => 'setActions',
-        'custom_data' => 'setCustomData'
+        'custom_data' => 'setCustomData',
+        'id' => 'setId'
     );
   
     /**
@@ -90,20 +90,14 @@ class AutomationRule implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'id' => 'getId',
         'project' => 'getProject',
         'is_active' => 'getIsActive',
         'scenarios' => 'getScenarios',
         'actions' => 'getActions',
-        'custom_data' => 'getCustomData'
+        'custom_data' => 'getCustomData',
+        'id' => 'getId'
     );
   
-    
-    /**
-      * $id 
-      * @var int
-      */
-    protected $id;
     
     /**
       * $project 
@@ -125,7 +119,7 @@ class AutomationRule implements ArrayAccess
     
     /**
       * $actions 
-      * @var \client.model\Action[]
+      * @var \client.model\SerializableAction[]
       */
     protected $actions;
     
@@ -135,6 +129,12 @@ class AutomationRule implements ArrayAccess
       */
     protected $custom_data;
     
+    /**
+      * $id 
+      * @var int
+      */
+    protected $id;
+    
 
     /**
      * Constructor
@@ -143,34 +143,13 @@ class AutomationRule implements ArrayAccess
     public function __construct(array $data = null)
     {
         if ($data != null) {
-            $this->id = $data["id"];
             $this->project = $data["project"];
             $this->is_active = $data["is_active"];
             $this->scenarios = $data["scenarios"];
             $this->actions = $data["actions"];
             $this->custom_data = $data["custom_data"];
+            $this->id = $data["id"];
         }
-    }
-    
-    /**
-     * Gets id
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-  
-    /**
-     * Sets id
-     * @param int $id 
-     * @return $this
-     */
-    public function setId($id)
-    {
-        
-        $this->id = $id;
-        return $this;
     }
     
     /**
@@ -238,7 +217,7 @@ class AutomationRule implements ArrayAccess
     
     /**
      * Gets actions
-     * @return \client.model\Action[]
+     * @return \client.model\SerializableAction[]
      */
     public function getActions()
     {
@@ -247,7 +226,7 @@ class AutomationRule implements ArrayAccess
   
     /**
      * Sets actions
-     * @param \client.model\Action[] $actions 
+     * @param \client.model\SerializableAction[] $actions 
      * @return $this
      */
     public function setActions($actions)
@@ -275,6 +254,27 @@ class AutomationRule implements ArrayAccess
     {
         
         $this->custom_data = $custom_data;
+        return $this;
+    }
+    
+    /**
+     * Gets id
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+  
+    /**
+     * Sets id
+     * @param int $id 
+     * @return $this
+     */
+    public function setId($id)
+    {
+        
+        $this->id = $id;
         return $this;
     }
     

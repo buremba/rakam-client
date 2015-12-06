@@ -166,7 +166,7 @@ class UsermailboxApi(object):
             params[key] = val
         del params['kwargs']
 
-        resource_path = '/user/mailbox/getOnlineUsers'.replace('{format}', 'json')
+        resource_path = '/user/mailbox/get_online_users'.replace('{format}', 'json')
         method = 'POST'
 
         path_params = {}
@@ -284,96 +284,6 @@ class UsermailboxApi(object):
                                             post_params=form_params,
                                             files=files,
                                             response_type='JsonResponse',
-                                            auth_settings=auth_settings,
-                                            callback=params.get('callback'))
-        return response
-
-    def send(self, **kwargs):
-        """
-        Send mail to user
-        Sends a mail to users mailbox
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.send(callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param str project: 
-        :param str from_user: 
-        :param str to_user: 
-        :param int parent: 
-        :param str message: 
-        :param int timestamp: 
-        :return: Message
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['project', 'from_user', 'to_user', 'parent', 'message', 'timestamp']
-        all_params.append('callback')
-
-        params = locals()
-        for key, val in iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method send" % key
-                )
-            params[key] = val
-        del params['kwargs']
-
-        resource_path = '/user/mailbox/send'.replace('{format}', 'json')
-        method = 'POST'
-
-        path_params = {}
-
-        query_params = {}
-
-        header_params = {}
-
-        form_params = {}
-        files = {}
-        if 'project' in params:
-            form_params['project'] = params['project']
-        if 'from_user' in params:
-            form_params['from_user'] = params['from_user']
-        if 'to_user' in params:
-            form_params['to_user'] = params['to_user']
-        if 'parent' in params:
-            form_params['parent'] = params['parent']
-        if 'message' in params:
-            form_params['message'] = params['message']
-        if 'timestamp' in params:
-            form_params['timestamp'] = params['timestamp']
-
-        body_params = None
-
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.\
-            select_header_accept(['application/json'])
-        if not header_params['Accept']:
-            del header_params['Accept']
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json'])
-
-        # Authentication setting
-        auth_settings = ['write_key']
-
-        response = self.api_client.call_api(resource_path, method,
-                                            path_params,
-                                            query_params,
-                                            header_params,
-                                            body=body_params,
-                                            post_params=form_params,
-                                            files=files,
-                                            response_type='Message',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'))
         return response

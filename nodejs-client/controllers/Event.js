@@ -49,3 +49,17 @@ module.exports.execute = function execute (req, res, next) {
   else
     res.end();
 };
+
+module.exports.explain = function explain (req, res, next) {
+  var query = req.swagger.params['query'].value;
+  
+
+  var result = Event.explain(query);
+
+  if(typeof result !== 'undefined') {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(result || {}, null, 2));
+  }
+  else
+    res.end();
+};

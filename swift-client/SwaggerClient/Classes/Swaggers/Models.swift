@@ -132,16 +132,6 @@ class Decoders {
             }
 			
 
-			// Decoder for Action
-            Decoders.addDecoder(clazz: Action.self) { (source: AnyObject) -> Action in
-                let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = Action()
-                instance.type = (sourceDictionary["type"] as? String).map { Action.SwaggerType(rawValue: $0)! } 
-                instance.value = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["value"])
-                return instance
-            }
-			
-
 			// Decoder for User
             Decoders.addDecoder(clazz: User.self) { (source: AnyObject) -> User in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -149,6 +139,22 @@ class Decoders {
                 instance.project = Decoders.decode(clazz: String.self, source: sourceDictionary["project"]!)
                 instance.id = Decoders.decode(clazz: String.self, source: sourceDictionary["id"]!)
                 instance.properties = Decoders.decode(clazz: Dictionary.self, source: sourceDictionary["properties"]!)
+                return instance
+            }
+			
+
+			// Decoder for Execute
+            Decoders.addDecoder(clazz: Execute.self) { (source: AnyObject) -> Execute in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = Execute()
+                instance.project = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["project"])
+                instance.measure = Decoders.decodeOptional(clazz: Measure.self, source: sourceDictionary["measure"])
+                instance.grouping = Decoders.decodeOptional(clazz: Reference.self, source: sourceDictionary["grouping"])
+                instance.segment = Decoders.decodeOptional(clazz: Reference.self, source: sourceDictionary["segment"])
+                instance.filterExpression = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["filterExpression"])
+                instance.startDate = Decoders.decodeOptional(clazz: NSDate.self, source: sourceDictionary["startDate"])
+                instance.endDate = Decoders.decodeOptional(clazz: NSDate.self, source: sourceDictionary["endDate"])
+                instance.collections = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["collections"])
                 return instance
             }
 			
@@ -185,13 +191,24 @@ class Decoders {
             }
 			
 
-			// Decoder for SetUserPropertyOnce
-            Decoders.addDecoder(clazz: SetUserPropertyOnce.self) { (source: AnyObject) -> SetUserPropertyOnce in
+			// Decoder for BatchCreate
+            Decoders.addDecoder(clazz: BatchCreate.self) { (source: AnyObject) -> BatchCreate in
                 let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = SetUserPropertyOnce()
+                let instance = BatchCreate()
                 instance.project = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["project"])
-                instance.user = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["user"])
-                instance.properties = Decoders.decodeOptional(clazz: Dictionary.self, source: sourceDictionary["properties"])
+                instance.users = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["users"])
+                return instance
+            }
+			
+
+			// Decoder for BatchSendMessages
+            Decoders.addDecoder(clazz: BatchSendMessages.self) { (source: AnyObject) -> BatchSendMessages in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = BatchSendMessages()
+                instance.project = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["project"])
+                instance.filter = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["filter"])
+                instance.event_filters = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["event_filters"])
+                instance.config = Decoders.decodeOptional(clazz: MailAction.self, source: sourceDictionary["config"])
                 return instance
             }
 			
@@ -206,16 +223,13 @@ class Decoders {
             }
 			
 
-			// Decoder for SearchUsers
-            Decoders.addDecoder(clazz: SearchUsers.self) { (source: AnyObject) -> SearchUsers in
+			// Decoder for Send
+            Decoders.addDecoder(clazz: Send.self) { (source: AnyObject) -> Send in
                 let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = SearchUsers()
+                let instance = Send()
                 instance.project = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["project"])
-                instance.filter = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["filter"])
-                instance.event_filters = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["event_filters"])
-                instance.sorting = Decoders.decodeOptional(clazz: Sorting.self, source: sourceDictionary["sorting"])
-                instance.offset = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["offset"])
-                instance.limit = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["limit"])
+                instance.user = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["user"])
+                instance.config = Decoders.decodeOptional(clazz: EmailActionConfig.self, source: sourceDictionary["config"])
                 return instance
             }
 			
@@ -229,6 +243,16 @@ class Decoders {
                 instance.error = Decoders.decodeOptional(clazz: QueryError.self, source: sourceDictionary["error"])
                 instance.properties = Decoders.decodeOptional(clazz: Dictionary.self, source: sourceDictionary["properties"])
                 instance.failed = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["failed"])
+                return instance
+            }
+			
+
+			// Decoder for Goal
+            Decoders.addDecoder(clazz: Goal.self) { (source: AnyObject) -> Goal in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = Goal()
+                instance.collection = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["collection"])
+                instance.filter = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["filter"])
                 return instance
             }
 			
@@ -270,12 +294,38 @@ class Decoders {
             }
 			
 
+			// Decoder for SearchUsers
+            Decoders.addDecoder(clazz: SearchUsers.self) { (source: AnyObject) -> SearchUsers in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = SearchUsers()
+                instance.project = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["project"])
+                instance.columns = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["columns"])
+                instance.filter = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["filter"])
+                instance.event_filters = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["event_filters"])
+                instance.sorting = Decoders.decodeOptional(clazz: Sorting.self, source: sourceDictionary["sorting"])
+                instance.offset = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["offset"])
+                instance.limit = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["limit"])
+                return instance
+            }
+			
+
 			// Decoder for MetadataResponse
             Decoders.addDecoder(clazz: MetadataResponse.self) { (source: AnyObject) -> MetadataResponse in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = MetadataResponse()
                 instance.columns = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["columns"])
                 instance.identifierColumn = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["identifierColumn"])
+                return instance
+            }
+			
+
+			// Decoder for SetUserProperties
+            Decoders.addDecoder(clazz: SetUserProperties.self) { (source: AnyObject) -> SetUserProperties in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = SetUserProperties()
+                instance.project = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["project"])
+                instance.user = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["user"])
+                instance.properties = Decoders.decodeOptional(clazz: Dictionary.self, source: sourceDictionary["properties"])
                 return instance
             }
 			
@@ -330,16 +380,6 @@ class Decoders {
             }
 			
 
-			// Decoder for BatchCreate
-            Decoders.addDecoder(clazz: BatchCreate.self) { (source: AnyObject) -> BatchCreate in
-                let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = BatchCreate()
-                instance.project = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["project"])
-                instance.users = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["users"])
-                return instance
-            }
-			
-
 			// Decoder for MaterializedViewBuilder
             Decoders.addDecoder(clazz: MaterializedViewBuilder.self) { (source: AnyObject) -> MaterializedViewBuilder in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -349,6 +389,22 @@ class Decoders {
                 instance.query = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["query"])
                 instance.options = Decoders.decodeOptional(clazz: Dictionary.self, source: sourceDictionary["options"])
                 instance.updateInterval = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["updateInterval"])
+                return instance
+            }
+			
+
+			// Decoder for ABTestingReport
+            Decoders.addDecoder(clazz: ABTestingReport.self) { (source: AnyObject) -> ABTestingReport in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = ABTestingReport()
+                instance.project = Decoders.decode(clazz: String.self, source: sourceDictionary["project"]!)
+                instance.name = Decoders.decode(clazz: String.self, source: sourceDictionary["name"]!)
+                instance.variants = Decoders.decode(clazz: Array.self, source: sourceDictionary["variants"]!)
+                instance.goal = Decoders.decode(clazz: Goal.self, source: sourceDictionary["goal"]!)
+                instance.options = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["options"])
+                instance.id = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["id"])
+                instance.collectionName = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["collectionName"])
+                instance.connectorField = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["connectorField"])
                 return instance
             }
 			
@@ -389,6 +445,16 @@ class Decoders {
             }
 			
 
+			// Decoder for SerializableAction
+            Decoders.addDecoder(clazz: SerializableAction.self) { (source: AnyObject) -> SerializableAction in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = SerializableAction()
+                instance.type = (sourceDictionary["type"] as? String).map { SerializableAction.SwaggerType(rawValue: $0)! } 
+                instance.value = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["value"])
+                return instance
+            }
+			
+
 			// Decoder for RetentionAction
             Decoders.addDecoder(clazz: RetentionAction.self) { (source: AnyObject) -> RetentionAction in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -398,18 +464,15 @@ class Decoders {
             }
 			
 
-			// Decoder for Execute
-            Decoders.addDecoder(clazz: Execute.self) { (source: AnyObject) -> Execute in
+			// Decoder for EmailActionConfig
+            Decoders.addDecoder(clazz: EmailActionConfig.self) { (source: AnyObject) -> EmailActionConfig in
                 let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = Execute()
-                instance.project = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["project"])
-                instance.measure = Decoders.decodeOptional(clazz: Measure.self, source: sourceDictionary["measure"])
-                instance.grouping = Decoders.decodeOptional(clazz: Reference.self, source: sourceDictionary["grouping"])
-                instance.segment = Decoders.decodeOptional(clazz: Reference.self, source: sourceDictionary["segment"])
-                instance.filterExpression = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["filterExpression"])
-                instance.startDate = Decoders.decodeOptional(clazz: NSDate.self, source: sourceDictionary["startDate"])
-                instance.endDate = Decoders.decodeOptional(clazz: NSDate.self, source: sourceDictionary["endDate"])
-                instance.collections = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["collections"])
+                let instance = EmailActionConfig()
+                instance.title = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["title"])
+                instance.content = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["content"])
+                instance.columnName = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["columnName"])
+                instance.defaultValues = Decoders.decodeOptional(clazz: Dictionary.self, source: sourceDictionary["defaultValues"])
+                instance.richText = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["richText"])
                 return instance
             }
 			
@@ -465,12 +528,23 @@ class Decoders {
             Decoders.addDecoder(clazz: AutomationRule.self) { (source: AnyObject) -> AutomationRule in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = AutomationRule()
-                instance.id = Decoders.decode(clazz: Int.self, source: sourceDictionary["id"]!)
                 instance.project = Decoders.decode(clazz: String.self, source: sourceDictionary["project"]!)
                 instance.is_active = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["is_active"])
                 instance.scenarios = Decoders.decode(clazz: Array.self, source: sourceDictionary["scenarios"]!)
                 instance.actions = Decoders.decode(clazz: Array.self, source: sourceDictionary["actions"]!)
                 instance.custom_data = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["custom_data"])
+                instance.id = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["id"])
+                return instance
+            }
+			
+
+			// Decoder for Variant
+            Decoders.addDecoder(clazz: Variant.self) { (source: AnyObject) -> Variant in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = Variant()
+                instance.name = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["name"])
+                instance.weight = Decoders.decodeOptional(clazz: Int.self, source: sourceDictionary["weight"])
+                instance.data = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["data"])
                 return instance
             }
 			
@@ -483,17 +557,6 @@ class Decoders {
                 instance.apiVersion = Decoders.decode(clazz: String.self, source: sourceDictionary["apiVersion"]!)
                 instance.uploadTime = Decoders.decode(clazz: Int.self, source: sourceDictionary["uploadTime"]!)
                 instance.checksum = Decoders.decode(clazz: String.self, source: sourceDictionary["checksum"]!)
-                return instance
-            }
-			
-
-			// Decoder for SetUserProperties
-            Decoders.addDecoder(clazz: SetUserProperties.self) { (source: AnyObject) -> SetUserProperties in
-                let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = SetUserProperties()
-                instance.project = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["project"])
-                instance.user = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["user"])
-                instance.properties = Decoders.decodeOptional(clazz: Dictionary.self, source: sourceDictionary["properties"])
                 return instance
             }
 			
@@ -519,6 +582,29 @@ class Decoders {
             }
 			
 
+			// Decoder for BatchSendEmails
+            Decoders.addDecoder(clazz: BatchSendEmails.self) { (source: AnyObject) -> BatchSendEmails in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = BatchSendEmails()
+                instance.project = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["project"])
+                instance.filter = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["filter"])
+                instance.event_filters = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["event_filters"])
+                instance.config = Decoders.decodeOptional(clazz: EmailActionConfig.self, source: sourceDictionary["config"])
+                return instance
+            }
+			
+
+			// Decoder for MailAction
+            Decoders.addDecoder(clazz: MailAction.self) { (source: AnyObject) -> MailAction in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = MailAction()
+                instance.message = Decoders.decode(clazz: String.self, source: sourceDictionary["message"]!)
+                instance.variables = Decoders.decode(clazz: Dictionary.self, source: sourceDictionary["variables"]!)
+                instance.fromUser = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["fromUser"])
+                return instance
+            }
+			
+
 			// Decoder for Collection
             Decoders.addDecoder(clazz: Collection.self) { (source: AnyObject) -> Collection in
                 let sourceDictionary = source as! [NSObject:AnyObject]
@@ -535,7 +621,7 @@ class Decoders {
                 let instance = Event()
                 instance.project = Decoders.decode(clazz: String.self, source: sourceDictionary["project"]!)
                 instance.collection = Decoders.decode(clazz: String.self, source: sourceDictionary["collection"]!)
-                instance.context = Decoders.decodeOptional(clazz: EventContext.self, source: sourceDictionary["context"])
+                instance.api = Decoders.decode(clazz: EventContext.self, source: sourceDictionary["api"]!)
                 instance.properties = Decoders.decode(clazz: String.self, source: sourceDictionary["properties"]!)
                 return instance
             }

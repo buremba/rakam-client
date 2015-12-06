@@ -10,23 +10,23 @@ import Foundation
 
 public class AutomationRule: JSONEncodable {
 
-    public var id: Int!
     public var project: String!
     public var is_active: Bool?
     public var scenarios: [ScenarioStep]!
-    public var actions: [Action]!
+    public var actions: [SerializableAction]!
     public var custom_data: String?
+    public var id: Int?
     
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
-        nillableDictionary["id"] = self.id
         nillableDictionary["project"] = self.project
         nillableDictionary["is_active"] = self.is_active
         nillableDictionary["scenarios"] = self.scenarios.encodeToJSON()
         nillableDictionary["actions"] = self.actions.encodeToJSON()
         nillableDictionary["custom_data"] = self.custom_data
+        nillableDictionary["id"] = self.id
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

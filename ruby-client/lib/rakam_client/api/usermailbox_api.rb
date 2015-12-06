@@ -76,7 +76,7 @@ module RakamClient
       end
       
       # resource path
-      path = "/user/mailbox/getOnlineUsers".sub('{format}','json')
+      path = "/user/mailbox/get_online_users".sub('{format}','json')
 
       # query parameters
       query_params = {}
@@ -163,65 +163,6 @@ module RakamClient
         :return_type => 'JsonResponse')
       if Configuration.debugging
         Configuration.logger.debug "API called: UsermailboxApi#mark_as_read. Result: #{result.inspect}"
-      end
-      return result
-    end
-
-    # Send mail to user
-    # Sends a mail to users mailbox
-    # @param [Hash] opts the optional parameters
-    # @option opts [String] :project 
-    # @option opts [String] :from_user 
-    # @option opts [String] :to_user 
-    # @option opts [Integer] :parent 
-    # @option opts [String] :message 
-    # @option opts [Integer] :timestamp 
-    # @return [Message]
-    def send(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: UsermailboxApi#send ..."
-      end
-      
-      # resource path
-      path = "/user/mailbox/send".sub('{format}','json')
-
-      # query parameters
-      query_params = {}
-
-      # header parameters
-      header_params = {}
-
-      # HTTP header 'Accept' (if needed)
-      _header_accept = ['application/json']
-      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
-
-      # HTTP header 'Content-Type'
-      _header_content_type = ['application/json']
-      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
-
-      # form parameters
-      form_params = {}
-      form_params["project"] = opts[:'project'] if opts[:'project']
-      form_params["from_user"] = opts[:'from_user'] if opts[:'from_user']
-      form_params["to_user"] = opts[:'to_user'] if opts[:'to_user']
-      form_params["parent"] = opts[:'parent'] if opts[:'parent']
-      form_params["message"] = opts[:'message'] if opts[:'message']
-      form_params["timestamp"] = opts[:'timestamp'] if opts[:'timestamp']
-
-      # http body (model)
-      post_body = nil
-      
-
-      auth_names = ['write_key']
-      result = @api_client.call_api(:POST, path,
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => 'Message')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: UsermailboxApi#send. Result: #{result.inspect}"
       end
       return result
     end

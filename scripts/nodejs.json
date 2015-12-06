@@ -1,5 +1,0 @@
-{
-  "apiPackage": "client.api",
-  "modelPackage": "client.model",
-  "sortParamsByRequiredFlag": false
-}

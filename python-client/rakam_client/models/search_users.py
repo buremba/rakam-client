@@ -38,6 +38,7 @@ class SearchUsers(object):
         """
         self.swagger_types = {
             'project': 'str',
+            'columns': 'list[str]',
             'filter': 'str',
             'event_filters': 'list[EventFilter]',
             'sorting': 'Sorting',
@@ -47,6 +48,7 @@ class SearchUsers(object):
 
         self.attribute_map = {
             'project': 'project',
+            'columns': 'columns',
             'filter': 'filter',
             'event_filters': 'event_filters',
             'sorting': 'sorting',
@@ -55,6 +57,7 @@ class SearchUsers(object):
         }
 
         self._project = None
+        self._columns = None
         self._filter = None
         self._event_filters = None
         self._sorting = None
@@ -82,6 +85,28 @@ class SearchUsers(object):
         :type: str
         """
         self._project = project
+
+    @property
+    def columns(self):
+        """
+        Gets the columns of this SearchUsers.
+
+
+        :return: The columns of this SearchUsers.
+        :rtype: list[str]
+        """
+        return self._columns
+
+    @columns.setter
+    def columns(self, columns):
+        """
+        Sets the columns of this SearchUsers.
+
+
+        :param columns: The columns of this SearchUsers.
+        :type: list[str]
+        """
+        self._columns = columns
 
     @property
     def filter(self):

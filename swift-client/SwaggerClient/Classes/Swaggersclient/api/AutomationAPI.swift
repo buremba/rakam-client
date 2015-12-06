@@ -58,15 +58,16 @@ extension SwaggerClientAPI {
   "success" : true,
   "message" : "aeiou"
 }}]
+         
+         - parameter automationRule: (body) 
 
          - returns: RequestBuilder<JsonResponse> 
          */
-        public class func addRule() -> RequestBuilder<JsonResponse> {
+        public class func addRule(automationRule automationRule: AutomationRule) -> RequestBuilder<JsonResponse> {
             let path = "/automation/add"
             let URLString = SwaggerClientAPI.basePath + path
             
-            let nillableParameters: [String:AnyObject?] = [:]
-            let parameters = APIHelper.rejectNil(nillableParameters)
+            let parameters = automationRule.encodeToJSON() as? [String:AnyObject]
 
             let requestBuilder: RequestBuilder<JsonResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
@@ -114,12 +115,11 @@ extension SwaggerClientAPI {
          - POST /automation/list
          - 
          - API Key:
-           - type: apiKey master_key 
-           - name: master_key
+           - type: apiKey read_key 
+           - name: read_key
          - examples: [{contentType=application/json, example=[ {
   "is_active" : true,
   "project" : "aeiou",
-  "id" : 123,
   "scenarios" : [ {
     "filter" : "aeiou",
     "threshold" : {
@@ -129,9 +129,10 @@ extension SwaggerClientAPI {
     },
     "collection" : "aeiou"
   } ],
+  "id" : 123,
   "actions" : [ {
     "type" : "aeiou",
-    "value" : "aeiou"
+    "value" : "{}"
   } ],
   "custom_data" : "aeiou"
 } ]}]

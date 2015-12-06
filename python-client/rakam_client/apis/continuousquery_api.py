@@ -109,7 +109,7 @@ class ContinuousqueryApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = []
+        auth_settings = ['master_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,
@@ -187,7 +187,7 @@ class ContinuousqueryApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = []
+        auth_settings = ['master_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,
@@ -262,7 +262,7 @@ class ContinuousqueryApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = []
+        auth_settings = ['read_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,
@@ -337,7 +337,7 @@ class ContinuousqueryApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = []
+        auth_settings = ['read_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,
@@ -415,7 +415,7 @@ class ContinuousqueryApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = []
+        auth_settings = ['read_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,

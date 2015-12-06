@@ -1,13 +1,16 @@
 module RakamClient
   # 
   class SearchUsers < BaseObject
-    attr_accessor :project, :filter, :event_filters, :sorting, :offset, :limit
+    attr_accessor :project, :columns, :filter, :event_filters, :sorting, :offset, :limit
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
         
         # 
         :'project' => :'project',
+        
+        # 
+        :'columns' => :'columns',
         
         # 
         :'filter' => :'filter',
@@ -31,6 +34,7 @@ module RakamClient
     def self.swagger_types
       {
         :'project' => :'String',
+        :'columns' => :'Array<String>',
         :'filter' => :'String',
         :'event_filters' => :'Array<EventFilter>',
         :'sorting' => :'Sorting',
@@ -49,6 +53,12 @@ module RakamClient
       
       if attributes[:'project']
         self.project = attributes[:'project']
+      end
+      
+      if attributes[:'columns']
+        if (value = attributes[:'columns']).is_a?(Array)
+          self.columns = value
+        end
       end
       
       if attributes[:'filter']

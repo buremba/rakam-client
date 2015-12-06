@@ -74,8 +74,8 @@ extension SwaggerClientAPI {
          - GET /project/list
          - 
          - API Key:
-           - type: apiKey master_key 
-           - name: master_key
+           - type: apiKey read_key 
+           - name: read_key
 
          - returns: RequestBuilder<Void> 
          */
@@ -98,8 +98,8 @@ extension SwaggerClientAPI {
          - POST /project/schema
          - 
          - API Key:
-           - type: apiKey master_key 
-           - name: master_key
+           - type: apiKey read_key 
+           - name: read_key
          - examples: [{contentType=application/json, example=[ {
   "name" : "aeiou",
   "fields" : [ {

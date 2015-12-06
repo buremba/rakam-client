@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-11-19T22:59:17.166+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
 public class Event   {
   
   private String project = null;
   private String collection = null;
-  private EventContext context = null;
+  private EventContext api = null;
   private Object properties = null;
 
   
@@ -45,13 +45,13 @@ public class Event   {
   
   /**
    **/
-  @ApiModelProperty(value = "")
-  @JsonProperty("context")
-  public EventContext getContext() {
-    return context;
+  @ApiModelProperty(required = true, value = "")
+  @JsonProperty("api")
+  public EventContext getApi() {
+    return api;
   }
-  public void setContext(EventContext context) {
-    this.context = context;
+  public void setApi(EventContext api) {
+    this.api = api;
   }
 
   
@@ -75,7 +75,7 @@ public class Event   {
     
     sb.append("    project: ").append(StringUtil.toIndentedString(project)).append("\n");
     sb.append("    collection: ").append(StringUtil.toIndentedString(collection)).append("\n");
-    sb.append("    context: ").append(StringUtil.toIndentedString(context)).append("\n");
+    sb.append("    api: ").append(StringUtil.toIndentedString(api)).append("\n");
     sb.append("    properties: ").append(StringUtil.toIndentedString(properties)).append("\n");
     sb.append("}");
     return sb.toString();

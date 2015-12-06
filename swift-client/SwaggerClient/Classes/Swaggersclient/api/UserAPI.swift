@@ -242,52 +242,45 @@ extension SwaggerClientAPI {
     
         /**
          
-         Set user property
+         Set user properties once
          
          - POST /user/set_once
          - 
-         - examples: [{contentType=application/json, example={
-  "success" : true,
-  "message" : "aeiou"
-}}]
          
-         - parameter setUserPropertyOnce: (body) 
+         - parameter setUserProperties: (body) 
 
-         - returns: RequestBuilder<JsonResponse> 
+         - returns: RequestBuilder<Void> 
          */
-        public class func setUserPropertyOnce(setUserPropertyOnce setUserPropertyOnce: SetUserPropertyOnce) -> RequestBuilder<JsonResponse> {
+        public class func setUserPropertiesOnce(setUserProperties setUserProperties: SetUserProperties) -> RequestBuilder<Void> {
             let path = "/user/set_once"
             let URLString = SwaggerClientAPI.basePath + path
             
-            let parameters = setUserPropertyOnce.encodeToJSON() as? [String:AnyObject]
+            let parameters = setUserProperties.encodeToJSON() as? [String:AnyObject]
 
-            let requestBuilder: RequestBuilder<JsonResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+            let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
             return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: true)
         }
     
         /**
          
-         Set user property
+         Set user properties
          
          - POST /user/set_property
          - 
-         - examples: [{contentType=application/json, example={
-  "success" : true,
-  "message" : "aeiou"
-}}]
+         - examples: [{contentType=application/json, example=123}]
          
          - parameter setUserProperties: (body) 
 
-         - returns: RequestBuilder<JsonResponse> 
+         - returns: RequestBuilder<Int> 
          */
-        public class func setUserProperties(setUserProperties setUserProperties: SetUserProperties) -> RequestBuilder<JsonResponse> {
+        public class func setUserProperties(setUserProperties setUserProperties: SetUserProperties) -> RequestBuilder<Int> {
             let path = "/user/set_property"
             let URLString = SwaggerClientAPI.basePath + path
             
             let parameters = setUserProperties.encodeToJSON() as? [String:AnyObject]
 
-            let requestBuilder: RequestBuilder<JsonResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+            let requestBuilder: RequestBuilder<Int>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
             return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: true)
         }

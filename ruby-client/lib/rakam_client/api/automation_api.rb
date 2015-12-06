@@ -61,12 +61,16 @@ module RakamClient
 
     # Add scenario
     # 
+    # @param automation_rule 
     # @param [Hash] opts the optional parameters
     # @return [JsonResponse]
-    def add_rule(opts = {})
+    def add_rule(automation_rule, opts = {})
       if Configuration.debugging
         Configuration.logger.debug "Calling API: AutomationApi#add_rule ..."
       end
+      
+      # verify the required parameter 'automation_rule' is set
+      fail "Missing the required parameter 'automation_rule' when calling add_rule" if automation_rule.nil?
       
       # resource path
       path = "/automation/add".sub('{format}','json')
@@ -89,7 +93,7 @@ module RakamClient
       form_params = {}
 
       # http body (model)
-      post_body = nil
+      post_body = @api_client.object_to_http_body(automation_rule)
       
 
       auth_names = ['master_key']
@@ -192,7 +196,7 @@ module RakamClient
       post_body = nil
       
 
-      auth_names = ['master_key']
+      auth_names = ['read_key']
       result = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,

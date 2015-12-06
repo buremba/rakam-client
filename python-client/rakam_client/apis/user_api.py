@@ -594,9 +594,9 @@ class UserApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def set_user_property_once(self, set_user_property_once, **kwargs):
+    def set_user_properties_once(self, set_user_properties, **kwargs):
         """
-        Set user property
+        Set user properties once
         
 
         This method makes a synchronous HTTP request by default. To make an
@@ -605,20 +605,20 @@ class UserApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.set_user_property_once(set_user_property_once, callback=callback_function)
+        >>> thread = api.set_user_properties_once(set_user_properties, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param SetUserPropertyOnce set_user_property_once:  (required)
-        :return: JsonResponse
+        :param SetUserProperties set_user_properties:  (required)
+        :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'set_user_property_once' is set
-        if set_user_property_once is None:
-            raise ValueError("Missing the required parameter `set_user_property_once` when calling `set_user_property_once`")
+        # verify the required parameter 'set_user_properties' is set
+        if set_user_properties is None:
+            raise ValueError("Missing the required parameter `set_user_properties` when calling `set_user_properties_once`")
 
-        all_params = ['set_user_property_once']
+        all_params = ['set_user_properties']
         all_params.append('callback')
 
         params = locals()
@@ -626,7 +626,7 @@ class UserApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method set_user_property_once" % key
+                    " to method set_user_properties_once" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -644,8 +644,8 @@ class UserApi(object):
         files = {}
 
         body_params = None
-        if 'set_user_property_once' in params:
-            body_params = params['set_user_property_once']
+        if 'set_user_properties' in params:
+            body_params = params['set_user_properties']
 
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
@@ -667,14 +667,14 @@ class UserApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=files,
-                                            response_type='JsonResponse',
+                                            response_type=None,
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'))
         return response
 
     def set_user_properties(self, set_user_properties, **kwargs):
         """
-        Set user property
+        Set user properties
         
 
         This method makes a synchronous HTTP request by default. To make an
@@ -688,7 +688,7 @@ class UserApi(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param SetUserProperties set_user_properties:  (required)
-        :return: JsonResponse
+        :return: int
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -745,7 +745,7 @@ class UserApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=files,
-                                            response_type='JsonResponse',
+                                            response_type='int',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'))
         return response

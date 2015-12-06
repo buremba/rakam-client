@@ -42,8 +42,9 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
+        /// <param name="automationRule"></param>
         /// <returns>JsonResponse</returns>
-        JsonResponse AddRule ();
+        JsonResponse AddRule (AutomationRule automationRule);
   
         /// <summary>
         /// Add scenario
@@ -51,8 +52,9 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
+        /// <param name="automationRule"></param>
         /// <returns>JsonResponse</returns>
-        System.Threading.Tasks.Task<JsonResponse> AddRuleAsync ();
+        System.Threading.Tasks.Task<JsonResponse> AddRuleAsync (AutomationRule automationRule);
         
         /// <summary>
         /// Deactivate rule
@@ -277,9 +279,13 @@ namespace Rakam.Client.Api
         /// <summary>
         /// Add scenario 
         /// </summary>
+        /// <param name="automationRule"></param> 
         /// <returns>JsonResponse</returns>            
-        public JsonResponse AddRule ()
+        public JsonResponse AddRule (AutomationRule automationRule)
         {
+            
+            // verify the required parameter 'automationRule' is set
+            if (automationRule == null) throw new ApiException(400, "Missing required parameter 'automationRule' when calling AddRule");
             
     
             var path = "/automation/add";
@@ -306,6 +312,7 @@ namespace Rakam.Client.Api
             
             
             
+            postBody = ApiClient.Serialize(automationRule); // http body (model) parameter
             
     
             // authentication setting, if any
@@ -325,9 +332,12 @@ namespace Rakam.Client.Api
         /// <summary>
         /// Add scenario 
         /// </summary>
+        /// <param name="automationRule"></param>
         /// <returns>JsonResponse</returns>
-        public async System.Threading.Tasks.Task<JsonResponse> AddRuleAsync ()
+        public async System.Threading.Tasks.Task<JsonResponse> AddRuleAsync (AutomationRule automationRule)
         {
+            // verify the required parameter 'automationRule' is set
+            if (automationRule == null) throw new ApiException(400, "Missing required parameter 'automationRule' when calling AddRule");
             
     
             var path = "/automation/add";
@@ -354,6 +364,7 @@ namespace Rakam.Client.Api
             
             
             
+            postBody = ApiClient.Serialize(automationRule); // http body (model) parameter
             
     
             // authentication setting, if any
@@ -505,7 +516,7 @@ namespace Rakam.Client.Api
             
     
             // authentication setting, if any
-            String[] authSettings = new String[] { "master_key" };
+            String[] authSettings = new String[] { "read_key" };
     
             // make the HTTP request
             IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
@@ -555,7 +566,7 @@ namespace Rakam.Client.Api
             
     
             // authentication setting, if any
-            String[] authSettings = new String[] { "master_key" };
+            String[] authSettings = new String[] { "read_key" };
     
             // make the HTTP request
             IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);

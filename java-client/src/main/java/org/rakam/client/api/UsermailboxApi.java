@@ -13,13 +13,12 @@ import java.util.*;
 import java.util.*;
 import java.util.Map;
 import org.rakam.client.model.JsonResponse;
-import org.rakam.client.model.Message;
 
 import java.io.File;
 import java.util.Map;
 import java.util.HashMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-11-19T22:59:17.166+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
 public class UsermailboxApi {
   private ApiClient apiClient;
 
@@ -113,7 +112,7 @@ public class UsermailboxApi {
     byte[] postBinaryBody = null;
     
     // create path and map variables
-    String path = "/user/mailbox/getOnlineUsers".replaceAll("\\{format\\}","json");
+    String path = "/user/mailbox/get_online_users".replaceAll("\\{format\\}","json");
 
     // query params
     List<Pair> queryParams = new ArrayList<Pair>();
@@ -201,71 +200,6 @@ public class UsermailboxApi {
     
     
     TypeRef returnType = new TypeRef<JsonResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
-  }
-  
-  /**
-   * Send mail to user
-   * Sends a mail to users mailbox
-   * @param project 
-   * @param fromUser 
-   * @param toUser 
-   * @param parent 
-   * @param message 
-   * @param timestamp 
-   * @return Message
-   */
-  public Message send (String project, String fromUser, String toUser, Integer parent, String message, Long timestamp) throws ApiException {
-    Object postBody = null;
-    byte[] postBinaryBody = null;
-    
-    // create path and map variables
-    String path = "/user/mailbox/send".replaceAll("\\{format\\}","json");
-
-    // query params
-    List<Pair> queryParams = new ArrayList<Pair>();
-    Map<String, String> headerParams = new HashMap<String, String>();
-    Map<String, Object> formParams = new HashMap<String, Object>();
-
-    
-
-    
-
-    if (project != null)
-      formParams.put("project", project);
-    if (fromUser != null)
-      formParams.put("from_user", fromUser);
-    if (toUser != null)
-      formParams.put("to_user", toUser);
-    if (parent != null)
-      formParams.put("parent", parent);
-    if (message != null)
-      formParams.put("message", message);
-    if (timestamp != null)
-      formParams.put("timestamp", timestamp);
-    
-
-    final String[] accepts = {
-      "application/json"
-    };
-    final String accept = apiClient.selectHeaderAccept(accepts);
-
-    final String[] contentTypes = {
-      "application/json"
-    };
-    final String contentType = apiClient.selectHeaderContentType(contentTypes);
-
-    String[] authNames = new String[] { "write_key" };
-
-    
-
-    
-    
-    TypeRef returnType = new TypeRef<Message>() {};
     return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
     

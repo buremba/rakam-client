@@ -17,6 +17,9 @@ extension SwaggerClientAPI {
          
          - POST /materialized-view/create
          - 
+         - API Key:
+           - type: apiKey master_key 
+           - name: master_key
          - examples: [{contentType=application/json, example={
   "success" : true,
   "message" : "aeiou"
@@ -43,6 +46,9 @@ extension SwaggerClientAPI {
          
          - POST /materialized-view/delete
          - 
+         - API Key:
+           - type: apiKey master_key 
+           - name: master_key
          - examples: [{contentType=application/json, example={
   "success" : true,
   "message" : "aeiou"
@@ -165,6 +171,9 @@ extension SwaggerClientAPI {
          
          - GET /materialized-view/update
          - 
+         - API Key:
+           - type: apiKey master_key 
+           - name: master_key
 
          - returns: RequestBuilder<Void> 
          */

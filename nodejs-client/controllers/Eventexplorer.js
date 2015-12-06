@@ -7,7 +7,7 @@ var Eventexplorer = require('./EventexplorerService');
 
 
 module.exports.execute = function execute (req, res, next) {
-  var execute = req.swagger.params['execute'].value;
+  var execute = req.swagger.params['Execute'].value;
   
 
   var result = Eventexplorer.execute(execute);

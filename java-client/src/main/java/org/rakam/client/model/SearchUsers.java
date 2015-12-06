@@ -12,10 +12,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-11-19T22:59:17.166+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
 public class SearchUsers   {
   
   private String project = null;
+  private List<String> columns = new ArrayList<String>();
   private String filter = null;
   private List<EventFilter> eventFilters = new ArrayList<EventFilter>();
   private Sorting sorting = null;
@@ -32,6 +33,18 @@ public class SearchUsers   {
   }
   public void setProject(String project) {
     this.project = project;
+  }
+
+  
+  /**
+   **/
+  @ApiModelProperty(value = "")
+  @JsonProperty("columns")
+  public List<String> getColumns() {
+    return columns;
+  }
+  public void setColumns(List<String> columns) {
+    this.columns = columns;
   }
 
   
@@ -102,6 +115,7 @@ public class SearchUsers   {
     sb.append("class SearchUsers {\n");
     
     sb.append("    project: ").append(StringUtil.toIndentedString(project)).append("\n");
+    sb.append("    columns: ").append(StringUtil.toIndentedString(columns)).append("\n");
     sb.append("    filter: ").append(StringUtil.toIndentedString(filter)).append("\n");
     sb.append("    eventFilters: ").append(StringUtil.toIndentedString(eventFilters)).append("\n");
     sb.append("    sorting: ").append(StringUtil.toIndentedString(sorting)).append("\n");

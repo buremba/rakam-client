@@ -21,6 +21,13 @@ namespace Rakam.Client.Model {
 
     
     /// <summary>
+    /// Gets or Sets Columns
+    /// </summary>
+    [DataMember(Name="columns", EmitDefaultValue=false)]
+    public List<string> Columns { get; set; }
+
+    
+    /// <summary>
     /// Gets or Sets Filter
     /// </summary>
     [DataMember(Name="filter", EmitDefaultValue=false)]
@@ -65,6 +72,8 @@ namespace Rakam.Client.Model {
       sb.Append("class SearchUsers {\n");
       
       sb.Append("  Project: ").Append(Project).Append("\n");
+      
+      sb.Append("  Columns: ").Append(Columns).Append("\n");
       
       sb.Append("  Filter: ").Append(Filter).Append("\n");
       

@@ -120,7 +120,7 @@ class RecipeApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def install(self, recipe, **kwargs):
+    def install(self, **kwargs):
         """
         Install recipe
         
@@ -131,20 +131,16 @@ class RecipeApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.install(recipe, callback=callback_function)
+        >>> thread = api.install(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param Recipe recipe:  (required)
         :return: JsonResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'recipe' is set
-        if recipe is None:
-            raise ValueError("Missing the required parameter `recipe` when calling `install`")
 
-        all_params = ['recipe']
+        all_params = []
         all_params.append('callback')
 
         params = locals()
@@ -170,8 +166,6 @@ class RecipeApi(object):
         files = {}
 
         body_params = None
-        if 'recipe' in params:
-            body_params = params['recipe']
 
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\

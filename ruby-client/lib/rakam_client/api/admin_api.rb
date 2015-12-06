@@ -136,7 +136,7 @@ module RakamClient
       post_body = nil
       
 
-      auth_names = ['master_key']
+      auth_names = ['read_key']
       @api_client.call_api(:GET, path,
         :header_params => header_params,
         :query_params => query_params,
@@ -184,7 +184,7 @@ module RakamClient
       post_body = nil
       
 
-      auth_names = ['master_key']
+      auth_names = ['read_key']
       result = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,

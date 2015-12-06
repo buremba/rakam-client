@@ -11,6 +11,7 @@ import Foundation
 public class SearchUsers: JSONEncodable {
 
     public var project: String?
+    public var columns: [String]?
     public var filter: String?
     public var event_filters: [EventFilter]?
     public var sorting: Sorting?
@@ -22,6 +23,7 @@ public class SearchUsers: JSONEncodable {
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["project"] = self.project
+        nillableDictionary["columns"] = self.columns?.encodeToJSON()
         nillableDictionary["filter"] = self.filter
         nillableDictionary["event_filters"] = self.event_filters?.encodeToJSON()
         nillableDictionary["sorting"] = self.sorting?.encodeToJSON()

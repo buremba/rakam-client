@@ -99,16 +99,15 @@ extension SwaggerClientAPI {
   "success" : true,
   "message" : "aeiou"
 }}]
-         
-         - parameter recipe: (body) 
 
          - returns: RequestBuilder<JsonResponse> 
          */
-        public class func install(recipe recipe: Recipe) -> RequestBuilder<JsonResponse> {
+        public class func install() -> RequestBuilder<JsonResponse> {
             let path = "/recipe/install"
             let URLString = SwaggerClientAPI.basePath + path
             
-            let parameters = recipe.encodeToJSON() as? [String:AnyObject]
+            let nillableParameters: [String:AnyObject?] = [:]
+            let parameters = APIHelper.rejectNil(nillableParameters)
 
             let requestBuilder: RequestBuilder<JsonResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 

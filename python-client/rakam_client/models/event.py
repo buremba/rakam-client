@@ -39,20 +39,20 @@ class Event(object):
         self.swagger_types = {
             'project': 'str',
             'collection': 'str',
-            'context': 'EventContext',
+            'api': 'EventContext',
             'properties': 'object'
         }
 
         self.attribute_map = {
             'project': 'project',
             'collection': 'collection',
-            'context': 'context',
+            'api': 'api',
             'properties': 'properties'
         }
 
         self._project = None
         self._collection = None
-        self._context = None
+        self._api = None
         self._properties = None
 
     @property
@@ -100,26 +100,26 @@ class Event(object):
         self._collection = collection
 
     @property
-    def context(self):
+    def api(self):
         """
-        Gets the context of this Event.
+        Gets the api of this Event.
 
 
-        :return: The context of this Event.
+        :return: The api of this Event.
         :rtype: EventContext
         """
-        return self._context
+        return self._api
 
-    @context.setter
-    def context(self, context):
+    @api.setter
+    def api(self, api):
         """
-        Sets the context of this Event.
+        Sets the api of this Event.
 
 
-        :param context: The context of this Event.
+        :param api: The api of this Event.
         :type: EventContext
         """
-        self._context = context
+        self._api = api
 
     @property
     def properties(self):

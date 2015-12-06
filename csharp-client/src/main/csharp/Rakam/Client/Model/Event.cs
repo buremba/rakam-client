@@ -28,10 +28,10 @@ namespace Rakam.Client.Model {
 
     
     /// <summary>
-    /// Gets or Sets Context
+    /// Gets or Sets Api
     /// </summary>
-    [DataMember(Name="context", EmitDefaultValue=false)]
-    public EventContext Context { get; set; }
+    [DataMember(Name="api", EmitDefaultValue=false)]
+    public EventContext Api { get; set; }
 
     
     /// <summary>
@@ -54,7 +54,7 @@ namespace Rakam.Client.Model {
       
       sb.Append("  Collection: ").Append(Collection).Append("\n");
       
-      sb.Append("  Context: ").Append(Context).Append("\n");
+      sb.Append("  Api: ").Append(Api).Append("\n");
       
       sb.Append("  Properties: ").Append(Properties).Append("\n");
       

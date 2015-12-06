@@ -250,7 +250,7 @@ class AdminApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = ['master_key']
+        auth_settings = ['read_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,
@@ -325,7 +325,7 @@ class AdminApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = ['master_key']
+        auth_settings = ['read_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,

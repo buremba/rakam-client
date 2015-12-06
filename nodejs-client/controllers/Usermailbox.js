@@ -53,22 +53,3 @@ module.exports.markAsRead = function markAsRead (req, res, next) {
   else
     res.end();
 };
-
-module.exports.send = function send (req, res, next) {
-  var project = req.swagger.params['project'].value;
-  var fromUser = req.swagger.params['from_user'].value;
-  var toUser = req.swagger.params['to_user'].value;
-  var parent = req.swagger.params['parent'].value;
-  var message = req.swagger.params['message'].value;
-  var timestamp = req.swagger.params['timestamp'].value;
-  
-
-  var result = Usermailbox.send(project, fromUser, toUser, parent, message, timestamp);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
-};

@@ -117,5 +117,34 @@ extension SwaggerClientAPI {
             return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
         }
     
+        /**
+         
+         Explain query
+         
+         - POST /query/explain
+         - 
+         - API Key:
+           - type: apiKey read_key 
+           - name: read_key
+         - examples: [{contentType=application/json, example="{}"}]
+         
+         - parameter query: (form) 
+
+         - returns: RequestBuilder<String> 
+         */
+        public class func explain(query query: String?) -> RequestBuilder<String> {
+            let path = "/query/explain"
+            let URLString = SwaggerClientAPI.basePath + path
+            
+            let nillableParameters: [String:AnyObject?] = [
+                "query": query
+            ]
+            let parameters = APIHelper.rejectNil(nillableParameters)
+
+            let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
+        }
+    
     }
 }

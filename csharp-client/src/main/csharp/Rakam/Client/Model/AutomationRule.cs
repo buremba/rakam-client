@@ -14,13 +14,6 @@ namespace Rakam.Client.Model {
   public class AutomationRule {
     
     /// <summary>
-    /// Gets or Sets Id
-    /// </summary>
-    [DataMember(Name="id", EmitDefaultValue=false)]
-    public int? Id { get; set; }
-
-    
-    /// <summary>
     /// Gets or Sets Project
     /// </summary>
     [DataMember(Name="project", EmitDefaultValue=false)]
@@ -45,7 +38,7 @@ namespace Rakam.Client.Model {
     /// Gets or Sets Actions
     /// </summary>
     [DataMember(Name="actions", EmitDefaultValue=false)]
-    public List<Action> Actions { get; set; }
+    public List<SerializableAction> Actions { get; set; }
 
     
     /// <summary>
@@ -53,6 +46,13 @@ namespace Rakam.Client.Model {
     /// </summary>
     [DataMember(Name="custom_data", EmitDefaultValue=false)]
     public string CustomData { get; set; }
+
+    
+    /// <summary>
+    /// Gets or Sets Id
+    /// </summary>
+    [DataMember(Name="id", EmitDefaultValue=false)]
+    public int? Id { get; set; }
 
     
 
@@ -64,8 +64,6 @@ namespace Rakam.Client.Model {
       var sb = new StringBuilder();
       sb.Append("class AutomationRule {\n");
       
-      sb.Append("  Id: ").Append(Id).Append("\n");
-      
       sb.Append("  Project: ").Append(Project).Append("\n");
       
       sb.Append("  IsActive: ").Append(IsActive).Append("\n");
@@ -75,6 +73,8 @@ namespace Rakam.Client.Model {
       sb.Append("  Actions: ").Append(Actions).Append("\n");
       
       sb.Append("  CustomData: ").Append(CustomData).Append("\n");
+      
+      sb.Append("  Id: ").Append(Id).Append("\n");
       
       sb.Append("}\n");
       return sb.ToString();

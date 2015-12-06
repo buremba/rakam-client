@@ -22,9 +22,10 @@ module.exports.activateRule = function activateRule (req, res, next) {
 };
 
 module.exports.addRule = function addRule (req, res, next) {
+  var automationRule = req.swagger.params['AutomationRule'].value;
   
 
-  var result = Automation.addRule();
+  var result = Automation.addRule(automationRule);
 
   if(typeof result !== 'undefined') {
     res.setHeader('Content-Type', 'application/json');

@@ -226,6 +226,17 @@
       "x-swagger-router-controller": "Automation",
       "tags": ["Automation"],
       "operationId": "addRule",
+      "parameters": [
+        {
+  "in" : "body",
+  "name" : "AutomationRule",
+  "required" : true,
+  "schema" : {
+    "$ref" : "#/definitions/AutomationRule"
+  }
+}
+        
+      ],
       "responses": {
         "200": {
   "description" : "successful operation",
@@ -374,7 +385,7 @@
   "/user/set_property": {
     
     "post": {
-      "summary": "Set user property",
+      "summary": "Set user properties",
       "description":"",
       "x-swagger-router-controller": "User",
       "tags": ["User"],
@@ -382,10 +393,10 @@
       "parameters": [
         {
   "in" : "body",
-  "name" : "setUserProperties",
+  "name" : "SetUserProperties",
   "required" : true,
   "schema" : {
-    "$ref" : "#/definitions/setUserProperties"
+    "$ref" : "#/definitions/SetUserProperties"
   }
 }
         
@@ -394,7 +405,8 @@
         "200": {
   "description" : "successful operation",
   "schema" : {
-    "$ref" : "#/definitions/JsonResponse"
+    "type" : "integer",
+    "format" : "int32"
   }
 }
         ,
@@ -419,10 +431,10 @@
       "parameters": [
         {
   "in" : "body",
-  "name" : "batchCreate",
+  "name" : "BatchCreate",
   "required" : true,
   "schema" : {
-    "$ref" : "#/definitions/batchCreate"
+    "$ref" : "#/definitions/BatchCreate"
   }
 }
         
@@ -451,30 +463,23 @@
   "/user/set_once": {
     
     "post": {
-      "summary": "Set user property",
+      "summary": "Set user properties once",
       "description":"",
       "x-swagger-router-controller": "User",
       "tags": ["User"],
-      "operationId": "setUserPropertyOnce",
+      "operationId": "setUserPropertiesOnce",
       "parameters": [
         {
   "in" : "body",
-  "name" : "setUserPropertyOnce",
+  "name" : "SetUserProperties",
   "required" : true,
   "schema" : {
-    "$ref" : "#/definitions/setUserPropertyOnce"
+    "$ref" : "#/definitions/SetUserProperties"
   }
 }
         
       ],
       "responses": {
-        "200": {
-  "description" : "successful operation",
-  "schema" : {
-    "$ref" : "#/definitions/JsonResponse"
-  }
-}
-        ,
         "400": {
   "description" : "User does not exist."
 }
@@ -496,10 +501,10 @@
       "parameters": [
         {
   "in" : "body",
-  "name" : "searchUsers",
+  "name" : "SearchUsers",
   "required" : true,
   "schema" : {
-    "$ref" : "#/definitions/searchUsers"
+    "$ref" : "#/definitions/SearchUsers"
   }
 }
         
@@ -605,13 +610,35 @@
   } ,
   
   
-  "/user/mailbox/get": {
+  "/ab-testing/create": {
     
     "post": {
-      "summary": "Get user mailbox",
-      "description":"Returns the last mails sent to the user",
-      "x-swagger-router-controller": "Usermailbox",
-      "tags": ["Usermailbox"],
+      "summary": "Create test",
+      "description":"",
+      "x-swagger-router-controller": "Abtesting",
+      "tags": ["Abtesting"],
+      "operationId": "create",
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "$ref" : "#/definitions/JsonResponse"
+  }
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/ab-testing/get": {
+    
+    "post": {
+      "summary": "Get report",
+      "description":"",
+      "x-swagger-router-controller": "Abtesting",
+      "tags": ["Abtesting"],
       "operationId": "get",
       "parameters": [
         {
@@ -621,31 +648,11 @@
   "type" : "string"
 },
         {
-  "name" : "user",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string"
-},
-        {
-  "name" : "parent",
+  "name" : "id",
   "in" : "formData",
   "required" : false,
   "type" : "integer",
   "format" : "int32"
-},
-        {
-  "name" : "limit",
-  "in" : "formData",
-  "required" : false,
-  "type" : "integer",
-  "format" : "int32"
-},
-        {
-  "name" : "offset",
-  "in" : "formData",
-  "required" : false,
-  "type" : "integer",
-  "format" : "int64"
 }
         
       ],
@@ -653,22 +660,8 @@
         "200": {
   "description" : "successful operation",
   "schema" : {
-    "type" : "array",
-    "items" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/definitions/Message"
-      }
-    }
+    "$ref" : "#/definitions/ABTestingReport"
   }
-}
-        ,
-        "400": {
-  "description" : "Project does not exist."
-}
-        ,
-        "404": {
-  "description" : "User does not exist."
 }
         
         
@@ -677,14 +670,14 @@
     
   } ,
   
-  "/user/mailbox/getOnlineUsers": {
+  "/ab-testing/list": {
     
     "post": {
-      "summary": "Get connected users",
+      "summary": "List reports",
       "description":"",
-      "x-swagger-router-controller": "Usermailbox",
-      "tags": ["Usermailbox"],
-      "operationId": "getConnectedUsers",
+      "x-swagger-router-controller": "Abtesting",
+      "tags": ["Abtesting"],
+      "operationId": "list",
       "parameters": [
         {
   "name" : "project",
@@ -700,18 +693,10 @@
   "schema" : {
     "type" : "array",
     "items" : {
-      "type" : "object",
-      "additionalProperties" : {
-        "type" : "object",
-        "properties" : { }
-      }
+      "$ref" : "#/definitions/ABTestingReport"
     }
   }
 }
-        ,
-        "400": {
-  "description" : "Project does not exist."
-}
         
         
       }
@@ -719,159 +704,20 @@
     
   } ,
   
-  "/user/mailbox/mark_as_read": {
+  "/ab-testing/update": {
     
     "post": {
-      "summary": "Mark mail as read",
-      "description":"Marks the specified mails as read.",
-      "x-swagger-router-controller": "Usermailbox",
-      "tags": ["Usermailbox"],
-      "operationId": "markAsRead",
-      "parameters": [
-        {
-  "name" : "project",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string"
-},
-        {
-  "name" : "user",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string"
-},
-        {
-  "name" : "message_ids",
-  "in" : "formData",
-  "required" : false,
-  "type" : "array",
-  "collectionFormat" : "multi"
-}
-        
-      ],
-      "responses": {
-        "200": {
-  "description" : "successful operation",
-  "schema" : {
-    "$ref" : "#/definitions/JsonResponse"
-  }
-}
-        ,
-        "400": {
-  "description" : "Project does not exist."
-}
-        ,
-        "404": {
-  "description" : "User does not exist."
-}
-        
-        
-      }
-    } 
-    
-  } ,
-  
-  "/user/mailbox/send": {
-    
-    "post": {
-      "summary": "Send mail to user",
-      "description":"Sends a mail to users mailbox",
-      "x-swagger-router-controller": "Usermailbox",
-      "tags": ["Usermailbox"],
-      "operationId": "send",
-      "parameters": [
-        {
-  "name" : "project",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string"
-},
-        {
-  "name" : "from_user",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string"
-},
-        {
-  "name" : "to_user",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string"
-},
-        {
-  "name" : "parent",
-  "in" : "formData",
-  "required" : false,
-  "type" : "integer",
-  "format" : "int32"
-},
-        {
-  "name" : "message",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string"
-},
-        {
-  "name" : "timestamp",
-  "in" : "formData",
-  "required" : false,
-  "type" : "integer",
-  "format" : "int64"
-}
-        
-      ],
-      "responses": {
-        "200": {
-  "description" : "successful operation",
-  "schema" : {
-    "$ref" : "#/definitions/Message"
-  }
-}
-        ,
-        "400": {
-  "description" : "Project does not exist."
-}
-        ,
-        "404": {
-  "description" : "User does not exist."
-}
-        
-        
-      }
-    } 
-    
-  } ,
-  
-  
-  "/continuous-query/create": {
-    
-    "post": {
-      "summary": "Create stream",
+      "summary": "Update report",
       "description":"",
-      "x-swagger-router-controller": "Continuousquery",
-      "tags": ["Continuousquery"],
-      "operationId": "create",
-      "parameters": [
-        {
-  "in" : "body",
-  "name" : "ContinuousQuery",
-  "required" : true,
-  "schema" : {
-    "$ref" : "#/definitions/ContinuousQuery"
-  }
-}
-        
-      ],
+      "x-swagger-router-controller": "Abtesting",
+      "tags": ["Abtesting"],
+      "operationId": "update",
       "responses": {
         "200": {
   "description" : "successful operation",
   "schema" : {
-    "$ref" : "#/definitions/JsonResponse"
+    "$ref" : "#/definitions/ABTestingReport"
   }
-}
-        ,
-        "400": {
-  "description" : "Project does not exist."
 }
         
         
@@ -880,13 +726,13 @@
     
   } ,
   
-  "/continuous-query/delete": {
+  "/ab-testing/delete": {
     
     "post": {
-      "summary": "Delete stream",
+      "summary": "Delete report",
       "description":"",
-      "x-swagger-router-controller": "Continuousquery",
-      "tags": ["Continuousquery"],
+      "x-swagger-router-controller": "Abtesting",
+      "tags": ["Abtesting"],
       "operationId": "delete",
       "parameters": [
         {
@@ -896,10 +742,11 @@
   "type" : "string"
 },
         {
-  "name" : "name",
+  "name" : "id",
   "in" : "formData",
   "required" : false,
-  "type" : "string"
+  "type" : "integer",
+  "format" : "int32"
 }
         
       ],
@@ -909,130 +756,6 @@
   "schema" : {
     "$ref" : "#/definitions/JsonResponse"
   }
-}
-        ,
-        "400": {
-  "description" : "Project does not exist."
-}
-        
-        
-      }
-    } 
-    
-  } ,
-  
-  "/continuous-query/list": {
-    
-    "post": {
-      "summary": "List queries",
-      "description":"",
-      "x-swagger-router-controller": "Continuousquery",
-      "tags": ["Continuousquery"],
-      "operationId": "listQueries",
-      "parameters": [
-        {
-  "name" : "project",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        "200": {
-  "description" : "successful operation",
-  "schema" : {
-    "type" : "array",
-    "items" : {
-      "$ref" : "#/definitions/ContinuousQuery"
-    }
-  }
-}
-        ,
-        "400": {
-  "description" : "Project does not exist."
-}
-        
-        
-      }
-    } 
-    
-  } ,
-  
-  "/continuous-query/schema": {
-    
-    "post": {
-      "summary": "Get query schema",
-      "description":"",
-      "x-swagger-router-controller": "Continuousquery",
-      "tags": ["Continuousquery"],
-      "operationId": "schema",
-      "parameters": [
-        {
-  "name" : "project",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        "200": {
-  "description" : "successful operation",
-  "schema" : {
-    "type" : "array",
-    "items" : {
-      "$ref" : "#/definitions/Collection"
-    }
-  }
-}
-        ,
-        "400": {
-  "description" : "Project does not exist."
-}
-        
-        
-      }
-    } 
-    
-  } ,
-  
-  "/continuous-query/test": {
-    
-    "post": {
-      "summary": "Test continuous query",
-      "description":"",
-      "x-swagger-router-controller": "Continuousquery",
-      "tags": ["Continuousquery"],
-      "operationId": "test",
-      "parameters": [
-        {
-  "name" : "project",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string"
-},
-        {
-  "name" : "query",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        "200": {
-  "description" : "successful operation",
-  "schema" : {
-    "type" : "array",
-    "items" : {
-      "$ref" : "#/definitions/SchemaField"
-    }
-  }
-}
-        ,
-        "400": {
-  "description" : "Project does not exist."
 }
         
         
@@ -1081,144 +804,12 @@
       "x-swagger-router-controller": "Recipe",
       "tags": ["Recipe"],
       "operationId": "install",
-      "parameters": [
-        {
-  "in" : "body",
-  "name" : "Recipe",
-  "required" : true,
-  "schema" : {
-    "$ref" : "#/definitions/Recipe"
-  }
-}
-        
-      ],
       "responses": {
         "200": {
   "description" : "successful operation",
   "schema" : {
     "$ref" : "#/definitions/JsonResponse"
   }
-}
-        
-        
-      }
-    } 
-    
-  } ,
-  
-  
-  "/event/collect": {
-    
-    "post": {
-      "summary": "Collect event",
-      "description":"",
-      "x-swagger-router-controller": "Event",
-      "tags": ["Event"],
-      "operationId": "collectEvent",
-      "parameters": [
-        {
-  "in" : "body",
-  "name" : "Event",
-  "required" : true,
-  "schema" : {
-    "$ref" : "#/definitions/Event"
-  }
-}
-        
-      ],
-      "responses": {
-        "200": {
-  "description" : "successful operation",
-  "schema" : {
-    "type" : "integer",
-    "format" : "int32"
-  }
-}
-        ,
-        "400": {
-  "description" : "Project does not exist."
-}
-        
-        
-      }
-    } 
-    
-  } ,
-  
-  "/query/execute": {
-    
-    "post": {
-      "summary": "Analyze events",
-      "description":"",
-      "x-swagger-router-controller": "Event",
-      "tags": ["Event"],
-      "operationId": "execute",
-      "parameters": [
-        {
-  "name" : "project",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string"
-},
-        {
-  "name" : "query",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string"
-},
-        {
-  "name" : "limit",
-  "in" : "formData",
-  "required" : false,
-  "type" : "integer",
-  "format" : "int32"
-}
-        
-      ],
-      "responses": {
-        "200": {
-  "description" : "successful operation",
-  "schema" : {
-    "$ref" : "#/definitions/QueryResult"
-  }
-}
-        
-        
-      }
-    } 
-    
-  } ,
-  
-  "/event/batch": {
-    
-    "post": {
-      "summary": "Collect multiple events",
-      "description":"",
-      "x-swagger-router-controller": "Event",
-      "tags": ["Event"],
-      "operationId": "batchEvents",
-      "parameters": [
-        {
-  "in" : "body",
-  "name" : "EventList",
-  "required" : true,
-  "schema" : {
-    "$ref" : "#/definitions/EventList"
-  }
-}
-        
-      ],
-      "responses": {
-        "200": {
-  "description" : "successful operation",
-  "schema" : {
-    "type" : "integer",
-    "format" : "int32"
-  }
-}
-        ,
-        "400": {
-  "description" : "Project does not exist."
 }
         
         
@@ -1550,166 +1141,6 @@
   } ,
   
   
-  "/event-explorer/analyze": {
-    
-    "post": {
-      "summary": "Perform simple query on event data",
-      "description":"",
-      "x-swagger-router-controller": "Eventexplorer",
-      "tags": ["Eventexplorer"],
-      "operationId": "execute",
-      "parameters": [
-        {
-  "in" : "body",
-  "name" : "execute",
-  "required" : true,
-  "schema" : {
-    "$ref" : "#/definitions/execute"
-  }
-}
-        
-      ],
-      "responses": {
-        "200": {
-  "description" : "successful operation",
-  "schema" : {
-    "$ref" : "#/definitions/QueryResult"
-  }
-}
-        
-        
-      }
-    } 
-    
-  } ,
-  
-  "/event-explorer/extra_dimensions": {
-    
-    "post": {
-      "summary": "Event statistics",
-      "description":"",
-      "x-swagger-router-controller": "Eventexplorer",
-      "tags": ["Eventexplorer"],
-      "operationId": "getExtraDimensions",
-      "parameters": [
-        {
-  "name" : "project",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        "200": {
-  "description" : "successful operation",
-  "schema" : {
-    "type" : "array",
-    "items" : {
-      "type" : "string"
-    }
-  }
-}
-        
-        
-      }
-    } 
-    
-  } ,
-  
-  "/event-explorer/event_dimensions": {
-    
-    "post": {
-      "summary": "Event statistics",
-      "description":"",
-      "x-swagger-router-controller": "Eventexplorer",
-      "tags": ["Eventexplorer"],
-      "operationId": "getEventDimensions",
-      "parameters": [
-        {
-  "name" : "project",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        "200": {
-  "description" : "successful operation",
-  "schema" : {
-    "type" : "array",
-    "items" : {
-      "type" : "string"
-    }
-  }
-}
-        
-        
-      }
-    } 
-    
-  } ,
-  
-  "/event-explorer/statistics": {
-    
-    "post": {
-      "summary": "Event statistics",
-      "description":"",
-      "x-swagger-router-controller": "Eventexplorer",
-      "tags": ["Eventexplorer"],
-      "operationId": "getEventStatistics",
-      "parameters": [
-        {
-  "name" : "project",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string"
-},
-        {
-  "name" : "collections",
-  "in" : "formData",
-  "required" : false,
-  "type" : "array",
-  "collectionFormat" : "multi"
-},
-        {
-  "name" : "dimension",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string"
-},
-        {
-  "name" : "startDate",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string",
-  "format" : "date"
-},
-        {
-  "name" : "endDate",
-  "in" : "formData",
-  "required" : false,
-  "type" : "string",
-  "format" : "date"
-}
-        
-      ],
-      "responses": {
-        "200": {
-  "description" : "successful operation",
-  "schema" : {
-    "$ref" : "#/definitions/QueryResult"
-  }
-}
-        
-        
-      }
-    } 
-    
-  } ,
-  
-  
   "/retention/analyze": {
     
     "post": {
@@ -1735,6 +1166,191 @@
   "schema" : {
     "$ref" : "#/definitions/QueryResult"
   }
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  
+  "/user/action/email/single": {
+    
+    "post": {
+      "summary": "Perform action for single user",
+      "description":"",
+      "x-swagger-router-controller": "Useraction",
+      "tags": ["Useraction"],
+      "operationId": "send",
+      "parameters": [
+        {
+  "in" : "body",
+  "name" : "Send",
+  "required" : true,
+  "schema" : {
+    "$ref" : "#/definitions/Send"
+  }
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "type" : "boolean"
+  }
+}
+        ,
+        "400": {
+  "description" : "Project does not exist."
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/user/action/mailbox/action/mailbox/single": {
+    
+    "post": {
+      "summary": "Send message to user",
+      "description":"Sends a mail to users mailbox",
+      "x-swagger-router-controller": "Useraction",
+      "tags": ["Useraction"],
+      "operationId": "send",
+      "parameters": [
+        {
+  "name" : "project",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "from_user",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "to_user",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "parent",
+  "in" : "formData",
+  "required" : false,
+  "type" : "integer",
+  "format" : "int32"
+},
+        {
+  "name" : "message",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "timestamp",
+  "in" : "formData",
+  "required" : false,
+  "type" : "integer",
+  "format" : "int64"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "$ref" : "#/definitions/Message"
+  }
+}
+        ,
+        "400": {
+  "description" : "Project does not exist."
+}
+        ,
+        "404": {
+  "description" : "User does not exist."
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/user/action/email/batch": {
+    
+    "post": {
+      "summary": "Apply batch operation",
+      "description":"",
+      "x-swagger-router-controller": "Useraction",
+      "tags": ["Useraction"],
+      "operationId": "batchSendEmails",
+      "parameters": [
+        {
+  "in" : "body",
+  "name" : "BatchSendEmails",
+  "required" : true,
+  "schema" : {
+    "$ref" : "#/definitions/BatchSendEmails"
+  }
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "type" : "integer",
+    "format" : "int64"
+  }
+}
+        ,
+        "400": {
+  "description" : "Project does not exist."
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/user/action/mailbox/batch": {
+    
+    "post": {
+      "summary": "Apply batch operation",
+      "description":"",
+      "x-swagger-router-controller": "Useraction",
+      "tags": ["Useraction"],
+      "operationId": "batchSendMessages",
+      "parameters": [
+        {
+  "in" : "body",
+  "name" : "BatchSendMessages",
+  "required" : true,
+  "schema" : {
+    "$ref" : "#/definitions/BatchSendMessages"
+  }
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "type" : "integer",
+    "format" : "int64"
+  }
+}
+        ,
+        "400": {
+  "description" : "Project does not exist."
 }
         
         
@@ -1979,6 +1595,685 @@
       }
     } 
     
+  } ,
+  
+  
+  "/user/mailbox/get": {
+    
+    "post": {
+      "summary": "Get user mailbox",
+      "description":"Returns the last mails sent to the user",
+      "x-swagger-router-controller": "Usermailbox",
+      "tags": ["Usermailbox"],
+      "operationId": "get",
+      "parameters": [
+        {
+  "name" : "project",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "user",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "parent",
+  "in" : "formData",
+  "required" : false,
+  "type" : "integer",
+  "format" : "int32"
+},
+        {
+  "name" : "limit",
+  "in" : "formData",
+  "required" : false,
+  "type" : "integer",
+  "format" : "int32"
+},
+        {
+  "name" : "offset",
+  "in" : "formData",
+  "required" : false,
+  "type" : "integer",
+  "format" : "int64"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Message"
+      }
+    }
+  }
+}
+        ,
+        "400": {
+  "description" : "Project does not exist."
+}
+        ,
+        "404": {
+  "description" : "User does not exist."
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/user/mailbox/mark_as_read": {
+    
+    "post": {
+      "summary": "Mark mail as read",
+      "description":"Marks the specified mails as read.",
+      "x-swagger-router-controller": "Usermailbox",
+      "tags": ["Usermailbox"],
+      "operationId": "markAsRead",
+      "parameters": [
+        {
+  "name" : "project",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "user",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "message_ids",
+  "in" : "formData",
+  "required" : false,
+  "type" : "array",
+  "collectionFormat" : "multi"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "$ref" : "#/definitions/JsonResponse"
+  }
+}
+        ,
+        "400": {
+  "description" : "Project does not exist."
+}
+        ,
+        "404": {
+  "description" : "User does not exist."
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/user/mailbox/get_online_users": {
+    
+    "post": {
+      "summary": "Get connected users",
+      "description":"",
+      "x-swagger-router-controller": "Usermailbox",
+      "tags": ["Usermailbox"],
+      "operationId": "getConnectedUsers",
+      "parameters": [
+        {
+  "name" : "project",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "type" : "object",
+      "additionalProperties" : {
+        "type" : "object",
+        "properties" : { }
+      }
+    }
+  }
+}
+        ,
+        "400": {
+  "description" : "Project does not exist."
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  
+  "/continuous-query/create": {
+    
+    "post": {
+      "summary": "Create stream",
+      "description":"",
+      "x-swagger-router-controller": "Continuousquery",
+      "tags": ["Continuousquery"],
+      "operationId": "create",
+      "parameters": [
+        {
+  "in" : "body",
+  "name" : "ContinuousQuery",
+  "required" : true,
+  "schema" : {
+    "$ref" : "#/definitions/ContinuousQuery"
+  }
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "$ref" : "#/definitions/JsonResponse"
+  }
+}
+        ,
+        "400": {
+  "description" : "Project does not exist."
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/continuous-query/delete": {
+    
+    "post": {
+      "summary": "Delete stream",
+      "description":"",
+      "x-swagger-router-controller": "Continuousquery",
+      "tags": ["Continuousquery"],
+      "operationId": "delete",
+      "parameters": [
+        {
+  "name" : "project",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "name",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "$ref" : "#/definitions/JsonResponse"
+  }
+}
+        ,
+        "400": {
+  "description" : "Project does not exist."
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/continuous-query/list": {
+    
+    "post": {
+      "summary": "List queries",
+      "description":"",
+      "x-swagger-router-controller": "Continuousquery",
+      "tags": ["Continuousquery"],
+      "operationId": "listQueries",
+      "parameters": [
+        {
+  "name" : "project",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/ContinuousQuery"
+    }
+  }
+}
+        ,
+        "400": {
+  "description" : "Project does not exist."
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/continuous-query/schema": {
+    
+    "post": {
+      "summary": "Get query schema",
+      "description":"",
+      "x-swagger-router-controller": "Continuousquery",
+      "tags": ["Continuousquery"],
+      "operationId": "schema",
+      "parameters": [
+        {
+  "name" : "project",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/Collection"
+    }
+  }
+}
+        ,
+        "400": {
+  "description" : "Project does not exist."
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/continuous-query/test": {
+    
+    "post": {
+      "summary": "Test continuous query",
+      "description":"",
+      "x-swagger-router-controller": "Continuousquery",
+      "tags": ["Continuousquery"],
+      "operationId": "test",
+      "parameters": [
+        {
+  "name" : "project",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "query",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/SchemaField"
+    }
+  }
+}
+        ,
+        "400": {
+  "description" : "Project does not exist."
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  
+  "/event/collect": {
+    
+    "post": {
+      "summary": "Collect event",
+      "description":"",
+      "x-swagger-router-controller": "Event",
+      "tags": ["Event"],
+      "operationId": "collectEvent",
+      "parameters": [
+        {
+  "in" : "body",
+  "name" : "Event",
+  "required" : true,
+  "schema" : {
+    "$ref" : "#/definitions/Event"
+  }
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "type" : "integer",
+    "format" : "int32"
+  }
+}
+        ,
+        "400": {
+  "description" : "Project does not exist."
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/query/explain": {
+    
+    "post": {
+      "summary": "Explain query",
+      "description":"",
+      "x-swagger-router-controller": "Event",
+      "tags": ["Event"],
+      "operationId": "explain",
+      "parameters": [
+        {
+  "name" : "query",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "type" : "object",
+    "properties" : { }
+  }
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/query/execute": {
+    
+    "post": {
+      "summary": "Analyze events",
+      "description":"",
+      "x-swagger-router-controller": "Event",
+      "tags": ["Event"],
+      "operationId": "execute",
+      "parameters": [
+        {
+  "name" : "project",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "query",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "limit",
+  "in" : "formData",
+  "required" : false,
+  "type" : "integer",
+  "format" : "int32"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "$ref" : "#/definitions/QueryResult"
+  }
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/event/batch": {
+    
+    "post": {
+      "summary": "Collect multiple events",
+      "description":"",
+      "x-swagger-router-controller": "Event",
+      "tags": ["Event"],
+      "operationId": "batchEvents",
+      "parameters": [
+        {
+  "in" : "body",
+  "name" : "EventList",
+  "required" : true,
+  "schema" : {
+    "$ref" : "#/definitions/EventList"
+  }
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "type" : "integer",
+    "format" : "int32"
+  }
+}
+        ,
+        "400": {
+  "description" : "Project does not exist."
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  
+  "/event-explorer/analyze": {
+    
+    "post": {
+      "summary": "Perform simple query on event data",
+      "description":"",
+      "x-swagger-router-controller": "Eventexplorer",
+      "tags": ["Eventexplorer"],
+      "operationId": "execute",
+      "parameters": [
+        {
+  "in" : "body",
+  "name" : "Execute",
+  "required" : true,
+  "schema" : {
+    "$ref" : "#/definitions/Execute"
+  }
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "$ref" : "#/definitions/QueryResult"
+  }
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/event-explorer/extra_dimensions": {
+    
+    "post": {
+      "summary": "Event statistics",
+      "description":"",
+      "x-swagger-router-controller": "Eventexplorer",
+      "tags": ["Eventexplorer"],
+      "operationId": "getExtraDimensions",
+      "parameters": [
+        {
+  "name" : "project",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "type" : "string"
+    }
+  }
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/event-explorer/event_dimensions": {
+    
+    "post": {
+      "summary": "Event statistics",
+      "description":"",
+      "x-swagger-router-controller": "Eventexplorer",
+      "tags": ["Eventexplorer"],
+      "operationId": "getEventDimensions",
+      "parameters": [
+        {
+  "name" : "project",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "type" : "string"
+    }
+  }
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/event-explorer/statistics": {
+    
+    "post": {
+      "summary": "Event statistics",
+      "description":"",
+      "x-swagger-router-controller": "Eventexplorer",
+      "tags": ["Eventexplorer"],
+      "operationId": "getEventStatistics",
+      "parameters": [
+        {
+  "name" : "project",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "collections",
+  "in" : "formData",
+  "required" : false,
+  "type" : "array",
+  "collectionFormat" : "multi"
+},
+        {
+  "name" : "dimension",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "startDate",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string",
+  "format" : "date"
+},
+        {
+  "name" : "endDate",
+  "in" : "formData",
+  "required" : false,
+  "type" : "string",
+  "format" : "date"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "successful operation",
+  "schema" : {
+    "$ref" : "#/definitions/QueryResult"
+  }
+}
+        
+        
+      }
+    } 
+    
   } 
   
   }, "definitions": {
@@ -2013,16 +2308,6 @@
       }
     }
   }
-},"Action": {
-  "properties" : {
-    "type" : {
-      "type" : "string",
-      "enum" : [ "email", "client" ]
-    },
-    "value" : {
-      "type" : "string"
-    }
-  }
 },"User": {
   "required" : [ "id", "project", "properties" ],
   "properties" : {
@@ -2037,6 +2322,38 @@
       "additionalProperties" : {
         "type" : "object",
         "properties" : { }
+      }
+    }
+  }
+},"Execute": {
+  "properties" : {
+    "project" : {
+      "type" : "string"
+    },
+    "measure" : {
+      "$ref" : "#/definitions/Measure"
+    },
+    "grouping" : {
+      "$ref" : "#/definitions/Reference"
+    },
+    "segment" : {
+      "$ref" : "#/definitions/Reference"
+    },
+    "filterExpression" : {
+      "type" : "string"
+    },
+    "startDate" : {
+      "type" : "string",
+      "format" : "date"
+    },
+    "endDate" : {
+      "type" : "string",
+      "format" : "date"
+    },
+    "collections" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string"
       }
     }
   }
@@ -2120,33 +2437,19 @@
       }
     }
   }
-},"setUserPropertyOnce": {
+},"BatchCreate": {
   "properties" : {
     "project" : {
       "type" : "string"
     },
-    "user" : {
-      "type" : "string"
-    },
-    "properties" : {
-      "type" : "object",
-      "additionalProperties" : {
-        "type" : "object",
-        "properties" : { }
+    "users" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/User"
       }
     }
   }
-},"JsonResponse": {
-  "properties" : {
-    "success" : {
-      "type" : "boolean",
-      "default" : false
-    },
-    "message" : {
-      "type" : "string"
-    }
-  }
-},"searchUsers": {
+},"BatchSendMessages": {
   "properties" : {
     "project" : {
       "type" : "string"
@@ -2160,16 +2463,30 @@
         "$ref" : "#/definitions/EventFilter"
       }
     },
-    "sorting" : {
-      "$ref" : "#/definitions/Sorting"
+    "config" : {
+      "$ref" : "#/definitions/MailAction"
+    }
+  }
+},"JsonResponse": {
+  "properties" : {
+    "success" : {
+      "type" : "boolean",
+      "default" : false
     },
-    "offset" : {
-      "type" : "integer",
-      "format" : "int32"
+    "message" : {
+      "type" : "string"
+    }
+  }
+},"Send": {
+  "properties" : {
+    "project" : {
+      "type" : "string"
     },
-    "limit" : {
-      "type" : "integer",
-      "format" : "int32"
+    "user" : {
+      "type" : "string"
+    },
+    "config" : {
+      "$ref" : "#/definitions/EmailActionConfig"
     }
   }
 },"QueryResult": {
@@ -2203,6 +2520,15 @@
     "failed" : {
       "type" : "boolean",
       "default" : false
+    }
+  }
+},"Goal": {
+  "properties" : {
+    "collection" : {
+      "type" : "string"
+    },
+    "filter" : {
+      "type" : "string"
     }
   }
 },"ContinuousQuery": {
@@ -2270,6 +2596,38 @@
       "enum" : [ "COUNT", "COUNT_UNIQUE", "SUM", "MINIMUM", "MAXIMUM", "APPROXIMATE_UNIQUE", "VARIANCE", "POPULATION_VARIANCE", "STANDARD_DEVIATION", "AVERAGE" ]
     }
   }
+},"SearchUsers": {
+  "properties" : {
+    "project" : {
+      "type" : "string"
+    },
+    "columns" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "filter" : {
+      "type" : "string"
+    },
+    "event_filters" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/EventFilter"
+      }
+    },
+    "sorting" : {
+      "$ref" : "#/definitions/Sorting"
+    },
+    "offset" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "limit" : {
+      "type" : "integer",
+      "format" : "int32"
+    }
+  }
 },"MetadataResponse": {
   "properties" : {
     "columns" : {
@@ -2280,6 +2638,22 @@
     },
     "identifierColumn" : {
       "type" : "string"
+    }
+  }
+},"SetUserProperties": {
+  "properties" : {
+    "project" : {
+      "type" : "string"
+    },
+    "user" : {
+      "type" : "string"
+    },
+    "properties" : {
+      "type" : "object",
+      "additionalProperties" : {
+        "type" : "object",
+        "properties" : { }
+      }
     }
   }
 },"QueryError": {
@@ -2359,18 +2733,6 @@
       "format" : "int64"
     }
   }
-},"batchCreate": {
-  "properties" : {
-    "project" : {
-      "type" : "string"
-    },
-    "users" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/definitions/User"
-      }
-    }
-  }
 },"MaterializedViewBuilder": {
   "properties" : {
     "name" : {
@@ -2390,6 +2752,39 @@
       }
     },
     "updateInterval" : {
+      "type" : "string"
+    }
+  }
+},"ABTestingReport": {
+  "required" : [ "goal", "name", "project", "variants" ],
+  "properties" : {
+    "project" : {
+      "type" : "string"
+    },
+    "name" : {
+      "type" : "string"
+    },
+    "variants" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Variant"
+      }
+    },
+    "goal" : {
+      "$ref" : "#/definitions/Goal"
+    },
+    "options" : {
+      "type" : "object",
+      "properties" : { }
+    },
+    "id" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "collectionName" : {
+      "type" : "string"
+    },
+    "connectorField" : {
       "type" : "string"
     }
   }
@@ -2451,6 +2846,17 @@
       }
     }
   }
+},"SerializableAction": {
+  "properties" : {
+    "type" : {
+      "type" : "string",
+      "enum" : [ "client", "user_action", "event" ]
+    },
+    "value" : {
+      "type" : "object",
+      "properties" : { }
+    }
+  }
 },"RetentionAction": {
   "properties" : {
     "collection" : {
@@ -2458,36 +2864,26 @@
       "readOnly" : true
     }
   }
-},"execute": {
+},"EmailActionConfig": {
   "properties" : {
-    "project" : {
+    "title" : {
       "type" : "string"
     },
-    "measure" : {
-      "$ref" : "#/definitions/Measure"
-    },
-    "grouping" : {
-      "$ref" : "#/definitions/Reference"
-    },
-    "segment" : {
-      "$ref" : "#/definitions/Reference"
-    },
-    "filterExpression" : {
+    "content" : {
       "type" : "string"
     },
-    "startDate" : {
-      "type" : "string",
-      "format" : "date"
+    "columnName" : {
+      "type" : "string"
     },
-    "endDate" : {
-      "type" : "string",
-      "format" : "date"
-    },
-    "collections" : {
-      "type" : "array",
-      "items" : {
+    "defaultValues" : {
+      "type" : "object",
+      "additionalProperties" : {
         "type" : "string"
       }
+    },
+    "richText" : {
+      "type" : "boolean",
+      "default" : false
     }
   }
 },"EventFilter": {
@@ -2559,12 +2955,8 @@
     }
   }
 },"AutomationRule": {
-  "required" : [ "actions", "id", "project", "scenarios" ],
+  "required" : [ "actions", "project", "scenarios" ],
   "properties" : {
-    "id" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
     "project" : {
       "type" : "string"
     },
@@ -2581,11 +2973,29 @@
     "actions" : {
       "type" : "array",
       "items" : {
-        "$ref" : "#/definitions/Action"
+        "$ref" : "#/definitions/SerializableAction"
       }
     },
     "custom_data" : {
       "type" : "string"
+    },
+    "id" : {
+      "type" : "integer",
+      "format" : "int32"
+    }
+  }
+},"Variant": {
+  "properties" : {
+    "name" : {
+      "type" : "string"
+    },
+    "weight" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "data" : {
+      "type" : "object",
+      "properties" : { }
     }
   }
 },"EventContext": {
@@ -2603,22 +3013,6 @@
     },
     "checksum" : {
       "type" : "string"
-    }
-  }
-},"setUserProperties": {
-  "properties" : {
-    "project" : {
-      "type" : "string"
-    },
-    "user" : {
-      "type" : "string"
-    },
-    "properties" : {
-      "type" : "object",
-      "additionalProperties" : {
-        "type" : "object",
-        "properties" : { }
-      }
     }
   }
 },"MaterializedViewSchema": {
@@ -2648,6 +3042,40 @@
       }
     }
   }
+},"BatchSendEmails": {
+  "properties" : {
+    "project" : {
+      "type" : "string"
+    },
+    "filter" : {
+      "type" : "string"
+    },
+    "event_filters" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/EventFilter"
+      }
+    },
+    "config" : {
+      "$ref" : "#/definitions/EmailActionConfig"
+    }
+  }
+},"MailAction": {
+  "required" : [ "message", "variables" ],
+  "properties" : {
+    "message" : {
+      "type" : "string"
+    },
+    "variables" : {
+      "type" : "object",
+      "additionalProperties" : {
+        "type" : "string"
+      }
+    },
+    "fromUser" : {
+      "type" : "string"
+    }
+  }
 },"Collection": {
   "properties" : {
     "name" : {
@@ -2661,7 +3089,7 @@
     }
   }
 },"Event": {
-  "required" : [ "collection", "project", "properties" ],
+  "required" : [ "api", "collection", "project", "properties" ],
   "properties" : {
     "project" : {
       "type" : "string",
@@ -2671,7 +3099,7 @@
       "type" : "string",
       "readOnly" : true
     },
-    "context" : {
+    "api" : {
       "$ref" : "#/definitions/EventContext"
     },
     "properties" : {

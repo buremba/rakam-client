@@ -130,29 +130,18 @@ exports.searchUsers = function(searchUsers) {
     return examples[Object.keys(examples)[0]];
   
 }
-exports.setUserPropertyOnce = function(setUserPropertyOnce) {
+exports.setUserPropertiesOnce = function(setUserProperties) {
 
   var examples = {};
   
-  examples['application/json'] = {
-  "success" : true,
-  "message" : "aeiou"
-};
-  
 
-  
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
   
 }
 exports.setUserProperties = function(setUserProperties) {
 
   var examples = {};
   
-  examples['application/json'] = {
-  "success" : true,
-  "message" : "aeiou"
-};
+  examples['application/json'] = 123;
   
 
   

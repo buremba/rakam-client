@@ -17,6 +17,9 @@ extension SwaggerClientAPI {
          
          - POST /continuous-query/create
          - 
+         - API Key:
+           - type: apiKey master_key 
+           - name: master_key
          - examples: [{contentType=application/json, example={
   "success" : true,
   "message" : "aeiou"
@@ -43,6 +46,9 @@ extension SwaggerClientAPI {
          
          - POST /continuous-query/delete
          - 
+         - API Key:
+           - type: apiKey master_key 
+           - name: master_key
          - examples: [{contentType=application/json, example={
   "success" : true,
   "message" : "aeiou"
@@ -74,6 +80,9 @@ extension SwaggerClientAPI {
          
          - POST /continuous-query/list
          - 
+         - API Key:
+           - type: apiKey read_key 
+           - name: read_key
          - examples: [{contentType=application/json, example=[ {
   "collections" : [ "aeiou" ],
   "name" : "aeiou",
@@ -110,6 +119,9 @@ extension SwaggerClientAPI {
          
          - POST /continuous-query/schema
          - 
+         - API Key:
+           - type: apiKey read_key 
+           - name: read_key
          - examples: [{contentType=application/json, example=[ {
   "name" : "aeiou",
   "fields" : [ {
@@ -147,6 +159,9 @@ extension SwaggerClientAPI {
          
          - POST /continuous-query/test
          - 
+         - API Key:
+           - type: apiKey read_key 
+           - name: read_key
          - examples: [{contentType=application/json, example=[ {
   "nullable" : true,
   "descriptiveName" : "aeiou",

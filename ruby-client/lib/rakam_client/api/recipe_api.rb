@@ -59,16 +59,12 @@ module RakamClient
 
     # Install recipe
     # 
-    # @param recipe 
     # @param [Hash] opts the optional parameters
     # @return [JsonResponse]
-    def install(recipe, opts = {})
+    def install(opts = {})
       if Configuration.debugging
         Configuration.logger.debug "Calling API: RecipeApi#install ..."
       end
-      
-      # verify the required parameter 'recipe' is set
-      fail "Missing the required parameter 'recipe' when calling install" if recipe.nil?
       
       # resource path
       path = "/recipe/install".sub('{format}','json')
@@ -91,7 +87,7 @@ module RakamClient
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(recipe)
+      post_body = nil
       
 
       auth_names = ['master_key']

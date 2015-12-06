@@ -53,7 +53,7 @@ class Event implements ArrayAccess
     static $swaggerTypes = array(
         'project' => 'string',
         'collection' => 'string',
-        'context' => '\client.model\EventContext',
+        'api' => '\client.model\EventContext',
         'properties' => 'object'
     );
   
@@ -64,7 +64,7 @@ class Event implements ArrayAccess
     static $attributeMap = array(
         'project' => 'project',
         'collection' => 'collection',
-        'context' => 'context',
+        'api' => 'api',
         'properties' => 'properties'
     );
   
@@ -75,7 +75,7 @@ class Event implements ArrayAccess
     static $setters = array(
         'project' => 'setProject',
         'collection' => 'setCollection',
-        'context' => 'setContext',
+        'api' => 'setApi',
         'properties' => 'setProperties'
     );
   
@@ -86,7 +86,7 @@ class Event implements ArrayAccess
     static $getters = array(
         'project' => 'getProject',
         'collection' => 'getCollection',
-        'context' => 'getContext',
+        'api' => 'getApi',
         'properties' => 'getProperties'
     );
   
@@ -104,10 +104,10 @@ class Event implements ArrayAccess
     protected $collection;
     
     /**
-      * $context 
+      * $api 
       * @var \client.model\EventContext
       */
-    protected $context;
+    protected $api;
     
     /**
       * $properties 
@@ -125,7 +125,7 @@ class Event implements ArrayAccess
         if ($data != null) {
             $this->project = $data["project"];
             $this->collection = $data["collection"];
-            $this->context = $data["context"];
+            $this->api = $data["api"];
             $this->properties = $data["properties"];
         }
     }
@@ -173,23 +173,23 @@ class Event implements ArrayAccess
     }
     
     /**
-     * Gets context
+     * Gets api
      * @return \client.model\EventContext
      */
-    public function getContext()
+    public function getApi()
     {
-        return $this->context;
+        return $this->api;
     }
   
     /**
-     * Sets context
-     * @param \client.model\EventContext $context 
+     * Sets api
+     * @param \client.model\EventContext $api 
      * @return $this
      */
-    public function setContext($context)
+    public function setApi($api)
     {
         
-        $this->context = $context;
+        $this->api = $api;
         return $this;
     }
     

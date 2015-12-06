@@ -12,7 +12,7 @@ public class Event: JSONEncodable {
 
     public var project: String!
     public var collection: String!
-    public var context: EventContext?
+    public var api: EventContext!
     public var properties: String!
     
 
@@ -21,7 +21,7 @@ public class Event: JSONEncodable {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["project"] = self.project
         nillableDictionary["collection"] = self.collection
-        nillableDictionary["context"] = self.context?.encodeToJSON()
+        nillableDictionary["api"] = self.api.encodeToJSON()
         nillableDictionary["properties"] = self.properties
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary

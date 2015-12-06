@@ -52,6 +52,7 @@ class SearchUsers implements ArrayAccess
       */
     static $swaggerTypes = array(
         'project' => 'string',
+        'columns' => 'string[]',
         'filter' => 'string',
         'event_filters' => '\client.model\EventFilter[]',
         'sorting' => '\client.model\Sorting',
@@ -65,6 +66,7 @@ class SearchUsers implements ArrayAccess
       */
     static $attributeMap = array(
         'project' => 'project',
+        'columns' => 'columns',
         'filter' => 'filter',
         'event_filters' => 'event_filters',
         'sorting' => 'sorting',
@@ -78,6 +80,7 @@ class SearchUsers implements ArrayAccess
       */
     static $setters = array(
         'project' => 'setProject',
+        'columns' => 'setColumns',
         'filter' => 'setFilter',
         'event_filters' => 'setEventFilters',
         'sorting' => 'setSorting',
@@ -91,6 +94,7 @@ class SearchUsers implements ArrayAccess
       */
     static $getters = array(
         'project' => 'getProject',
+        'columns' => 'getColumns',
         'filter' => 'getFilter',
         'event_filters' => 'getEventFilters',
         'sorting' => 'getSorting',
@@ -104,6 +108,12 @@ class SearchUsers implements ArrayAccess
       * @var string
       */
     protected $project;
+    
+    /**
+      * $columns 
+      * @var string[]
+      */
+    protected $columns;
     
     /**
       * $filter 
@@ -144,6 +154,7 @@ class SearchUsers implements ArrayAccess
     {
         if ($data != null) {
             $this->project = $data["project"];
+            $this->columns = $data["columns"];
             $this->filter = $data["filter"];
             $this->event_filters = $data["event_filters"];
             $this->sorting = $data["sorting"];
@@ -170,6 +181,27 @@ class SearchUsers implements ArrayAccess
     {
         
         $this->project = $project;
+        return $this;
+    }
+    
+    /**
+     * Gets columns
+     * @return string[]
+     */
+    public function getColumns()
+    {
+        return $this->columns;
+    }
+  
+    /**
+     * Sets columns
+     * @param string[] $columns 
+     * @return $this
+     */
+    public function setColumns($columns)
+    {
+        
+        $this->columns = $columns;
         return $this;
     }
     

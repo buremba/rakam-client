@@ -37,51 +37,29 @@ class AutomationRule(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'id': 'int',
             'project': 'str',
             'is_active': 'bool',
             'scenarios': 'list[ScenarioStep]',
-            'actions': 'list[Action]',
-            'custom_data': 'str'
+            'actions': 'list[SerializableAction]',
+            'custom_data': 'str',
+            'id': 'int'
         }
 
         self.attribute_map = {
-            'id': 'id',
             'project': 'project',
             'is_active': 'is_active',
             'scenarios': 'scenarios',
             'actions': 'actions',
-            'custom_data': 'custom_data'
+            'custom_data': 'custom_data',
+            'id': 'id'
         }
 
-        self._id = None
         self._project = None
         self._is_active = None
         self._scenarios = None
         self._actions = None
         self._custom_data = None
-
-    @property
-    def id(self):
-        """
-        Gets the id of this AutomationRule.
-
-
-        :return: The id of this AutomationRule.
-        :rtype: int
-        """
-        return self._id
-
-    @id.setter
-    def id(self, id):
-        """
-        Sets the id of this AutomationRule.
-
-
-        :param id: The id of this AutomationRule.
-        :type: int
-        """
-        self._id = id
+        self._id = None
 
     @property
     def project(self):
@@ -156,7 +134,7 @@ class AutomationRule(object):
 
 
         :return: The actions of this AutomationRule.
-        :rtype: list[Action]
+        :rtype: list[SerializableAction]
         """
         return self._actions
 
@@ -167,7 +145,7 @@ class AutomationRule(object):
 
 
         :param actions: The actions of this AutomationRule.
-        :type: list[Action]
+        :type: list[SerializableAction]
         """
         self._actions = actions
 
@@ -192,6 +170,28 @@ class AutomationRule(object):
         :type: str
         """
         self._custom_data = custom_data
+
+    @property
+    def id(self):
+        """
+        Gets the id of this AutomationRule.
+
+
+        :return: The id of this AutomationRule.
+        :rtype: int
+        """
+        return self._id
+
+    @id.setter
+    def id(self, id):
+        """
+        Sets the id of this AutomationRule.
+
+
+        :param id: The id of this AutomationRule.
+        :type: int
+        """
+        self._id = id
 
     def to_dict(self):
         """

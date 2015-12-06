@@ -7,7 +7,7 @@ var User = require('./UserService');
 
 
 module.exports.batchCreate = function batchCreate (req, res, next) {
-  var batchCreate = req.swagger.params['batchCreate'].value;
+  var batchCreate = req.swagger.params['BatchCreate'].value;
   
 
   var result = User.batchCreate(batchCreate);
@@ -96,7 +96,7 @@ module.exports.getMetadata = function getMetadata (req, res, next) {
 };
 
 module.exports.searchUsers = function searchUsers (req, res, next) {
-  var searchUsers = req.swagger.params['searchUsers'].value;
+  var searchUsers = req.swagger.params['SearchUsers'].value;
   
 
   var result = User.searchUsers(searchUsers);
@@ -109,11 +109,11 @@ module.exports.searchUsers = function searchUsers (req, res, next) {
     res.end();
 };
 
-module.exports.setUserPropertyOnce = function setUserPropertyOnce (req, res, next) {
-  var setUserPropertyOnce = req.swagger.params['setUserPropertyOnce'].value;
+module.exports.setUserPropertiesOnce = function setUserPropertiesOnce (req, res, next) {
+  var setUserProperties = req.swagger.params['SetUserProperties'].value;
   
 
-  var result = User.setUserPropertyOnce(setUserPropertyOnce);
+  var result = User.setUserPropertiesOnce(setUserProperties);
 
   if(typeof result !== 'undefined') {
     res.setHeader('Content-Type', 'application/json');
@@ -124,7 +124,7 @@ module.exports.setUserPropertyOnce = function setUserPropertyOnce (req, res, nex
 };
 
 module.exports.setUserProperties = function setUserProperties (req, res, next) {
-  var setUserProperties = req.swagger.params['setUserProperties'].value;
+  var setUserProperties = req.swagger.params['SetUserProperties'].value;
   
 
   var result = User.setUserProperties(setUserProperties);

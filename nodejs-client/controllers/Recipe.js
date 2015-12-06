@@ -21,10 +21,9 @@ module.exports.export = function export (req, res, next) {
 };
 
 module.exports.install = function install (req, res, next) {
-  var recipe = req.swagger.params['Recipe'].value;
   
 
-  var result = Recipe.install(recipe);
+  var result = Recipe.install();
 
   if(typeof result !== 'undefined') {
     res.setHeader('Content-Type', 'application/json');

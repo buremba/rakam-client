@@ -165,44 +165,44 @@ namespace Rakam.Client.Api
         System.Threading.Tasks.Task<QueryResult> SearchUsersAsync (SearchUsers searchUsers);
         
         /// <summary>
-        /// Set user property
+        /// Set user properties once
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="setUserPropertyOnce"></param>
-        /// <returns>JsonResponse</returns>
-        JsonResponse SetUserPropertyOnce (SetUserPropertyOnce setUserPropertyOnce);
+        /// <param name="setUserProperties"></param>
+        /// <returns></returns>
+        void SetUserPropertiesOnce (SetUserProperties setUserProperties);
   
         /// <summary>
-        /// Set user property
+        /// Set user properties once
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="setUserPropertyOnce"></param>
-        /// <returns>JsonResponse</returns>
-        System.Threading.Tasks.Task<JsonResponse> SetUserPropertyOnceAsync (SetUserPropertyOnce setUserPropertyOnce);
+        /// <param name="setUserProperties"></param>
+        /// <returns></returns>
+        System.Threading.Tasks.Task SetUserPropertiesOnceAsync (SetUserProperties setUserProperties);
         
         /// <summary>
-        /// Set user property
+        /// Set user properties
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <param name="setUserProperties"></param>
-        /// <returns>JsonResponse</returns>
-        JsonResponse SetUserProperties (SetUserProperties setUserProperties);
+        /// <returns>int?</returns>
+        int? SetUserProperties (SetUserProperties setUserProperties);
   
         /// <summary>
-        /// Set user property
+        /// Set user properties
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <param name="setUserProperties"></param>
-        /// <returns>JsonResponse</returns>
-        System.Threading.Tasks.Task<JsonResponse> SetUserPropertiesAsync (SetUserProperties setUserProperties);
+        /// <returns>int?</returns>
+        System.Threading.Tasks.Task<int?> SetUserPropertiesAsync (SetUserProperties setUserProperties);
         
     }
   
@@ -974,15 +974,15 @@ namespace Rakam.Client.Api
         }
         
         /// <summary>
-        /// Set user property 
+        /// Set user properties once 
         /// </summary>
-        /// <param name="setUserPropertyOnce"></param> 
-        /// <returns>JsonResponse</returns>            
-        public JsonResponse SetUserPropertyOnce (SetUserPropertyOnce setUserPropertyOnce)
+        /// <param name="setUserProperties"></param> 
+        /// <returns></returns>            
+        public void SetUserPropertiesOnce (SetUserProperties setUserProperties)
         {
             
-            // verify the required parameter 'setUserPropertyOnce' is set
-            if (setUserPropertyOnce == null) throw new ApiException(400, "Missing required parameter 'setUserPropertyOnce' when calling SetUserPropertyOnce");
+            // verify the required parameter 'setUserProperties' is set
+            if (setUserProperties == null) throw new ApiException(400, "Missing required parameter 'setUserProperties' when calling SetUserPropertiesOnce");
             
     
             var path = "/user/set_once";
@@ -1009,7 +1009,7 @@ namespace Rakam.Client.Api
             
             
             
-            postBody = ApiClient.Serialize(setUserPropertyOnce); // http body (model) parameter
+            postBody = ApiClient.Serialize(setUserProperties); // http body (model) parameter
             
     
             // authentication setting, if any
@@ -1019,22 +1019,22 @@ namespace Rakam.Client.Api
             IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
     
             if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling SetUserPropertyOnce: " + response.Content, response.Content);
+                throw new ApiException ((int)response.StatusCode, "Error calling SetUserPropertiesOnce: " + response.Content, response.Content);
             else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling SetUserPropertyOnce: " + response.ErrorMessage, response.ErrorMessage);
+                throw new ApiException ((int)response.StatusCode, "Error calling SetUserPropertiesOnce: " + response.ErrorMessage, response.ErrorMessage);
     
-            return (JsonResponse) ApiClient.Deserialize(response.Content, typeof(JsonResponse), response.Headers);
+            return;
         }
     
         /// <summary>
-        /// Set user property 
+        /// Set user properties once 
         /// </summary>
-        /// <param name="setUserPropertyOnce"></param>
-        /// <returns>JsonResponse</returns>
-        public async System.Threading.Tasks.Task<JsonResponse> SetUserPropertyOnceAsync (SetUserPropertyOnce setUserPropertyOnce)
+        /// <param name="setUserProperties"></param>
+        /// <returns></returns>
+        public async System.Threading.Tasks.Task SetUserPropertiesOnceAsync (SetUserProperties setUserProperties)
         {
-            // verify the required parameter 'setUserPropertyOnce' is set
-            if (setUserPropertyOnce == null) throw new ApiException(400, "Missing required parameter 'setUserPropertyOnce' when calling SetUserPropertyOnce");
+            // verify the required parameter 'setUserProperties' is set
+            if (setUserProperties == null) throw new ApiException(400, "Missing required parameter 'setUserProperties' when calling SetUserPropertiesOnce");
             
     
             var path = "/user/set_once";
@@ -1061,7 +1061,7 @@ namespace Rakam.Client.Api
             
             
             
-            postBody = ApiClient.Serialize(setUserPropertyOnce); // http body (model) parameter
+            postBody = ApiClient.Serialize(setUserProperties); // http body (model) parameter
             
     
             // authentication setting, if any
@@ -1070,17 +1070,18 @@ namespace Rakam.Client.Api
             // make the HTTP request
             IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
             if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling SetUserPropertyOnce: " + response.Content, response.Content);
+                throw new ApiException ((int)response.StatusCode, "Error calling SetUserPropertiesOnce: " + response.Content, response.Content);
 
-            return (JsonResponse) ApiClient.Deserialize(response.Content, typeof(JsonResponse), response.Headers);
+            
+            return;
         }
         
         /// <summary>
-        /// Set user property 
+        /// Set user properties 
         /// </summary>
         /// <param name="setUserProperties"></param> 
-        /// <returns>JsonResponse</returns>            
-        public JsonResponse SetUserProperties (SetUserProperties setUserProperties)
+        /// <returns>int?</returns>            
+        public int? SetUserProperties (SetUserProperties setUserProperties)
         {
             
             // verify the required parameter 'setUserProperties' is set
@@ -1125,15 +1126,15 @@ namespace Rakam.Client.Api
             else if (((int)response.StatusCode) == 0)
                 throw new ApiException ((int)response.StatusCode, "Error calling SetUserProperties: " + response.ErrorMessage, response.ErrorMessage);
     
-            return (JsonResponse) ApiClient.Deserialize(response.Content, typeof(JsonResponse), response.Headers);
+            return (int?) ApiClient.Deserialize(response.Content, typeof(int?), response.Headers);
         }
     
         /// <summary>
-        /// Set user property 
+        /// Set user properties 
         /// </summary>
         /// <param name="setUserProperties"></param>
-        /// <returns>JsonResponse</returns>
-        public async System.Threading.Tasks.Task<JsonResponse> SetUserPropertiesAsync (SetUserProperties setUserProperties)
+        /// <returns>int?</returns>
+        public async System.Threading.Tasks.Task<int?> SetUserPropertiesAsync (SetUserProperties setUserProperties)
         {
             // verify the required parameter 'setUserProperties' is set
             if (setUserProperties == null) throw new ApiException(400, "Missing required parameter 'setUserProperties' when calling SetUserProperties");
@@ -1174,7 +1175,7 @@ namespace Rakam.Client.Api
             if (((int)response.StatusCode) >= 400)
                 throw new ApiException ((int)response.StatusCode, "Error calling SetUserProperties: " + response.Content, response.Content);
 
-            return (JsonResponse) ApiClient.Deserialize(response.Content, typeof(JsonResponse), response.Headers);
+            return (int?) ApiClient.Deserialize(response.Content, typeof(int?), response.Headers);
         }
         
     }

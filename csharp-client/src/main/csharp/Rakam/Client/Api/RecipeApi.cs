@@ -40,9 +40,8 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="recipe"></param>
         /// <returns>JsonResponse</returns>
-        JsonResponse Install (Recipe recipe);
+        JsonResponse Install ();
   
         /// <summary>
         /// Install recipe
@@ -50,9 +49,8 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="recipe"></param>
         /// <returns>JsonResponse</returns>
-        System.Threading.Tasks.Task<JsonResponse> InstallAsync (Recipe recipe);
+        System.Threading.Tasks.Task<JsonResponse> InstallAsync ();
         
     }
   
@@ -209,13 +207,9 @@ namespace Rakam.Client.Api
         /// <summary>
         /// Install recipe 
         /// </summary>
-        /// <param name="recipe"></param> 
         /// <returns>JsonResponse</returns>            
-        public JsonResponse Install (Recipe recipe)
+        public JsonResponse Install ()
         {
-            
-            // verify the required parameter 'recipe' is set
-            if (recipe == null) throw new ApiException(400, "Missing required parameter 'recipe' when calling Install");
             
     
             var path = "/recipe/install";
@@ -242,7 +236,6 @@ namespace Rakam.Client.Api
             
             
             
-            postBody = ApiClient.Serialize(recipe); // http body (model) parameter
             
     
             // authentication setting, if any
@@ -262,12 +255,9 @@ namespace Rakam.Client.Api
         /// <summary>
         /// Install recipe 
         /// </summary>
-        /// <param name="recipe"></param>
         /// <returns>JsonResponse</returns>
-        public async System.Threading.Tasks.Task<JsonResponse> InstallAsync (Recipe recipe)
+        public async System.Threading.Tasks.Task<JsonResponse> InstallAsync ()
         {
-            // verify the required parameter 'recipe' is set
-            if (recipe == null) throw new ApiException(400, "Missing required parameter 'recipe' when calling Install");
             
     
             var path = "/recipe/install";
@@ -294,7 +284,6 @@ namespace Rakam.Client.Api
             
             
             
-            postBody = ApiClient.Serialize(recipe); // http body (model) parameter
             
     
             // authentication setting, if any
