@@ -13,8 +13,11 @@ public class QueryError: JSONEncodable {
     public var message: String?
     public var sqlState: String?
     public var errorCode: Int?
-    public var query: String?
+    public var errorLine: Int?
+    public var charPositionInLine: Int?
     
+
+    public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
@@ -22,7 +25,8 @@ public class QueryError: JSONEncodable {
         nillableDictionary["message"] = self.message
         nillableDictionary["sqlState"] = self.sqlState
         nillableDictionary["errorCode"] = self.errorCode
-        nillableDictionary["query"] = self.query
+        nillableDictionary["errorLine"] = self.errorLine
+        nillableDictionary["charPositionInLine"] = self.charPositionInLine
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

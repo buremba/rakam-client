@@ -6,50 +6,14 @@ var url = require('url');
 var Usermailbox = require('./UsermailboxService');
 
 
-module.exports.get = function get (req, res, next) {
-  var project = req.swagger.params['project'].value;
-  var user = req.swagger.params['user'].value;
-  var parent = req.swagger.params['parent'].value;
-  var limit = req.swagger.params['limit'].value;
-  var offset = req.swagger.params['offset'].value;
-  
-
-  var result = Usermailbox.get(project, user, parent, limit, offset);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.userMailboxGet = function userMailboxGet (req, res, next) {
+  Usermailbox.userMailboxGet(req.swagger.params, res, next);
 };
 
-module.exports.getConnectedUsers = function getConnectedUsers (req, res, next) {
-  var project = req.swagger.params['project'].value;
-  
-
-  var result = Usermailbox.getConnectedUsers(project);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.userMailboxGetConnectedUsers = function userMailboxGetConnectedUsers (req, res, next) {
+  Usermailbox.userMailboxGetConnectedUsers(req.swagger.params, res, next);
 };
 
-module.exports.markAsRead = function markAsRead (req, res, next) {
-  var project = req.swagger.params['project'].value;
-  var user = req.swagger.params['user'].value;
-  var messageIds = req.swagger.params['message_ids'].value;
-  
-
-  var result = Usermailbox.markAsRead(project, user, messageIds);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.userMailboxMarkAsRead = function userMailboxMarkAsRead (req, res, next) {
+  Usermailbox.userMailboxMarkAsRead(req.swagger.params, res, next);
 };

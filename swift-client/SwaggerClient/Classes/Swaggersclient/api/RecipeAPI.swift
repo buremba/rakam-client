@@ -20,70 +20,19 @@ extension SwaggerClientAPI {
          - API Key:
            - type: apiKey master_key 
            - name: master_key
-         - examples: [{contentType=application/json, example={
-  "reports" : [ {
-    "query" : "aeiou",
-    "name" : "aeiou",
-    "options" : {
-      "key" : "{}"
-    },
-    "slug" : "aeiou"
-  } ],
-  "materializedViews" : [ {
-    "updateInterval" : "aeiou",
-    "query" : "aeiou",
-    "name" : "aeiou",
-    "options" : {
-      "key" : "{}"
-    },
-    "table_name" : "aeiou"
-  } ],
-  "materializedViewBuilders" : [ "" ],
-  "collections" : {
-    "key" : {
-      "name" : "aeiou",
-      "fields" : [ {
-        "nullable" : true,
-        "descriptiveName" : "aeiou",
-        "unique" : true,
-        "name" : "aeiou",
-        "description" : "aeiou",
-        "type" : "aeiou",
-        "category" : "aeiou"
-      } ]
-    }
-  },
-  "continuousQueryBuilders" : [ "" ],
-  "project" : "aeiou",
-  "strategy" : "aeiou",
-  "continuousQueries" : [ {
-    "collections" : [ "aeiou" ],
-    "query" : "aeiou",
-    "name" : "aeiou",
-    "options" : {
-      "key" : "{}"
-    },
-    "partitionKeys" : [ "aeiou" ],
-    "tableName" : "aeiou"
-  } ]
-}}]
-         
-         - parameter project: (form) 
 
-         - returns: RequestBuilder<Recipe> 
+         - returns: RequestBuilder<Void> 
          */
-        public class func export(project project: String?) -> RequestBuilder<Recipe> {
+        public class func recipeExport() -> RequestBuilder<Void> {
             let path = "/recipe/export"
             let URLString = SwaggerClientAPI.basePath + path
             
-            let nillableParameters: [String:AnyObject?] = [
-                "project": project
-            ]
+            let nillableParameters: [String:AnyObject?] = [:]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
-            let requestBuilder: RequestBuilder<Recipe>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+            let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
+            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: true)
         }
     
         /**
@@ -95,21 +44,17 @@ extension SwaggerClientAPI {
          - API Key:
            - type: apiKey master_key 
            - name: master_key
-         - examples: [{contentType=application/json, example={
-  "success" : true,
-  "message" : "aeiou"
-}}]
 
-         - returns: RequestBuilder<JsonResponse> 
+         - returns: RequestBuilder<Void> 
          */
-        public class func install() -> RequestBuilder<JsonResponse> {
+        public class func recipeInstall() -> RequestBuilder<Void> {
             let path = "/recipe/install"
             let URLString = SwaggerClientAPI.basePath + path
             
             let nillableParameters: [String:AnyObject?] = [:]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
-            let requestBuilder: RequestBuilder<JsonResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+            let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
             return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: true)
         }

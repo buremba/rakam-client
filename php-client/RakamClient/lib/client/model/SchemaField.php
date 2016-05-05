@@ -53,7 +53,6 @@ class SchemaField implements ArrayAccess
     static $swaggerTypes = array(
         'name' => 'string',
         'type' => 'string',
-        'nullable' => 'bool',
         'unique' => 'bool',
         'descriptive_name' => 'string',
         'description' => 'string',
@@ -67,7 +66,6 @@ class SchemaField implements ArrayAccess
     static $attributeMap = array(
         'name' => 'name',
         'type' => 'type',
-        'nullable' => 'nullable',
         'unique' => 'unique',
         'descriptive_name' => 'descriptiveName',
         'description' => 'description',
@@ -81,7 +79,6 @@ class SchemaField implements ArrayAccess
     static $setters = array(
         'name' => 'setName',
         'type' => 'setType',
-        'nullable' => 'setNullable',
         'unique' => 'setUnique',
         'descriptive_name' => 'setDescriptiveName',
         'description' => 'setDescription',
@@ -95,7 +92,6 @@ class SchemaField implements ArrayAccess
     static $getters = array(
         'name' => 'getName',
         'type' => 'getType',
-        'nullable' => 'getNullable',
         'unique' => 'getUnique',
         'descriptive_name' => 'getDescriptiveName',
         'description' => 'getDescription',
@@ -116,16 +112,10 @@ class SchemaField implements ArrayAccess
     protected $type;
     
     /**
-      * $nullable 
-      * @var bool
-      */
-    protected $nullable;
-    
-    /**
       * $unique 
       * @var bool
       */
-    protected $unique;
+    protected $unique = false;
     
     /**
       * $descriptive_name 
@@ -155,7 +145,6 @@ class SchemaField implements ArrayAccess
         if ($data != null) {
             $this->name = $data["name"];
             $this->type = $data["type"];
-            $this->nullable = $data["nullable"];
             $this->unique = $data["unique"];
             $this->descriptive_name = $data["descriptive_name"];
             $this->description = $data["description"];
@@ -200,32 +189,11 @@ class SchemaField implements ArrayAccess
      */
     public function setType($type)
     {
-        $allowed_values = array("STRING", "LONG", "DOUBLE", "BOOLEAN", "DATE", "TIME", "TIMESTAMP", "ARRAY_STRING", "ARRAY_LONG", "ARRAY_DOUBLE", "ARRAY_BOOLEAN", "ARRAY_DATE", "ARRAY_TIME", "ARRAY_TIMESTAMP");
+        $allowed_values = array("STRING", "INTEGER", "DECIMAL", "DOUBLE", "LONG", "BOOLEAN", "DATE", "TIME", "TIMESTAMP", "BINARY", "ARRAY_STRING", "ARRAY_INTEGER", "ARRAY_DECIMAL", "ARRAY_DOUBLE", "ARRAY_LONG", "ARRAY_BOOLEAN", "ARRAY_DATE", "ARRAY_TIME", "ARRAY_TIMESTAMP", "ARRAY_BINARY", "MAP_STRING", "MAP_INTEGER", "MAP_DECIMAL", "MAP_DOUBLE", "MAP_LONG", "MAP_BOOLEAN", "MAP_DATE", "MAP_TIME", "MAP_TIMESTAMP", "MAP_BINARY");
         if (!in_array($type, $allowed_values)) {
-            throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'STRING', 'LONG', 'DOUBLE', 'BOOLEAN', 'DATE', 'TIME', 'TIMESTAMP', 'ARRAY_STRING', 'ARRAY_LONG', 'ARRAY_DOUBLE', 'ARRAY_BOOLEAN', 'ARRAY_DATE', 'ARRAY_TIME', 'ARRAY_TIMESTAMP'");
+            throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'STRING', 'INTEGER', 'DECIMAL', 'DOUBLE', 'LONG', 'BOOLEAN', 'DATE', 'TIME', 'TIMESTAMP', 'BINARY', 'ARRAY_STRING', 'ARRAY_INTEGER', 'ARRAY_DECIMAL', 'ARRAY_DOUBLE', 'ARRAY_LONG', 'ARRAY_BOOLEAN', 'ARRAY_DATE', 'ARRAY_TIME', 'ARRAY_TIMESTAMP', 'ARRAY_BINARY', 'MAP_STRING', 'MAP_INTEGER', 'MAP_DECIMAL', 'MAP_DOUBLE', 'MAP_LONG', 'MAP_BOOLEAN', 'MAP_DATE', 'MAP_TIME', 'MAP_TIMESTAMP', 'MAP_BINARY'");
         }
         $this->type = $type;
-        return $this;
-    }
-    
-    /**
-     * Gets nullable
-     * @return bool
-     */
-    public function getNullable()
-    {
-        return $this->nullable;
-    }
-  
-    /**
-     * Sets nullable
-     * @param bool $nullable 
-     * @return $this
-     */
-    public function setNullable($nullable)
-    {
-        
-        $this->nullable = $nullable;
         return $this;
     }
     

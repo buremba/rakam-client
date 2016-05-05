@@ -11,30 +11,32 @@ import Foundation
 public class RetentionQuery: JSONEncodable {
 
     public enum Date_unit: String { 
-        case DAY = "DAY"
-        case WEEK = "WEEK"
-        case MONTH = "MONTH"
+        case Day = "DAY"
+        case Week = "WEEK"
+        case Month = "MONTH"
     }
     
     public var project: String?
-    public var connector_field: String?
     public var first_action: RetentionAction?
     public var returning_action: RetentionAction?
     public var dimension: String?
     public var date_unit: Date_unit?
+    public var period: Int?
     public var startDate: NSDate?
     public var endDate: NSDate?
     
+
+    public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["project"] = self.project
-        nillableDictionary["connector_field"] = self.connector_field
         nillableDictionary["first_action"] = self.first_action?.encodeToJSON()
         nillableDictionary["returning_action"] = self.returning_action?.encodeToJSON()
         nillableDictionary["dimension"] = self.dimension
         nillableDictionary["date_unit"] = self.date_unit?.rawValue
+        nillableDictionary["period"] = self.period
         nillableDictionary["startDate"] = self.startDate?.encodeToJSON()
         nillableDictionary["endDate"] = self.endDate?.encodeToJSON()
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]

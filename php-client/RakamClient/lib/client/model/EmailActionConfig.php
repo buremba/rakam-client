@@ -123,7 +123,7 @@ class EmailActionConfig implements ArrayAccess
       * $rich_text 
       * @var bool
       */
-    protected $rich_text;
+    protected $rich_text = false;
     
 
     /**

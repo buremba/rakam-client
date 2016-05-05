@@ -4,26 +4,32 @@ module RakamClient
   class RealtimeApi
     attr_accessor :api_client
 
-    def initialize(api_client = nil)
-      @api_client = api_client || Configuration.api_client
+    def initialize(api_client = ApiClient.default)
+      @api_client = api_client
     end
 
     # Create report
     # 
+    # @param real_time_report 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :project 
-    # @option opts [String] :name 
-    # @option opts [String] :aggregation 
-    # @option opts [String] :table_name 
-    # @option opts [Array<String>] :collections 
-    # @option opts [String] :filter 
-    # @option opts [String] :measure 
-    # @option opts [Array<String>] :dimensions 
     # @return [JsonResponse]
-    def create(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: RealtimeApi#create ..."
+    def realtime_create(real_time_report, opts = {})
+      data, status_code, headers = realtime_create_with_http_info(real_time_report, opts)
+      return data
+    end
+
+    # Create report
+    # 
+    # @param real_time_report 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(JsonResponse, Fixnum, Hash)>] JsonResponse data, response status code and response headers
+    def realtime_create_with_http_info(real_time_report, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: RealtimeApi#realtime_create ..."
       end
+      
+      # verify the required parameter 'real_time_report' is set
+      fail "Missing the required parameter 'real_time_report' when calling realtime_create" if real_time_report.nil?
       
       # resource path
       path = "/realtime/create".sub('{format}','json')
@@ -44,42 +50,45 @@ module RakamClient
 
       # form parameters
       form_params = {}
-      form_params["project"] = opts[:'project'] if opts[:'project']
-      form_params["name"] = opts[:'name'] if opts[:'name']
-      form_params["aggregation"] = opts[:'aggregation'] if opts[:'aggregation']
-      form_params["table_name"] = opts[:'table_name'] if opts[:'table_name']
-      form_params["collections"] = opts[:'collections'] if opts[:'collections']
-      form_params["filter"] = opts[:'filter'] if opts[:'filter']
-      form_params["measure"] = opts[:'measure'] if opts[:'measure']
-      form_params["dimensions"] = opts[:'dimensions'] if opts[:'dimensions']
 
       # http body (model)
-      post_body = nil
+      post_body = @api_client.object_to_http_body(real_time_report)
       
 
-      auth_names = ['read_key']
-      result = @api_client.call_api(:POST, path,
+      auth_names = ['master_key']
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'JsonResponse')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: RealtimeApi#create. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RealtimeApi#realtime_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
     # Delete report
     # 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :project 
-    # @option opts [String] :name 
+    # @option opts [String] :table_name 
     # @return [JsonResponse]
-    def delete(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: RealtimeApi#delete ..."
+    def realtime_delete(opts = {})
+      data, status_code, headers = realtime_delete_with_http_info(opts)
+      return data
+    end
+
+    # Delete report
+    # 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :project 
+    # @option opts [String] :table_name 
+    # @return [Array<(JsonResponse, Fixnum, Hash)>] JsonResponse data, response status code and response headers
+    def realtime_delete_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: RealtimeApi#realtime_delete ..."
       end
       
       # resource path
@@ -102,43 +111,48 @@ module RakamClient
       # form parameters
       form_params = {}
       form_params["project"] = opts[:'project'] if opts[:'project']
-      form_params["name"] = opts[:'name'] if opts[:'name']
+      form_params["table_name"] = opts[:'table_name'] if opts[:'table_name']
 
       # http body (model)
       post_body = nil
       
 
-      auth_names = ['read_key']
-      result = @api_client.call_api(:POST, path,
+      auth_names = ['master_key']
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'JsonResponse')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: RealtimeApi#delete. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RealtimeApi#realtime_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
     # Get report
     # 
+    # @param realtime_get 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :project 
-    # @option opts [String] :table_name 
-    # @option opts [String] :filter 
-    # @option opts [String] :aggregation 
-    # @option opts [String] :measure 
-    # @option opts [Array<String>] :dimensions 
-    # @option opts [BOOLEAN] :aggregate 
-    # @option opts [DateTime] :date_start 
-    # @option opts [DateTime] :date_end 
-    # @return [Object]
-    def get(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: RealtimeApi#get ..."
+    # @return [RealTimeQueryResult]
+    def realtime_get(realtime_get, opts = {})
+      data, status_code, headers = realtime_get_with_http_info(realtime_get, opts)
+      return data
+    end
+
+    # Get report
+    # 
+    # @param realtime_get 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(RealTimeQueryResult, Fixnum, Hash)>] RealTimeQueryResult data, response status code and response headers
+    def realtime_get_with_http_info(realtime_get, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: RealtimeApi#realtime_get ..."
       end
+      
+      # verify the required parameter 'realtime_get' is set
+      fail "Missing the required parameter 'realtime_get' when calling realtime_get" if realtime_get.nil?
       
       # resource path
       path = "/realtime/get".sub('{format}','json')
@@ -159,42 +173,43 @@ module RakamClient
 
       # form parameters
       form_params = {}
-      form_params["project"] = opts[:'project'] if opts[:'project']
-      form_params["table_name"] = opts[:'table_name'] if opts[:'table_name']
-      form_params["filter"] = opts[:'filter'] if opts[:'filter']
-      form_params["aggregation"] = opts[:'aggregation'] if opts[:'aggregation']
-      form_params["measure"] = opts[:'measure'] if opts[:'measure']
-      form_params["dimensions"] = opts[:'dimensions'] if opts[:'dimensions']
-      form_params["aggregate"] = opts[:'aggregate'] if opts[:'aggregate']
-      form_params["date_start"] = opts[:'date_start'] if opts[:'date_start']
-      form_params["date_end"] = opts[:'date_end'] if opts[:'date_end']
 
       # http body (model)
-      post_body = nil
+      post_body = @api_client.object_to_http_body(realtime_get)
       
 
       auth_names = ['read_key']
-      result = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Object')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: RealtimeApi#get. Result: #{result.inspect}"
+        :return_type => 'RealTimeQueryResult')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RealtimeApi#realtime_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
-    # List reports
+    # List queries
     # 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :project 
-    # @return [Array<RealTimeReport>]
-    def list_reports(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: RealtimeApi#list_reports ..."
+    # @return [Array<ContinuousQuery>]
+    def realtime_list(opts = {})
+      data, status_code, headers = realtime_list_with_http_info(opts)
+      return data
+    end
+
+    # List queries
+    # 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :project 
+    # @return [Array<(Array<ContinuousQuery>, Fixnum, Hash)>] Array<ContinuousQuery> data, response status code and response headers
+    def realtime_list_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: RealtimeApi#realtime_list ..."
       end
       
       # resource path
@@ -223,17 +238,17 @@ module RakamClient
       
 
       auth_names = ['read_key']
-      result = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Array<RealTimeReport>')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: RealtimeApi#list_reports. Result: #{result.inspect}"
+        :return_type => 'Array<ContinuousQuery>')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RealtimeApi#realtime_list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
   end
 end

@@ -145,9 +145,9 @@ class Measure implements ArrayAccess
      */
     public function setAggregation($aggregation)
     {
-        $allowed_values = array("COUNT", "COUNT_UNIQUE", "SUM", "MINIMUM", "MAXIMUM", "APPROXIMATE_UNIQUE", "VARIANCE", "POPULATION_VARIANCE", "STANDARD_DEVIATION", "AVERAGE");
+        $allowed_values = array("COUNT", "COUNT_UNIQUE", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "APPROXIMATE_UNIQUE");
         if (!in_array($aggregation, $allowed_values)) {
-            throw new \InvalidArgumentException("Invalid value for 'aggregation', must be one of 'COUNT', 'COUNT_UNIQUE', 'SUM', 'MINIMUM', 'MAXIMUM', 'APPROXIMATE_UNIQUE', 'VARIANCE', 'POPULATION_VARIANCE', 'STANDARD_DEVIATION', 'AVERAGE'");
+            throw new \InvalidArgumentException("Invalid value for 'aggregation', must be one of 'COUNT', 'COUNT_UNIQUE', 'SUM', 'MINIMUM', 'MAXIMUM', 'AVERAGE', 'APPROXIMATE_UNIQUE'");
         }
         $this->aggregation = $aggregation;
         return $this;

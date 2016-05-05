@@ -51,8 +51,7 @@ class FunnelStep implements ArrayAccess
       * @var string[]
       */
     static $swaggerTypes = array(
-        'collection' => 'string',
-        'filter_expression' => 'string'
+        'collection' => 'string'
     );
   
     /** 
@@ -60,8 +59,7 @@ class FunnelStep implements ArrayAccess
       * @var string[] 
       */
     static $attributeMap = array(
-        'collection' => 'collection',
-        'filter_expression' => 'filterExpression'
+        'collection' => 'collection'
     );
   
     /**
@@ -69,8 +67,7 @@ class FunnelStep implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'collection' => 'setCollection',
-        'filter_expression' => 'setFilterExpression'
+        'collection' => 'setCollection'
     );
   
     /**
@@ -78,8 +75,7 @@ class FunnelStep implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'collection' => 'getCollection',
-        'filter_expression' => 'getFilterExpression'
+        'collection' => 'getCollection'
     );
   
     
@@ -88,12 +84,6 @@ class FunnelStep implements ArrayAccess
       * @var string
       */
     protected $collection;
-    
-    /**
-      * $filter_expression 
-      * @var string
-      */
-    protected $filter_expression;
     
 
     /**
@@ -104,7 +94,6 @@ class FunnelStep implements ArrayAccess
     {
         if ($data != null) {
             $this->collection = $data["collection"];
-            $this->filter_expression = $data["filter_expression"];
         }
     }
     
@@ -126,27 +115,6 @@ class FunnelStep implements ArrayAccess
     {
         
         $this->collection = $collection;
-        return $this;
-    }
-    
-    /**
-     * Gets filter_expression
-     * @return string
-     */
-    public function getFilterExpression()
-    {
-        return $this->filter_expression;
-    }
-  
-    /**
-     * Sets filter_expression
-     * @param string $filter_expression 
-     * @return $this
-     */
-    public function setFilterExpression($filter_expression)
-    {
-        
-        $this->filter_expression = $filter_expression;
         return $this;
     }
     

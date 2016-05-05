@@ -52,7 +52,7 @@ class CollectionEvent implements ArrayAccess
       */
     static $swaggerTypes = array(
         'collection' => 'string',
-        'properties' => 'map[string,object]'
+        'properties' => 'map[string,\client.model\InlineResponse200]'
     );
   
     /** 
@@ -91,7 +91,7 @@ class CollectionEvent implements ArrayAccess
     
     /**
       * $properties 
-      * @var map[string,object]
+      * @var map[string,\client.model\InlineResponse200]
       */
     protected $properties;
     
@@ -131,7 +131,7 @@ class CollectionEvent implements ArrayAccess
     
     /**
      * Gets properties
-     * @return map[string,object]
+     * @return map[string,\client.model\InlineResponse200]
      */
     public function getProperties()
     {
@@ -140,7 +140,7 @@ class CollectionEvent implements ArrayAccess
   
     /**
      * Sets properties
-     * @param map[string,object] $properties 
+     * @param map[string,\client.model\InlineResponse200] $properties 
      * @return $this
      */
     public function setProperties($properties)

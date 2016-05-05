@@ -1,15 +1,16 @@
 package org.rakam.client.model;
 
-import org.rakam.StringUtil;
-
-
-
-import io.swagger.annotations.*;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
-@ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+
+
+
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class Message   {
   
   private Integer id = null;
@@ -17,13 +18,14 @@ public class Message   {
   private Object fromUser = null;
   private Object toUser = null;
   private Integer parentId = null;
-  private Boolean seen = null;
+  private Boolean seen = false;
   private Long time = null;
   private String project = null;
 
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("id")
   public Integer getId() {
@@ -36,6 +38,7 @@ public class Message   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("content")
   public String getContent() {
@@ -48,6 +51,7 @@ public class Message   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("from_user")
   public Object getFromUser() {
@@ -60,6 +64,7 @@ public class Message   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("to_user")
   public Object getToUser() {
@@ -72,6 +77,7 @@ public class Message   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("parentId")
   public Integer getParentId() {
@@ -84,6 +90,7 @@ public class Message   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("seen")
   public Boolean getSeen() {
@@ -96,6 +103,7 @@ public class Message   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("time")
   public Long getTime() {
@@ -108,6 +116,7 @@ public class Message   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("project")
   public String getProject() {
@@ -120,19 +129,55 @@ public class Message   {
   
 
   @Override
-  public String toString()  {
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Message message = (Message) o;
+    return Objects.equals(id, message.id) &&
+        Objects.equals(content, message.content) &&
+        Objects.equals(fromUser, message.fromUser) &&
+        Objects.equals(toUser, message.toUser) &&
+        Objects.equals(parentId, message.parentId) &&
+        Objects.equals(seen, message.seen) &&
+        Objects.equals(time, message.time) &&
+        Objects.equals(project, message.project);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, content, fromUser, toUser, parentId, seen, time, project);
+  }
+
+  @Override
+  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Message {\n");
     
-    sb.append("    id: ").append(StringUtil.toIndentedString(id)).append("\n");
-    sb.append("    content: ").append(StringUtil.toIndentedString(content)).append("\n");
-    sb.append("    fromUser: ").append(StringUtil.toIndentedString(fromUser)).append("\n");
-    sb.append("    toUser: ").append(StringUtil.toIndentedString(toUser)).append("\n");
-    sb.append("    parentId: ").append(StringUtil.toIndentedString(parentId)).append("\n");
-    sb.append("    seen: ").append(StringUtil.toIndentedString(seen)).append("\n");
-    sb.append("    time: ").append(StringUtil.toIndentedString(time)).append("\n");
-    sb.append("    project: ").append(StringUtil.toIndentedString(project)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    content: ").append(toIndentedString(content)).append("\n");
+    sb.append("    fromUser: ").append(toIndentedString(fromUser)).append("\n");
+    sb.append("    toUser: ").append(toIndentedString(toUser)).append("\n");
+    sb.append("    parentId: ").append(toIndentedString(parentId)).append("\n");
+    sb.append("    seen: ").append(toIndentedString(seen)).append("\n");
+    sb.append("    time: ").append(toIndentedString(time)).append("\n");
+    sb.append("    project: ").append(toIndentedString(project)).append("\n");
     sb.append("}");
     return sb.toString();
   }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+

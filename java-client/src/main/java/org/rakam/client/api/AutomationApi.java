@@ -1,23 +1,18 @@
 package org.rakam.client.api;
 
+import com.sun.jersey.api.client.GenericType;
+
 import org.rakam.ApiException;
 import org.rakam.ApiClient;
 import org.rakam.Configuration;
 import org.rakam.Pair;
-import org.rakam.TypeRef;
-
-import org.rakam.client.model.*;
-
-import java.util.*;
 
 import org.rakam.client.model.JsonResponse;
 import org.rakam.client.model.AutomationRule;
 
-import java.io.File;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class AutomationApi {
   private ApiClient apiClient;
 
@@ -45,9 +40,8 @@ public class AutomationApi {
    * @param id 
    * @return JsonResponse
    */
-  public JsonResponse activateRule (String project, Integer id) throws ApiException {
+  public JsonResponse automationActivateRule(String project, Integer id) throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/automation/activate".replaceAll("\\{format\\}","json");
@@ -80,15 +74,9 @@ public class AutomationApi {
     String[] authNames = new String[] { "master_key" };
 
     
-
+    GenericType<JsonResponse> returnType = new GenericType<JsonResponse>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<JsonResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
   /**
@@ -97,13 +85,12 @@ public class AutomationApi {
    * @param automationRule 
    * @return JsonResponse
    */
-  public JsonResponse addRule (AutomationRule automationRule) throws ApiException {
+  public JsonResponse automationAddRule(AutomationRule automationRule) throws ApiException {
     Object postBody = automationRule;
-    byte[] postBinaryBody = null;
     
      // verify the required parameter 'automationRule' is set
      if (automationRule == null) {
-        throw new ApiException(400, "Missing the required parameter 'automationRule' when calling addRule");
+        throw new ApiException(400, "Missing the required parameter 'automationRule' when calling automationAddRule");
      }
      
     // create path and map variables
@@ -133,15 +120,9 @@ public class AutomationApi {
     String[] authNames = new String[] { "master_key" };
 
     
-
+    GenericType<JsonResponse> returnType = new GenericType<JsonResponse>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<JsonResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
   /**
@@ -151,9 +132,8 @@ public class AutomationApi {
    * @param id 
    * @return JsonResponse
    */
-  public JsonResponse deactivateRule (String project, Integer id) throws ApiException {
+  public JsonResponse automationDeactivateRule(String project, Integer id) throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/automation/deactivate".replaceAll("\\{format\\}","json");
@@ -186,15 +166,9 @@ public class AutomationApi {
     String[] authNames = new String[] { "master_key" };
 
     
-
+    GenericType<JsonResponse> returnType = new GenericType<JsonResponse>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<JsonResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
   /**
@@ -203,9 +177,8 @@ public class AutomationApi {
    * @param project 
    * @return List<AutomationRule>
    */
-  public List<AutomationRule> listRules (String project) throws ApiException {
+  public List<AutomationRule> automationListRules(String project) throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/automation/list".replaceAll("\\{format\\}","json");
@@ -236,15 +209,9 @@ public class AutomationApi {
     String[] authNames = new String[] { "read_key" };
 
     
-
+    GenericType<List<AutomationRule>> returnType = new GenericType<List<AutomationRule>>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<List<AutomationRule>>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
   /**
@@ -254,9 +221,8 @@ public class AutomationApi {
    * @param id 
    * @return JsonResponse
    */
-  public JsonResponse removeRule (String project, Integer id) throws ApiException {
+  public JsonResponse automationRemoveRule(String project, Integer id) throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/automation/remove".replaceAll("\\{format\\}","json");
@@ -289,15 +255,9 @@ public class AutomationApi {
     String[] authNames = new String[] { "master_key" };
 
     
-
+    GenericType<JsonResponse> returnType = new GenericType<JsonResponse>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<JsonResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
 }

@@ -45,7 +45,7 @@ class UseractionApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def batch_send_emails(self, batch_send_emails, **kwargs):
+    def user_email_action_batch(self, **kwargs):
         """
         Apply batch operation
         
@@ -56,20 +56,17 @@ class UseractionApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.batch_send_emails(batch_send_emails, callback=callback_function)
+        >>> thread = api.user_email_action_batch(user_email_action_batch=user_email_action_batch_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param BatchSendEmails batch_send_emails:  (required)
+        :param UserEmailActionBatch user_email_action_batch:  (required)
         :return: int
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'batch_send_emails' is set
-        if batch_send_emails is None:
-            raise ValueError("Missing the required parameter `batch_send_emails` when calling `batch_send_emails`")
 
-        all_params = ['batch_send_emails']
+        all_params = ['user_email_action_batch']
         all_params.append('callback')
 
         params = locals()
@@ -77,10 +74,14 @@ class UseractionApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method batch_send_emails" % key
+                    " to method user_email_action_batch" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'user_email_action_batch' is set
+        if ('user_email_action_batch' not in params) or (params['user_email_action_batch'] is None):
+            raise ValueError("Missing the required parameter `user_email_action_batch` when calling `user_email_action_batch`")
 
         resource_path = '/user/action/email/batch'.replace('{format}', 'json')
         method = 'POST'
@@ -95,8 +96,8 @@ class UseractionApi(object):
         files = {}
 
         body_params = None
-        if 'batch_send_emails' in params:
-            body_params = params['batch_send_emails']
+        if 'user_email_action_batch' in params:
+            body_params = params['user_email_action_batch']
 
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
@@ -109,7 +110,7 @@ class UseractionApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = []
+        auth_settings = ['read_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,
@@ -123,7 +124,7 @@ class UseractionApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def send(self, send, **kwargs):
+    def user_email_action_send(self, **kwargs):
         """
         Perform action for single user
         
@@ -134,20 +135,17 @@ class UseractionApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.send(send, callback=callback_function)
+        >>> thread = api.user_email_action_send(user_email_action_send=user_email_action_send_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param Send send:  (required)
+        :param UserEmailActionSend user_email_action_send:  (required)
         :return: bool
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'send' is set
-        if send is None:
-            raise ValueError("Missing the required parameter `send` when calling `send`")
 
-        all_params = ['send']
+        all_params = ['user_email_action_send']
         all_params.append('callback')
 
         params = locals()
@@ -155,10 +153,14 @@ class UseractionApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method send" % key
+                    " to method user_email_action_send" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'user_email_action_send' is set
+        if ('user_email_action_send' not in params) or (params['user_email_action_send'] is None):
+            raise ValueError("Missing the required parameter `user_email_action_send` when calling `user_email_action_send`")
 
         resource_path = '/user/action/email/single'.replace('{format}', 'json')
         method = 'POST'
@@ -173,8 +175,8 @@ class UseractionApi(object):
         files = {}
 
         body_params = None
-        if 'send' in params:
-            body_params = params['send']
+        if 'user_email_action_send' in params:
+            body_params = params['user_email_action_send']
 
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
@@ -187,7 +189,7 @@ class UseractionApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = []
+        auth_settings = ['read_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,
@@ -201,7 +203,7 @@ class UseractionApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def send_1(self, **kwargs):
+    def user_mailbox_action_send(self, **kwargs):
         """
         Send message to user
         Sends a mail to users mailbox
@@ -212,7 +214,7 @@ class UseractionApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.send_1(callback=callback_function)
+        >>> thread = api.user_mailbox_action_send(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -235,10 +237,11 @@ class UseractionApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method send_1" % key
+                    " to method user_mailbox_action_send" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/user/action/mailbox/action/mailbox/single'.replace('{format}', 'json')
         method = 'POST'
@@ -291,7 +294,7 @@ class UseractionApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def batch_send_messages(self, batch_send_messages, **kwargs):
+    def user_mailbox_action_batch_send_messages(self, **kwargs):
         """
         Apply batch operation
         
@@ -302,20 +305,17 @@ class UseractionApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.batch_send_messages(batch_send_messages, callback=callback_function)
+        >>> thread = api.user_mailbox_action_batch_send_messages(user_mailbox_action_batch_send_messages=user_mailbox_action_batch_send_messages_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param BatchSendMessages batch_send_messages:  (required)
+        :param UserMailboxActionBatchSendMessages user_mailbox_action_batch_send_messages:  (required)
         :return: int
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'batch_send_messages' is set
-        if batch_send_messages is None:
-            raise ValueError("Missing the required parameter `batch_send_messages` when calling `batch_send_messages`")
 
-        all_params = ['batch_send_messages']
+        all_params = ['user_mailbox_action_batch_send_messages']
         all_params.append('callback')
 
         params = locals()
@@ -323,10 +323,14 @@ class UseractionApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method batch_send_messages" % key
+                    " to method user_mailbox_action_batch_send_messages" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'user_mailbox_action_batch_send_messages' is set
+        if ('user_mailbox_action_batch_send_messages' not in params) or (params['user_mailbox_action_batch_send_messages'] is None):
+            raise ValueError("Missing the required parameter `user_mailbox_action_batch_send_messages` when calling `user_mailbox_action_batch_send_messages`")
 
         resource_path = '/user/action/mailbox/batch'.replace('{format}', 'json')
         method = 'POST'
@@ -341,8 +345,8 @@ class UseractionApi(object):
         files = {}
 
         body_params = None
-        if 'batch_send_messages' in params:
-            body_params = params['batch_send_messages']
+        if 'user_mailbox_action_batch_send_messages' in params:
+            body_params = params['user_mailbox_action_batch_send_messages']
 
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
@@ -355,7 +359,7 @@ class UseractionApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = []
+        auth_settings = ['read_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,

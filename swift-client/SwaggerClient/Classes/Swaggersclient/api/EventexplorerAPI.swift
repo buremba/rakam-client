@@ -23,7 +23,6 @@ extension SwaggerClientAPI {
          - examples: [{contentType=application/json, example={
   "result" : [ [ "{}" ] ],
   "metadata" : [ {
-    "nullable" : true,
     "descriptiveName" : "aeiou",
     "unique" : true,
     "name" : "aeiou",
@@ -33,58 +32,30 @@ extension SwaggerClientAPI {
   } ],
   "failed" : true,
   "error" : {
-    "query" : "aeiou",
+    "charPositionInLine" : 123,
     "sqlState" : "aeiou",
     "errorCode" : 123,
-    "message" : "aeiou"
+    "message" : "aeiou",
+    "errorLine" : 123
   },
   "properties" : {
-    "key" : "{}"
+    "key" : { }
   }
 }}]
          
-         - parameter execute: (body) 
+         - parameter analyzeRequest: (body) 
 
          - returns: RequestBuilder<QueryResult> 
          */
-        public class func execute(execute execute: Execute) -> RequestBuilder<QueryResult> {
+        public class func eventExplorerAnalyze(analyzeRequest analyzeRequest: AnalyzeRequest) -> RequestBuilder<QueryResult> {
             let path = "/event-explorer/analyze"
             let URLString = SwaggerClientAPI.basePath + path
             
-            let parameters = execute.encodeToJSON() as? [String:AnyObject]
+            let parameters = analyzeRequest.encodeToJSON() as? [String:AnyObject]
 
             let requestBuilder: RequestBuilder<QueryResult>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
             return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: true)
-        }
-    
-        /**
-         
-         Event statistics
-         
-         - POST /event-explorer/event_dimensions
-         - 
-         - API Key:
-           - type: apiKey read_key 
-           - name: read_key
-         - examples: [{contentType=application/json, example=[ "aeiou" ]}]
-         
-         - parameter project: (form) 
-
-         - returns: RequestBuilder<[String]> 
-         */
-        public class func getEventDimensions(project project: String?) -> RequestBuilder<[String]> {
-            let path = "/event-explorer/event_dimensions"
-            let URLString = SwaggerClientAPI.basePath + path
-            
-            let nillableParameters: [String:AnyObject?] = [
-                "project": project
-            ]
-            let parameters = APIHelper.rejectNil(nillableParameters)
-
-            let requestBuilder: RequestBuilder<[String]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
         }
     
         /**
@@ -96,13 +67,15 @@ extension SwaggerClientAPI {
          - API Key:
            - type: apiKey read_key 
            - name: read_key
-         - examples: [{contentType=application/json, example=[ "aeiou" ]}]
+         - examples: [{contentType=application/json, example={
+  "key" : [ "aeiou" ]
+}}]
          
          - parameter project: (form) 
 
-         - returns: RequestBuilder<[String]> 
+         - returns: RequestBuilder<[String:[String]]> 
          */
-        public class func getExtraDimensions(project project: String?) -> RequestBuilder<[String]> {
+        public class func eventExplorerGetExtraDimensions(project project: String?) -> RequestBuilder<[String:[String]]> {
             let path = "/event-explorer/extra_dimensions"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -111,7 +84,49 @@ extension SwaggerClientAPI {
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
-            let requestBuilder: RequestBuilder<[String]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+            let requestBuilder: RequestBuilder<[String:[String]]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
+        }
+    
+        /**
+         
+         Create Pre-computed table
+         
+         - POST /event-explorer/pre_calculate
+         - 
+         - API Key:
+           - type: apiKey master_key 
+           - name: master_key
+         - examples: [{contentType=application/json, example={
+  "name" : "aeiou",
+  "tableName" : "aeiou"
+}}]
+         
+         - parameter project: (form) 
+         - parameter collections: (form) 
+         - parameter dimensions: (form) 
+         - parameter aggregations: (form) 
+         - parameter measures: (form) 
+         - parameter tableName: (form) 
+
+         - returns: RequestBuilder<PreCalculatedTable> 
+         */
+        public class func eventExplorerCreatePreComputedTable(project project: String?, collections: [String]?, dimensions: [String]?, aggregations: [String]?, measures: [String]?, tableName: String?) -> RequestBuilder<PreCalculatedTable> {
+            let path = "/event-explorer/pre_calculate"
+            let URLString = SwaggerClientAPI.basePath + path
+            
+            let nillableParameters: [String:AnyObject?] = [
+                "project": project,
+                "collections": collections,
+                "dimensions": dimensions,
+                "aggregations": aggregations,
+                "measures": measures,
+                "tableName": tableName
+            ]
+            let parameters = APIHelper.rejectNil(nillableParameters)
+
+            let requestBuilder: RequestBuilder<PreCalculatedTable>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
             return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
         }
@@ -128,7 +143,6 @@ extension SwaggerClientAPI {
          - examples: [{contentType=application/json, example={
   "result" : [ [ "{}" ] ],
   "metadata" : [ {
-    "nullable" : true,
     "descriptiveName" : "aeiou",
     "unique" : true,
     "name" : "aeiou",
@@ -138,13 +152,14 @@ extension SwaggerClientAPI {
   } ],
   "failed" : true,
   "error" : {
-    "query" : "aeiou",
+    "charPositionInLine" : 123,
     "sqlState" : "aeiou",
     "errorCode" : 123,
-    "message" : "aeiou"
+    "message" : "aeiou",
+    "errorLine" : 123
   },
   "properties" : {
-    "key" : "{}"
+    "key" : { }
   }
 }}]
          
@@ -156,7 +171,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<QueryResult> 
          */
-        public class func getEventStatistics(project project: String?, collections: [String]?, dimension: String?, startDate: NSDate?, endDate: NSDate?) -> RequestBuilder<QueryResult> {
+        public class func eventExplorerGetEventStatistics(project project: String?, collections: [String]?, dimension: String?, startDate: NSDate?, endDate: NSDate?) -> RequestBuilder<QueryResult> {
             let path = "/event-explorer/statistics"
             let URLString = SwaggerClientAPI.basePath + path
             

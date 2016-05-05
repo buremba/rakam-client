@@ -4,8 +4,8 @@ module RakamClient
   class AutomationApi
     attr_accessor :api_client
 
-    def initialize(api_client = nil)
-      @api_client = api_client || Configuration.api_client
+    def initialize(api_client = ApiClient.default)
+      @api_client = api_client
     end
 
     # Activate rule
@@ -14,9 +14,20 @@ module RakamClient
     # @option opts [String] :project 
     # @option opts [Integer] :id 
     # @return [JsonResponse]
-    def activate_rule(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: AutomationApi#activate_rule ..."
+    def automation_activate_rule(opts = {})
+      data, status_code, headers = automation_activate_rule_with_http_info(opts)
+      return data
+    end
+
+    # Activate rule
+    # 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :project 
+    # @option opts [Integer] :id 
+    # @return [Array<(JsonResponse, Fixnum, Hash)>] JsonResponse data, response status code and response headers
+    def automation_activate_rule_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: AutomationApi#automation_activate_rule ..."
       end
       
       # resource path
@@ -46,17 +57,17 @@ module RakamClient
       
 
       auth_names = ['master_key']
-      result = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'JsonResponse')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: AutomationApi#activate_rule. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AutomationApi#automation_activate_rule\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
     # Add scenario
@@ -64,13 +75,23 @@ module RakamClient
     # @param automation_rule 
     # @param [Hash] opts the optional parameters
     # @return [JsonResponse]
-    def add_rule(automation_rule, opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: AutomationApi#add_rule ..."
+    def automation_add_rule(automation_rule, opts = {})
+      data, status_code, headers = automation_add_rule_with_http_info(automation_rule, opts)
+      return data
+    end
+
+    # Add scenario
+    # 
+    # @param automation_rule 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(JsonResponse, Fixnum, Hash)>] JsonResponse data, response status code and response headers
+    def automation_add_rule_with_http_info(automation_rule, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: AutomationApi#automation_add_rule ..."
       end
       
       # verify the required parameter 'automation_rule' is set
-      fail "Missing the required parameter 'automation_rule' when calling add_rule" if automation_rule.nil?
+      fail "Missing the required parameter 'automation_rule' when calling automation_add_rule" if automation_rule.nil?
       
       # resource path
       path = "/automation/add".sub('{format}','json')
@@ -97,17 +118,17 @@ module RakamClient
       
 
       auth_names = ['master_key']
-      result = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'JsonResponse')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: AutomationApi#add_rule. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AutomationApi#automation_add_rule\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
     # Deactivate rule
@@ -116,9 +137,20 @@ module RakamClient
     # @option opts [String] :project 
     # @option opts [Integer] :id 
     # @return [JsonResponse]
-    def deactivate_rule(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: AutomationApi#deactivate_rule ..."
+    def automation_deactivate_rule(opts = {})
+      data, status_code, headers = automation_deactivate_rule_with_http_info(opts)
+      return data
+    end
+
+    # Deactivate rule
+    # 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :project 
+    # @option opts [Integer] :id 
+    # @return [Array<(JsonResponse, Fixnum, Hash)>] JsonResponse data, response status code and response headers
+    def automation_deactivate_rule_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: AutomationApi#automation_deactivate_rule ..."
       end
       
       # resource path
@@ -148,17 +180,17 @@ module RakamClient
       
 
       auth_names = ['master_key']
-      result = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'JsonResponse')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: AutomationApi#deactivate_rule. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AutomationApi#automation_deactivate_rule\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
     # List scenarios
@@ -166,9 +198,19 @@ module RakamClient
     # @param [Hash] opts the optional parameters
     # @option opts [String] :project 
     # @return [Array<AutomationRule>]
-    def list_rules(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: AutomationApi#list_rules ..."
+    def automation_list_rules(opts = {})
+      data, status_code, headers = automation_list_rules_with_http_info(opts)
+      return data
+    end
+
+    # List scenarios
+    # 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :project 
+    # @return [Array<(Array<AutomationRule>, Fixnum, Hash)>] Array<AutomationRule> data, response status code and response headers
+    def automation_list_rules_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: AutomationApi#automation_list_rules ..."
       end
       
       # resource path
@@ -197,17 +239,17 @@ module RakamClient
       
 
       auth_names = ['read_key']
-      result = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'Array<AutomationRule>')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: AutomationApi#list_rules. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AutomationApi#automation_list_rules\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
     # Remove rule
@@ -216,9 +258,20 @@ module RakamClient
     # @option opts [String] :project 
     # @option opts [Integer] :id 
     # @return [JsonResponse]
-    def remove_rule(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: AutomationApi#remove_rule ..."
+    def automation_remove_rule(opts = {})
+      data, status_code, headers = automation_remove_rule_with_http_info(opts)
+      return data
+    end
+
+    # Remove rule
+    # 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :project 
+    # @option opts [Integer] :id 
+    # @return [Array<(JsonResponse, Fixnum, Hash)>] JsonResponse data, response status code and response headers
+    def automation_remove_rule_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: AutomationApi#automation_remove_rule ..."
       end
       
       # resource path
@@ -248,17 +301,17 @@ module RakamClient
       
 
       auth_names = ['master_key']
-      result = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'JsonResponse')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: AutomationApi#remove_rule. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AutomationApi#automation_remove_rule\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
   end
 end

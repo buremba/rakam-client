@@ -52,11 +52,11 @@ class RetentionQuery implements ArrayAccess
       */
     static $swaggerTypes = array(
         'project' => 'string',
-        'connector_field' => 'string',
         'first_action' => '\client.model\RetentionAction',
         'returning_action' => '\client.model\RetentionAction',
         'dimension' => 'string',
         'date_unit' => 'string',
+        'period' => 'int',
         'start_date' => '\DateTime',
         'end_date' => '\DateTime'
     );
@@ -67,11 +67,11 @@ class RetentionQuery implements ArrayAccess
       */
     static $attributeMap = array(
         'project' => 'project',
-        'connector_field' => 'connector_field',
         'first_action' => 'first_action',
         'returning_action' => 'returning_action',
         'dimension' => 'dimension',
         'date_unit' => 'date_unit',
+        'period' => 'period',
         'start_date' => 'startDate',
         'end_date' => 'endDate'
     );
@@ -82,11 +82,11 @@ class RetentionQuery implements ArrayAccess
       */
     static $setters = array(
         'project' => 'setProject',
-        'connector_field' => 'setConnectorField',
         'first_action' => 'setFirstAction',
         'returning_action' => 'setReturningAction',
         'dimension' => 'setDimension',
         'date_unit' => 'setDateUnit',
+        'period' => 'setPeriod',
         'start_date' => 'setStartDate',
         'end_date' => 'setEndDate'
     );
@@ -97,11 +97,11 @@ class RetentionQuery implements ArrayAccess
       */
     static $getters = array(
         'project' => 'getProject',
-        'connector_field' => 'getConnectorField',
         'first_action' => 'getFirstAction',
         'returning_action' => 'getReturningAction',
         'dimension' => 'getDimension',
         'date_unit' => 'getDateUnit',
+        'period' => 'getPeriod',
         'start_date' => 'getStartDate',
         'end_date' => 'getEndDate'
     );
@@ -112,12 +112,6 @@ class RetentionQuery implements ArrayAccess
       * @var string
       */
     protected $project;
-    
-    /**
-      * $connector_field 
-      * @var string
-      */
-    protected $connector_field;
     
     /**
       * $first_action 
@@ -144,6 +138,12 @@ class RetentionQuery implements ArrayAccess
     protected $date_unit;
     
     /**
+      * $period 
+      * @var int
+      */
+    protected $period;
+    
+    /**
       * $start_date 
       * @var \DateTime
       */
@@ -164,11 +164,11 @@ class RetentionQuery implements ArrayAccess
     {
         if ($data != null) {
             $this->project = $data["project"];
-            $this->connector_field = $data["connector_field"];
             $this->first_action = $data["first_action"];
             $this->returning_action = $data["returning_action"];
             $this->dimension = $data["dimension"];
             $this->date_unit = $data["date_unit"];
+            $this->period = $data["period"];
             $this->start_date = $data["start_date"];
             $this->end_date = $data["end_date"];
         }
@@ -192,27 +192,6 @@ class RetentionQuery implements ArrayAccess
     {
         
         $this->project = $project;
-        return $this;
-    }
-    
-    /**
-     * Gets connector_field
-     * @return string
-     */
-    public function getConnectorField()
-    {
-        return $this->connector_field;
-    }
-  
-    /**
-     * Sets connector_field
-     * @param string $connector_field 
-     * @return $this
-     */
-    public function setConnectorField($connector_field)
-    {
-        
-        $this->connector_field = $connector_field;
         return $this;
     }
     
@@ -300,6 +279,27 @@ class RetentionQuery implements ArrayAccess
             throw new \InvalidArgumentException("Invalid value for 'date_unit', must be one of 'DAY', 'WEEK', 'MONTH'");
         }
         $this->date_unit = $date_unit;
+        return $this;
+    }
+    
+    /**
+     * Gets period
+     * @return int
+     */
+    public function getPeriod()
+    {
+        return $this->period;
+    }
+  
+    /**
+     * Sets period
+     * @param int $period 
+     * @return $this
+     */
+    public function setPeriod($period)
+    {
+        
+        $this->period = $period;
         return $this;
     }
     

@@ -45,7 +45,7 @@ class EventApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def batch_events(self, event_list, **kwargs):
+    def collect_event_batch_events(self, **kwargs):
         """
         Collect multiple events
         
@@ -56,7 +56,7 @@ class EventApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.batch_events(event_list, callback=callback_function)
+        >>> thread = api.collect_event_batch_events(event_list=event_list_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -65,9 +65,6 @@ class EventApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'event_list' is set
-        if event_list is None:
-            raise ValueError("Missing the required parameter `event_list` when calling `batch_events`")
 
         all_params = ['event_list']
         all_params.append('callback')
@@ -77,10 +74,14 @@ class EventApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method batch_events" % key
+                    " to method collect_event_batch_events" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'event_list' is set
+        if ('event_list' not in params) or (params['event_list'] is None):
+            raise ValueError("Missing the required parameter `event_list` when calling `collect_event_batch_events`")
 
         resource_path = '/event/batch'.replace('{format}', 'json')
         method = 'POST'
@@ -123,7 +124,244 @@ class EventApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def collect_event(self, event, **kwargs):
+    def collect_event_bulk_events(self, **kwargs):
+        """
+        Send Bulk events
+        
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.collect_event_bulk_events(event_list=event_list_value, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param EventList event_list:  (required)
+        :return: int
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['event_list']
+        all_params.append('callback')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method collect_event_bulk_events" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        # verify the required parameter 'event_list' is set
+        if ('event_list' not in params) or (params['event_list'] is None):
+            raise ValueError("Missing the required parameter `event_list` when calling `collect_event_bulk_events`")
+
+        resource_path = '/event/bulk'.replace('{format}', 'json')
+        method = 'POST'
+
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = {}
+        files = {}
+
+        body_params = None
+        if 'event_list' in params:
+            body_params = params['event_list']
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['master_key']
+
+        response = self.api_client.call_api(resource_path, method,
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=files,
+                                            response_type='int',
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'))
+        return response
+
+    def collect_event_commit_bulk_events(self, **kwargs):
+        """
+        Commit Bulk events
+        
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.collect_event_commit_bulk_events(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project: 
+        :param str collection: 
+        :return: QueryResult
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['project', 'collection']
+        all_params.append('callback')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method collect_event_commit_bulk_events" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+
+        resource_path = '/event/bulk/commit'.replace('{format}', 'json')
+        method = 'POST'
+
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = {}
+        files = {}
+        if 'project' in params:
+            form_params['project'] = params['project']
+        if 'collection' in params:
+            form_params['collection'] = params['collection']
+
+        body_params = None
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['master_key']
+
+        response = self.api_client.call_api(resource_path, method,
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=files,
+                                            response_type='QueryResult',
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'))
+        return response
+
+    def collect_event_bulk_events_remote(self, **kwargs):
+        """
+        Send Bulk events
+        
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.collect_event_bulk_events_remote(event_list=event_list_value, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param EventList event_list:  (required)
+        :return: int
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['event_list']
+        all_params.append('callback')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method collect_event_bulk_events_remote" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        # verify the required parameter 'event_list' is set
+        if ('event_list' not in params) or (params['event_list'] is None):
+            raise ValueError("Missing the required parameter `event_list` when calling `collect_event_bulk_events_remote`")
+
+        resource_path = '/event/bulk/remote'.replace('{format}', 'json')
+        method = 'POST'
+
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = {}
+        files = {}
+
+        body_params = None
+        if 'event_list' in params:
+            body_params = params['event_list']
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['master_key']
+
+        response = self.api_client.call_api(resource_path, method,
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=files,
+                                            response_type='int',
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'))
+        return response
+
+    def collect_event_collect_event(self, **kwargs):
         """
         Collect event
         
@@ -134,7 +372,7 @@ class EventApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.collect_event(event, callback=callback_function)
+        >>> thread = api.collect_event_collect_event(event=event_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -143,9 +381,6 @@ class EventApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'event' is set
-        if event is None:
-            raise ValueError("Missing the required parameter `event` when calling `collect_event`")
 
         all_params = ['event']
         all_params.append('callback')
@@ -155,10 +390,14 @@ class EventApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method collect_event" % key
+                    " to method collect_event_collect_event" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'event' is set
+        if ('event' not in params) or (params['event'] is None):
+            raise ValueError("Missing the required parameter `event` when calling `collect_event_collect_event`")
 
         resource_path = '/event/collect'.replace('{format}', 'json')
         method = 'POST'
@@ -201,7 +440,7 @@ class EventApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def execute(self, **kwargs):
+    def query_execute(self, **kwargs):
         """
         Analyze events
         
@@ -212,7 +451,7 @@ class EventApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.execute(callback=callback_function)
+        >>> thread = api.query_execute(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -232,10 +471,11 @@ class EventApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method execute" % key
+                    " to method query_execute" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/query/execute'.replace('{format}', 'json')
         method = 'POST'
@@ -282,7 +522,7 @@ class EventApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def explain(self, **kwargs):
+    def query_explain(self, **kwargs):
         """
         Explain query
         
@@ -293,12 +533,12 @@ class EventApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.explain(callback=callback_function)
+        >>> thread = api.query_explain(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str query: 
-        :return: object
+        :return: InlineResponse200
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -311,10 +551,11 @@ class EventApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method explain" % key
+                    " to method query_explain" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/query/explain'.replace('{format}', 'json')
         method = 'POST'
@@ -352,7 +593,86 @@ class EventApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=files,
-                                            response_type='object',
+                                            response_type='InlineResponse200',
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'))
+        return response
+
+    def query_metadata(self, **kwargs):
+        """
+        Test query
+        
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.query_metadata(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project: 
+        :param str query: 
+        :return: list[SchemaField]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['project', 'query']
+        all_params.append('callback')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method query_metadata" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+
+        resource_path = '/query/metadata'.replace('{format}', 'json')
+        method = 'POST'
+
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = {}
+        files = {}
+        if 'project' in params:
+            form_params['project'] = params['project']
+        if 'query' in params:
+            form_params['query'] = params['query']
+
+        body_params = None
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['read_key']
+
+        response = self.api_client.call_api(resource_path, method,
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=files,
+                                            response_type='list[SchemaField]',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'))
         return response

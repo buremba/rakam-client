@@ -39,27 +39,33 @@ class MaterializedView(object):
         self.swagger_types = {
             'project': 'str',
             'name': 'str',
-            'table_name': 'str',
             'query': 'str',
+            'incremental': 'bool',
+            'options': 'dict(str, InlineResponse200)',
+            'table_name': 'str',
             'update_interval': 'str',
-            'options': 'dict(str, object)'
+            'last_update': 'datetime'
         }
 
         self.attribute_map = {
             'project': 'project',
             'name': 'name',
-            'table_name': 'table_name',
             'query': 'query',
-            'update_interval': 'update_interval',
-            'options': 'options'
+            'incremental': 'incremental',
+            'options': 'options',
+            'table_name': 'tableName',
+            'update_interval': 'updateInterval',
+            'last_update': 'lastUpdate'
         }
 
         self._project = None
         self._name = None
-        self._table_name = None
         self._query = None
-        self._update_interval = None
+        self._incremental = False
         self._options = None
+        self._table_name = None
+        self._update_interval = None
+        self._last_update = None
 
     @property
     def project(self):
@@ -106,28 +112,6 @@ class MaterializedView(object):
         self._name = name
 
     @property
-    def table_name(self):
-        """
-        Gets the table_name of this MaterializedView.
-
-
-        :return: The table_name of this MaterializedView.
-        :rtype: str
-        """
-        return self._table_name
-
-    @table_name.setter
-    def table_name(self, table_name):
-        """
-        Sets the table_name of this MaterializedView.
-
-
-        :param table_name: The table_name of this MaterializedView.
-        :type: str
-        """
-        self._table_name = table_name
-
-    @property
     def query(self):
         """
         Gets the query of this MaterializedView.
@@ -148,6 +132,72 @@ class MaterializedView(object):
         :type: str
         """
         self._query = query
+
+    @property
+    def incremental(self):
+        """
+        Gets the incremental of this MaterializedView.
+
+
+        :return: The incremental of this MaterializedView.
+        :rtype: bool
+        """
+        return self._incremental
+
+    @incremental.setter
+    def incremental(self, incremental):
+        """
+        Sets the incremental of this MaterializedView.
+
+
+        :param incremental: The incremental of this MaterializedView.
+        :type: bool
+        """
+        self._incremental = incremental
+
+    @property
+    def options(self):
+        """
+        Gets the options of this MaterializedView.
+
+
+        :return: The options of this MaterializedView.
+        :rtype: dict(str, InlineResponse200)
+        """
+        return self._options
+
+    @options.setter
+    def options(self, options):
+        """
+        Sets the options of this MaterializedView.
+
+
+        :param options: The options of this MaterializedView.
+        :type: dict(str, InlineResponse200)
+        """
+        self._options = options
+
+    @property
+    def table_name(self):
+        """
+        Gets the table_name of this MaterializedView.
+
+
+        :return: The table_name of this MaterializedView.
+        :rtype: str
+        """
+        return self._table_name
+
+    @table_name.setter
+    def table_name(self, table_name):
+        """
+        Sets the table_name of this MaterializedView.
+
+
+        :param table_name: The table_name of this MaterializedView.
+        :type: str
+        """
+        self._table_name = table_name
 
     @property
     def update_interval(self):
@@ -172,26 +222,26 @@ class MaterializedView(object):
         self._update_interval = update_interval
 
     @property
-    def options(self):
+    def last_update(self):
         """
-        Gets the options of this MaterializedView.
+        Gets the last_update of this MaterializedView.
 
 
-        :return: The options of this MaterializedView.
-        :rtype: dict(str, object)
+        :return: The last_update of this MaterializedView.
+        :rtype: datetime
         """
-        return self._options
+        return self._last_update
 
-    @options.setter
-    def options(self, options):
+    @last_update.setter
+    def last_update(self, last_update):
         """
-        Sets the options of this MaterializedView.
+        Sets the last_update of this MaterializedView.
 
 
-        :param options: The options of this MaterializedView.
-        :type: dict(str, object)
+        :param last_update: The last_update of this MaterializedView.
+        :type: datetime
         """
-        self._options = options
+        self._last_update = last_update
 
     def to_dict(self):
         """
@@ -224,3 +274,16 @@ class MaterializedView(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

@@ -55,7 +55,7 @@ class AutomationRule(object):
         }
 
         self._project = None
-        self._is_active = None
+        self._is_active = False
         self._scenarios = None
         self._actions = None
         self._custom_data = None
@@ -224,3 +224,16 @@ class AutomationRule(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

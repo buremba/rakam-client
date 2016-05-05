@@ -30,7 +30,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<JsonResponse> 
          */
-        public class func activateRule(project project: String?, id: Int?) -> RequestBuilder<JsonResponse> {
+        public class func automationActivateRule(project project: String?, id: Int?) -> RequestBuilder<JsonResponse> {
             let path = "/automation/activate"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -63,7 +63,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<JsonResponse> 
          */
-        public class func addRule(automationRule automationRule: AutomationRule) -> RequestBuilder<JsonResponse> {
+        public class func automationAddRule(automationRule automationRule: AutomationRule) -> RequestBuilder<JsonResponse> {
             let path = "/automation/add"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -93,7 +93,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<JsonResponse> 
          */
-        public class func deactivateRule(project project: String?, id: Int?) -> RequestBuilder<JsonResponse> {
+        public class func automationDeactivateRule(project project: String?, id: Int?) -> RequestBuilder<JsonResponse> {
             let path = "/automation/deactivate"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -141,7 +141,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<[AutomationRule]> 
          */
-        public class func listRules(project project: String?) -> RequestBuilder<[AutomationRule]> {
+        public class func automationListRules(project project: String?) -> RequestBuilder<[AutomationRule]> {
             let path = "/automation/list"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -174,7 +174,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<JsonResponse> 
          */
-        public class func removeRule(project project: String?, id: Int?) -> RequestBuilder<JsonResponse> {
+        public class func automationRemoveRule(project project: String?, id: Int?) -> RequestBuilder<JsonResponse> {
             let path = "/automation/remove"
             let URLString = SwaggerClientAPI.basePath + path
             

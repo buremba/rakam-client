@@ -6,75 +6,22 @@ var url = require('url');
 var Automation = require('./AutomationService');
 
 
-module.exports.activateRule = function activateRule (req, res, next) {
-  var project = req.swagger.params['project'].value;
-  var id = req.swagger.params['id'].value;
-  
-
-  var result = Automation.activateRule(project, id);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.automationActivateRule = function automationActivateRule (req, res, next) {
+  Automation.automationActivateRule(req.swagger.params, res, next);
 };
 
-module.exports.addRule = function addRule (req, res, next) {
-  var automationRule = req.swagger.params['AutomationRule'].value;
-  
-
-  var result = Automation.addRule(automationRule);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.automationAddRule = function automationAddRule (req, res, next) {
+  Automation.automationAddRule(req.swagger.params, res, next);
 };
 
-module.exports.deactivateRule = function deactivateRule (req, res, next) {
-  var project = req.swagger.params['project'].value;
-  var id = req.swagger.params['id'].value;
-  
-
-  var result = Automation.deactivateRule(project, id);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.automationDeactivateRule = function automationDeactivateRule (req, res, next) {
+  Automation.automationDeactivateRule(req.swagger.params, res, next);
 };
 
-module.exports.listRules = function listRules (req, res, next) {
-  var project = req.swagger.params['project'].value;
-  
-
-  var result = Automation.listRules(project);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.automationListRules = function automationListRules (req, res, next) {
+  Automation.automationListRules(req.swagger.params, res, next);
 };
 
-module.exports.removeRule = function removeRule (req, res, next) {
-  var project = req.swagger.params['project'].value;
-  var id = req.swagger.params['id'].value;
-  
-
-  var result = Automation.removeRule(project, id);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.automationRemoveRule = function automationRemoveRule (req, res, next) {
+  Automation.automationRemoveRule(req.swagger.params, res, next);
 };

@@ -45,7 +45,7 @@ class MaterializedviewApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def create(self, materialized_view, **kwargs):
+    def materialized_view_create(self, **kwargs):
         """
         Create view
         
@@ -56,7 +56,7 @@ class MaterializedviewApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.create(materialized_view, callback=callback_function)
+        >>> thread = api.materialized_view_create(materialized_view=materialized_view_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -65,9 +65,6 @@ class MaterializedviewApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'materialized_view' is set
-        if materialized_view is None:
-            raise ValueError("Missing the required parameter `materialized_view` when calling `create`")
 
         all_params = ['materialized_view']
         all_params.append('callback')
@@ -77,10 +74,14 @@ class MaterializedviewApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method create" % key
+                    " to method materialized_view_create" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'materialized_view' is set
+        if ('materialized_view' not in params) or (params['materialized_view'] is None):
+            raise ValueError("Missing the required parameter `materialized_view` when calling `materialized_view_create`")
 
         resource_path = '/materialized-view/create'.replace('{format}', 'json')
         method = 'POST'
@@ -123,7 +124,7 @@ class MaterializedviewApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def delete(self, **kwargs):
+    def materialized_view_delete(self, **kwargs):
         """
         Delete materialized view
         
@@ -134,18 +135,18 @@ class MaterializedviewApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.delete(callback=callback_function)
+        >>> thread = api.materialized_view_delete(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str project: 
-        :param str name: 
+        :param str table_name: 
         :return: JsonResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['project', 'name']
+        all_params = ['project', 'table_name']
         all_params.append('callback')
 
         params = locals()
@@ -153,10 +154,11 @@ class MaterializedviewApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method delete" % key
+                    " to method materialized_view_delete" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/materialized-view/delete'.replace('{format}', 'json')
         method = 'POST'
@@ -171,8 +173,8 @@ class MaterializedviewApi(object):
         files = {}
         if 'project' in params:
             form_params['project'] = params['project']
-        if 'name' in params:
-            form_params['name'] = params['name']
+        if 'table_name' in params:
+            form_params['table_name'] = params['table_name']
 
         body_params = None
 
@@ -201,7 +203,7 @@ class MaterializedviewApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def get(self, **kwargs):
+    def materialized_view_get(self, **kwargs):
         """
         Get view
         
@@ -212,18 +214,18 @@ class MaterializedviewApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get(callback=callback_function)
+        >>> thread = api.materialized_view_get(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str project: 
-        :param str name: 
-        :return: object
+        :param str table_name: 
+        :return: MaterializedView
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['project', 'name']
+        all_params = ['project', 'table_name']
         all_params.append('callback')
 
         params = locals()
@@ -231,10 +233,11 @@ class MaterializedviewApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get" % key
+                    " to method materialized_view_get" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/materialized-view/get'.replace('{format}', 'json')
         method = 'POST'
@@ -249,8 +252,8 @@ class MaterializedviewApi(object):
         files = {}
         if 'project' in params:
             form_params['project'] = params['project']
-        if 'name' in params:
-            form_params['name'] = params['name']
+        if 'table_name' in params:
+            form_params['table_name'] = params['table_name']
 
         body_params = None
 
@@ -265,7 +268,7 @@ class MaterializedviewApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = []
+        auth_settings = ['read_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,
@@ -274,12 +277,12 @@ class MaterializedviewApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=files,
-                                            response_type='object',
+                                            response_type='MaterializedView',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'))
         return response
 
-    def list_views(self, **kwargs):
+    def materialized_view_list_views(self, **kwargs):
         """
         List views
         
@@ -290,12 +293,12 @@ class MaterializedviewApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.list_views(callback=callback_function)
+        >>> thread = api.materialized_view_list_views(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str project: 
-        :return: object
+        :return: list[MaterializedView]
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -308,10 +311,11 @@ class MaterializedviewApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method list_views" % key
+                    " to method materialized_view_list_views" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/materialized-view/list'.replace('{format}', 'json')
         method = 'POST'
@@ -340,7 +344,7 @@ class MaterializedviewApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = []
+        auth_settings = ['read_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,
@@ -349,12 +353,12 @@ class MaterializedviewApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=files,
-                                            response_type='object',
+                                            response_type='list[MaterializedView]',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'))
         return response
 
-    def schema(self, **kwargs):
+    def materialized_view_schema(self, **kwargs):
         """
         Get schemas
         
@@ -365,17 +369,18 @@ class MaterializedviewApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.schema(callback=callback_function)
+        >>> thread = api.materialized_view_schema(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str project: 
+        :param list[str] names: 
         :return: list[MaterializedViewSchema]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['project']
+        all_params = ['project', 'names']
         all_params.append('callback')
 
         params = locals()
@@ -383,10 +388,11 @@ class MaterializedviewApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method schema" % key
+                    " to method materialized_view_schema" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/materialized-view/schema'.replace('{format}', 'json')
         method = 'POST'
@@ -401,6 +407,8 @@ class MaterializedviewApi(object):
         files = {}
         if 'project' in params:
             form_params['project'] = params['project']
+        if 'names' in params:
+            form_params['names'] = params['names']
 
         body_params = None
 
@@ -415,7 +423,7 @@ class MaterializedviewApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = []
+        auth_settings = ['read_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,
@@ -429,7 +437,7 @@ class MaterializedviewApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def update(self, **kwargs):
+    def materialized_view_update(self, **kwargs):
         """
         Update view
         
@@ -440,7 +448,7 @@ class MaterializedviewApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.update(callback=callback_function)
+        >>> thread = api.materialized_view_update(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -457,10 +465,11 @@ class MaterializedviewApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method update" % key
+                    " to method materialized_view_update" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/materialized-view/update'.replace('{format}', 'json')
         method = 'GET'

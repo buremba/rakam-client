@@ -1,8 +1,12 @@
 'use strict';
 
-exports.create = function() {
+exports.abTestingCreate = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * aBTestingReport (ABTestingReport)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = {
   "success" : true,
@@ -11,13 +15,24 @@ exports.create = function() {
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }
-exports.delete = function(project, id) {
+exports.abTestingDelete = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * project (String)
+   * id (Integer)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = {
   "success" : true,
@@ -26,13 +41,24 @@ exports.delete = function(project, id) {
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }
-exports.get = function(project, id) {
+exports.abTestingGet = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * project (String)
+   * id (Integer)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = {
   "connectorField" : "aeiou",
@@ -54,13 +80,23 @@ exports.get = function(project, id) {
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }
-exports.list = function(project) {
+exports.abTestingList = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * project (String)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = [ {
   "connectorField" : "aeiou",
@@ -82,13 +118,23 @@ exports.list = function(project) {
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }
-exports.update = function() {
+exports.abTestingUpdate = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * aBTestingReport (ABTestingReport)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = {
   "connectorField" : "aeiou",
@@ -110,7 +156,13 @@ exports.update = function() {
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }

@@ -1,31 +1,33 @@
 package org.rakam.client.model;
 
-import org.rakam.StringUtil;
+import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.*;
 import java.util.Date;
 import org.rakam.client.model.FunnelStep;
+import org.rakam.client.model.FunnelWindow;
 
 
 
-import io.swagger.annotations.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-@ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class FunnelQuery   {
   
   private String project = null;
-  private String connectorField = null;
   private List<FunnelStep> steps = new ArrayList<FunnelStep>();
   private String dimension = null;
   private Date startDate = null;
+  private FunnelWindow window = null;
   private Date endDate = null;
-  private Boolean enableOtherGrouping = null;
 
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("project")
   public String getProject() {
@@ -38,18 +40,7 @@ public class FunnelQuery   {
   
   /**
    **/
-  @ApiModelProperty(value = "")
-  @JsonProperty("connector_field")
-  public String getConnectorField() {
-    return connectorField;
-  }
-  public void setConnectorField(String connectorField) {
-    this.connectorField = connectorField;
-  }
-
   
-  /**
-   **/
   @ApiModelProperty(value = "")
   @JsonProperty("steps")
   public List<FunnelStep> getSteps() {
@@ -62,6 +53,7 @@ public class FunnelQuery   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("dimension")
   public String getDimension() {
@@ -74,6 +66,7 @@ public class FunnelQuery   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("startDate")
   public Date getStartDate() {
@@ -86,6 +79,20 @@ public class FunnelQuery   {
   
   /**
    **/
+  
+  @ApiModelProperty(value = "")
+  @JsonProperty("window")
+  public FunnelWindow getWindow() {
+    return window;
+  }
+  public void setWindow(FunnelWindow window) {
+    this.window = window;
+  }
+
+  
+  /**
+   **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("endDate")
   public Date getEndDate() {
@@ -96,32 +103,53 @@ public class FunnelQuery   {
   }
 
   
-  /**
-   **/
-  @ApiModelProperty(value = "")
-  @JsonProperty("enableOtherGrouping")
-  public Boolean getEnableOtherGrouping() {
-    return enableOtherGrouping;
-  }
-  public void setEnableOtherGrouping(Boolean enableOtherGrouping) {
-    this.enableOtherGrouping = enableOtherGrouping;
-  }
-
-  
 
   @Override
-  public String toString()  {
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    FunnelQuery funnelQuery = (FunnelQuery) o;
+    return Objects.equals(project, funnelQuery.project) &&
+        Objects.equals(steps, funnelQuery.steps) &&
+        Objects.equals(dimension, funnelQuery.dimension) &&
+        Objects.equals(startDate, funnelQuery.startDate) &&
+        Objects.equals(window, funnelQuery.window) &&
+        Objects.equals(endDate, funnelQuery.endDate);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(project, steps, dimension, startDate, window, endDate);
+  }
+
+  @Override
+  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class FunnelQuery {\n");
     
-    sb.append("    project: ").append(StringUtil.toIndentedString(project)).append("\n");
-    sb.append("    connectorField: ").append(StringUtil.toIndentedString(connectorField)).append("\n");
-    sb.append("    steps: ").append(StringUtil.toIndentedString(steps)).append("\n");
-    sb.append("    dimension: ").append(StringUtil.toIndentedString(dimension)).append("\n");
-    sb.append("    startDate: ").append(StringUtil.toIndentedString(startDate)).append("\n");
-    sb.append("    endDate: ").append(StringUtil.toIndentedString(endDate)).append("\n");
-    sb.append("    enableOtherGrouping: ").append(StringUtil.toIndentedString(enableOtherGrouping)).append("\n");
+    sb.append("    project: ").append(toIndentedString(project)).append("\n");
+    sb.append("    steps: ").append(toIndentedString(steps)).append("\n");
+    sb.append("    dimension: ").append(toIndentedString(dimension)).append("\n");
+    sb.append("    startDate: ").append(toIndentedString(startDate)).append("\n");
+    sb.append("    window: ").append(toIndentedString(window)).append("\n");
+    sb.append("    endDate: ").append(toIndentedString(endDate)).append("\n");
     sb.append("}");
     return sb.toString();
   }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+

@@ -53,10 +53,12 @@ class MaterializedView implements ArrayAccess
     static $swaggerTypes = array(
         'project' => 'string',
         'name' => 'string',
-        'table_name' => 'string',
         'query' => 'string',
+        'incremental' => 'bool',
+        'options' => 'map[string,\client.model\InlineResponse200]',
+        'table_name' => 'string',
         'update_interval' => 'string',
-        'options' => 'map[string,object]'
+        'last_update' => '\DateTime'
     );
   
     /** 
@@ -66,10 +68,12 @@ class MaterializedView implements ArrayAccess
     static $attributeMap = array(
         'project' => 'project',
         'name' => 'name',
-        'table_name' => 'table_name',
         'query' => 'query',
-        'update_interval' => 'update_interval',
-        'options' => 'options'
+        'incremental' => 'incremental',
+        'options' => 'options',
+        'table_name' => 'tableName',
+        'update_interval' => 'updateInterval',
+        'last_update' => 'lastUpdate'
     );
   
     /**
@@ -79,10 +83,12 @@ class MaterializedView implements ArrayAccess
     static $setters = array(
         'project' => 'setProject',
         'name' => 'setName',
-        'table_name' => 'setTableName',
         'query' => 'setQuery',
+        'incremental' => 'setIncremental',
+        'options' => 'setOptions',
+        'table_name' => 'setTableName',
         'update_interval' => 'setUpdateInterval',
-        'options' => 'setOptions'
+        'last_update' => 'setLastUpdate'
     );
   
     /**
@@ -92,10 +98,12 @@ class MaterializedView implements ArrayAccess
     static $getters = array(
         'project' => 'getProject',
         'name' => 'getName',
-        'table_name' => 'getTableName',
         'query' => 'getQuery',
+        'incremental' => 'getIncremental',
+        'options' => 'getOptions',
+        'table_name' => 'getTableName',
         'update_interval' => 'getUpdateInterval',
-        'options' => 'getOptions'
+        'last_update' => 'getLastUpdate'
     );
   
     
@@ -112,16 +120,28 @@ class MaterializedView implements ArrayAccess
     protected $name;
     
     /**
-      * $table_name 
-      * @var string
-      */
-    protected $table_name;
-    
-    /**
       * $query 
       * @var string
       */
     protected $query;
+    
+    /**
+      * $incremental 
+      * @var bool
+      */
+    protected $incremental = false;
+    
+    /**
+      * $options 
+      * @var map[string,\client.model\InlineResponse200]
+      */
+    protected $options;
+    
+    /**
+      * $table_name 
+      * @var string
+      */
+    protected $table_name;
     
     /**
       * $update_interval 
@@ -130,10 +150,10 @@ class MaterializedView implements ArrayAccess
     protected $update_interval;
     
     /**
-      * $options 
-      * @var map[string,object]
+      * $last_update 
+      * @var \DateTime
       */
-    protected $options;
+    protected $last_update;
     
 
     /**
@@ -145,10 +165,12 @@ class MaterializedView implements ArrayAccess
         if ($data != null) {
             $this->project = $data["project"];
             $this->name = $data["name"];
-            $this->table_name = $data["table_name"];
             $this->query = $data["query"];
-            $this->update_interval = $data["update_interval"];
+            $this->incremental = $data["incremental"];
             $this->options = $data["options"];
+            $this->table_name = $data["table_name"];
+            $this->update_interval = $data["update_interval"];
+            $this->last_update = $data["last_update"];
         }
     }
     
@@ -195,27 +217,6 @@ class MaterializedView implements ArrayAccess
     }
     
     /**
-     * Gets table_name
-     * @return string
-     */
-    public function getTableName()
-    {
-        return $this->table_name;
-    }
-  
-    /**
-     * Sets table_name
-     * @param string $table_name 
-     * @return $this
-     */
-    public function setTableName($table_name)
-    {
-        
-        $this->table_name = $table_name;
-        return $this;
-    }
-    
-    /**
      * Gets query
      * @return string
      */
@@ -233,6 +234,69 @@ class MaterializedView implements ArrayAccess
     {
         
         $this->query = $query;
+        return $this;
+    }
+    
+    /**
+     * Gets incremental
+     * @return bool
+     */
+    public function getIncremental()
+    {
+        return $this->incremental;
+    }
+  
+    /**
+     * Sets incremental
+     * @param bool $incremental 
+     * @return $this
+     */
+    public function setIncremental($incremental)
+    {
+        
+        $this->incremental = $incremental;
+        return $this;
+    }
+    
+    /**
+     * Gets options
+     * @return map[string,\client.model\InlineResponse200]
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+  
+    /**
+     * Sets options
+     * @param map[string,\client.model\InlineResponse200] $options 
+     * @return $this
+     */
+    public function setOptions($options)
+    {
+        
+        $this->options = $options;
+        return $this;
+    }
+    
+    /**
+     * Gets table_name
+     * @return string
+     */
+    public function getTableName()
+    {
+        return $this->table_name;
+    }
+  
+    /**
+     * Sets table_name
+     * @param string $table_name 
+     * @return $this
+     */
+    public function setTableName($table_name)
+    {
+        
+        $this->table_name = $table_name;
         return $this;
     }
     
@@ -258,23 +322,23 @@ class MaterializedView implements ArrayAccess
     }
     
     /**
-     * Gets options
-     * @return map[string,object]
+     * Gets last_update
+     * @return \DateTime
      */
-    public function getOptions()
+    public function getLastUpdate()
     {
-        return $this->options;
+        return $this->last_update;
     }
   
     /**
-     * Sets options
-     * @param map[string,object] $options 
+     * Sets last_update
+     * @param \DateTime $last_update 
      * @return $this
      */
-    public function setOptions($options)
+    public function setLastUpdate($last_update)
     {
         
-        $this->options = $options;
+        $this->last_update = $last_update;
         return $this;
     }
     

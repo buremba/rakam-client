@@ -56,7 +56,7 @@ class EmailActionConfig(object):
         self._content = None
         self._column_name = None
         self._default_values = None
-        self._rich_text = None
+        self._rich_text = False
 
     @property
     def title(self):
@@ -199,3 +199,16 @@ class EmailActionConfig(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

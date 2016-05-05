@@ -1,50 +1,68 @@
 package org.rakam.client.model;
 
-import org.rakam.StringUtil;
-
-
-
-import io.swagger.annotations.*;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
-@ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+
+
+
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class SchemaField   {
   
   private String name = null;
 
-public enum TypeEnum {
-  STRING("STRING"),
-  LONG("LONG"),
-  DOUBLE("DOUBLE"),
-  BOOLEAN("BOOLEAN"),
-  DATE("DATE"),
-  TIME("TIME"),
-  TIMESTAMP("TIMESTAMP"),
-  ARRAY_STRING("ARRAY_STRING"),
-  ARRAY_LONG("ARRAY_LONG"),
-  ARRAY_DOUBLE("ARRAY_DOUBLE"),
-  ARRAY_BOOLEAN("ARRAY_BOOLEAN"),
-  ARRAY_DATE("ARRAY_DATE"),
-  ARRAY_TIME("ARRAY_TIME"),
-  ARRAY_TIMESTAMP("ARRAY_TIMESTAMP");
 
-  private String value;
+  public enum TypeEnum {
+    STRING("STRING"),
+    INTEGER("INTEGER"),
+    DECIMAL("DECIMAL"),
+    DOUBLE("DOUBLE"),
+    LONG("LONG"),
+    BOOLEAN("BOOLEAN"),
+    DATE("DATE"),
+    TIME("TIME"),
+    TIMESTAMP("TIMESTAMP"),
+    BINARY("BINARY"),
+    ARRAY_STRING("ARRAY_STRING"),
+    ARRAY_INTEGER("ARRAY_INTEGER"),
+    ARRAY_DECIMAL("ARRAY_DECIMAL"),
+    ARRAY_DOUBLE("ARRAY_DOUBLE"),
+    ARRAY_LONG("ARRAY_LONG"),
+    ARRAY_BOOLEAN("ARRAY_BOOLEAN"),
+    ARRAY_DATE("ARRAY_DATE"),
+    ARRAY_TIME("ARRAY_TIME"),
+    ARRAY_TIMESTAMP("ARRAY_TIMESTAMP"),
+    ARRAY_BINARY("ARRAY_BINARY"),
+    MAP_STRING("MAP_STRING"),
+    MAP_INTEGER("MAP_INTEGER"),
+    MAP_DECIMAL("MAP_DECIMAL"),
+    MAP_DOUBLE("MAP_DOUBLE"),
+    MAP_LONG("MAP_LONG"),
+    MAP_BOOLEAN("MAP_BOOLEAN"),
+    MAP_DATE("MAP_DATE"),
+    MAP_TIME("MAP_TIME"),
+    MAP_TIMESTAMP("MAP_TIMESTAMP"),
+    MAP_BINARY("MAP_BINARY");
 
-  TypeEnum(String value) {
-    this.value = value;
+    private String value;
+
+    TypeEnum(String value) {
+      this.value = value;
+    }
+
+    @Override
+    @JsonValue
+    public String toString() {
+      return value;
+    }
   }
-
-  @Override
-  public String toString() {
-    return value;
-  }
-}
 
   private TypeEnum type = null;
-  private Boolean nullable = null;
-  private Boolean unique = null;
+  private Boolean unique = false;
   private String descriptiveName = null;
   private String description = null;
   private String category = null;
@@ -52,6 +70,7 @@ public enum TypeEnum {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("name")
   public String getName() {
@@ -64,6 +83,7 @@ public enum TypeEnum {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("type")
   public TypeEnum getType() {
@@ -76,18 +96,7 @@ public enum TypeEnum {
   
   /**
    **/
-  @ApiModelProperty(value = "")
-  @JsonProperty("nullable")
-  public Boolean getNullable() {
-    return nullable;
-  }
-  public void setNullable(Boolean nullable) {
-    this.nullable = nullable;
-  }
-
   
-  /**
-   **/
   @ApiModelProperty(value = "")
   @JsonProperty("unique")
   public Boolean getUnique() {
@@ -100,6 +109,7 @@ public enum TypeEnum {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("descriptiveName")
   public String getDescriptiveName() {
@@ -112,6 +122,7 @@ public enum TypeEnum {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("description")
   public String getDescription() {
@@ -124,6 +135,7 @@ public enum TypeEnum {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("category")
   public String getCategory() {
@@ -136,18 +148,51 @@ public enum TypeEnum {
   
 
   @Override
-  public String toString()  {
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    SchemaField schemaField = (SchemaField) o;
+    return Objects.equals(name, schemaField.name) &&
+        Objects.equals(type, schemaField.type) &&
+        Objects.equals(unique, schemaField.unique) &&
+        Objects.equals(descriptiveName, schemaField.descriptiveName) &&
+        Objects.equals(description, schemaField.description) &&
+        Objects.equals(category, schemaField.category);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, type, unique, descriptiveName, description, category);
+  }
+
+  @Override
+  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SchemaField {\n");
     
-    sb.append("    name: ").append(StringUtil.toIndentedString(name)).append("\n");
-    sb.append("    type: ").append(StringUtil.toIndentedString(type)).append("\n");
-    sb.append("    nullable: ").append(StringUtil.toIndentedString(nullable)).append("\n");
-    sb.append("    unique: ").append(StringUtil.toIndentedString(unique)).append("\n");
-    sb.append("    descriptiveName: ").append(StringUtil.toIndentedString(descriptiveName)).append("\n");
-    sb.append("    description: ").append(StringUtil.toIndentedString(description)).append("\n");
-    sb.append("    category: ").append(StringUtil.toIndentedString(category)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    unique: ").append(toIndentedString(unique)).append("\n");
+    sb.append("    descriptiveName: ").append(toIndentedString(descriptiveName)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    category: ").append(toIndentedString(category)).append("\n");
     sb.append("}");
     return sb.toString();
   }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+

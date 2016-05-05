@@ -38,17 +38,20 @@ class EventFilter(object):
         """
         self.swagger_types = {
             'collection': 'str',
+            'timeframe': 'Timeframe',
             'aggregation': 'EventFilterAggregation',
             'filter_expression': 'str'
         }
 
         self.attribute_map = {
             'collection': 'collection',
+            'timeframe': 'timeframe',
             'aggregation': 'aggregation',
             'filter_expression': 'filterExpression'
         }
 
         self._collection = None
+        self._timeframe = None
         self._aggregation = None
         self._filter_expression = None
 
@@ -73,6 +76,28 @@ class EventFilter(object):
         :type: str
         """
         self._collection = collection
+
+    @property
+    def timeframe(self):
+        """
+        Gets the timeframe of this EventFilter.
+
+
+        :return: The timeframe of this EventFilter.
+        :rtype: Timeframe
+        """
+        return self._timeframe
+
+    @timeframe.setter
+    def timeframe(self, timeframe):
+        """
+        Sets the timeframe of this EventFilter.
+
+
+        :param timeframe: The timeframe of this EventFilter.
+        :type: Timeframe
+        """
+        self._timeframe = timeframe
 
     @property
     def aggregation(self):
@@ -149,3 +174,16 @@ class EventFilter(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

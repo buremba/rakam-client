@@ -45,7 +45,7 @@ class AbtestingApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def create(self, **kwargs):
+    def ab_testing_create(self, **kwargs):
         """
         Create test
         
@@ -56,16 +56,17 @@ class AbtestingApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.create(callback=callback_function)
+        >>> thread = api.ab_testing_create(ab_testing_report=ab_testing_report_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
+        :param ABTestingReport ab_testing_report:  (required)
         :return: JsonResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = []
+        all_params = ['ab_testing_report']
         all_params.append('callback')
 
         params = locals()
@@ -73,10 +74,14 @@ class AbtestingApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method create" % key
+                    " to method ab_testing_create" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'ab_testing_report' is set
+        if ('ab_testing_report' not in params) or (params['ab_testing_report'] is None):
+            raise ValueError("Missing the required parameter `ab_testing_report` when calling `ab_testing_create`")
 
         resource_path = '/ab-testing/create'.replace('{format}', 'json')
         method = 'POST'
@@ -91,6 +96,8 @@ class AbtestingApi(object):
         files = {}
 
         body_params = None
+        if 'ab_testing_report' in params:
+            body_params = params['ab_testing_report']
 
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
@@ -117,7 +124,7 @@ class AbtestingApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def delete(self, **kwargs):
+    def ab_testing_delete(self, **kwargs):
         """
         Delete report
         
@@ -128,7 +135,7 @@ class AbtestingApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.delete(callback=callback_function)
+        >>> thread = api.ab_testing_delete(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -147,10 +154,11 @@ class AbtestingApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method delete" % key
+                    " to method ab_testing_delete" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/ab-testing/delete'.replace('{format}', 'json')
         method = 'POST'
@@ -195,7 +203,7 @@ class AbtestingApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def get(self, **kwargs):
+    def ab_testing_get(self, **kwargs):
         """
         Get report
         
@@ -206,7 +214,7 @@ class AbtestingApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get(callback=callback_function)
+        >>> thread = api.ab_testing_get(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -225,10 +233,11 @@ class AbtestingApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get" % key
+                    " to method ab_testing_get" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/ab-testing/get'.replace('{format}', 'json')
         method = 'POST'
@@ -273,7 +282,7 @@ class AbtestingApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def list(self, **kwargs):
+    def ab_testing_list(self, **kwargs):
         """
         List reports
         
@@ -284,7 +293,7 @@ class AbtestingApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.list(callback=callback_function)
+        >>> thread = api.ab_testing_list(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -302,10 +311,11 @@ class AbtestingApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method list" % key
+                    " to method ab_testing_list" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/ab-testing/list'.replace('{format}', 'json')
         method = 'POST'
@@ -348,7 +358,7 @@ class AbtestingApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def update(self, **kwargs):
+    def ab_testing_update(self, **kwargs):
         """
         Update report
         
@@ -359,16 +369,17 @@ class AbtestingApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.update(callback=callback_function)
+        >>> thread = api.ab_testing_update(ab_testing_report=ab_testing_report_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
+        :param ABTestingReport ab_testing_report:  (required)
         :return: ABTestingReport
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = []
+        all_params = ['ab_testing_report']
         all_params.append('callback')
 
         params = locals()
@@ -376,10 +387,14 @@ class AbtestingApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method update" % key
+                    " to method ab_testing_update" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'ab_testing_report' is set
+        if ('ab_testing_report' not in params) or (params['ab_testing_report'] is None):
+            raise ValueError("Missing the required parameter `ab_testing_report` when calling `ab_testing_update`")
 
         resource_path = '/ab-testing/update'.replace('{format}', 'json')
         method = 'POST'
@@ -394,6 +409,8 @@ class AbtestingApi(object):
         files = {}
 
         body_params = None
+        if 'ab_testing_report' in params:
+            body_params = params['ab_testing_report']
 
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\

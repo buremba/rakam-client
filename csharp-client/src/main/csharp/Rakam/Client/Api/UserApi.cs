@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 using RestSharp;
 using Rakam.Client.Client;
 using Rakam.Client.Model;
@@ -20,9 +21,9 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="batchCreate"></param>
-        /// <returns></returns>
-        List<string> BatchCreate (BatchCreate batchCreate);
+        /// <param name="userBatchCreate"></param>
+        /// <returns>List&lt;string&gt;</returns>
+        List<string> UserBatchCreate (UserBatchCreate userBatchCreate);
   
         /// <summary>
         /// Create new user
@@ -30,9 +31,29 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="batchCreate"></param>
-        /// <returns></returns>
-        System.Threading.Tasks.Task<List<string>> BatchCreateAsync (BatchCreate batchCreate);
+        /// <param name="userBatchCreate"></param>
+        /// <returns>ApiResponse of List&lt;string&gt;</returns>
+        ApiResponse<List<string>> UserBatchCreateWithHttpInfo (UserBatchCreate userBatchCreate);
+
+        /// <summary>
+        /// Create new user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="userBatchCreate"></param>
+        /// <returns>Task of List&lt;string&gt;</returns>
+        System.Threading.Tasks.Task<List<string>> UserBatchCreateAsync (UserBatchCreate userBatchCreate);
+
+        /// <summary>
+        /// Create new user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="userBatchCreate"></param>
+        /// <returns>Task of ApiResponse (List&lt;string&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<string>>> UserBatchCreateAsyncWithHttpInfo (UserBatchCreate userBatchCreate);
         
         /// <summary>
         /// Create new user
@@ -42,7 +63,7 @@ namespace Rakam.Client.Api
         /// </remarks>
         /// <param name="user"></param>
         /// <returns>string</returns>
-        string Create (User user);
+        string UserCreate (User user);
   
         /// <summary>
         /// Create new user
@@ -51,8 +72,68 @@ namespace Rakam.Client.Api
         /// 
         /// </remarks>
         /// <param name="user"></param>
-        /// <returns>string</returns>
-        System.Threading.Tasks.Task<string> CreateAsync (User user);
+        /// <returns>ApiResponse of string</returns>
+        ApiResponse<string> UserCreateWithHttpInfo (User user);
+
+        /// <summary>
+        /// Create new user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="user"></param>
+        /// <returns>Task of string</returns>
+        System.Threading.Tasks.Task<string> UserCreateAsync (User user);
+
+        /// <summary>
+        /// Create new user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="user"></param>
+        /// <returns>Task of ApiResponse (string)</returns>
+        System.Threading.Tasks.Task<ApiResponse<string>> UserCreateAsyncWithHttpInfo (User user);
+        
+        /// <summary>
+        /// Get events of the user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="userCreateSegment"></param>
+        /// <returns>JsonResponse</returns>
+        JsonResponse UserCreateSegment (UserCreateSegment userCreateSegment);
+  
+        /// <summary>
+        /// Get events of the user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="userCreateSegment"></param>
+        /// <returns>ApiResponse of JsonResponse</returns>
+        ApiResponse<JsonResponse> UserCreateSegmentWithHttpInfo (UserCreateSegment userCreateSegment);
+
+        /// <summary>
+        /// Get events of the user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="userCreateSegment"></param>
+        /// <returns>Task of JsonResponse</returns>
+        System.Threading.Tasks.Task<JsonResponse> UserCreateSegmentAsync (UserCreateSegment userCreateSegment);
+
+        /// <summary>
+        /// Get events of the user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="userCreateSegment"></param>
+        /// <returns>Task of ApiResponse (JsonResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<JsonResponse>> UserCreateSegmentAsyncWithHttpInfo (UserCreateSegment userCreateSegment);
         
         /// <summary>
         /// Get user
@@ -63,7 +144,7 @@ namespace Rakam.Client.Api
         /// <param name="project"></param>
         /// <param name="user"></param>
         /// <returns>User</returns>
-        User GetUser (string project, string user);
+        User UserGetUser (string project = null, string user = null);
   
         /// <summary>
         /// Get user
@@ -73,8 +154,30 @@ namespace Rakam.Client.Api
         /// </remarks>
         /// <param name="project"></param>
         /// <param name="user"></param>
-        /// <returns>User</returns>
-        System.Threading.Tasks.Task<User> GetUserAsync (string project, string user);
+        /// <returns>ApiResponse of User</returns>
+        ApiResponse<User> UserGetUserWithHttpInfo (string project = null, string user = null);
+
+        /// <summary>
+        /// Get user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="project"></param>
+        /// <param name="user"></param>
+        /// <returns>Task of User</returns>
+        System.Threading.Tasks.Task<User> UserGetUserAsync (string project = null, string user = null);
+
+        /// <summary>
+        /// Get user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="project"></param>
+        /// <param name="user"></param>
+        /// <returns>Task of ApiResponse (User)</returns>
+        System.Threading.Tasks.Task<ApiResponse<User>> UserGetUserAsyncWithHttpInfo (string project = null, string user = null);
         
         /// <summary>
         /// Get events of the user
@@ -86,8 +189,8 @@ namespace Rakam.Client.Api
         /// <param name="user"></param>
         /// <param name="limit"></param>
         /// <param name="offset"></param>
-        /// <returns></returns>
-        List<CollectionEvent> GetEvents (string project, string user, int? limit, long? offset);
+        /// <returns>List&lt;CollectionEvent&gt;</returns>
+        List<CollectionEvent> UserGetEvents (string project = null, string user = null, int? limit = null, DateTime? offset = null);
   
         /// <summary>
         /// Get events of the user
@@ -99,8 +202,34 @@ namespace Rakam.Client.Api
         /// <param name="user"></param>
         /// <param name="limit"></param>
         /// <param name="offset"></param>
-        /// <returns></returns>
-        System.Threading.Tasks.Task<List<CollectionEvent>> GetEventsAsync (string project, string user, int? limit, long? offset);
+        /// <returns>ApiResponse of List&lt;CollectionEvent&gt;</returns>
+        ApiResponse<List<CollectionEvent>> UserGetEventsWithHttpInfo (string project = null, string user = null, int? limit = null, DateTime? offset = null);
+
+        /// <summary>
+        /// Get events of the user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="project"></param>
+        /// <param name="user"></param>
+        /// <param name="limit"></param>
+        /// <param name="offset"></param>
+        /// <returns>Task of List&lt;CollectionEvent&gt;</returns>
+        System.Threading.Tasks.Task<List<CollectionEvent>> UserGetEventsAsync (string project = null, string user = null, int? limit = null, DateTime? offset = null);
+
+        /// <summary>
+        /// Get events of the user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="project"></param>
+        /// <param name="user"></param>
+        /// <param name="limit"></param>
+        /// <param name="offset"></param>
+        /// <returns>Task of ApiResponse (List&lt;CollectionEvent&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<CollectionEvent>>> UserGetEventsAsyncWithHttpInfo (string project = null, string user = null, int? limit = null, DateTime? offset = null);
         
         /// <summary>
         /// Set user property
@@ -108,10 +237,9 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="project"></param>
-        /// <param name="user"></param>
+        /// <param name="userIncrementProperty"></param>
         /// <returns>JsonResponse</returns>
-        JsonResponse IncrementUserProperty (string project, string user);
+        JsonResponse UserIncrementProperty (UserIncrementProperty userIncrementProperty);
   
         /// <summary>
         /// Set user property
@@ -119,10 +247,69 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="project"></param>
-        /// <param name="user"></param>
-        /// <returns>JsonResponse</returns>
-        System.Threading.Tasks.Task<JsonResponse> IncrementUserPropertyAsync (string project, string user);
+        /// <param name="userIncrementProperty"></param>
+        /// <returns>ApiResponse of JsonResponse</returns>
+        ApiResponse<JsonResponse> UserIncrementPropertyWithHttpInfo (UserIncrementProperty userIncrementProperty);
+
+        /// <summary>
+        /// Set user property
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="userIncrementProperty"></param>
+        /// <returns>Task of JsonResponse</returns>
+        System.Threading.Tasks.Task<JsonResponse> UserIncrementPropertyAsync (UserIncrementProperty userIncrementProperty);
+
+        /// <summary>
+        /// Set user property
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="userIncrementProperty"></param>
+        /// <returns>Task of ApiResponse (JsonResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<JsonResponse>> UserIncrementPropertyAsyncWithHttpInfo (UserIncrementProperty userIncrementProperty);
+        
+        /// <summary>
+        /// Merge user with anonymous id
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="userMergeUser"></param>
+        /// <returns>bool?</returns>
+        bool? UserMergeUser (UserMergeUser userMergeUser);
+  
+        /// <summary>
+        /// Merge user with anonymous id
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="userMergeUser"></param>
+        /// <returns>ApiResponse of bool?</returns>
+        ApiResponse<bool?> UserMergeUserWithHttpInfo (UserMergeUser userMergeUser);
+
+        /// <summary>
+        /// Merge user with anonymous id
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="userMergeUser"></param>
+        /// <returns>Task of bool?</returns>
+        System.Threading.Tasks.Task<bool?> UserMergeUserAsync (UserMergeUser userMergeUser);
+
+        /// <summary>
+        /// Merge user with anonymous id
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="userMergeUser"></param>
+        /// <returns>Task of ApiResponse (bool?)</returns>
+        System.Threading.Tasks.Task<ApiResponse<bool?>> UserMergeUserAsyncWithHttpInfo (UserMergeUser userMergeUser);
         
         /// <summary>
         /// Get user storage metadata
@@ -132,7 +319,7 @@ namespace Rakam.Client.Api
         /// </remarks>
         /// <param name="project"></param>
         /// <returns>MetadataResponse</returns>
-        MetadataResponse GetMetadata (string project);
+        MetadataResponse UserGetMetadata (string project = null);
   
         /// <summary>
         /// Get user storage metadata
@@ -141,8 +328,28 @@ namespace Rakam.Client.Api
         /// 
         /// </remarks>
         /// <param name="project"></param>
-        /// <returns>MetadataResponse</returns>
-        System.Threading.Tasks.Task<MetadataResponse> GetMetadataAsync (string project);
+        /// <returns>ApiResponse of MetadataResponse</returns>
+        ApiResponse<MetadataResponse> UserGetMetadataWithHttpInfo (string project = null);
+
+        /// <summary>
+        /// Get user storage metadata
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="project"></param>
+        /// <returns>Task of MetadataResponse</returns>
+        System.Threading.Tasks.Task<MetadataResponse> UserGetMetadataAsync (string project = null);
+
+        /// <summary>
+        /// Get user storage metadata
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="project"></param>
+        /// <returns>Task of ApiResponse (MetadataResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<MetadataResponse>> UserGetMetadataAsyncWithHttpInfo (string project = null);
         
         /// <summary>
         /// Search users
@@ -150,9 +357,9 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="searchUsers"></param>
+        /// <param name="userSearchUsers"></param>
         /// <returns>QueryResult</returns>
-        QueryResult SearchUsers (SearchUsers searchUsers);
+        QueryResult UserSearchUsers (UserSearchUsers userSearchUsers);
   
         /// <summary>
         /// Search users
@@ -160,29 +367,29 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="searchUsers"></param>
-        /// <returns>QueryResult</returns>
-        System.Threading.Tasks.Task<QueryResult> SearchUsersAsync (SearchUsers searchUsers);
-        
+        /// <param name="userSearchUsers"></param>
+        /// <returns>ApiResponse of QueryResult</returns>
+        ApiResponse<QueryResult> UserSearchUsersWithHttpInfo (UserSearchUsers userSearchUsers);
+
         /// <summary>
-        /// Set user properties once
+        /// Search users
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="setUserProperties"></param>
-        /// <returns></returns>
-        void SetUserPropertiesOnce (SetUserProperties setUserProperties);
-  
+        /// <param name="userSearchUsers"></param>
+        /// <returns>Task of QueryResult</returns>
+        System.Threading.Tasks.Task<QueryResult> UserSearchUsersAsync (UserSearchUsers userSearchUsers);
+
         /// <summary>
-        /// Set user properties once
+        /// Search users
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="setUserProperties"></param>
-        /// <returns></returns>
-        System.Threading.Tasks.Task SetUserPropertiesOnceAsync (SetUserProperties setUserProperties);
+        /// <param name="userSearchUsers"></param>
+        /// <returns>Task of ApiResponse (QueryResult)</returns>
+        System.Threading.Tasks.Task<ApiResponse<QueryResult>> UserSearchUsersAsyncWithHttpInfo (UserSearchUsers userSearchUsers);
         
         /// <summary>
         /// Set user properties
@@ -192,7 +399,7 @@ namespace Rakam.Client.Api
         /// </remarks>
         /// <param name="setUserProperties"></param>
         /// <returns>int?</returns>
-        int? SetUserProperties (SetUserProperties setUserProperties);
+        int? UserSetProperties (SetUserProperties setUserProperties);
   
         /// <summary>
         /// Set user properties
@@ -201,8 +408,108 @@ namespace Rakam.Client.Api
         /// 
         /// </remarks>
         /// <param name="setUserProperties"></param>
-        /// <returns>int?</returns>
-        System.Threading.Tasks.Task<int?> SetUserPropertiesAsync (SetUserProperties setUserProperties);
+        /// <returns>ApiResponse of int?</returns>
+        ApiResponse<int?> UserSetPropertiesWithHttpInfo (SetUserProperties setUserProperties);
+
+        /// <summary>
+        /// Set user properties
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="setUserProperties"></param>
+        /// <returns>Task of int?</returns>
+        System.Threading.Tasks.Task<int?> UserSetPropertiesAsync (SetUserProperties setUserProperties);
+
+        /// <summary>
+        /// Set user properties
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="setUserProperties"></param>
+        /// <returns>Task of ApiResponse (int?)</returns>
+        System.Threading.Tasks.Task<ApiResponse<int?>> UserSetPropertiesAsyncWithHttpInfo (SetUserProperties setUserProperties);
+        
+        /// <summary>
+        /// Set user properties once
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="setUserProperties"></param>
+        /// <returns></returns>
+        void UserSetPropertiesOnce (SetUserProperties setUserProperties);
+  
+        /// <summary>
+        /// Set user properties once
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="setUserProperties"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> UserSetPropertiesOnceWithHttpInfo (SetUserProperties setUserProperties);
+
+        /// <summary>
+        /// Set user properties once
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="setUserProperties"></param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task UserSetPropertiesOnceAsync (SetUserProperties setUserProperties);
+
+        /// <summary>
+        /// Set user properties once
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="setUserProperties"></param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> UserSetPropertiesOnceAsyncWithHttpInfo (SetUserProperties setUserProperties);
+        
+        /// <summary>
+        /// Unset user property
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="userUnsetProperty"></param>
+        /// <returns>JsonResponse</returns>
+        JsonResponse UserUnsetProperty (UserUnsetProperty userUnsetProperty);
+  
+        /// <summary>
+        /// Unset user property
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="userUnsetProperty"></param>
+        /// <returns>ApiResponse of JsonResponse</returns>
+        ApiResponse<JsonResponse> UserUnsetPropertyWithHttpInfo (UserUnsetProperty userUnsetProperty);
+
+        /// <summary>
+        /// Unset user property
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="userUnsetProperty"></param>
+        /// <returns>Task of JsonResponse</returns>
+        System.Threading.Tasks.Task<JsonResponse> UserUnsetPropertyAsync (UserUnsetProperty userUnsetProperty);
+
+        /// <summary>
+        /// Unset user property
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="userUnsetProperty"></param>
+        /// <returns>Task of ApiResponse (JsonResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<JsonResponse>> UserUnsetPropertyAsyncWithHttpInfo (UserUnsetProperty userUnsetProperty);
         
     }
   
@@ -214,68 +521,102 @@ namespace Rakam.Client.Api
         /// <summary>
         /// Initializes a new instance of the <see cref="UserApi"/> class.
         /// </summary>
-        /// <param name="apiClient"> an instance of ApiClient (optional)</param>
-        /// <returns></returns>
-        public UserApi(ApiClient apiClient = null)
-        {
-            if (apiClient == null) // use the default one in Configuration
-                this.ApiClient = Configuration.DefaultApiClient; 
-            else
-                this.ApiClient = apiClient;
-        }
-    
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UserApi"/> class.
-        /// </summary>
         /// <returns></returns>
         public UserApi(String basePath)
         {
-            this.ApiClient = new ApiClient(basePath);
+            this.Configuration = new Configuration(new ApiClient(basePath));
         }
     
         /// <summary>
-        /// Sets the base path of the API client.
+        /// Initializes a new instance of the <see cref="UserApi"/> class
+        /// using Configuration object
         /// </summary>
-        /// <param name="basePath">The base path</param>
-        /// <value>The base path</value>
-        public void SetBasePath(String basePath)
+        /// <param name="configuration">An instance of Configuration</param>
+        /// <returns></returns>
+        public UserApi(Configuration configuration = null)
         {
-            this.ApiClient.BasePath = basePath;
+            if (configuration == null) // use the default one in Configuration
+                this.Configuration = Configuration.Default; 
+            else
+                this.Configuration = configuration;
         }
-    
+
         /// <summary>
         /// Gets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
         public String GetBasePath()
         {
-            return this.ApiClient.BasePath;
+            return this.Configuration.ApiClient.RestClient.BaseUrl.ToString();
+        }
+
+        /// <summary>
+        /// Sets the base path of the API client.
+        /// </summary>
+        /// <value>The base path</value>
+        [Obsolete("SetBasePath is deprecated, please do 'Configuraiton.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
+        public void SetBasePath(String basePath)
+        {
+            // do nothing
         }
     
         /// <summary>
-        /// Gets or sets the API client.
+        /// Gets or sets the configuration object
         /// </summary>
-        /// <value>An instance of the ApiClient</value>
-        public ApiClient ApiClient {get; set;}
-    
+        /// <value>An instance of the Configuration</value>
+        public Configuration Configuration {get; set;}
+
+        /// <summary>
+        /// Gets the default header.
+        /// </summary>
+        /// <returns>Dictionary of HTTP header</returns>
+        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
+        public Dictionary<String, String> DefaultHeader()
+        {
+            return this.Configuration.DefaultHeader;
+        }
+
+        /// <summary>
+        /// Add default header.
+        /// </summary>
+        /// <param name="key">Header field name.</param>
+        /// <param name="value">Header field value.</param>
+        /// <returns></returns>
+        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
+        public void AddDefaultHeader(string key, string value)
+        {
+            this.Configuration.AddDefaultHeader(key, value);
+        }
+   
         
         /// <summary>
         /// Create new user 
         /// </summary>
-        /// <param name="batchCreate"></param> 
-        /// <returns></returns>            
-        public List<string> BatchCreate (BatchCreate batchCreate)
+        /// <param name="userBatchCreate"></param> 
+        /// <returns>List&lt;string&gt;</returns>
+        public List<string> UserBatchCreate (UserBatchCreate userBatchCreate)
+        {
+             ApiResponse<List<string>> response = UserBatchCreateWithHttpInfo(userBatchCreate);
+             return response.Data;
+        }
+
+        /// <summary>
+        /// Create new user 
+        /// </summary>
+        /// <param name="userBatchCreate"></param> 
+        /// <returns>ApiResponse of List&lt;string&gt;</returns>
+        public ApiResponse< List<string> > UserBatchCreateWithHttpInfo (UserBatchCreate userBatchCreate)
         {
             
-            // verify the required parameter 'batchCreate' is set
-            if (batchCreate == null) throw new ApiException(400, "Missing required parameter 'batchCreate' when calling BatchCreate");
+            // verify the required parameter 'userBatchCreate' is set
+            if (userBatchCreate == null) throw new ApiException(400, "Missing required parameter 'userBatchCreate' when calling UserBatchCreate");
             
     
-            var path = "/user/batch/create";
+            var path_ = "/user/batch/create";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var formParams = new Dictionary<String, String>();
             var fileParams = new Dictionary<String, FileParameter>();
             String postBody = null;
@@ -284,9 +625,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -295,35 +636,51 @@ namespace Rakam.Client.Api
             
             
             
-            postBody = ApiClient.Serialize(batchCreate); // http body (model) parameter
+            postBody = Configuration.ApiClient.Serialize(userBatchCreate); // http body (model) parameter
+            
+
             
     
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
-    
             // make the HTTP request
-            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
     
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling BatchCreate: " + response.Content, response.Content);
-            else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling BatchCreate: " + response.ErrorMessage, response.ErrorMessage);
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserBatchCreate: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserBatchCreate: " + response.ErrorMessage, response.ErrorMessage);
     
-            return (List<string>) ApiClient.Deserialize(response.Content, typeof(List<string>), response.Headers);
+            return new ApiResponse<List<string>>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (List<string>) Configuration.ApiClient.Deserialize(response, typeof(List<string>)));
+            
         }
     
         /// <summary>
         /// Create new user 
         /// </summary>
-        /// <param name="batchCreate"></param>
-        /// <returns></returns>
-        public async System.Threading.Tasks.Task<List<string>> BatchCreateAsync (BatchCreate batchCreate)
+        /// <param name="userBatchCreate"></param>
+        /// <returns>Task of List&lt;string&gt;</returns>
+        public async System.Threading.Tasks.Task<List<string>> UserBatchCreateAsync (UserBatchCreate userBatchCreate)
         {
-            // verify the required parameter 'batchCreate' is set
-            if (batchCreate == null) throw new ApiException(400, "Missing required parameter 'batchCreate' when calling BatchCreate");
+             ApiResponse<List<string>> response = await UserBatchCreateAsyncWithHttpInfo(userBatchCreate);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        /// Create new user 
+        /// </summary>
+        /// <param name="userBatchCreate"></param>
+        /// <returns>Task of ApiResponse (List&lt;string&gt;)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<List<string>>> UserBatchCreateAsyncWithHttpInfo (UserBatchCreate userBatchCreate)
+        {
+            // verify the required parameter 'userBatchCreate' is set
+            if (userBatchCreate == null) throw new ApiException(400, "Missing required parameter 'userBatchCreate' when calling UserBatchCreate");
             
     
-            var path = "/user/batch/create";
+            var path_ = "/user/batch/create";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
@@ -336,9 +693,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -347,37 +704,55 @@ namespace Rakam.Client.Api
             
             
             
-            postBody = ApiClient.Serialize(batchCreate); // http body (model) parameter
+            postBody = Configuration.ApiClient.Serialize(userBatchCreate); // http body (model) parameter
             
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling BatchCreate: " + response.Content, response.Content);
 
-            return (List<string>) ApiClient.Deserialize(response.Content, typeof(List<string>), response.Headers);
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserBatchCreate: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserBatchCreate: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<List<string>>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (List<string>) Configuration.ApiClient.Deserialize(response, typeof(List<string>)));
+            
         }
         
         /// <summary>
         /// Create new user 
         /// </summary>
         /// <param name="user"></param> 
-        /// <returns>string</returns>            
-        public string Create (User user)
+        /// <returns>string</returns>
+        public string UserCreate (User user)
+        {
+             ApiResponse<string> response = UserCreateWithHttpInfo(user);
+             return response.Data;
+        }
+
+        /// <summary>
+        /// Create new user 
+        /// </summary>
+        /// <param name="user"></param> 
+        /// <returns>ApiResponse of string</returns>
+        public ApiResponse< string > UserCreateWithHttpInfo (User user)
         {
             
             // verify the required parameter 'user' is set
-            if (user == null) throw new ApiException(400, "Missing required parameter 'user' when calling Create");
+            if (user == null) throw new ApiException(400, "Missing required parameter 'user' when calling UserCreate");
             
     
-            var path = "/user/create";
+            var path_ = "/user/create";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var formParams = new Dictionary<String, String>();
             var fileParams = new Dictionary<String, FileParameter>();
             String postBody = null;
@@ -386,9 +761,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -397,35 +772,51 @@ namespace Rakam.Client.Api
             
             
             
-            postBody = ApiClient.Serialize(user); // http body (model) parameter
+            postBody = Configuration.ApiClient.Serialize(user); // http body (model) parameter
+            
+
             
     
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
-    
             // make the HTTP request
-            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
     
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling Create: " + response.Content, response.Content);
-            else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling Create: " + response.ErrorMessage, response.ErrorMessage);
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserCreate: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserCreate: " + response.ErrorMessage, response.ErrorMessage);
     
-            return (string) ApiClient.Deserialize(response.Content, typeof(string), response.Headers);
+            return new ApiResponse<string>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (string) Configuration.ApiClient.Deserialize(response, typeof(string)));
+            
         }
     
         /// <summary>
         /// Create new user 
         /// </summary>
         /// <param name="user"></param>
-        /// <returns>string</returns>
-        public async System.Threading.Tasks.Task<string> CreateAsync (User user)
+        /// <returns>Task of string</returns>
+        public async System.Threading.Tasks.Task<string> UserCreateAsync (User user)
+        {
+             ApiResponse<string> response = await UserCreateAsyncWithHttpInfo(user);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        /// Create new user 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>Task of ApiResponse (string)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<string>> UserCreateAsyncWithHttpInfo (User user)
         {
             // verify the required parameter 'user' is set
-            if (user == null) throw new ApiException(400, "Missing required parameter 'user' when calling Create");
+            if (user == null) throw new ApiException(400, "Missing required parameter 'user' when calling UserCreate");
             
     
-            var path = "/user/create";
+            var path_ = "/user/create";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
@@ -438,9 +829,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -449,18 +840,177 @@ namespace Rakam.Client.Api
             
             
             
-            postBody = ApiClient.Serialize(user); // http body (model) parameter
+            postBody = Configuration.ApiClient.Serialize(user); // http body (model) parameter
+            
+
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserCreate: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserCreate: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<string>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (string) Configuration.ApiClient.Deserialize(response, typeof(string)));
+            
+        }
+        
+        /// <summary>
+        /// Get events of the user 
+        /// </summary>
+        /// <param name="userCreateSegment"></param> 
+        /// <returns>JsonResponse</returns>
+        public JsonResponse UserCreateSegment (UserCreateSegment userCreateSegment)
+        {
+             ApiResponse<JsonResponse> response = UserCreateSegmentWithHttpInfo(userCreateSegment);
+             return response.Data;
+        }
+
+        /// <summary>
+        /// Get events of the user 
+        /// </summary>
+        /// <param name="userCreateSegment"></param> 
+        /// <returns>ApiResponse of JsonResponse</returns>
+        public ApiResponse< JsonResponse > UserCreateSegmentWithHttpInfo (UserCreateSegment userCreateSegment)
+        {
+            
+            // verify the required parameter 'userCreateSegment' is set
+            if (userCreateSegment == null) throw new ApiException(400, "Missing required parameter 'userCreateSegment' when calling UserCreateSegment");
             
     
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
+            var path_ = "/user/create_segment";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            
+            postBody = Configuration.ApiClient.Serialize(userCreateSegment); // http body (model) parameter
+            
+
+            
+            // authentication (read_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("read_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["read_key"] = apiKeyValue;
+            }
+            
     
             // make the HTTP request
-            IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling Create: " + response.Content, response.Content);
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
 
-            return (string) ApiClient.Deserialize(response.Content, typeof(string), response.Headers);
+            int statusCode = (int) response.StatusCode;
+    
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserCreateSegment: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserCreateSegment: " + response.ErrorMessage, response.ErrorMessage);
+    
+            return new ApiResponse<JsonResponse>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (JsonResponse) Configuration.ApiClient.Deserialize(response, typeof(JsonResponse)));
+            
+        }
+    
+        /// <summary>
+        /// Get events of the user 
+        /// </summary>
+        /// <param name="userCreateSegment"></param>
+        /// <returns>Task of JsonResponse</returns>
+        public async System.Threading.Tasks.Task<JsonResponse> UserCreateSegmentAsync (UserCreateSegment userCreateSegment)
+        {
+             ApiResponse<JsonResponse> response = await UserCreateSegmentAsyncWithHttpInfo(userCreateSegment);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        /// Get events of the user 
+        /// </summary>
+        /// <param name="userCreateSegment"></param>
+        /// <returns>Task of ApiResponse (JsonResponse)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<JsonResponse>> UserCreateSegmentAsyncWithHttpInfo (UserCreateSegment userCreateSegment)
+        {
+            // verify the required parameter 'userCreateSegment' is set
+            if (userCreateSegment == null) throw new ApiException(400, "Missing required parameter 'userCreateSegment' when calling UserCreateSegment");
+            
+    
+            var path_ = "/user/create_segment";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>();
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            
+            postBody = Configuration.ApiClient.Serialize(userCreateSegment); // http body (model) parameter
+            
+
+            
+            // authentication (read_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("read_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["read_key"] = apiKeyValue;
+            }
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserCreateSegment: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserCreateSegment: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<JsonResponse>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (JsonResponse) Configuration.ApiClient.Deserialize(response, typeof(JsonResponse)));
+            
         }
         
         /// <summary>
@@ -468,16 +1018,28 @@ namespace Rakam.Client.Api
         /// </summary>
         /// <param name="project"></param> 
         /// <param name="user"></param> 
-        /// <returns>User</returns>            
-        public User GetUser (string project, string user)
+        /// <returns>User</returns>
+        public User UserGetUser (string project = null, string user = null)
+        {
+             ApiResponse<User> response = UserGetUserWithHttpInfo(project, user);
+             return response.Data;
+        }
+
+        /// <summary>
+        /// Get user 
+        /// </summary>
+        /// <param name="project"></param> 
+        /// <param name="user"></param> 
+        /// <returns>ApiResponse of User</returns>
+        public ApiResponse< User > UserGetUserWithHttpInfo (string project = null, string user = null)
         {
             
     
-            var path = "/user/get";
+            var path_ = "/user/get";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var formParams = new Dictionary<String, String>();
             var fileParams = new Dictionary<String, FileParameter>();
             String postBody = null;
@@ -486,9 +1048,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -496,23 +1058,35 @@ namespace Rakam.Client.Api
             
             
             
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
-            if (user != null) formParams.Add("user", ApiClient.ParameterToString(user)); // form parameter
+            if (project != null) formParams.Add("project", Configuration.ApiClient.ParameterToString(project)); // form parameter
+            if (user != null) formParams.Add("user", Configuration.ApiClient.ParameterToString(user)); // form parameter
             
             
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
+
+            
+            // authentication (read_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("read_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["read_key"] = apiKeyValue;
+            }
+            
     
             // make the HTTP request
-            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
     
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling GetUser: " + response.Content, response.Content);
-            else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling GetUser: " + response.ErrorMessage, response.ErrorMessage);
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserGetUser: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserGetUser: " + response.ErrorMessage, response.ErrorMessage);
     
-            return (User) ApiClient.Deserialize(response.Content, typeof(User), response.Headers);
+            return new ApiResponse<User>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (User) Configuration.ApiClient.Deserialize(response, typeof(User)));
+            
         }
     
         /// <summary>
@@ -520,12 +1094,25 @@ namespace Rakam.Client.Api
         /// </summary>
         /// <param name="project"></param>
         /// <param name="user"></param>
-        /// <returns>User</returns>
-        public async System.Threading.Tasks.Task<User> GetUserAsync (string project, string user)
+        /// <returns>Task of User</returns>
+        public async System.Threading.Tasks.Task<User> UserGetUserAsync (string project = null, string user = null)
+        {
+             ApiResponse<User> response = await UserGetUserAsyncWithHttpInfo(project, user);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        /// Get user 
+        /// </summary>
+        /// <param name="project"></param>
+        /// <param name="user"></param>
+        /// <returns>Task of ApiResponse (User)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<User>> UserGetUserAsyncWithHttpInfo (string project = null, string user = null)
         {
             
     
-            var path = "/user/get";
+            var path_ = "/user/get";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
@@ -538,9 +1125,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -548,20 +1135,35 @@ namespace Rakam.Client.Api
             
             
             
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
-            if (user != null) formParams.Add("user", ApiClient.ParameterToString(user)); // form parameter
+            if (project != null) formParams.Add("project", Configuration.ApiClient.ParameterToString(project)); // form parameter
+            if (user != null) formParams.Add("user", Configuration.ApiClient.ParameterToString(user)); // form parameter
             
             
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling GetUser: " + response.Content, response.Content);
 
-            return (User) ApiClient.Deserialize(response.Content, typeof(User), response.Headers);
+            
+            // authentication (read_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("read_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["read_key"] = apiKeyValue;
+            }
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserGetUser: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserGetUser: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<User>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (User) Configuration.ApiClient.Deserialize(response, typeof(User)));
+            
         }
         
         /// <summary>
@@ -571,16 +1173,30 @@ namespace Rakam.Client.Api
         /// <param name="user"></param> 
         /// <param name="limit"></param> 
         /// <param name="offset"></param> 
-        /// <returns></returns>            
-        public List<CollectionEvent> GetEvents (string project, string user, int? limit, long? offset)
+        /// <returns>List&lt;CollectionEvent&gt;</returns>
+        public List<CollectionEvent> UserGetEvents (string project = null, string user = null, int? limit = null, DateTime? offset = null)
+        {
+             ApiResponse<List<CollectionEvent>> response = UserGetEventsWithHttpInfo(project, user, limit, offset);
+             return response.Data;
+        }
+
+        /// <summary>
+        /// Get events of the user 
+        /// </summary>
+        /// <param name="project"></param> 
+        /// <param name="user"></param> 
+        /// <param name="limit"></param> 
+        /// <param name="offset"></param> 
+        /// <returns>ApiResponse of List&lt;CollectionEvent&gt;</returns>
+        public ApiResponse< List<CollectionEvent> > UserGetEventsWithHttpInfo (string project = null, string user = null, int? limit = null, DateTime? offset = null)
         {
             
     
-            var path = "/user/get_events";
+            var path_ = "/user/get_events";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var formParams = new Dictionary<String, String>();
             var fileParams = new Dictionary<String, FileParameter>();
             String postBody = null;
@@ -589,9 +1205,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -599,25 +1215,37 @@ namespace Rakam.Client.Api
             
             
             
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
-            if (user != null) formParams.Add("user", ApiClient.ParameterToString(user)); // form parameter
-            if (limit != null) formParams.Add("limit", ApiClient.ParameterToString(limit)); // form parameter
-            if (offset != null) formParams.Add("offset", ApiClient.ParameterToString(offset)); // form parameter
+            if (project != null) formParams.Add("project", Configuration.ApiClient.ParameterToString(project)); // form parameter
+            if (user != null) formParams.Add("user", Configuration.ApiClient.ParameterToString(user)); // form parameter
+            if (limit != null) formParams.Add("limit", Configuration.ApiClient.ParameterToString(limit)); // form parameter
+            if (offset != null) formParams.Add("offset", Configuration.ApiClient.ParameterToString(offset)); // form parameter
             
             
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
+
+            
+            // authentication (read_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("read_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["read_key"] = apiKeyValue;
+            }
+            
     
             // make the HTTP request
-            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
     
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling GetEvents: " + response.Content, response.Content);
-            else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling GetEvents: " + response.ErrorMessage, response.ErrorMessage);
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserGetEvents: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserGetEvents: " + response.ErrorMessage, response.ErrorMessage);
     
-            return (List<CollectionEvent>) ApiClient.Deserialize(response.Content, typeof(List<CollectionEvent>), response.Headers);
+            return new ApiResponse<List<CollectionEvent>>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (List<CollectionEvent>) Configuration.ApiClient.Deserialize(response, typeof(List<CollectionEvent>)));
+            
         }
     
         /// <summary>
@@ -627,115 +1255,27 @@ namespace Rakam.Client.Api
         /// <param name="user"></param>
         /// <param name="limit"></param>
         /// <param name="offset"></param>
-        /// <returns></returns>
-        public async System.Threading.Tasks.Task<List<CollectionEvent>> GetEventsAsync (string project, string user, int? limit, long? offset)
+        /// <returns>Task of List&lt;CollectionEvent&gt;</returns>
+        public async System.Threading.Tasks.Task<List<CollectionEvent>> UserGetEventsAsync (string project = null, string user = null, int? limit = null, DateTime? offset = null)
         {
-            
-    
-            var path = "/user/get_events";
-    
-            var pathParams = new Dictionary<String, String>();
-            var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
-            var formParams = new Dictionary<String, String>();
-            var fileParams = new Dictionary<String, FileParameter>();
-            String postBody = null;
+             ApiResponse<List<CollectionEvent>> response = await UserGetEventsAsyncWithHttpInfo(project, user, limit, offset);
+             return response.Data;
 
-            // to determine the Accept header
-            String[] http_header_accepts = new String[] {
-                "application/json"
-            };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
-            if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            pathParams.Add("format", "json");
-            
-            
-            
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
-            if (user != null) formParams.Add("user", ApiClient.ParameterToString(user)); // form parameter
-            if (limit != null) formParams.Add("limit", ApiClient.ParameterToString(limit)); // form parameter
-            if (offset != null) formParams.Add("offset", ApiClient.ParameterToString(offset)); // form parameter
-            
-            
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling GetEvents: " + response.Content, response.Content);
-
-            return (List<CollectionEvent>) ApiClient.Deserialize(response.Content, typeof(List<CollectionEvent>), response.Headers);
         }
-        
-        /// <summary>
-        /// Set user property 
-        /// </summary>
-        /// <param name="project"></param> 
-        /// <param name="user"></param> 
-        /// <returns>JsonResponse</returns>            
-        public JsonResponse IncrementUserProperty (string project, string user)
-        {
-            
-    
-            var path = "/user/increment";
-    
-            var pathParams = new Dictionary<String, String>();
-            var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
-            var formParams = new Dictionary<String, String>();
-            var fileParams = new Dictionary<String, FileParameter>();
-            String postBody = null;
 
-            // to determine the Accept header
-            String[] http_header_accepts = new String[] {
-                "application/json"
-            };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
-            if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            pathParams.Add("format", "json");
-            
-            
-            
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
-            if (user != null) formParams.Add("user", ApiClient.ParameterToString(user)); // form parameter
-            
-            
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-    
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling IncrementUserProperty: " + response.Content, response.Content);
-            else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling IncrementUserProperty: " + response.ErrorMessage, response.ErrorMessage);
-    
-            return (JsonResponse) ApiClient.Deserialize(response.Content, typeof(JsonResponse), response.Headers);
-        }
-    
         /// <summary>
-        /// Set user property 
+        /// Get events of the user 
         /// </summary>
         /// <param name="project"></param>
         /// <param name="user"></param>
-        /// <returns>JsonResponse</returns>
-        public async System.Threading.Tasks.Task<JsonResponse> IncrementUserPropertyAsync (string project, string user)
+        /// <param name="limit"></param>
+        /// <param name="offset"></param>
+        /// <returns>Task of ApiResponse (List&lt;CollectionEvent&gt;)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<List<CollectionEvent>>> UserGetEventsAsyncWithHttpInfo (string project = null, string user = null, int? limit = null, DateTime? offset = null)
         {
             
     
-            var path = "/user/increment";
+            var path_ = "/user/get_events";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
@@ -748,9 +1288,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -758,36 +1298,352 @@ namespace Rakam.Client.Api
             
             
             
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
-            if (user != null) formParams.Add("user", ApiClient.ParameterToString(user)); // form parameter
+            if (project != null) formParams.Add("project", Configuration.ApiClient.ParameterToString(project)); // form parameter
+            if (user != null) formParams.Add("user", Configuration.ApiClient.ParameterToString(user)); // form parameter
+            if (limit != null) formParams.Add("limit", Configuration.ApiClient.ParameterToString(limit)); // form parameter
+            if (offset != null) formParams.Add("offset", Configuration.ApiClient.ParameterToString(offset)); // form parameter
             
+            
+
+            
+            // authentication (read_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("read_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["read_key"] = apiKeyValue;
+            }
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserGetEvents: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserGetEvents: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<List<CollectionEvent>>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (List<CollectionEvent>) Configuration.ApiClient.Deserialize(response, typeof(List<CollectionEvent>)));
+            
+        }
+        
+        /// <summary>
+        /// Set user property 
+        /// </summary>
+        /// <param name="userIncrementProperty"></param> 
+        /// <returns>JsonResponse</returns>
+        public JsonResponse UserIncrementProperty (UserIncrementProperty userIncrementProperty)
+        {
+             ApiResponse<JsonResponse> response = UserIncrementPropertyWithHttpInfo(userIncrementProperty);
+             return response.Data;
+        }
+
+        /// <summary>
+        /// Set user property 
+        /// </summary>
+        /// <param name="userIncrementProperty"></param> 
+        /// <returns>ApiResponse of JsonResponse</returns>
+        public ApiResponse< JsonResponse > UserIncrementPropertyWithHttpInfo (UserIncrementProperty userIncrementProperty)
+        {
+            
+            // verify the required parameter 'userIncrementProperty' is set
+            if (userIncrementProperty == null) throw new ApiException(400, "Missing required parameter 'userIncrementProperty' when calling UserIncrementProperty");
             
     
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
+            var path_ = "/user/increment_property";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            
+            postBody = Configuration.ApiClient.Serialize(userIncrementProperty); // http body (model) parameter
+            
+
+            
     
             // make the HTTP request
-            IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling IncrementUserProperty: " + response.Content, response.Content);
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
 
-            return (JsonResponse) ApiClient.Deserialize(response.Content, typeof(JsonResponse), response.Headers);
+            int statusCode = (int) response.StatusCode;
+    
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserIncrementProperty: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserIncrementProperty: " + response.ErrorMessage, response.ErrorMessage);
+    
+            return new ApiResponse<JsonResponse>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (JsonResponse) Configuration.ApiClient.Deserialize(response, typeof(JsonResponse)));
+            
+        }
+    
+        /// <summary>
+        /// Set user property 
+        /// </summary>
+        /// <param name="userIncrementProperty"></param>
+        /// <returns>Task of JsonResponse</returns>
+        public async System.Threading.Tasks.Task<JsonResponse> UserIncrementPropertyAsync (UserIncrementProperty userIncrementProperty)
+        {
+             ApiResponse<JsonResponse> response = await UserIncrementPropertyAsyncWithHttpInfo(userIncrementProperty);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        /// Set user property 
+        /// </summary>
+        /// <param name="userIncrementProperty"></param>
+        /// <returns>Task of ApiResponse (JsonResponse)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<JsonResponse>> UserIncrementPropertyAsyncWithHttpInfo (UserIncrementProperty userIncrementProperty)
+        {
+            // verify the required parameter 'userIncrementProperty' is set
+            if (userIncrementProperty == null) throw new ApiException(400, "Missing required parameter 'userIncrementProperty' when calling UserIncrementProperty");
+            
+    
+            var path_ = "/user/increment_property";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>();
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            
+            postBody = Configuration.ApiClient.Serialize(userIncrementProperty); // http body (model) parameter
+            
+
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserIncrementProperty: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserIncrementProperty: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<JsonResponse>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (JsonResponse) Configuration.ApiClient.Deserialize(response, typeof(JsonResponse)));
+            
+        }
+        
+        /// <summary>
+        /// Merge user with anonymous id 
+        /// </summary>
+        /// <param name="userMergeUser"></param> 
+        /// <returns>bool?</returns>
+        public bool? UserMergeUser (UserMergeUser userMergeUser)
+        {
+             ApiResponse<bool?> response = UserMergeUserWithHttpInfo(userMergeUser);
+             return response.Data;
+        }
+
+        /// <summary>
+        /// Merge user with anonymous id 
+        /// </summary>
+        /// <param name="userMergeUser"></param> 
+        /// <returns>ApiResponse of bool?</returns>
+        public ApiResponse< bool? > UserMergeUserWithHttpInfo (UserMergeUser userMergeUser)
+        {
+            
+            // verify the required parameter 'userMergeUser' is set
+            if (userMergeUser == null) throw new ApiException(400, "Missing required parameter 'userMergeUser' when calling UserMergeUser");
+            
+    
+            var path_ = "/user/merge";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            
+            postBody = Configuration.ApiClient.Serialize(userMergeUser); // http body (model) parameter
+            
+
+            
+            // authentication (read_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("read_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["read_key"] = apiKeyValue;
+            }
+            
+    
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+    
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserMergeUser: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserMergeUser: " + response.ErrorMessage, response.ErrorMessage);
+    
+            return new ApiResponse<bool?>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (bool?) Configuration.ApiClient.Deserialize(response, typeof(bool?)));
+            
+        }
+    
+        /// <summary>
+        /// Merge user with anonymous id 
+        /// </summary>
+        /// <param name="userMergeUser"></param>
+        /// <returns>Task of bool?</returns>
+        public async System.Threading.Tasks.Task<bool?> UserMergeUserAsync (UserMergeUser userMergeUser)
+        {
+             ApiResponse<bool?> response = await UserMergeUserAsyncWithHttpInfo(userMergeUser);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        /// Merge user with anonymous id 
+        /// </summary>
+        /// <param name="userMergeUser"></param>
+        /// <returns>Task of ApiResponse (bool?)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<bool?>> UserMergeUserAsyncWithHttpInfo (UserMergeUser userMergeUser)
+        {
+            // verify the required parameter 'userMergeUser' is set
+            if (userMergeUser == null) throw new ApiException(400, "Missing required parameter 'userMergeUser' when calling UserMergeUser");
+            
+    
+            var path_ = "/user/merge";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>();
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            
+            postBody = Configuration.ApiClient.Serialize(userMergeUser); // http body (model) parameter
+            
+
+            
+            // authentication (read_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("read_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["read_key"] = apiKeyValue;
+            }
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserMergeUser: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserMergeUser: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<bool?>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (bool?) Configuration.ApiClient.Deserialize(response, typeof(bool?)));
+            
         }
         
         /// <summary>
         /// Get user storage metadata 
         /// </summary>
         /// <param name="project"></param> 
-        /// <returns>MetadataResponse</returns>            
-        public MetadataResponse GetMetadata (string project)
+        /// <returns>MetadataResponse</returns>
+        public MetadataResponse UserGetMetadata (string project = null)
+        {
+             ApiResponse<MetadataResponse> response = UserGetMetadataWithHttpInfo(project);
+             return response.Data;
+        }
+
+        /// <summary>
+        /// Get user storage metadata 
+        /// </summary>
+        /// <param name="project"></param> 
+        /// <returns>ApiResponse of MetadataResponse</returns>
+        public ApiResponse< MetadataResponse > UserGetMetadataWithHttpInfo (string project = null)
         {
             
     
-            var path = "/user/metadata";
+            var path_ = "/user/metadata";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var formParams = new Dictionary<String, String>();
             var fileParams = new Dictionary<String, FileParameter>();
             String postBody = null;
@@ -796,9 +1652,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -806,34 +1662,58 @@ namespace Rakam.Client.Api
             
             
             
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
+            if (project != null) formParams.Add("project", Configuration.ApiClient.ParameterToString(project)); // form parameter
             
             
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
+
+            
+            // authentication (read_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("read_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["read_key"] = apiKeyValue;
+            }
+            
     
             // make the HTTP request
-            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
     
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling GetMetadata: " + response.Content, response.Content);
-            else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling GetMetadata: " + response.ErrorMessage, response.ErrorMessage);
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserGetMetadata: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserGetMetadata: " + response.ErrorMessage, response.ErrorMessage);
     
-            return (MetadataResponse) ApiClient.Deserialize(response.Content, typeof(MetadataResponse), response.Headers);
+            return new ApiResponse<MetadataResponse>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (MetadataResponse) Configuration.ApiClient.Deserialize(response, typeof(MetadataResponse)));
+            
         }
     
         /// <summary>
         /// Get user storage metadata 
         /// </summary>
         /// <param name="project"></param>
-        /// <returns>MetadataResponse</returns>
-        public async System.Threading.Tasks.Task<MetadataResponse> GetMetadataAsync (string project)
+        /// <returns>Task of MetadataResponse</returns>
+        public async System.Threading.Tasks.Task<MetadataResponse> UserGetMetadataAsync (string project = null)
+        {
+             ApiResponse<MetadataResponse> response = await UserGetMetadataAsyncWithHttpInfo(project);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        /// Get user storage metadata 
+        /// </summary>
+        /// <param name="project"></param>
+        /// <returns>Task of ApiResponse (MetadataResponse)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<MetadataResponse>> UserGetMetadataAsyncWithHttpInfo (string project = null)
         {
             
     
-            var path = "/user/metadata";
+            var path_ = "/user/metadata";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
@@ -846,9 +1726,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -856,140 +1736,64 @@ namespace Rakam.Client.Api
             
             
             
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
+            if (project != null) formParams.Add("project", Configuration.ApiClient.ParameterToString(project)); // form parameter
             
             
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling GetMetadata: " + response.Content, response.Content);
 
-            return (MetadataResponse) ApiClient.Deserialize(response.Content, typeof(MetadataResponse), response.Headers);
+            
+            // authentication (read_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("read_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["read_key"] = apiKeyValue;
+            }
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserGetMetadata: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserGetMetadata: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<MetadataResponse>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (MetadataResponse) Configuration.ApiClient.Deserialize(response, typeof(MetadataResponse)));
+            
         }
         
         /// <summary>
         /// Search users 
         /// </summary>
-        /// <param name="searchUsers"></param> 
-        /// <returns>QueryResult</returns>            
-        public QueryResult SearchUsers (SearchUsers searchUsers)
-        {
-            
-            // verify the required parameter 'searchUsers' is set
-            if (searchUsers == null) throw new ApiException(400, "Missing required parameter 'searchUsers' when calling SearchUsers");
-            
-    
-            var path = "/user/search";
-    
-            var pathParams = new Dictionary<String, String>();
-            var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
-            var formParams = new Dictionary<String, String>();
-            var fileParams = new Dictionary<String, FileParameter>();
-            String postBody = null;
-
-            // to determine the Accept header
-            String[] http_header_accepts = new String[] {
-                "application/json"
-            };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
-            if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            pathParams.Add("format", "json");
-            
-            
-            
-            
-            postBody = ApiClient.Serialize(searchUsers); // http body (model) parameter
-            
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-    
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling SearchUsers: " + response.Content, response.Content);
-            else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling SearchUsers: " + response.ErrorMessage, response.ErrorMessage);
-    
-            return (QueryResult) ApiClient.Deserialize(response.Content, typeof(QueryResult), response.Headers);
-        }
-    
-        /// <summary>
-        /// Search users 
-        /// </summary>
-        /// <param name="searchUsers"></param>
+        /// <param name="userSearchUsers"></param> 
         /// <returns>QueryResult</returns>
-        public async System.Threading.Tasks.Task<QueryResult> SearchUsersAsync (SearchUsers searchUsers)
+        public QueryResult UserSearchUsers (UserSearchUsers userSearchUsers)
         {
-            // verify the required parameter 'searchUsers' is set
-            if (searchUsers == null) throw new ApiException(400, "Missing required parameter 'searchUsers' when calling SearchUsers");
-            
-    
-            var path = "/user/search";
-    
-            var pathParams = new Dictionary<String, String>();
-            var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
-            var formParams = new Dictionary<String, String>();
-            var fileParams = new Dictionary<String, FileParameter>();
-            String postBody = null;
-
-            // to determine the Accept header
-            String[] http_header_accepts = new String[] {
-                "application/json"
-            };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
-            if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            pathParams.Add("format", "json");
-            
-            
-            
-            
-            postBody = ApiClient.Serialize(searchUsers); // http body (model) parameter
-            
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling SearchUsers: " + response.Content, response.Content);
-
-            return (QueryResult) ApiClient.Deserialize(response.Content, typeof(QueryResult), response.Headers);
+             ApiResponse<QueryResult> response = UserSearchUsersWithHttpInfo(userSearchUsers);
+             return response.Data;
         }
-        
+
         /// <summary>
-        /// Set user properties once 
+        /// Search users 
         /// </summary>
-        /// <param name="setUserProperties"></param> 
-        /// <returns></returns>            
-        public void SetUserPropertiesOnce (SetUserProperties setUserProperties)
+        /// <param name="userSearchUsers"></param> 
+        /// <returns>ApiResponse of QueryResult</returns>
+        public ApiResponse< QueryResult > UserSearchUsersWithHttpInfo (UserSearchUsers userSearchUsers)
         {
             
-            // verify the required parameter 'setUserProperties' is set
-            if (setUserProperties == null) throw new ApiException(400, "Missing required parameter 'setUserProperties' when calling SetUserPropertiesOnce");
+            // verify the required parameter 'userSearchUsers' is set
+            if (userSearchUsers == null) throw new ApiException(400, "Missing required parameter 'userSearchUsers' when calling UserSearchUsers");
             
     
-            var path = "/user/set_once";
+            var path_ = "/user/search";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var formParams = new Dictionary<String, String>();
             var fileParams = new Dictionary<String, FileParameter>();
             String postBody = null;
@@ -998,9 +1802,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -1009,35 +1813,59 @@ namespace Rakam.Client.Api
             
             
             
-            postBody = ApiClient.Serialize(setUserProperties); // http body (model) parameter
+            postBody = Configuration.ApiClient.Serialize(userSearchUsers); // http body (model) parameter
+            
+
+            
+            // authentication (read_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("read_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["read_key"] = apiKeyValue;
+            }
             
     
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
-    
             // make the HTTP request
-            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
     
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling SetUserPropertiesOnce: " + response.Content, response.Content);
-            else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling SetUserPropertiesOnce: " + response.ErrorMessage, response.ErrorMessage);
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserSearchUsers: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserSearchUsers: " + response.ErrorMessage, response.ErrorMessage);
     
-            return;
+            return new ApiResponse<QueryResult>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (QueryResult) Configuration.ApiClient.Deserialize(response, typeof(QueryResult)));
+            
         }
     
         /// <summary>
-        /// Set user properties once 
+        /// Search users 
         /// </summary>
-        /// <param name="setUserProperties"></param>
-        /// <returns></returns>
-        public async System.Threading.Tasks.Task SetUserPropertiesOnceAsync (SetUserProperties setUserProperties)
+        /// <param name="userSearchUsers"></param>
+        /// <returns>Task of QueryResult</returns>
+        public async System.Threading.Tasks.Task<QueryResult> UserSearchUsersAsync (UserSearchUsers userSearchUsers)
         {
-            // verify the required parameter 'setUserProperties' is set
-            if (setUserProperties == null) throw new ApiException(400, "Missing required parameter 'setUserProperties' when calling SetUserPropertiesOnce");
+             ApiResponse<QueryResult> response = await UserSearchUsersAsyncWithHttpInfo(userSearchUsers);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        /// Search users 
+        /// </summary>
+        /// <param name="userSearchUsers"></param>
+        /// <returns>Task of ApiResponse (QueryResult)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<QueryResult>> UserSearchUsersAsyncWithHttpInfo (UserSearchUsers userSearchUsers)
+        {
+            // verify the required parameter 'userSearchUsers' is set
+            if (userSearchUsers == null) throw new ApiException(400, "Missing required parameter 'userSearchUsers' when calling UserSearchUsers");
             
     
-            var path = "/user/set_once";
+            var path_ = "/user/search";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
@@ -1050,9 +1878,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -1061,86 +1889,127 @@ namespace Rakam.Client.Api
             
             
             
-            postBody = ApiClient.Serialize(setUserProperties); // http body (model) parameter
+            postBody = Configuration.ApiClient.Serialize(userSearchUsers); // http body (model) parameter
             
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling SetUserPropertiesOnce: " + response.Content, response.Content);
 
             
-            return;
+            // authentication (read_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("read_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["read_key"] = apiKeyValue;
+            }
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserSearchUsers: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserSearchUsers: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<QueryResult>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (QueryResult) Configuration.ApiClient.Deserialize(response, typeof(QueryResult)));
+            
         }
         
         /// <summary>
         /// Set user properties 
         /// </summary>
         /// <param name="setUserProperties"></param> 
-        /// <returns>int?</returns>            
-        public int? SetUserProperties (SetUserProperties setUserProperties)
-        {
-            
-            // verify the required parameter 'setUserProperties' is set
-            if (setUserProperties == null) throw new ApiException(400, "Missing required parameter 'setUserProperties' when calling SetUserProperties");
-            
-    
-            var path = "/user/set_property";
-    
-            var pathParams = new Dictionary<String, String>();
-            var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
-            var formParams = new Dictionary<String, String>();
-            var fileParams = new Dictionary<String, FileParameter>();
-            String postBody = null;
-
-            // to determine the Accept header
-            String[] http_header_accepts = new String[] {
-                "application/json"
-            };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
-            if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            pathParams.Add("format", "json");
-            
-            
-            
-            
-            postBody = ApiClient.Serialize(setUserProperties); // http body (model) parameter
-            
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-    
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling SetUserProperties: " + response.Content, response.Content);
-            else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling SetUserProperties: " + response.ErrorMessage, response.ErrorMessage);
-    
-            return (int?) ApiClient.Deserialize(response.Content, typeof(int?), response.Headers);
-        }
-    
-        /// <summary>
-        /// Set user properties 
-        /// </summary>
-        /// <param name="setUserProperties"></param>
         /// <returns>int?</returns>
-        public async System.Threading.Tasks.Task<int?> SetUserPropertiesAsync (SetUserProperties setUserProperties)
+        public int? UserSetProperties (SetUserProperties setUserProperties)
         {
+             ApiResponse<int?> response = UserSetPropertiesWithHttpInfo(setUserProperties);
+             return response.Data;
+        }
+
+        /// <summary>
+        /// Set user properties 
+        /// </summary>
+        /// <param name="setUserProperties"></param> 
+        /// <returns>ApiResponse of int?</returns>
+        public ApiResponse< int? > UserSetPropertiesWithHttpInfo (SetUserProperties setUserProperties)
+        {
+            
             // verify the required parameter 'setUserProperties' is set
-            if (setUserProperties == null) throw new ApiException(400, "Missing required parameter 'setUserProperties' when calling SetUserProperties");
+            if (setUserProperties == null) throw new ApiException(400, "Missing required parameter 'setUserProperties' when calling UserSetProperties");
             
     
-            var path = "/user/set_property";
+            var path_ = "/user/set_properties";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            
+            postBody = Configuration.ApiClient.Serialize(setUserProperties); // http body (model) parameter
+            
+
+            
+    
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+    
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserSetProperties: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserSetProperties: " + response.ErrorMessage, response.ErrorMessage);
+    
+            return new ApiResponse<int?>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (int?) Configuration.ApiClient.Deserialize(response, typeof(int?)));
+            
+        }
+    
+        /// <summary>
+        /// Set user properties 
+        /// </summary>
+        /// <param name="setUserProperties"></param>
+        /// <returns>Task of int?</returns>
+        public async System.Threading.Tasks.Task<int?> UserSetPropertiesAsync (SetUserProperties setUserProperties)
+        {
+             ApiResponse<int?> response = await UserSetPropertiesAsyncWithHttpInfo(setUserProperties);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        /// Set user properties 
+        /// </summary>
+        /// <param name="setUserProperties"></param>
+        /// <returns>Task of ApiResponse (int?)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<int?>> UserSetPropertiesAsyncWithHttpInfo (SetUserProperties setUserProperties)
+        {
+            // verify the required parameter 'setUserProperties' is set
+            if (setUserProperties == null) throw new ApiException(400, "Missing required parameter 'setUserProperties' when calling UserSetProperties");
+            
+    
+            var path_ = "/user/set_properties";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
@@ -1153,9 +2022,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -1164,18 +2033,295 @@ namespace Rakam.Client.Api
             
             
             
-            postBody = ApiClient.Serialize(setUserProperties); // http body (model) parameter
+            postBody = Configuration.ApiClient.Serialize(setUserProperties); // http body (model) parameter
+            
+
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserSetProperties: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserSetProperties: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<int?>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (int?) Configuration.ApiClient.Deserialize(response, typeof(int?)));
+            
+        }
+        
+        /// <summary>
+        /// Set user properties once 
+        /// </summary>
+        /// <param name="setUserProperties"></param> 
+        /// <returns></returns>
+        public void UserSetPropertiesOnce (SetUserProperties setUserProperties)
+        {
+             UserSetPropertiesOnceWithHttpInfo(setUserProperties);
+        }
+
+        /// <summary>
+        /// Set user properties once 
+        /// </summary>
+        /// <param name="setUserProperties"></param> 
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> UserSetPropertiesOnceWithHttpInfo (SetUserProperties setUserProperties)
+        {
+            
+            // verify the required parameter 'setUserProperties' is set
+            if (setUserProperties == null) throw new ApiException(400, "Missing required parameter 'setUserProperties' when calling UserSetPropertiesOnce");
             
     
-            // authentication setting, if any
-            String[] authSettings = new String[] {  };
+            var path_ = "/user/set_properties_once";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            
+            postBody = Configuration.ApiClient.Serialize(setUserProperties); // http body (model) parameter
+            
+
+            
     
             // make the HTTP request
-            IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling SetUserProperties: " + response.Content, response.Content);
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
 
-            return (int?) ApiClient.Deserialize(response.Content, typeof(int?), response.Headers);
+            int statusCode = (int) response.StatusCode;
+    
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserSetPropertiesOnce: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserSetPropertiesOnce: " + response.ErrorMessage, response.ErrorMessage);
+    
+            
+            return new ApiResponse<Object>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+    
+        /// <summary>
+        /// Set user properties once 
+        /// </summary>
+        /// <param name="setUserProperties"></param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task UserSetPropertiesOnceAsync (SetUserProperties setUserProperties)
+        {
+             await UserSetPropertiesOnceAsyncWithHttpInfo(setUserProperties);
+
+        }
+
+        /// <summary>
+        /// Set user properties once 
+        /// </summary>
+        /// <param name="setUserProperties"></param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> UserSetPropertiesOnceAsyncWithHttpInfo (SetUserProperties setUserProperties)
+        {
+            // verify the required parameter 'setUserProperties' is set
+            if (setUserProperties == null) throw new ApiException(400, "Missing required parameter 'setUserProperties' when calling UserSetPropertiesOnce");
+            
+    
+            var path_ = "/user/set_properties_once";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>();
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            
+            postBody = Configuration.ApiClient.Serialize(setUserProperties); // http body (model) parameter
+            
+
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserSetPropertiesOnce: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserSetPropertiesOnce: " + response.ErrorMessage, response.ErrorMessage);
+
+            
+            return new ApiResponse<Object>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+        
+        /// <summary>
+        /// Unset user property 
+        /// </summary>
+        /// <param name="userUnsetProperty"></param> 
+        /// <returns>JsonResponse</returns>
+        public JsonResponse UserUnsetProperty (UserUnsetProperty userUnsetProperty)
+        {
+             ApiResponse<JsonResponse> response = UserUnsetPropertyWithHttpInfo(userUnsetProperty);
+             return response.Data;
+        }
+
+        /// <summary>
+        /// Unset user property 
+        /// </summary>
+        /// <param name="userUnsetProperty"></param> 
+        /// <returns>ApiResponse of JsonResponse</returns>
+        public ApiResponse< JsonResponse > UserUnsetPropertyWithHttpInfo (UserUnsetProperty userUnsetProperty)
+        {
+            
+            // verify the required parameter 'userUnsetProperty' is set
+            if (userUnsetProperty == null) throw new ApiException(400, "Missing required parameter 'userUnsetProperty' when calling UserUnsetProperty");
+            
+    
+            var path_ = "/user/unset_properties";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            
+            postBody = Configuration.ApiClient.Serialize(userUnsetProperty); // http body (model) parameter
+            
+
+            
+    
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+    
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserUnsetProperty: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserUnsetProperty: " + response.ErrorMessage, response.ErrorMessage);
+    
+            return new ApiResponse<JsonResponse>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (JsonResponse) Configuration.ApiClient.Deserialize(response, typeof(JsonResponse)));
+            
+        }
+    
+        /// <summary>
+        /// Unset user property 
+        /// </summary>
+        /// <param name="userUnsetProperty"></param>
+        /// <returns>Task of JsonResponse</returns>
+        public async System.Threading.Tasks.Task<JsonResponse> UserUnsetPropertyAsync (UserUnsetProperty userUnsetProperty)
+        {
+             ApiResponse<JsonResponse> response = await UserUnsetPropertyAsyncWithHttpInfo(userUnsetProperty);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        /// Unset user property 
+        /// </summary>
+        /// <param name="userUnsetProperty"></param>
+        /// <returns>Task of ApiResponse (JsonResponse)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<JsonResponse>> UserUnsetPropertyAsyncWithHttpInfo (UserUnsetProperty userUnsetProperty)
+        {
+            // verify the required parameter 'userUnsetProperty' is set
+            if (userUnsetProperty == null) throw new ApiException(400, "Missing required parameter 'userUnsetProperty' when calling UserUnsetProperty");
+            
+    
+            var path_ = "/user/unset_properties";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>();
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            
+            postBody = Configuration.ApiClient.Serialize(userUnsetProperty); // http body (model) parameter
+            
+
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UserUnsetProperty: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UserUnsetProperty: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<JsonResponse>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (JsonResponse) Configuration.ApiClient.Deserialize(response, typeof(JsonResponse)));
+            
         }
         
     }

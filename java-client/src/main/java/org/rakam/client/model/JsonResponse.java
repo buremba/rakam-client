@@ -1,23 +1,25 @@
 package org.rakam.client.model;
 
-import org.rakam.StringUtil;
-
-
-
-import io.swagger.annotations.*;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
-@ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+
+
+
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class JsonResponse   {
   
-  private Boolean success = null;
+  private Boolean success = false;
   private String message = null;
 
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("success")
   public Boolean getSuccess() {
@@ -30,6 +32,7 @@ public class JsonResponse   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("message")
   public String getMessage() {
@@ -42,13 +45,43 @@ public class JsonResponse   {
   
 
   @Override
-  public String toString()  {
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    JsonResponse jsonResponse = (JsonResponse) o;
+    return Objects.equals(success, jsonResponse.success) &&
+        Objects.equals(message, jsonResponse.message);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(success, message);
+  }
+
+  @Override
+  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class JsonResponse {\n");
     
-    sb.append("    success: ").append(StringUtil.toIndentedString(success)).append("\n");
-    sb.append("    message: ").append(StringUtil.toIndentedString(message)).append("\n");
+    sb.append("    success: ").append(toIndentedString(success)).append("\n");
+    sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("}");
     return sb.toString();
   }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+

@@ -38,31 +38,28 @@ class FunnelQuery(object):
         """
         self.swagger_types = {
             'project': 'str',
-            'connector_field': 'str',
             'steps': 'list[FunnelStep]',
             'dimension': 'str',
             'start_date': 'date',
-            'end_date': 'date',
-            'enable_other_grouping': 'bool'
+            'window': 'FunnelWindow',
+            'end_date': 'date'
         }
 
         self.attribute_map = {
             'project': 'project',
-            'connector_field': 'connector_field',
             'steps': 'steps',
             'dimension': 'dimension',
             'start_date': 'startDate',
-            'end_date': 'endDate',
-            'enable_other_grouping': 'enableOtherGrouping'
+            'window': 'window',
+            'end_date': 'endDate'
         }
 
         self._project = None
-        self._connector_field = None
         self._steps = None
         self._dimension = None
         self._start_date = None
+        self._window = None
         self._end_date = None
-        self._enable_other_grouping = None
 
     @property
     def project(self):
@@ -85,28 +82,6 @@ class FunnelQuery(object):
         :type: str
         """
         self._project = project
-
-    @property
-    def connector_field(self):
-        """
-        Gets the connector_field of this FunnelQuery.
-
-
-        :return: The connector_field of this FunnelQuery.
-        :rtype: str
-        """
-        return self._connector_field
-
-    @connector_field.setter
-    def connector_field(self, connector_field):
-        """
-        Sets the connector_field of this FunnelQuery.
-
-
-        :param connector_field: The connector_field of this FunnelQuery.
-        :type: str
-        """
-        self._connector_field = connector_field
 
     @property
     def steps(self):
@@ -175,6 +150,28 @@ class FunnelQuery(object):
         self._start_date = start_date
 
     @property
+    def window(self):
+        """
+        Gets the window of this FunnelQuery.
+
+
+        :return: The window of this FunnelQuery.
+        :rtype: FunnelWindow
+        """
+        return self._window
+
+    @window.setter
+    def window(self, window):
+        """
+        Sets the window of this FunnelQuery.
+
+
+        :param window: The window of this FunnelQuery.
+        :type: FunnelWindow
+        """
+        self._window = window
+
+    @property
     def end_date(self):
         """
         Gets the end_date of this FunnelQuery.
@@ -195,28 +192,6 @@ class FunnelQuery(object):
         :type: date
         """
         self._end_date = end_date
-
-    @property
-    def enable_other_grouping(self):
-        """
-        Gets the enable_other_grouping of this FunnelQuery.
-
-
-        :return: The enable_other_grouping of this FunnelQuery.
-        :rtype: bool
-        """
-        return self._enable_other_grouping
-
-    @enable_other_grouping.setter
-    def enable_other_grouping(self, enable_other_grouping):
-        """
-        Sets the enable_other_grouping of this FunnelQuery.
-
-
-        :param enable_other_grouping: The enable_other_grouping of this FunnelQuery.
-        :type: bool
-        """
-        self._enable_other_grouping = enable_other_grouping
 
     def to_dict(self):
         """
@@ -249,3 +224,16 @@ class FunnelQuery(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

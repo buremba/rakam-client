@@ -38,32 +38,32 @@ class RetentionQuery(object):
         """
         self.swagger_types = {
             'project': 'str',
-            'connector_field': 'str',
             'first_action': 'RetentionAction',
             'returning_action': 'RetentionAction',
             'dimension': 'str',
             'date_unit': 'str',
+            'period': 'int',
             'start_date': 'date',
             'end_date': 'date'
         }
 
         self.attribute_map = {
             'project': 'project',
-            'connector_field': 'connector_field',
             'first_action': 'first_action',
             'returning_action': 'returning_action',
             'dimension': 'dimension',
             'date_unit': 'date_unit',
+            'period': 'period',
             'start_date': 'startDate',
             'end_date': 'endDate'
         }
 
         self._project = None
-        self._connector_field = None
         self._first_action = None
         self._returning_action = None
         self._dimension = None
         self._date_unit = None
+        self._period = None
         self._start_date = None
         self._end_date = None
 
@@ -88,28 +88,6 @@ class RetentionQuery(object):
         :type: str
         """
         self._project = project
-
-    @property
-    def connector_field(self):
-        """
-        Gets the connector_field of this RetentionQuery.
-
-
-        :return: The connector_field of this RetentionQuery.
-        :rtype: str
-        """
-        return self._connector_field
-
-    @connector_field.setter
-    def connector_field(self, connector_field):
-        """
-        Sets the connector_field of this RetentionQuery.
-
-
-        :param connector_field: The connector_field of this RetentionQuery.
-        :type: str
-        """
-        self._connector_field = connector_field
 
     @property
     def first_action(self):
@@ -206,6 +184,28 @@ class RetentionQuery(object):
         self._date_unit = date_unit
 
     @property
+    def period(self):
+        """
+        Gets the period of this RetentionQuery.
+
+
+        :return: The period of this RetentionQuery.
+        :rtype: int
+        """
+        return self._period
+
+    @period.setter
+    def period(self, period):
+        """
+        Sets the period of this RetentionQuery.
+
+
+        :param period: The period of this RetentionQuery.
+        :type: int
+        """
+        self._period = period
+
+    @property
     def start_date(self):
         """
         Gets the start_date of this RetentionQuery.
@@ -280,3 +280,16 @@ class RetentionQuery(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

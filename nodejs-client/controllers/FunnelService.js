@@ -1,20 +1,16 @@
 'use strict';
 
-exports.analyze = function(funnelQuery) {
+exports.funnelAnalyzerAnalyze = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * funnelQuery (FunnelQuery)
+   **/
 
-  var examples = {};
-  
-
-  
-}
-exports.analyze_1 = function(funnelQuery) {
-
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = {
   "result" : [ [ "{}" ] ],
   "metadata" : [ {
-    "nullable" : true,
     "descriptiveName" : "aeiou",
     "unique" : true,
     "name" : "aeiou",
@@ -24,19 +20,26 @@ exports.analyze_1 = function(funnelQuery) {
   } ],
   "failed" : true,
   "error" : {
-    "query" : "aeiou",
+    "charPositionInLine" : 123,
     "sqlState" : "aeiou",
     "errorCode" : 123,
-    "message" : "aeiou"
+    "message" : "aeiou",
+    "errorLine" : 123
   },
   "properties" : {
-    "key" : "{}"
+    "key" : { }
   }
 };
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }

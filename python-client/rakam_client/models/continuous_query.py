@@ -39,30 +39,27 @@ class ContinuousQuery(object):
         self.swagger_types = {
             'project': 'str',
             'name': 'str',
-            'collections': 'list[str]',
-            'options': 'dict(str, object)',
+            'query': 'str',
+            'options': 'dict(str, InlineResponse200)',
             'table_name': 'str',
-            'partition_keys': 'list[str]',
-            'raw_query': 'str'
+            'partition_keys': 'list[str]'
         }
 
         self.attribute_map = {
             'project': 'project',
             'name': 'name',
-            'collections': 'collections',
+            'query': 'query',
             'options': 'options',
             'table_name': 'tableName',
-            'partition_keys': 'partitionKeys',
-            'raw_query': 'rawQuery'
+            'partition_keys': 'partitionKeys'
         }
 
         self._project = None
         self._name = None
-        self._collections = None
+        self._query = None
         self._options = None
         self._table_name = None
         self._partition_keys = None
-        self._raw_query = None
 
     @property
     def project(self):
@@ -109,26 +106,26 @@ class ContinuousQuery(object):
         self._name = name
 
     @property
-    def collections(self):
+    def query(self):
         """
-        Gets the collections of this ContinuousQuery.
+        Gets the query of this ContinuousQuery.
 
 
-        :return: The collections of this ContinuousQuery.
-        :rtype: list[str]
+        :return: The query of this ContinuousQuery.
+        :rtype: str
         """
-        return self._collections
+        return self._query
 
-    @collections.setter
-    def collections(self, collections):
+    @query.setter
+    def query(self, query):
         """
-        Sets the collections of this ContinuousQuery.
+        Sets the query of this ContinuousQuery.
 
 
-        :param collections: The collections of this ContinuousQuery.
-        :type: list[str]
+        :param query: The query of this ContinuousQuery.
+        :type: str
         """
-        self._collections = collections
+        self._query = query
 
     @property
     def options(self):
@@ -137,7 +134,7 @@ class ContinuousQuery(object):
 
 
         :return: The options of this ContinuousQuery.
-        :rtype: dict(str, object)
+        :rtype: dict(str, InlineResponse200)
         """
         return self._options
 
@@ -148,7 +145,7 @@ class ContinuousQuery(object):
 
 
         :param options: The options of this ContinuousQuery.
-        :type: dict(str, object)
+        :type: dict(str, InlineResponse200)
         """
         self._options = options
 
@@ -196,28 +193,6 @@ class ContinuousQuery(object):
         """
         self._partition_keys = partition_keys
 
-    @property
-    def raw_query(self):
-        """
-        Gets the raw_query of this ContinuousQuery.
-
-
-        :return: The raw_query of this ContinuousQuery.
-        :rtype: str
-        """
-        return self._raw_query
-
-    @raw_query.setter
-    def raw_query(self, raw_query):
-        """
-        Sets the raw_query of this ContinuousQuery.
-
-
-        :param raw_query: The raw_query of this ContinuousQuery.
-        :type: str
-        """
-        self._raw_query = raw_query
-
     def to_dict(self):
         """
         Returns the model properties as a dict
@@ -249,3 +224,16 @@ class ContinuousQuery(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

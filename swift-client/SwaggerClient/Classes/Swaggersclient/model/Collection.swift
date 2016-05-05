@@ -14,6 +14,8 @@ public class Collection: JSONEncodable {
     public var fields: [SchemaField]?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

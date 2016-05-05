@@ -6,60 +6,34 @@ var url = require('url');
 var Event = require('./EventService');
 
 
-module.exports.batchEvents = function batchEvents (req, res, next) {
-  var eventList = req.swagger.params['EventList'].value;
-  
-
-  var result = Event.batchEvents(eventList);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.collectEventBatchEvents = function collectEventBatchEvents (req, res, next) {
+  Event.collectEventBatchEvents(req.swagger.params, res, next);
 };
 
-module.exports.collectEvent = function collectEvent (req, res, next) {
-  var event = req.swagger.params['Event'].value;
-  
-
-  var result = Event.collectEvent(event);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.collectEventBulkEvents = function collectEventBulkEvents (req, res, next) {
+  Event.collectEventBulkEvents(req.swagger.params, res, next);
 };
 
-module.exports.execute = function execute (req, res, next) {
-  var project = req.swagger.params['project'].value;
-  var query = req.swagger.params['query'].value;
-  var limit = req.swagger.params['limit'].value;
-  
-
-  var result = Event.execute(project, query, limit);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.collectEventCommitBulkEvents = function collectEventCommitBulkEvents (req, res, next) {
+  Event.collectEventCommitBulkEvents(req.swagger.params, res, next);
 };
 
-module.exports.explain = function explain (req, res, next) {
-  var query = req.swagger.params['query'].value;
-  
+module.exports.collectEventBulkEventsRemote = function collectEventBulkEventsRemote (req, res, next) {
+  Event.collectEventBulkEventsRemote(req.swagger.params, res, next);
+};
 
-  var result = Event.explain(query);
+module.exports.collectEventCollectEvent = function collectEventCollectEvent (req, res, next) {
+  Event.collectEventCollectEvent(req.swagger.params, res, next);
+};
 
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.queryExecute = function queryExecute (req, res, next) {
+  Event.queryExecute(req.swagger.params, res, next);
+};
+
+module.exports.queryExplain = function queryExplain (req, res, next) {
+  Event.queryExplain(req.swagger.params, res, next);
+};
+
+module.exports.queryMetadata = function queryMetadata (req, res, next) {
+  Event.queryMetadata(req.swagger.params, res, next);
 };

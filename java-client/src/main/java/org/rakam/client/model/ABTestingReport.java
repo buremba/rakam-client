@@ -1,18 +1,19 @@
 package org.rakam.client.model;
 
-import org.rakam.StringUtil;
-import org.rakam.client.model.Variant;
-import org.rakam.client.model.Goal;
-import java.util.*;
-
-
-
-import io.swagger.annotations.*;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.util.*;
+import org.rakam.client.model.Goal;
+import org.rakam.client.model.Variant;
 
 
-@ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+
+
+
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class ABTestingReport   {
   
   private String project = null;
@@ -27,6 +28,7 @@ public class ABTestingReport   {
   
   /**
    **/
+  
   @ApiModelProperty(required = true, value = "")
   @JsonProperty("project")
   public String getProject() {
@@ -39,6 +41,7 @@ public class ABTestingReport   {
   
   /**
    **/
+  
   @ApiModelProperty(required = true, value = "")
   @JsonProperty("name")
   public String getName() {
@@ -51,6 +54,7 @@ public class ABTestingReport   {
   
   /**
    **/
+  
   @ApiModelProperty(required = true, value = "")
   @JsonProperty("variants")
   public List<Variant> getVariants() {
@@ -63,6 +67,7 @@ public class ABTestingReport   {
   
   /**
    **/
+  
   @ApiModelProperty(required = true, value = "")
   @JsonProperty("goal")
   public Goal getGoal() {
@@ -75,6 +80,7 @@ public class ABTestingReport   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("options")
   public Object getOptions() {
@@ -87,6 +93,7 @@ public class ABTestingReport   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("id")
   public Integer getId() {
@@ -99,6 +106,7 @@ public class ABTestingReport   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("collectionName")
   public String getCollectionName() {
@@ -111,6 +119,7 @@ public class ABTestingReport   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("connectorField")
   public String getConnectorField() {
@@ -123,19 +132,55 @@ public class ABTestingReport   {
   
 
   @Override
-  public String toString()  {
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    ABTestingReport aBTestingReport = (ABTestingReport) o;
+    return Objects.equals(project, aBTestingReport.project) &&
+        Objects.equals(name, aBTestingReport.name) &&
+        Objects.equals(variants, aBTestingReport.variants) &&
+        Objects.equals(goal, aBTestingReport.goal) &&
+        Objects.equals(options, aBTestingReport.options) &&
+        Objects.equals(id, aBTestingReport.id) &&
+        Objects.equals(collectionName, aBTestingReport.collectionName) &&
+        Objects.equals(connectorField, aBTestingReport.connectorField);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(project, name, variants, goal, options, id, collectionName, connectorField);
+  }
+
+  @Override
+  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ABTestingReport {\n");
     
-    sb.append("    project: ").append(StringUtil.toIndentedString(project)).append("\n");
-    sb.append("    name: ").append(StringUtil.toIndentedString(name)).append("\n");
-    sb.append("    variants: ").append(StringUtil.toIndentedString(variants)).append("\n");
-    sb.append("    goal: ").append(StringUtil.toIndentedString(goal)).append("\n");
-    sb.append("    options: ").append(StringUtil.toIndentedString(options)).append("\n");
-    sb.append("    id: ").append(StringUtil.toIndentedString(id)).append("\n");
-    sb.append("    collectionName: ").append(StringUtil.toIndentedString(collectionName)).append("\n");
-    sb.append("    connectorField: ").append(StringUtil.toIndentedString(connectorField)).append("\n");
+    sb.append("    project: ").append(toIndentedString(project)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    variants: ").append(toIndentedString(variants)).append("\n");
+    sb.append("    goal: ").append(toIndentedString(goal)).append("\n");
+    sb.append("    options: ").append(toIndentedString(options)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    collectionName: ").append(toIndentedString(collectionName)).append("\n");
+    sb.append("    connectorField: ").append(toIndentedString(connectorField)).append("\n");
     sb.append("}");
     return sb.toString();
   }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+

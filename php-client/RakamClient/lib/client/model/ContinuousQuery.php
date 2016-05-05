@@ -53,11 +53,10 @@ class ContinuousQuery implements ArrayAccess
     static $swaggerTypes = array(
         'project' => 'string',
         'name' => 'string',
-        'collections' => 'string[]',
-        'options' => 'map[string,object]',
+        'query' => 'string',
+        'options' => 'map[string,\client.model\InlineResponse200]',
         'table_name' => 'string',
-        'partition_keys' => 'string[]',
-        'raw_query' => 'string'
+        'partition_keys' => 'string[]'
     );
   
     /** 
@@ -67,11 +66,10 @@ class ContinuousQuery implements ArrayAccess
     static $attributeMap = array(
         'project' => 'project',
         'name' => 'name',
-        'collections' => 'collections',
+        'query' => 'query',
         'options' => 'options',
         'table_name' => 'tableName',
-        'partition_keys' => 'partitionKeys',
-        'raw_query' => 'rawQuery'
+        'partition_keys' => 'partitionKeys'
     );
   
     /**
@@ -81,11 +79,10 @@ class ContinuousQuery implements ArrayAccess
     static $setters = array(
         'project' => 'setProject',
         'name' => 'setName',
-        'collections' => 'setCollections',
+        'query' => 'setQuery',
         'options' => 'setOptions',
         'table_name' => 'setTableName',
-        'partition_keys' => 'setPartitionKeys',
-        'raw_query' => 'setRawQuery'
+        'partition_keys' => 'setPartitionKeys'
     );
   
     /**
@@ -95,11 +92,10 @@ class ContinuousQuery implements ArrayAccess
     static $getters = array(
         'project' => 'getProject',
         'name' => 'getName',
-        'collections' => 'getCollections',
+        'query' => 'getQuery',
         'options' => 'getOptions',
         'table_name' => 'getTableName',
-        'partition_keys' => 'getPartitionKeys',
-        'raw_query' => 'getRawQuery'
+        'partition_keys' => 'getPartitionKeys'
     );
   
     
@@ -116,14 +112,14 @@ class ContinuousQuery implements ArrayAccess
     protected $name;
     
     /**
-      * $collections 
-      * @var string[]
+      * $query 
+      * @var string
       */
-    protected $collections;
+    protected $query;
     
     /**
       * $options 
-      * @var map[string,object]
+      * @var map[string,\client.model\InlineResponse200]
       */
     protected $options;
     
@@ -139,12 +135,6 @@ class ContinuousQuery implements ArrayAccess
       */
     protected $partition_keys;
     
-    /**
-      * $raw_query 
-      * @var string
-      */
-    protected $raw_query;
-    
 
     /**
      * Constructor
@@ -155,11 +145,10 @@ class ContinuousQuery implements ArrayAccess
         if ($data != null) {
             $this->project = $data["project"];
             $this->name = $data["name"];
-            $this->collections = $data["collections"];
+            $this->query = $data["query"];
             $this->options = $data["options"];
             $this->table_name = $data["table_name"];
             $this->partition_keys = $data["partition_keys"];
-            $this->raw_query = $data["raw_query"];
         }
     }
     
@@ -206,29 +195,29 @@ class ContinuousQuery implements ArrayAccess
     }
     
     /**
-     * Gets collections
-     * @return string[]
+     * Gets query
+     * @return string
      */
-    public function getCollections()
+    public function getQuery()
     {
-        return $this->collections;
+        return $this->query;
     }
   
     /**
-     * Sets collections
-     * @param string[] $collections 
+     * Sets query
+     * @param string $query 
      * @return $this
      */
-    public function setCollections($collections)
+    public function setQuery($query)
     {
         
-        $this->collections = $collections;
+        $this->query = $query;
         return $this;
     }
     
     /**
      * Gets options
-     * @return map[string,object]
+     * @return map[string,\client.model\InlineResponse200]
      */
     public function getOptions()
     {
@@ -237,7 +226,7 @@ class ContinuousQuery implements ArrayAccess
   
     /**
      * Sets options
-     * @param map[string,object] $options 
+     * @param map[string,\client.model\InlineResponse200] $options 
      * @return $this
      */
     public function setOptions($options)
@@ -286,27 +275,6 @@ class ContinuousQuery implements ArrayAccess
     {
         
         $this->partition_keys = $partition_keys;
-        return $this;
-    }
-    
-    /**
-     * Gets raw_query
-     * @return string
-     */
-    public function getRawQuery()
-    {
-        return $this->raw_query;
-    }
-  
-    /**
-     * Sets raw_query
-     * @param string $raw_query 
-     * @return $this
-     */
-    public function setRawQuery($raw_query)
-    {
-        
-        $this->raw_query = $raw_query;
         return $this;
     }
     

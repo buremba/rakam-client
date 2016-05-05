@@ -18,43 +18,26 @@ extension SwaggerClientAPI {
          - POST /realtime/create
          - 
          - API Key:
-           - type: apiKey read_key 
-           - name: read_key
+           - type: apiKey master_key 
+           - name: master_key
          - examples: [{contentType=application/json, example={
   "success" : true,
   "message" : "aeiou"
 }}]
          
-         - parameter project: (form) 
-         - parameter name: (form) 
-         - parameter aggregation: (form) 
-         - parameter tableName: (form) 
-         - parameter collections: (form) 
-         - parameter filter: (form) 
-         - parameter measure: (form) 
-         - parameter dimensions: (form) 
+         - parameter realTimeReport: (body) 
 
          - returns: RequestBuilder<JsonResponse> 
          */
-        public class func create(project project: String?, name: String?, aggregation: String?, tableName: String?, collections: [String]?, filter: String?, measure: String?, dimensions: [String]?) -> RequestBuilder<JsonResponse> {
+        public class func realtimeCreate(realTimeReport realTimeReport: RealTimeReport) -> RequestBuilder<JsonResponse> {
             let path = "/realtime/create"
             let URLString = SwaggerClientAPI.basePath + path
             
-            let nillableParameters: [String:AnyObject?] = [
-                "project": project,
-                "name": name,
-                "aggregation": aggregation,
-                "tableName": tableName,
-                "collections": collections,
-                "filter": filter,
-                "measure": measure,
-                "dimensions": dimensions
-            ]
-            let parameters = APIHelper.rejectNil(nillableParameters)
+            let parameters = realTimeReport.encodeToJSON() as? [String:AnyObject]
 
             let requestBuilder: RequestBuilder<JsonResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
+            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: true)
         }
     
         /**
@@ -64,25 +47,25 @@ extension SwaggerClientAPI {
          - POST /realtime/delete
          - 
          - API Key:
-           - type: apiKey read_key 
-           - name: read_key
+           - type: apiKey master_key 
+           - name: master_key
          - examples: [{contentType=application/json, example={
   "success" : true,
   "message" : "aeiou"
 }}]
          
          - parameter project: (form) 
-         - parameter name: (form) 
+         - parameter tableName: (form) 
 
          - returns: RequestBuilder<JsonResponse> 
          */
-        public class func delete(project project: String?, name: String?) -> RequestBuilder<JsonResponse> {
+        public class func realtimeDelete(project project: String?, tableName: String?) -> RequestBuilder<JsonResponse> {
             let path = "/realtime/delete"
             let URLString = SwaggerClientAPI.basePath + path
             
             let nillableParameters: [String:AnyObject?] = [
                 "project": project,
-                "name": name
+                "tableName": tableName
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
@@ -100,45 +83,30 @@ extension SwaggerClientAPI {
          - API Key:
            - type: apiKey read_key 
            - name: read_key
-         - examples: [{contentType=application/json, example="{}"}]
+         - examples: [{contentType=application/json, example={
+  "result" : "{}",
+  "start" : 123456789,
+  "end" : 123456789
+}}]
          
-         - parameter project: (form) 
-         - parameter tableName: (form) 
-         - parameter filter: (form) 
-         - parameter aggregation: (form) 
-         - parameter measure: (form) 
-         - parameter dimensions: (form) 
-         - parameter aggregate: (form) 
-         - parameter dateStart: (form) 
-         - parameter dateEnd: (form) 
+         - parameter realtimeGet: (body) 
 
-         - returns: RequestBuilder<String> 
+         - returns: RequestBuilder<RealTimeQueryResult> 
          */
-        public class func get(project project: String?, tableName: String?, filter: String?, aggregation: String?, measure: String?, dimensions: [String]?, aggregate: Bool?, dateStart: NSDate?, dateEnd: NSDate?) -> RequestBuilder<String> {
+        public class func realtimeGet(realtimeGet realtimeGet: Realtime_Get) -> RequestBuilder<RealTimeQueryResult> {
             let path = "/realtime/get"
             let URLString = SwaggerClientAPI.basePath + path
             
-            let nillableParameters: [String:AnyObject?] = [
-                "project": project,
-                "tableName": tableName,
-                "filter": filter,
-                "aggregation": aggregation,
-                "measure": measure,
-                "dimensions": dimensions,
-                "aggregate": aggregate,
-                "dateStart": dateStart,
-                "dateEnd": dateEnd
-            ]
-            let parameters = APIHelper.rejectNil(nillableParameters)
+            let parameters = realtimeGet.encodeToJSON() as? [String:AnyObject]
 
-            let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+            let requestBuilder: RequestBuilder<RealTimeQueryResult>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
+            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: true)
         }
     
         /**
          
-         List reports
+         List queries
          
          - POST /realtime/list
          - 
@@ -146,21 +114,21 @@ extension SwaggerClientAPI {
            - type: apiKey read_key 
            - name: read_key
          - examples: [{contentType=application/json, example=[ {
-  "filter" : "aeiou",
-  "measure" : "aeiou",
-  "collections" : [ "aeiou" ],
+  "query" : "aeiou",
   "name" : "aeiou",
+  "options" : {
+    "key" : { }
+  },
   "project" : "aeiou",
-  "aggregation" : "aeiou",
-  "table_name" : "aeiou",
-  "dimensions" : [ "aeiou" ]
+  "partitionKeys" : [ "aeiou" ],
+  "tableName" : "aeiou"
 } ]}]
          
          - parameter project: (form) 
 
-         - returns: RequestBuilder<[RealTimeReport]> 
+         - returns: RequestBuilder<[ContinuousQuery]> 
          */
-        public class func listReports(project project: String?) -> RequestBuilder<[RealTimeReport]> {
+        public class func realtimeList(project project: String?) -> RequestBuilder<[ContinuousQuery]> {
             let path = "/realtime/list"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -169,7 +137,7 @@ extension SwaggerClientAPI {
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
-            let requestBuilder: RequestBuilder<[RealTimeReport]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+            let requestBuilder: RequestBuilder<[ContinuousQuery]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
             return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
         }

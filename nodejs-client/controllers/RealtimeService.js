@@ -1,8 +1,12 @@
 'use strict';
 
-exports.create = function(project, name, aggregation, tableName, collections, filter, measure, dimensions) {
+exports.realtimeCreate = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * realTimeReport (RealTimeReport)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = {
   "success" : true,
@@ -11,13 +15,24 @@ exports.create = function(project, name, aggregation, tableName, collections, fi
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }
-exports.delete = function(project, name) {
+exports.realtimeDelete = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * project (String)
+   * tableName (String)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = {
   "success" : true,
@@ -26,40 +41,70 @@ exports.delete = function(project, name) {
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }
-exports.get = function(project, tableName, filter, aggregation, measure, dimensions, aggregate, dateStart, dateEnd) {
+exports.realtimeGet = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * realtimeGet (Realtime_Get)
+   **/
 
-  var examples = {};
+var examples = {};
   
-  examples['application/json'] = "{}";
+  examples['application/json'] = {
+  "result" : "{}",
+  "start" : 123456789,
+  "end" : 123456789
+};
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }
-exports.listReports = function(project) {
+exports.realtimeList = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * project (String)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = [ {
-  "filter" : "aeiou",
-  "measure" : "aeiou",
-  "collections" : [ "aeiou" ],
+  "query" : "aeiou",
   "name" : "aeiou",
+  "options" : {
+    "key" : { }
+  },
   "project" : "aeiou",
-  "aggregation" : "aeiou",
-  "table_name" : "aeiou",
-  "dimensions" : [ "aeiou" ]
+  "partitionKeys" : [ "aeiou" ],
+  "tableName" : "aeiou"
 } ];
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }

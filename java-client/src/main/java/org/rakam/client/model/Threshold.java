@@ -1,33 +1,36 @@
 package org.rakam.client.model;
 
-import org.rakam.StringUtil;
-
-
-
-import io.swagger.annotations.*;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
-@ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+
+
+
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class Threshold   {
   
 
-public enum AggregationEnum {
-  COUNT("count"),
-  SUM("sum");
 
-  private String value;
+  public enum AggregationEnum {
+    COUNT("count"),
+    SUM("sum");
 
-  AggregationEnum(String value) {
-    this.value = value;
+    private String value;
+
+    AggregationEnum(String value) {
+      this.value = value;
+    }
+
+    @Override
+    @JsonValue
+    public String toString() {
+      return value;
+    }
   }
-
-  @Override
-  public String toString() {
-    return value;
-  }
-}
 
   private AggregationEnum aggregation = null;
   private String fieldName = null;
@@ -36,6 +39,7 @@ public enum AggregationEnum {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("aggregation")
   public AggregationEnum getAggregation() {
@@ -48,6 +52,7 @@ public enum AggregationEnum {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("fieldName")
   public String getFieldName() {
@@ -60,6 +65,7 @@ public enum AggregationEnum {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("value")
   public Long getValue() {
@@ -72,14 +78,45 @@ public enum AggregationEnum {
   
 
   @Override
-  public String toString()  {
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Threshold threshold = (Threshold) o;
+    return Objects.equals(aggregation, threshold.aggregation) &&
+        Objects.equals(fieldName, threshold.fieldName) &&
+        Objects.equals(value, threshold.value);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(aggregation, fieldName, value);
+  }
+
+  @Override
+  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Threshold {\n");
     
-    sb.append("    aggregation: ").append(StringUtil.toIndentedString(aggregation)).append("\n");
-    sb.append("    fieldName: ").append(StringUtil.toIndentedString(fieldName)).append("\n");
-    sb.append("    value: ").append(StringUtil.toIndentedString(value)).append("\n");
+    sb.append("    aggregation: ").append(toIndentedString(aggregation)).append("\n");
+    sb.append("    fieldName: ").append(toIndentedString(fieldName)).append("\n");
+    sb.append("    value: ").append(toIndentedString(value)).append("\n");
     sb.append("}");
     return sb.toString();
   }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+

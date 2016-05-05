@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 using RestSharp;
 using Rakam.Client.Client;
-using Rakam.Client.Model;
 
 namespace Rakam.Client.Api
 {
@@ -20,9 +20,8 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="project"></param>
-        /// <returns>Recipe</returns>
-        Recipe Export (string project);
+        /// <returns></returns>
+        void RecipeExport ();
   
         /// <summary>
         /// Export recipe
@@ -30,9 +29,26 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="project"></param>
-        /// <returns>Recipe</returns>
-        System.Threading.Tasks.Task<Recipe> ExportAsync (string project);
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> RecipeExportWithHttpInfo ();
+
+        /// <summary>
+        /// Export recipe
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task RecipeExportAsync ();
+
+        /// <summary>
+        /// Export recipe
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> RecipeExportAsyncWithHttpInfo ();
         
         /// <summary>
         /// Install recipe
@@ -40,8 +56,8 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <returns>JsonResponse</returns>
-        JsonResponse Install ();
+        /// <returns></returns>
+        void RecipeInstall ();
   
         /// <summary>
         /// Install recipe
@@ -49,8 +65,26 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <returns>JsonResponse</returns>
-        System.Threading.Tasks.Task<JsonResponse> InstallAsync ();
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> RecipeInstallWithHttpInfo ();
+
+        /// <summary>
+        /// Install recipe
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task RecipeInstallAsync ();
+
+        /// <summary>
+        /// Install recipe
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> RecipeInstallAsyncWithHttpInfo ();
         
     }
   
@@ -62,65 +96,96 @@ namespace Rakam.Client.Api
         /// <summary>
         /// Initializes a new instance of the <see cref="RecipeApi"/> class.
         /// </summary>
-        /// <param name="apiClient"> an instance of ApiClient (optional)</param>
-        /// <returns></returns>
-        public RecipeApi(ApiClient apiClient = null)
-        {
-            if (apiClient == null) // use the default one in Configuration
-                this.ApiClient = Configuration.DefaultApiClient; 
-            else
-                this.ApiClient = apiClient;
-        }
-    
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RecipeApi"/> class.
-        /// </summary>
         /// <returns></returns>
         public RecipeApi(String basePath)
         {
-            this.ApiClient = new ApiClient(basePath);
+            this.Configuration = new Configuration(new ApiClient(basePath));
         }
     
         /// <summary>
-        /// Sets the base path of the API client.
+        /// Initializes a new instance of the <see cref="RecipeApi"/> class
+        /// using Configuration object
         /// </summary>
-        /// <param name="basePath">The base path</param>
-        /// <value>The base path</value>
-        public void SetBasePath(String basePath)
+        /// <param name="configuration">An instance of Configuration</param>
+        /// <returns></returns>
+        public RecipeApi(Configuration configuration = null)
         {
-            this.ApiClient.BasePath = basePath;
+            if (configuration == null) // use the default one in Configuration
+                this.Configuration = Configuration.Default; 
+            else
+                this.Configuration = configuration;
         }
-    
+
         /// <summary>
         /// Gets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
         public String GetBasePath()
         {
-            return this.ApiClient.BasePath;
+            return this.Configuration.ApiClient.RestClient.BaseUrl.ToString();
+        }
+
+        /// <summary>
+        /// Sets the base path of the API client.
+        /// </summary>
+        /// <value>The base path</value>
+        [Obsolete("SetBasePath is deprecated, please do 'Configuraiton.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
+        public void SetBasePath(String basePath)
+        {
+            // do nothing
         }
     
         /// <summary>
-        /// Gets or sets the API client.
+        /// Gets or sets the configuration object
         /// </summary>
-        /// <value>An instance of the ApiClient</value>
-        public ApiClient ApiClient {get; set;}
-    
+        /// <value>An instance of the Configuration</value>
+        public Configuration Configuration {get; set;}
+
+        /// <summary>
+        /// Gets the default header.
+        /// </summary>
+        /// <returns>Dictionary of HTTP header</returns>
+        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
+        public Dictionary<String, String> DefaultHeader()
+        {
+            return this.Configuration.DefaultHeader;
+        }
+
+        /// <summary>
+        /// Add default header.
+        /// </summary>
+        /// <param name="key">Header field name.</param>
+        /// <param name="value">Header field value.</param>
+        /// <returns></returns>
+        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
+        public void AddDefaultHeader(string key, string value)
+        {
+            this.Configuration.AddDefaultHeader(key, value);
+        }
+   
         
         /// <summary>
         /// Export recipe 
         /// </summary>
-        /// <param name="project"></param> 
-        /// <returns>Recipe</returns>            
-        public Recipe Export (string project)
+        /// <returns></returns>
+        public void RecipeExport ()
+        {
+             RecipeExportWithHttpInfo();
+        }
+
+        /// <summary>
+        /// Export recipe 
+        /// </summary>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> RecipeExportWithHttpInfo ()
         {
             
     
-            var path = "/recipe/export";
+            var path_ = "/recipe/export";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var formParams = new Dictionary<String, String>();
             var fileParams = new Dictionary<String, FileParameter>();
             String postBody = null;
@@ -129,9 +194,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -139,34 +204,54 @@ namespace Rakam.Client.Api
             
             
             
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
             
             
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] { "master_key" };
+
+            
+            // authentication (master_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("master_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["master_key"] = apiKeyValue;
+            }
+            
     
             // make the HTTP request
-            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
     
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling Export: " + response.Content, response.Content);
-            else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling Export: " + response.ErrorMessage, response.ErrorMessage);
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling RecipeExport: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling RecipeExport: " + response.ErrorMessage, response.ErrorMessage);
     
-            return (Recipe) ApiClient.Deserialize(response.Content, typeof(Recipe), response.Headers);
+            
+            return new ApiResponse<Object>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
         }
     
         /// <summary>
         /// Export recipe 
         /// </summary>
-        /// <param name="project"></param>
-        /// <returns>Recipe</returns>
-        public async System.Threading.Tasks.Task<Recipe> ExportAsync (string project)
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task RecipeExportAsync ()
+        {
+             await RecipeExportAsyncWithHttpInfo();
+
+        }
+
+        /// <summary>
+        /// Export recipe 
+        /// </summary>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> RecipeExportAsyncWithHttpInfo ()
         {
             
     
-            var path = "/recipe/export";
+            var path_ = "/recipe/export";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
@@ -179,9 +264,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -189,34 +274,57 @@ namespace Rakam.Client.Api
             
             
             
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
             
             
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] { "master_key" };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling Export: " + response.Content, response.Content);
 
-            return (Recipe) ApiClient.Deserialize(response.Content, typeof(Recipe), response.Headers);
+            
+            // authentication (master_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("master_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["master_key"] = apiKeyValue;
+            }
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling RecipeExport: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling RecipeExport: " + response.ErrorMessage, response.ErrorMessage);
+
+            
+            return new ApiResponse<Object>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
         }
         
         /// <summary>
         /// Install recipe 
         /// </summary>
-        /// <returns>JsonResponse</returns>            
-        public JsonResponse Install ()
+        /// <returns></returns>
+        public void RecipeInstall ()
+        {
+             RecipeInstallWithHttpInfo();
+        }
+
+        /// <summary>
+        /// Install recipe 
+        /// </summary>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> RecipeInstallWithHttpInfo ()
         {
             
     
-            var path = "/recipe/install";
+            var path_ = "/recipe/install";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var formParams = new Dictionary<String, String>();
             var fileParams = new Dictionary<String, FileParameter>();
             String postBody = null;
@@ -225,9 +333,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -237,30 +345,52 @@ namespace Rakam.Client.Api
             
             
             
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] { "master_key" };
+
+            
+            // authentication (master_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("master_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["master_key"] = apiKeyValue;
+            }
+            
     
             // make the HTTP request
-            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
     
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling Install: " + response.Content, response.Content);
-            else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling Install: " + response.ErrorMessage, response.ErrorMessage);
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling RecipeInstall: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling RecipeInstall: " + response.ErrorMessage, response.ErrorMessage);
     
-            return (JsonResponse) ApiClient.Deserialize(response.Content, typeof(JsonResponse), response.Headers);
+            
+            return new ApiResponse<Object>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
         }
     
         /// <summary>
         /// Install recipe 
         /// </summary>
-        /// <returns>JsonResponse</returns>
-        public async System.Threading.Tasks.Task<JsonResponse> InstallAsync ()
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task RecipeInstallAsync ()
+        {
+             await RecipeInstallAsyncWithHttpInfo();
+
+        }
+
+        /// <summary>
+        /// Install recipe 
+        /// </summary>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> RecipeInstallAsyncWithHttpInfo ()
         {
             
     
-            var path = "/recipe/install";
+            var path_ = "/recipe/install";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
@@ -273,9 +403,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -285,16 +415,31 @@ namespace Rakam.Client.Api
             
             
             
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] { "master_key" };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling Install: " + response.Content, response.Content);
 
-            return (JsonResponse) ApiClient.Deserialize(response.Content, typeof(JsonResponse), response.Headers);
+            
+            // authentication (master_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("master_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["master_key"] = apiKeyValue;
+            }
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling RecipeInstall: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling RecipeInstall: " + response.ErrorMessage, response.ErrorMessage);
+
+            
+            return new ApiResponse<Object>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
         }
         
     }

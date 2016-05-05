@@ -4,8 +4,8 @@ module RakamClient
   class RetentionApi
     attr_accessor :api_client
 
-    def initialize(api_client = nil)
-      @api_client = api_client || Configuration.api_client
+    def initialize(api_client = ApiClient.default)
+      @api_client = api_client
     end
 
     # Execute query
@@ -13,13 +13,23 @@ module RakamClient
     # @param retention_query 
     # @param [Hash] opts the optional parameters
     # @return [QueryResult]
-    def execute(retention_query, opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: RetentionApi#execute ..."
+    def retention_analyzer_execute(retention_query, opts = {})
+      data, status_code, headers = retention_analyzer_execute_with_http_info(retention_query, opts)
+      return data
+    end
+
+    # Execute query
+    # 
+    # @param retention_query 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(QueryResult, Fixnum, Hash)>] QueryResult data, response status code and response headers
+    def retention_analyzer_execute_with_http_info(retention_query, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: RetentionApi#retention_analyzer_execute ..."
       end
       
       # verify the required parameter 'retention_query' is set
-      fail "Missing the required parameter 'retention_query' when calling execute" if retention_query.nil?
+      fail "Missing the required parameter 'retention_query' when calling retention_analyzer_execute" if retention_query.nil?
       
       # resource path
       path = "/retention/analyze".sub('{format}','json')
@@ -46,17 +56,17 @@ module RakamClient
       
 
       auth_names = ['read_key']
-      result = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'QueryResult')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: RetentionApi#execute. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RetentionApi#retention_analyzer_execute\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
   end
 end

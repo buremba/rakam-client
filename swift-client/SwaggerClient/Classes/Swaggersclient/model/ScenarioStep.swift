@@ -15,6 +15,8 @@ public class ScenarioStep: JSONEncodable {
     public var threshold: Threshold?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

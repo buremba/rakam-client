@@ -45,7 +45,7 @@ class RealtimeApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def create(self, **kwargs):
+    def realtime_create(self, **kwargs):
         """
         Create report
         
@@ -56,24 +56,17 @@ class RealtimeApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.create(callback=callback_function)
+        >>> thread = api.realtime_create(real_time_report=real_time_report_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str project: 
-        :param str name: 
-        :param str aggregation: 
-        :param str table_name: 
-        :param list[str] collections: 
-        :param str filter: 
-        :param str measure: 
-        :param list[str] dimensions: 
+        :param RealTimeReport real_time_report:  (required)
         :return: JsonResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['project', 'name', 'aggregation', 'table_name', 'collections', 'filter', 'measure', 'dimensions']
+        all_params = ['real_time_report']
         all_params.append('callback')
 
         params = locals()
@@ -81,10 +74,14 @@ class RealtimeApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method create" % key
+                    " to method realtime_create" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'real_time_report' is set
+        if ('real_time_report' not in params) or (params['real_time_report'] is None):
+            raise ValueError("Missing the required parameter `real_time_report` when calling `realtime_create`")
 
         resource_path = '/realtime/create'.replace('{format}', 'json')
         method = 'POST'
@@ -97,24 +94,10 @@ class RealtimeApi(object):
 
         form_params = {}
         files = {}
-        if 'project' in params:
-            form_params['project'] = params['project']
-        if 'name' in params:
-            form_params['name'] = params['name']
-        if 'aggregation' in params:
-            form_params['aggregation'] = params['aggregation']
-        if 'table_name' in params:
-            form_params['table_name'] = params['table_name']
-        if 'collections' in params:
-            form_params['collections'] = params['collections']
-        if 'filter' in params:
-            form_params['filter'] = params['filter']
-        if 'measure' in params:
-            form_params['measure'] = params['measure']
-        if 'dimensions' in params:
-            form_params['dimensions'] = params['dimensions']
 
         body_params = None
+        if 'real_time_report' in params:
+            body_params = params['real_time_report']
 
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
@@ -127,7 +110,7 @@ class RealtimeApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = ['read_key']
+        auth_settings = ['master_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,
@@ -141,7 +124,7 @@ class RealtimeApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def delete(self, **kwargs):
+    def realtime_delete(self, **kwargs):
         """
         Delete report
         
@@ -152,18 +135,18 @@ class RealtimeApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.delete(callback=callback_function)
+        >>> thread = api.realtime_delete(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str project: 
-        :param str name: 
+        :param str table_name: 
         :return: JsonResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['project', 'name']
+        all_params = ['project', 'table_name']
         all_params.append('callback')
 
         params = locals()
@@ -171,10 +154,11 @@ class RealtimeApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method delete" % key
+                    " to method realtime_delete" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/realtime/delete'.replace('{format}', 'json')
         method = 'POST'
@@ -189,8 +173,8 @@ class RealtimeApi(object):
         files = {}
         if 'project' in params:
             form_params['project'] = params['project']
-        if 'name' in params:
-            form_params['name'] = params['name']
+        if 'table_name' in params:
+            form_params['table_name'] = params['table_name']
 
         body_params = None
 
@@ -205,7 +189,7 @@ class RealtimeApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = ['read_key']
+        auth_settings = ['master_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,
@@ -219,7 +203,7 @@ class RealtimeApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def get(self, **kwargs):
+    def realtime_get(self, **kwargs):
         """
         Get report
         
@@ -230,25 +214,17 @@ class RealtimeApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get(callback=callback_function)
+        >>> thread = api.realtime_get(realtime_get=realtime_get_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str project: 
-        :param str table_name: 
-        :param str filter: 
-        :param str aggregation: 
-        :param str measure: 
-        :param list[str] dimensions: 
-        :param bool aggregate: 
-        :param datetime date_start: 
-        :param datetime date_end: 
-        :return: object
+        :param RealtimeGet realtime_get:  (required)
+        :return: RealTimeQueryResult
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['project', 'table_name', 'filter', 'aggregation', 'measure', 'dimensions', 'aggregate', 'date_start', 'date_end']
+        all_params = ['realtime_get']
         all_params.append('callback')
 
         params = locals()
@@ -256,10 +232,14 @@ class RealtimeApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get" % key
+                    " to method realtime_get" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'realtime_get' is set
+        if ('realtime_get' not in params) or (params['realtime_get'] is None):
+            raise ValueError("Missing the required parameter `realtime_get` when calling `realtime_get`")
 
         resource_path = '/realtime/get'.replace('{format}', 'json')
         method = 'POST'
@@ -272,26 +252,10 @@ class RealtimeApi(object):
 
         form_params = {}
         files = {}
-        if 'project' in params:
-            form_params['project'] = params['project']
-        if 'table_name' in params:
-            form_params['table_name'] = params['table_name']
-        if 'filter' in params:
-            form_params['filter'] = params['filter']
-        if 'aggregation' in params:
-            form_params['aggregation'] = params['aggregation']
-        if 'measure' in params:
-            form_params['measure'] = params['measure']
-        if 'dimensions' in params:
-            form_params['dimensions'] = params['dimensions']
-        if 'aggregate' in params:
-            form_params['aggregate'] = params['aggregate']
-        if 'date_start' in params:
-            form_params['date_start'] = params['date_start']
-        if 'date_end' in params:
-            form_params['date_end'] = params['date_end']
 
         body_params = None
+        if 'realtime_get' in params:
+            body_params = params['realtime_get']
 
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
@@ -313,14 +277,14 @@ class RealtimeApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=files,
-                                            response_type='object',
+                                            response_type='RealTimeQueryResult',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'))
         return response
 
-    def list_reports(self, **kwargs):
+    def realtime_list(self, **kwargs):
         """
-        List reports
+        List queries
         
 
         This method makes a synchronous HTTP request by default. To make an
@@ -329,12 +293,12 @@ class RealtimeApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.list_reports(callback=callback_function)
+        >>> thread = api.realtime_list(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str project: 
-        :return: list[RealTimeReport]
+        :return: list[ContinuousQuery]
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -347,10 +311,11 @@ class RealtimeApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method list_reports" % key
+                    " to method realtime_list" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/realtime/list'.replace('{format}', 'json')
         method = 'POST'
@@ -388,7 +353,7 @@ class RealtimeApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=files,
-                                            response_type='list[RealTimeReport]',
+                                            response_type='list[ContinuousQuery]',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'))
         return response

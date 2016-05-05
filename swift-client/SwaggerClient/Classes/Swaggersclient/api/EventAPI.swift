@@ -26,8 +26,112 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<Int> 
          */
-        public class func batchEvents(eventList eventList: EventList) -> RequestBuilder<Int> {
+        public class func collectEventBatchEvents(eventList eventList: EventList) -> RequestBuilder<Int> {
             let path = "/event/batch"
+            let URLString = SwaggerClientAPI.basePath + path
+            
+            let parameters = eventList.encodeToJSON() as? [String:AnyObject]
+
+            let requestBuilder: RequestBuilder<Int>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: true)
+        }
+    
+        /**
+         
+         Send Bulk events
+         
+         - POST /event/bulk
+         - 
+         - API Key:
+           - type: apiKey master_key 
+           - name: master_key
+         - examples: [{contentType=application/json, example=123}]
+         
+         - parameter eventList: (body) 
+
+         - returns: RequestBuilder<Int> 
+         */
+        public class func collectEventBulkEvents(eventList eventList: EventList) -> RequestBuilder<Int> {
+            let path = "/event/bulk"
+            let URLString = SwaggerClientAPI.basePath + path
+            
+            let parameters = eventList.encodeToJSON() as? [String:AnyObject]
+
+            let requestBuilder: RequestBuilder<Int>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: true)
+        }
+    
+        /**
+         
+         Commit Bulk events
+         
+         - POST /event/bulk/commit
+         - 
+         - API Key:
+           - type: apiKey master_key 
+           - name: master_key
+         - examples: [{contentType=application/json, example={
+  "result" : [ [ "{}" ] ],
+  "metadata" : [ {
+    "descriptiveName" : "aeiou",
+    "unique" : true,
+    "name" : "aeiou",
+    "description" : "aeiou",
+    "type" : "aeiou",
+    "category" : "aeiou"
+  } ],
+  "failed" : true,
+  "error" : {
+    "charPositionInLine" : 123,
+    "sqlState" : "aeiou",
+    "errorCode" : 123,
+    "message" : "aeiou",
+    "errorLine" : 123
+  },
+  "properties" : {
+    "key" : { }
+  }
+}}]
+         
+         - parameter project: (form) 
+         - parameter collection: (form) 
+
+         - returns: RequestBuilder<QueryResult> 
+         */
+        public class func collectEventCommitBulkEvents(project project: String?, collection: String?) -> RequestBuilder<QueryResult> {
+            let path = "/event/bulk/commit"
+            let URLString = SwaggerClientAPI.basePath + path
+            
+            let nillableParameters: [String:AnyObject?] = [
+                "project": project,
+                "collection": collection
+            ]
+            let parameters = APIHelper.rejectNil(nillableParameters)
+
+            let requestBuilder: RequestBuilder<QueryResult>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
+        }
+    
+        /**
+         
+         Send Bulk events
+         
+         - POST /event/bulk/remote
+         - 
+         - API Key:
+           - type: apiKey master_key 
+           - name: master_key
+         - examples: [{contentType=application/json, example=123}]
+         
+         - parameter eventList: (body) 
+
+         - returns: RequestBuilder<Int> 
+         */
+        public class func collectEventBulkEventsRemote(eventList eventList: EventList) -> RequestBuilder<Int> {
+            let path = "/event/bulk/remote"
             let URLString = SwaggerClientAPI.basePath + path
             
             let parameters = eventList.encodeToJSON() as? [String:AnyObject]
@@ -52,7 +156,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<Int> 
          */
-        public class func collectEvent(event event: Event) -> RequestBuilder<Int> {
+        public class func collectEventCollectEvent(event event: Event) -> RequestBuilder<Int> {
             let path = "/event/collect"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -75,7 +179,6 @@ extension SwaggerClientAPI {
          - examples: [{contentType=application/json, example={
   "result" : [ [ "{}" ] ],
   "metadata" : [ {
-    "nullable" : true,
     "descriptiveName" : "aeiou",
     "unique" : true,
     "name" : "aeiou",
@@ -85,13 +188,14 @@ extension SwaggerClientAPI {
   } ],
   "failed" : true,
   "error" : {
-    "query" : "aeiou",
+    "charPositionInLine" : 123,
     "sqlState" : "aeiou",
     "errorCode" : 123,
-    "message" : "aeiou"
+    "message" : "aeiou",
+    "errorLine" : 123
   },
   "properties" : {
-    "key" : "{}"
+    "key" : { }
   }
 }}]
          
@@ -101,7 +205,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<QueryResult> 
          */
-        public class func execute(project project: String?, query: String?, limit: Int?) -> RequestBuilder<QueryResult> {
+        public class func queryExecute(project project: String?, query: String?, limit: Int?) -> RequestBuilder<QueryResult> {
             let path = "/query/execute"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -126,13 +230,13 @@ extension SwaggerClientAPI {
          - API Key:
            - type: apiKey read_key 
            - name: read_key
-         - examples: [{contentType=application/json, example="{}"}]
+         - examples: [{contentType=application/json, example={ }}]
          
          - parameter query: (form) 
 
-         - returns: RequestBuilder<String> 
+         - returns: RequestBuilder<Inline_response_200> 
          */
-        public class func explain(query query: String?) -> RequestBuilder<String> {
+        public class func queryExplain(query query: String?) -> RequestBuilder<Inline_response_200> {
             let path = "/query/explain"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -141,7 +245,45 @@ extension SwaggerClientAPI {
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
-            let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+            let requestBuilder: RequestBuilder<Inline_response_200>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
+        }
+    
+        /**
+         
+         Test query
+         
+         - POST /query/metadata
+         - 
+         - API Key:
+           - type: apiKey read_key 
+           - name: read_key
+         - examples: [{contentType=application/json, example=[ {
+  "descriptiveName" : "aeiou",
+  "unique" : true,
+  "name" : "aeiou",
+  "description" : "aeiou",
+  "type" : "aeiou",
+  "category" : "aeiou"
+} ]}]
+         
+         - parameter project: (form) 
+         - parameter query: (form) 
+
+         - returns: RequestBuilder<[SchemaField]> 
+         */
+        public class func queryMetadata(project project: String?, query: String?) -> RequestBuilder<[SchemaField]> {
+            let path = "/query/metadata"
+            let URLString = SwaggerClientAPI.basePath + path
+            
+            let nillableParameters: [String:AnyObject?] = [
+                "project": project,
+                "query": query
+            ]
+            let parameters = APIHelper.rejectNil(nillableParameters)
+
+            let requestBuilder: RequestBuilder<[SchemaField]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
             return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
         }

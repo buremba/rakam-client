@@ -1,23 +1,16 @@
 package org.rakam.client.api;
 
+import com.sun.jersey.api.client.GenericType;
+
 import org.rakam.ApiException;
 import org.rakam.ApiClient;
 import org.rakam.Configuration;
 import org.rakam.Pair;
-import org.rakam.TypeRef;
 
-import org.rakam.client.model.*;
 
 import java.util.*;
 
-import org.rakam.client.model.Recipe;
-import org.rakam.client.model.JsonResponse;
-
-import java.io.File;
-import java.util.Map;
-import java.util.HashMap;
-
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class RecipeApi {
   private ApiClient apiClient;
 
@@ -41,12 +34,10 @@ public class RecipeApi {
   /**
    * Export recipe
    * 
-   * @param project 
-   * @return Recipe
+   * @return void
    */
-  public Recipe export (String project) throws ApiException {
+  public void recipeExport() throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/recipe/export".replaceAll("\\{format\\}","json");
@@ -60,8 +51,6 @@ public class RecipeApi {
 
     
 
-    if (project != null)
-      formParams.put("project", project);
     
 
     final String[] accepts = {
@@ -77,25 +66,17 @@ public class RecipeApi {
     String[] authNames = new String[] { "master_key" };
 
     
-
+    apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, null);
     
-    
-    TypeRef returnType = new TypeRef<Recipe>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
   /**
    * Install recipe
    * 
-   * @return JsonResponse
+   * @return void
    */
-  public JsonResponse install () throws ApiException {
+  public void recipeInstall() throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/recipe/install".replaceAll("\\{format\\}","json");
@@ -124,15 +105,8 @@ public class RecipeApi {
     String[] authNames = new String[] { "master_key" };
 
     
-
+    apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, null);
     
-    
-    TypeRef returnType = new TypeRef<JsonResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
 }

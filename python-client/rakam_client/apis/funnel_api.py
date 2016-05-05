@@ -45,7 +45,7 @@ class FunnelApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def analyze(self, funnel_query, **kwargs):
+    def funnel_analyzer_analyze(self, **kwargs):
         """
         Execute query
         
@@ -56,85 +56,7 @@ class FunnelApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.analyze(funnel_query, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param FunnelQuery funnel_query:  (required)
-        :return: None
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        # verify the required parameter 'funnel_query' is set
-        if funnel_query is None:
-            raise ValueError("Missing the required parameter `funnel_query` when calling `analyze`")
-
-        all_params = ['funnel_query']
-        all_params.append('callback')
-
-        params = locals()
-        for key, val in iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method analyze" % key
-                )
-            params[key] = val
-        del params['kwargs']
-
-        resource_path = '/funnel/analyze'.replace('{format}', 'json')
-        method = 'GET'
-
-        path_params = {}
-
-        query_params = {}
-
-        header_params = {}
-
-        form_params = {}
-        files = {}
-
-        body_params = None
-        if 'funnel_query' in params:
-            body_params = params['funnel_query']
-
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.\
-            select_header_accept(['text/event-stream'])
-        if not header_params['Accept']:
-            del header_params['Accept']
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['text/event-stream'])
-
-        # Authentication setting
-        auth_settings = ['read_key']
-
-        response = self.api_client.call_api(resource_path, method,
-                                            path_params,
-                                            query_params,
-                                            header_params,
-                                            body=body_params,
-                                            post_params=form_params,
-                                            files=files,
-                                            response_type=None,
-                                            auth_settings=auth_settings,
-                                            callback=params.get('callback'))
-        return response
-
-    def analyze_1(self, funnel_query, **kwargs):
-        """
-        Execute query
-        
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.analyze_1(funnel_query, callback=callback_function)
+        >>> thread = api.funnel_analyzer_analyze(funnel_query=funnel_query_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -143,9 +65,6 @@ class FunnelApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'funnel_query' is set
-        if funnel_query is None:
-            raise ValueError("Missing the required parameter `funnel_query` when calling `analyze_1`")
 
         all_params = ['funnel_query']
         all_params.append('callback')
@@ -155,10 +74,14 @@ class FunnelApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method analyze_1" % key
+                    " to method funnel_analyzer_analyze" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'funnel_query' is set
+        if ('funnel_query' not in params) or (params['funnel_query'] is None):
+            raise ValueError("Missing the required parameter `funnel_query` when calling `funnel_analyzer_analyze`")
 
         resource_path = '/funnel/analyze'.replace('{format}', 'json')
         method = 'POST'

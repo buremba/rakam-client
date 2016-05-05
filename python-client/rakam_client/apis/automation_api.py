@@ -45,7 +45,7 @@ class AutomationApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def activate_rule(self, **kwargs):
+    def automation_activate_rule(self, **kwargs):
         """
         Activate rule
         
@@ -56,7 +56,7 @@ class AutomationApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.activate_rule(callback=callback_function)
+        >>> thread = api.automation_activate_rule(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -75,10 +75,11 @@ class AutomationApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method activate_rule" % key
+                    " to method automation_activate_rule" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/automation/activate'.replace('{format}', 'json')
         method = 'POST'
@@ -123,7 +124,7 @@ class AutomationApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def add_rule(self, automation_rule, **kwargs):
+    def automation_add_rule(self, **kwargs):
         """
         Add scenario
         
@@ -134,7 +135,7 @@ class AutomationApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.add_rule(automation_rule, callback=callback_function)
+        >>> thread = api.automation_add_rule(automation_rule=automation_rule_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -143,9 +144,6 @@ class AutomationApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'automation_rule' is set
-        if automation_rule is None:
-            raise ValueError("Missing the required parameter `automation_rule` when calling `add_rule`")
 
         all_params = ['automation_rule']
         all_params.append('callback')
@@ -155,10 +153,14 @@ class AutomationApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method add_rule" % key
+                    " to method automation_add_rule" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'automation_rule' is set
+        if ('automation_rule' not in params) or (params['automation_rule'] is None):
+            raise ValueError("Missing the required parameter `automation_rule` when calling `automation_add_rule`")
 
         resource_path = '/automation/add'.replace('{format}', 'json')
         method = 'POST'
@@ -201,7 +203,7 @@ class AutomationApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def deactivate_rule(self, **kwargs):
+    def automation_deactivate_rule(self, **kwargs):
         """
         Deactivate rule
         
@@ -212,7 +214,7 @@ class AutomationApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.deactivate_rule(callback=callback_function)
+        >>> thread = api.automation_deactivate_rule(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -231,10 +233,11 @@ class AutomationApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method deactivate_rule" % key
+                    " to method automation_deactivate_rule" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/automation/deactivate'.replace('{format}', 'json')
         method = 'POST'
@@ -279,7 +282,7 @@ class AutomationApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def list_rules(self, **kwargs):
+    def automation_list_rules(self, **kwargs):
         """
         List scenarios
         
@@ -290,7 +293,7 @@ class AutomationApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.list_rules(callback=callback_function)
+        >>> thread = api.automation_list_rules(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -308,10 +311,11 @@ class AutomationApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method list_rules" % key
+                    " to method automation_list_rules" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/automation/list'.replace('{format}', 'json')
         method = 'POST'
@@ -354,7 +358,7 @@ class AutomationApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def remove_rule(self, **kwargs):
+    def automation_remove_rule(self, **kwargs):
         """
         Remove rule
         
@@ -365,7 +369,7 @@ class AutomationApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.remove_rule(callback=callback_function)
+        >>> thread = api.automation_remove_rule(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -384,10 +388,11 @@ class AutomationApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method remove_rule" % key
+                    " to method automation_remove_rule" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/automation/remove'.replace('{format}', 'json')
         method = 'POST'

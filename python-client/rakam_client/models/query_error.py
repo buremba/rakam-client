@@ -40,20 +40,23 @@ class QueryError(object):
             'message': 'str',
             'sql_state': 'str',
             'error_code': 'int',
-            'query': 'str'
+            'error_line': 'int',
+            'char_position_in_line': 'int'
         }
 
         self.attribute_map = {
             'message': 'message',
             'sql_state': 'sqlState',
             'error_code': 'errorCode',
-            'query': 'query'
+            'error_line': 'errorLine',
+            'char_position_in_line': 'charPositionInLine'
         }
 
         self._message = None
         self._sql_state = None
         self._error_code = None
-        self._query = None
+        self._error_line = None
+        self._char_position_in_line = None
 
     @property
     def message(self):
@@ -122,26 +125,48 @@ class QueryError(object):
         self._error_code = error_code
 
     @property
-    def query(self):
+    def error_line(self):
         """
-        Gets the query of this QueryError.
+        Gets the error_line of this QueryError.
 
 
-        :return: The query of this QueryError.
-        :rtype: str
+        :return: The error_line of this QueryError.
+        :rtype: int
         """
-        return self._query
+        return self._error_line
 
-    @query.setter
-    def query(self, query):
+    @error_line.setter
+    def error_line(self, error_line):
         """
-        Sets the query of this QueryError.
+        Sets the error_line of this QueryError.
 
 
-        :param query: The query of this QueryError.
-        :type: str
+        :param error_line: The error_line of this QueryError.
+        :type: int
         """
-        self._query = query
+        self._error_line = error_line
+
+    @property
+    def char_position_in_line(self):
+        """
+        Gets the char_position_in_line of this QueryError.
+
+
+        :return: The char_position_in_line of this QueryError.
+        :rtype: int
+        """
+        return self._char_position_in_line
+
+    @char_position_in_line.setter
+    def char_position_in_line(self, char_position_in_line):
+        """
+        Sets the char_position_in_line of this QueryError.
+
+
+        :param char_position_in_line: The char_position_in_line of this QueryError.
+        :type: int
+        """
+        self._char_position_in_line = char_position_in_line
 
     def to_dict(self):
         """
@@ -174,3 +199,16 @@ class QueryError(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

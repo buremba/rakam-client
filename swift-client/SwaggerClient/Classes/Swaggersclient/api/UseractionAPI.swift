@@ -17,17 +17,20 @@ extension SwaggerClientAPI {
          
          - POST /user/action/email/batch
          - 
+         - API Key:
+           - type: apiKey read_key 
+           - name: read_key
          - examples: [{contentType=application/json, example=123456789}]
          
-         - parameter batchSendEmails: (body) 
+         - parameter userEmailActionBatch: (body) 
 
          - returns: RequestBuilder<Int> 
          */
-        public class func batchSendEmails(batchSendEmails batchSendEmails: BatchSendEmails) -> RequestBuilder<Int> {
+        public class func userEmailActionBatch(userEmailActionBatch userEmailActionBatch: UserEmailAction_Batch) -> RequestBuilder<Int> {
             let path = "/user/action/email/batch"
             let URLString = SwaggerClientAPI.basePath + path
             
-            let parameters = batchSendEmails.encodeToJSON() as? [String:AnyObject]
+            let parameters = userEmailActionBatch.encodeToJSON() as? [String:AnyObject]
 
             let requestBuilder: RequestBuilder<Int>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
@@ -40,17 +43,20 @@ extension SwaggerClientAPI {
          
          - POST /user/action/email/single
          - 
+         - API Key:
+           - type: apiKey read_key 
+           - name: read_key
          - examples: [{contentType=application/json, example=true}]
          
-         - parameter send: (body) 
+         - parameter userEmailActionSend: (body) 
 
          - returns: RequestBuilder<Bool> 
          */
-        public class func send(send send: Send) -> RequestBuilder<Bool> {
+        public class func userEmailActionSend(userEmailActionSend userEmailActionSend: UserEmailAction_Send) -> RequestBuilder<Bool> {
             let path = "/user/action/email/single"
             let URLString = SwaggerClientAPI.basePath + path
             
-            let parameters = send.encodeToJSON() as? [String:AnyObject]
+            let parameters = userEmailActionSend.encodeToJSON() as? [String:AnyObject]
 
             let requestBuilder: RequestBuilder<Bool>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
@@ -86,7 +92,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<Message> 
          */
-        public class func send(project project: String?, fromUser: String?, toUser: String?, parent: Int?, message: String?, timestamp: Int?) -> RequestBuilder<Message> {
+        public class func userMailboxActionSend(project project: String?, fromUser: String?, toUser: String?, parent: Int?, message: String?, timestamp: Int?) -> RequestBuilder<Message> {
             let path = "/user/action/mailbox/action/mailbox/single"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -111,17 +117,20 @@ extension SwaggerClientAPI {
          
          - POST /user/action/mailbox/batch
          - 
+         - API Key:
+           - type: apiKey read_key 
+           - name: read_key
          - examples: [{contentType=application/json, example=123456789}]
          
-         - parameter batchSendMessages: (body) 
+         - parameter userMailboxActionBatchSendMessages: (body) 
 
          - returns: RequestBuilder<Int> 
          */
-        public class func batchSendMessages(batchSendMessages batchSendMessages: BatchSendMessages) -> RequestBuilder<Int> {
+        public class func userMailboxActionBatchSendMessages(userMailboxActionBatchSendMessages userMailboxActionBatchSendMessages: UserMailboxAction_BatchSendMessages) -> RequestBuilder<Int> {
             let path = "/user/action/mailbox/batch"
             let URLString = SwaggerClientAPI.basePath + path
             
-            let parameters = batchSendMessages.encodeToJSON() as? [String:AnyObject]
+            let parameters = userMailboxActionBatchSendMessages.encodeToJSON() as? [String:AnyObject]
 
             let requestBuilder: RequestBuilder<Int>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 

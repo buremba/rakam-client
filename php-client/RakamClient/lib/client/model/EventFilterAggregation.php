@@ -209,9 +209,9 @@ class EventFilterAggregation implements ArrayAccess
      */
     public function setType($type)
     {
-        $allowed_values = array("COUNT", "COUNT_UNIQUE", "SUM", "MINIMUM", "MAXIMUM", "APPROXIMATE_UNIQUE", "VARIANCE", "POPULATION_VARIANCE", "STANDARD_DEVIATION", "AVERAGE");
+        $allowed_values = array("COUNT", "COUNT_UNIQUE", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "APPROXIMATE_UNIQUE");
         if (!in_array($type, $allowed_values)) {
-            throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'COUNT', 'COUNT_UNIQUE', 'SUM', 'MINIMUM', 'MAXIMUM', 'APPROXIMATE_UNIQUE', 'VARIANCE', 'POPULATION_VARIANCE', 'STANDARD_DEVIATION', 'AVERAGE'");
+            throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'COUNT', 'COUNT_UNIQUE', 'SUM', 'MINIMUM', 'MAXIMUM', 'AVERAGE', 'APPROXIMATE_UNIQUE'");
         }
         $this->type = $type;
         return $this;

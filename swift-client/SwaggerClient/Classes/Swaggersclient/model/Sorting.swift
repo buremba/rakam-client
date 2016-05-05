@@ -19,6 +19,8 @@ public class Sorting: JSONEncodable {
     public var order: Order?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

@@ -37,17 +37,14 @@ class FunnelStep(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'collection': 'str',
-            'filter_expression': 'str'
+            'collection': 'str'
         }
 
         self.attribute_map = {
-            'collection': 'collection',
-            'filter_expression': 'filterExpression'
+            'collection': 'collection'
         }
 
         self._collection = None
-        self._filter_expression = None
 
     @property
     def collection(self):
@@ -70,28 +67,6 @@ class FunnelStep(object):
         :type: str
         """
         self._collection = collection
-
-    @property
-    def filter_expression(self):
-        """
-        Gets the filter_expression of this FunnelStep.
-
-
-        :return: The filter_expression of this FunnelStep.
-        :rtype: str
-        """
-        return self._filter_expression
-
-    @filter_expression.setter
-    def filter_expression(self, filter_expression):
-        """
-        Sets the filter_expression of this FunnelStep.
-
-
-        :param filter_expression: The filter_expression of this FunnelStep.
-        :type: str
-        """
-        self._filter_expression = filter_expression
 
     def to_dict(self):
         """
@@ -124,3 +99,16 @@ class FunnelStep(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

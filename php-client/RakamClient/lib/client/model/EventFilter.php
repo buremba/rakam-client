@@ -52,6 +52,7 @@ class EventFilter implements ArrayAccess
       */
     static $swaggerTypes = array(
         'collection' => 'string',
+        'timeframe' => '\client.model\Timeframe',
         'aggregation' => '\client.model\EventFilterAggregation',
         'filter_expression' => 'string'
     );
@@ -62,6 +63,7 @@ class EventFilter implements ArrayAccess
       */
     static $attributeMap = array(
         'collection' => 'collection',
+        'timeframe' => 'timeframe',
         'aggregation' => 'aggregation',
         'filter_expression' => 'filterExpression'
     );
@@ -72,6 +74,7 @@ class EventFilter implements ArrayAccess
       */
     static $setters = array(
         'collection' => 'setCollection',
+        'timeframe' => 'setTimeframe',
         'aggregation' => 'setAggregation',
         'filter_expression' => 'setFilterExpression'
     );
@@ -82,6 +85,7 @@ class EventFilter implements ArrayAccess
       */
     static $getters = array(
         'collection' => 'getCollection',
+        'timeframe' => 'getTimeframe',
         'aggregation' => 'getAggregation',
         'filter_expression' => 'getFilterExpression'
     );
@@ -92,6 +96,12 @@ class EventFilter implements ArrayAccess
       * @var string
       */
     protected $collection;
+    
+    /**
+      * $timeframe 
+      * @var \client.model\Timeframe
+      */
+    protected $timeframe;
     
     /**
       * $aggregation 
@@ -114,6 +124,7 @@ class EventFilter implements ArrayAccess
     {
         if ($data != null) {
             $this->collection = $data["collection"];
+            $this->timeframe = $data["timeframe"];
             $this->aggregation = $data["aggregation"];
             $this->filter_expression = $data["filter_expression"];
         }
@@ -137,6 +148,27 @@ class EventFilter implements ArrayAccess
     {
         
         $this->collection = $collection;
+        return $this;
+    }
+    
+    /**
+     * Gets timeframe
+     * @return \client.model\Timeframe
+     */
+    public function getTimeframe()
+    {
+        return $this->timeframe;
+    }
+  
+    /**
+     * Sets timeframe
+     * @param \client.model\Timeframe $timeframe 
+     * @return $this
+     */
+    public function setTimeframe($timeframe)
+    {
+        
+        $this->timeframe = $timeframe;
         return $this;
     }
     

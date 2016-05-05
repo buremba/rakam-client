@@ -24,15 +24,16 @@ extension SwaggerClientAPI {
   "success" : true,
   "message" : "aeiou"
 }}]
+         
+         - parameter aBTestingReport: (body) 
 
          - returns: RequestBuilder<JsonResponse> 
          */
-        public class func create() -> RequestBuilder<JsonResponse> {
+        public class func abTestingCreate(aBTestingReport aBTestingReport: ABTestingReport) -> RequestBuilder<JsonResponse> {
             let path = "/ab-testing/create"
             let URLString = SwaggerClientAPI.basePath + path
             
-            let nillableParameters: [String:AnyObject?] = [:]
-            let parameters = APIHelper.rejectNil(nillableParameters)
+            let parameters = aBTestingReport.encodeToJSON() as? [String:AnyObject]
 
             let requestBuilder: RequestBuilder<JsonResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
@@ -58,7 +59,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<JsonResponse> 
          */
-        public class func delete(project project: String?, id: Int?) -> RequestBuilder<JsonResponse> {
+        public class func abTestingDelete(project project: String?, id: Int?) -> RequestBuilder<JsonResponse> {
             let path = "/ab-testing/delete"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -105,7 +106,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<ABTestingReport> 
          */
-        public class func get(project project: String?, id: Int?) -> RequestBuilder<ABTestingReport> {
+        public class func abTestingGet(project project: String?, id: Int?) -> RequestBuilder<ABTestingReport> {
             let path = "/ab-testing/get"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -151,7 +152,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<[ABTestingReport]> 
          */
-        public class func list(project project: String?) -> RequestBuilder<[ABTestingReport]> {
+        public class func abTestingList(project project: String?) -> RequestBuilder<[ABTestingReport]> {
             let path = "/ab-testing/list"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -191,15 +192,16 @@ extension SwaggerClientAPI {
   "id" : 123,
   "collectionName" : "aeiou"
 }}]
+         
+         - parameter aBTestingReport: (body) 
 
          - returns: RequestBuilder<ABTestingReport> 
          */
-        public class func update() -> RequestBuilder<ABTestingReport> {
+        public class func abTestingUpdate(aBTestingReport aBTestingReport: ABTestingReport) -> RequestBuilder<ABTestingReport> {
             let path = "/ab-testing/update"
             let URLString = SwaggerClientAPI.basePath + path
             
-            let nillableParameters: [String:AnyObject?] = [:]
-            let parameters = APIHelper.rejectNil(nillableParameters)
+            let parameters = aBTestingReport.encodeToJSON() as? [String:AnyObject]
 
             let requestBuilder: RequestBuilder<ABTestingReport>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 

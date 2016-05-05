@@ -11,24 +11,24 @@ import Foundation
 public class ContinuousQuery: JSONEncodable {
 
     public var project: String!
-    public var name: String?
-    public var collections: [String]?
-    public var options: [String:String]?
+    public var name: String!
+    public var query: String!
+    public var options: [String:Inline_response_200]?
     public var tableName: String?
     public var partitionKeys: [String]?
-    public var rawQuery: String?
     
+
+    public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["project"] = self.project
         nillableDictionary["name"] = self.name
-        nillableDictionary["collections"] = self.collections?.encodeToJSON()
+        nillableDictionary["query"] = self.query
         nillableDictionary["options"] = self.options?.encodeToJSON()
         nillableDictionary["tableName"] = self.tableName
         nillableDictionary["partitionKeys"] = self.partitionKeys?.encodeToJSON()
-        nillableDictionary["rawQuery"] = self.rawQuery
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

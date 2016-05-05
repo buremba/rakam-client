@@ -1,23 +1,18 @@
 package org.rakam.client.api;
 
+import com.sun.jersey.api.client.GenericType;
+
 import org.rakam.ApiException;
 import org.rakam.ApiClient;
 import org.rakam.Configuration;
 import org.rakam.Pair;
-import org.rakam.TypeRef;
-
-import org.rakam.client.model.*;
-
-import java.util.*;
 
 import org.rakam.client.model.QueryResult;
 import org.rakam.client.model.RetentionQuery;
 
-import java.io.File;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class RetentionApi {
   private ApiClient apiClient;
 
@@ -44,13 +39,12 @@ public class RetentionApi {
    * @param retentionQuery 
    * @return QueryResult
    */
-  public QueryResult execute (RetentionQuery retentionQuery) throws ApiException {
+  public QueryResult retentionAnalyzerExecute(RetentionQuery retentionQuery) throws ApiException {
     Object postBody = retentionQuery;
-    byte[] postBinaryBody = null;
     
      // verify the required parameter 'retentionQuery' is set
      if (retentionQuery == null) {
-        throw new ApiException(400, "Missing the required parameter 'retentionQuery' when calling execute");
+        throw new ApiException(400, "Missing the required parameter 'retentionQuery' when calling retentionAnalyzerExecute");
      }
      
     // create path and map variables
@@ -80,15 +74,9 @@ public class RetentionApi {
     String[] authNames = new String[] { "read_key" };
 
     
-
+    GenericType<QueryResult> returnType = new GenericType<QueryResult>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<QueryResult>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
 }

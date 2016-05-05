@@ -15,6 +15,8 @@ public class Variant: JSONEncodable {
     public var data: String?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

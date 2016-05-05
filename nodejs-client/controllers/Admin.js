@@ -6,56 +6,42 @@ var url = require('url');
 var Admin = require('./AdminService');
 
 
-module.exports.getModules = function getModules (req, res, next) {
-  
-
-  var result = Admin.getModules();
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.adminGetConfigurations = function adminGetConfigurations (req, res, next) {
+  Admin.adminGetConfigurations(req.swagger.params, res, next);
 };
 
-module.exports.createProject = function createProject (req, res, next) {
-  var name = req.swagger.params['name'].value;
-  
-
-  var result = Admin.createProject(name);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.adminModules = function adminModules (req, res, next) {
+  Admin.adminModules(req.swagger.params, res, next);
 };
 
-module.exports.getProjects = function getProjects (req, res, next) {
-  
-
-  var result = Admin.getProjects();
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.adminGetTypes = function adminGetTypes (req, res, next) {
+  Admin.adminGetTypes(req.swagger.params, res, next);
 };
 
-module.exports.schema = function schema (req, res, next) {
-  var project = req.swagger.params['project'].value;
-  
+module.exports.projectCollections = function projectCollections (req, res, next) {
+  Admin.projectCollections(req.swagger.params, res, next);
+};
 
-  var result = Admin.schema(project);
+module.exports.projectCreateProject = function projectCreateProject (req, res, next) {
+  Admin.projectCreateProject(req.swagger.params, res, next);
+};
 
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.projectDeleteProject = function projectDeleteProject (req, res, next) {
+  Admin.projectDeleteProject(req.swagger.params, res, next);
+};
+
+module.exports.projectGetProjects = function projectGetProjects (req, res, next) {
+  Admin.projectGetProjects(req.swagger.params, res, next);
+};
+
+module.exports.projectSchema = function projectSchema (req, res, next) {
+  Admin.projectSchema(req.swagger.params, res, next);
+};
+
+module.exports.projectAddFieldsToSchema = function projectAddFieldsToSchema (req, res, next) {
+  Admin.projectAddFieldsToSchema(req.swagger.params, res, next);
+};
+
+module.exports.projectAddCustomFieldsToSchema = function projectAddCustomFieldsToSchema (req, res, next) {
+  Admin.projectAddCustomFieldsToSchema(req.swagger.params, res, next);
 };

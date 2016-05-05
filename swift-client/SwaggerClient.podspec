@@ -11,5 +11,5 @@ Pod::Spec.new do |s|
   s.summary = 'Client API for Rakam Analytics API'
   s.documentation_url = 'https://api.getrakam.com'
   s.source_files = 'SwaggerClient/Classes/Swaggers/**/*.swift'
-  s.dependency 'Alamofire', '~> 2.0.0'
+  s.dependency 'Alamofire', '~> 3.1.4'
 end

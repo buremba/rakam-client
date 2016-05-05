@@ -39,32 +39,29 @@ class RealTimeReport(object):
         self.swagger_types = {
             'project': 'str',
             'name': 'str',
-            'aggregation': 'str',
+            'measures': 'list[Measure]',
             'table_name': 'str',
             'collections': 'list[str]',
             'filter': 'str',
-            'measure': 'str',
             'dimensions': 'list[str]'
         }
 
         self.attribute_map = {
             'project': 'project',
             'name': 'name',
-            'aggregation': 'aggregation',
+            'measures': 'measures',
             'table_name': 'table_name',
             'collections': 'collections',
             'filter': 'filter',
-            'measure': 'measure',
             'dimensions': 'dimensions'
         }
 
         self._project = None
         self._name = None
-        self._aggregation = None
+        self._measures = None
         self._table_name = None
         self._collections = None
         self._filter = None
-        self._measure = None
         self._dimensions = None
 
     @property
@@ -112,32 +109,26 @@ class RealTimeReport(object):
         self._name = name
 
     @property
-    def aggregation(self):
+    def measures(self):
         """
-        Gets the aggregation of this RealTimeReport.
+        Gets the measures of this RealTimeReport.
 
 
-        :return: The aggregation of this RealTimeReport.
-        :rtype: str
+        :return: The measures of this RealTimeReport.
+        :rtype: list[Measure]
         """
-        return self._aggregation
+        return self._measures
 
-    @aggregation.setter
-    def aggregation(self, aggregation):
+    @measures.setter
+    def measures(self, measures):
         """
-        Sets the aggregation of this RealTimeReport.
+        Sets the measures of this RealTimeReport.
 
 
-        :param aggregation: The aggregation of this RealTimeReport.
-        :type: str
+        :param measures: The measures of this RealTimeReport.
+        :type: list[Measure]
         """
-        allowed_values = ["COUNT", "COUNT_UNIQUE", "SUM", "MINIMUM", "MAXIMUM", "APPROXIMATE_UNIQUE", "VARIANCE", "POPULATION_VARIANCE", "STANDARD_DEVIATION", "AVERAGE"]
-        if aggregation not in allowed_values:
-            raise ValueError(
-                "Invalid value for `aggregation`, must be one of {0}"
-                .format(allowed_values)
-            )
-        self._aggregation = aggregation
+        self._measures = measures
 
     @property
     def table_name(self):
@@ -206,28 +197,6 @@ class RealTimeReport(object):
         self._filter = filter
 
     @property
-    def measure(self):
-        """
-        Gets the measure of this RealTimeReport.
-
-
-        :return: The measure of this RealTimeReport.
-        :rtype: str
-        """
-        return self._measure
-
-    @measure.setter
-    def measure(self, measure):
-        """
-        Sets the measure of this RealTimeReport.
-
-
-        :param measure: The measure of this RealTimeReport.
-        :type: str
-        """
-        self._measure = measure
-
-    @property
     def dimensions(self):
         """
         Gets the dimensions of this RealTimeReport.
@@ -280,3 +249,16 @@ class RealTimeReport(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

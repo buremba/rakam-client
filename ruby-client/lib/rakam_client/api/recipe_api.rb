@@ -4,18 +4,26 @@ module RakamClient
   class RecipeApi
     attr_accessor :api_client
 
-    def initialize(api_client = nil)
-      @api_client = api_client || Configuration.api_client
+    def initialize(api_client = ApiClient.default)
+      @api_client = api_client
     end
 
     # Export recipe
     # 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :project 
-    # @return [Recipe]
-    def export(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: RecipeApi#export ..."
+    # @return [nil]
+    def recipe_export(opts = {})
+      recipe_export_with_http_info(opts)
+      return nil
+    end
+
+    # Export recipe
+    # 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def recipe_export_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: RecipeApi#recipe_export ..."
       end
       
       # resource path
@@ -37,33 +45,40 @@ module RakamClient
 
       # form parameters
       form_params = {}
-      form_params["project"] = opts[:'project'] if opts[:'project']
 
       # http body (model)
       post_body = nil
       
 
       auth_names = ['master_key']
-      result = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names,
-        :return_type => 'Recipe')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: RecipeApi#export. Result: #{result.inspect}"
+        :auth_names => auth_names)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RecipeApi#recipe_export\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
     # Install recipe
     # 
     # @param [Hash] opts the optional parameters
-    # @return [JsonResponse]
-    def install(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: RecipeApi#install ..."
+    # @return [nil]
+    def recipe_install(opts = {})
+      recipe_install_with_http_info(opts)
+      return nil
+    end
+
+    # Install recipe
+    # 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def recipe_install_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: RecipeApi#recipe_install ..."
       end
       
       # resource path
@@ -91,17 +106,16 @@ module RakamClient
       
 
       auth_names = ['master_key']
-      result = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names,
-        :return_type => 'JsonResponse')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: RecipeApi#install. Result: #{result.inspect}"
+        :auth_names => auth_names)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RecipeApi#recipe_install\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
   end
 end

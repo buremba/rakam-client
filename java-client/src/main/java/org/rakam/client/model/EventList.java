@@ -1,18 +1,19 @@
 package org.rakam.client.model;
 
-import org.rakam.StringUtil;
-import org.rakam.client.model.EventContext;
-import org.rakam.client.model.Event;
-import java.util.*;
-
-
-
-import io.swagger.annotations.*;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.util.*;
+import org.rakam.client.model.Event;
+import org.rakam.client.model.EventContext;
 
 
-@ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+
+
+
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class EventList   {
   
   private EventContext api = null;
@@ -22,6 +23,7 @@ public class EventList   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("api")
   public EventContext getApi() {
@@ -34,6 +36,7 @@ public class EventList   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("project")
   public String getProject() {
@@ -46,6 +49,7 @@ public class EventList   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("events")
   public List<Event> getEvents() {
@@ -58,14 +62,45 @@ public class EventList   {
   
 
   @Override
-  public String toString()  {
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    EventList eventList = (EventList) o;
+    return Objects.equals(api, eventList.api) &&
+        Objects.equals(project, eventList.project) &&
+        Objects.equals(events, eventList.events);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(api, project, events);
+  }
+
+  @Override
+  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class EventList {\n");
     
-    sb.append("    api: ").append(StringUtil.toIndentedString(api)).append("\n");
-    sb.append("    project: ").append(StringUtil.toIndentedString(project)).append("\n");
-    sb.append("    events: ").append(StringUtil.toIndentedString(events)).append("\n");
+    sb.append("    api: ").append(toIndentedString(api)).append("\n");
+    sb.append("    project: ").append(toIndentedString(project)).append("\n");
+    sb.append("    events: ").append(toIndentedString(events)).append("\n");
     sb.append("}");
     return sb.toString();
   }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+

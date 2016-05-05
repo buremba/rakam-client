@@ -40,7 +40,7 @@ class QueryResult(object):
             'metadata': 'list[SchemaField]',
             'result': 'list[list[object]]',
             'error': 'QueryError',
-            'properties': 'dict(str, object)',
+            'properties': 'dict(str, InlineResponse200)',
             'failed': 'bool'
         }
 
@@ -56,7 +56,7 @@ class QueryResult(object):
         self._result = None
         self._error = None
         self._properties = None
-        self._failed = None
+        self._failed = False
 
     @property
     def metadata(self):
@@ -131,7 +131,7 @@ class QueryResult(object):
 
 
         :return: The properties of this QueryResult.
-        :rtype: dict(str, object)
+        :rtype: dict(str, InlineResponse200)
         """
         return self._properties
 
@@ -142,7 +142,7 @@ class QueryResult(object):
 
 
         :param properties: The properties of this QueryResult.
-        :type: dict(str, object)
+        :type: dict(str, InlineResponse200)
         """
         self._properties = properties
 
@@ -199,3 +199,16 @@ class QueryResult(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

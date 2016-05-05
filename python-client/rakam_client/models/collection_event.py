@@ -38,7 +38,7 @@ class CollectionEvent(object):
         """
         self.swagger_types = {
             'collection': 'str',
-            'properties': 'dict(str, object)'
+            'properties': 'dict(str, InlineResponse200)'
         }
 
         self.attribute_map = {
@@ -78,7 +78,7 @@ class CollectionEvent(object):
 
 
         :return: The properties of this CollectionEvent.
-        :rtype: dict(str, object)
+        :rtype: dict(str, InlineResponse200)
         """
         return self._properties
 
@@ -89,7 +89,7 @@ class CollectionEvent(object):
 
 
         :param properties: The properties of this CollectionEvent.
-        :type: dict(str, object)
+        :type: dict(str, InlineResponse200)
         """
         self._properties = properties
 
@@ -124,3 +124,16 @@ class CollectionEvent(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

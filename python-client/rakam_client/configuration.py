@@ -56,7 +56,7 @@ class Configuration(object):
         Constructor
         """
         # Default Base url
-        self.host = "https://app.getrakam.com/"
+        self.host = "https://api.rakam.io/"
         # Default api client
         self.api_client = None
         # Temp file folder for downloading files
@@ -71,6 +71,7 @@ class Configuration(object):
         self.username = ""
         # Password for HTTP basic authentication
         self.password = ""
+
 
         # Logging Settings
         self.logger = {}
@@ -234,6 +235,7 @@ class Configuration(object):
                     'key': 'write_key',
                     'value': self.get_api_key_with_prefix('write_key')
                 },
+
         }
 
     def to_debug_report(self):
@@ -245,6 +247,6 @@ class Configuration(object):
         return "Python SDK Debug Report:\n"\
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
-               "Version of the API: 0.2\n"\
+               "Version of the API: 0.4\n"\
                "SDK Package Version: 0.2".\
                format(env=sys.platform, pyversion=sys.version)

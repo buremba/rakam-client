@@ -53,7 +53,8 @@ class SetUserProperties implements ArrayAccess
     static $swaggerTypes = array(
         'project' => 'string',
         'user' => 'string',
-        'properties' => 'map[string,object]'
+        'api' => '\client.model\UserContext',
+        'properties' => 'map[string,\client.model\InlineResponse200]'
     );
   
     /** 
@@ -63,6 +64,7 @@ class SetUserProperties implements ArrayAccess
     static $attributeMap = array(
         'project' => 'project',
         'user' => 'user',
+        'api' => 'api',
         'properties' => 'properties'
     );
   
@@ -73,6 +75,7 @@ class SetUserProperties implements ArrayAccess
     static $setters = array(
         'project' => 'setProject',
         'user' => 'setUser',
+        'api' => 'setApi',
         'properties' => 'setProperties'
     );
   
@@ -83,6 +86,7 @@ class SetUserProperties implements ArrayAccess
     static $getters = array(
         'project' => 'getProject',
         'user' => 'getUser',
+        'api' => 'getApi',
         'properties' => 'getProperties'
     );
   
@@ -100,8 +104,14 @@ class SetUserProperties implements ArrayAccess
     protected $user;
     
     /**
+      * $api 
+      * @var \client.model\UserContext
+      */
+    protected $api;
+    
+    /**
       * $properties 
-      * @var map[string,object]
+      * @var map[string,\client.model\InlineResponse200]
       */
     protected $properties;
     
@@ -115,6 +125,7 @@ class SetUserProperties implements ArrayAccess
         if ($data != null) {
             $this->project = $data["project"];
             $this->user = $data["user"];
+            $this->api = $data["api"];
             $this->properties = $data["properties"];
         }
     }
@@ -162,8 +173,29 @@ class SetUserProperties implements ArrayAccess
     }
     
     /**
+     * Gets api
+     * @return \client.model\UserContext
+     */
+    public function getApi()
+    {
+        return $this->api;
+    }
+  
+    /**
+     * Sets api
+     * @param \client.model\UserContext $api 
+     * @return $this
+     */
+    public function setApi($api)
+    {
+        
+        $this->api = $api;
+        return $this;
+    }
+    
+    /**
      * Gets properties
-     * @return map[string,object]
+     * @return map[string,\client.model\InlineResponse200]
      */
     public function getProperties()
     {
@@ -172,7 +204,7 @@ class SetUserProperties implements ArrayAccess
   
     /**
      * Sets properties
-     * @param map[string,object] $properties 
+     * @param map[string,\client.model\InlineResponse200] $properties 
      * @return $this
      */
     public function setProperties($properties)

@@ -12,14 +12,18 @@ public class User: JSONEncodable {
 
     public var project: String!
     public var id: String!
-    public var properties: [String:String]!
+    public var api: UserContext!
+    public var properties: [String:Inline_response_200]!
     
+
+    public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["project"] = self.project
         nillableDictionary["id"] = self.id
+        nillableDictionary["api"] = self.api.encodeToJSON()
         nillableDictionary["properties"] = self.properties.encodeToJSON()
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary

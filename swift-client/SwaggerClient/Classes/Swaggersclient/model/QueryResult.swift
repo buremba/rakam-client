@@ -13,9 +13,11 @@ public class QueryResult: JSONEncodable {
     public var metadata: [SchemaField]?
     public var result: [[String]]?
     public var error: QueryError?
-    public var properties: [String:String]?
+    public var properties: [String:Inline_response_200]?
     public var failed: Bool?
     
+
+    public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {

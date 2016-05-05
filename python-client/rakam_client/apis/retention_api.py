@@ -45,7 +45,7 @@ class RetentionApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def execute(self, retention_query, **kwargs):
+    def retention_analyzer_execute(self, **kwargs):
         """
         Execute query
         
@@ -56,7 +56,7 @@ class RetentionApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.execute(retention_query, callback=callback_function)
+        >>> thread = api.retention_analyzer_execute(retention_query=retention_query_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -65,9 +65,6 @@ class RetentionApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'retention_query' is set
-        if retention_query is None:
-            raise ValueError("Missing the required parameter `retention_query` when calling `execute`")
 
         all_params = ['retention_query']
         all_params.append('callback')
@@ -77,10 +74,14 @@ class RetentionApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method execute" % key
+                    " to method retention_analyzer_execute" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'retention_query' is set
+        if ('retention_query' not in params) or (params['retention_query'] is None):
+            raise ValueError("Missing the required parameter `retention_query` when calling `retention_analyzer_execute`")
 
         resource_path = '/retention/analyze'.replace('{format}', 'json')
         method = 'POST'

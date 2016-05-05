@@ -11,27 +11,26 @@ import Foundation
 public class Measure: JSONEncodable {
 
     public enum Aggregation: String { 
-        case COUNT = "COUNT"
-        case COUNT_UNIQUE = "COUNT_UNIQUE"
-        case SUM = "SUM"
-        case MINIMUM = "MINIMUM"
-        case MAXIMUM = "MAXIMUM"
-        case APPROXIMATE_UNIQUE = "APPROXIMATE_UNIQUE"
-        case VARIANCE = "VARIANCE"
-        case POPULATION_VARIANCE = "POPULATION_VARIANCE"
-        case STANDARD_DEVIATION = "STANDARD_DEVIATION"
-        case AVERAGE = "AVERAGE"
+        case Count = "COUNT"
+        case CountUnique = "COUNT_UNIQUE"
+        case Sum = "SUM"
+        case Minimum = "MINIMUM"
+        case Maximum = "MAXIMUM"
+        case Average = "AVERAGE"
+        case ApproximateUnique = "APPROXIMATE_UNIQUE"
     }
     
-    public var column: String?
-    public var aggregation: Aggregation?
+    public var column: String!
+    public var aggregation: Aggregation!
     
+
+    public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["column"] = self.column
-        nillableDictionary["aggregation"] = self.aggregation?.rawValue
+        nillableDictionary["aggregation"] = self.aggregation.rawValue
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

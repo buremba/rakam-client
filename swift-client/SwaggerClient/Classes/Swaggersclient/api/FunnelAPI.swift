@@ -15,31 +15,6 @@ extension SwaggerClientAPI {
          
          Execute query
          
-         - GET /funnel/analyze
-         - 
-         - API Key:
-           - type: apiKey read_key 
-           - name: read_key
-         
-         - parameter funnelQuery: (body) 
-
-         - returns: RequestBuilder<Void> 
-         */
-        public class func analyze(funnelQuery funnelQuery: FunnelQuery) -> RequestBuilder<Void> {
-            let path = "/funnel/analyze"
-            let URLString = SwaggerClientAPI.basePath + path
-            
-            let parameters = funnelQuery.encodeToJSON() as? [String:AnyObject]
-
-            let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-            return requestBuilder.init(method: "GET", URLString: URLString, parameters: parameters, isBody: true)
-        }
-    
-        /**
-         
-         Execute query
-         
          - POST /funnel/analyze
          - 
          - API Key:
@@ -48,7 +23,6 @@ extension SwaggerClientAPI {
          - examples: [{contentType=application/json, example={
   "result" : [ [ "{}" ] ],
   "metadata" : [ {
-    "nullable" : true,
     "descriptiveName" : "aeiou",
     "unique" : true,
     "name" : "aeiou",
@@ -58,13 +32,14 @@ extension SwaggerClientAPI {
   } ],
   "failed" : true,
   "error" : {
-    "query" : "aeiou",
+    "charPositionInLine" : 123,
     "sqlState" : "aeiou",
     "errorCode" : 123,
-    "message" : "aeiou"
+    "message" : "aeiou",
+    "errorLine" : 123
   },
   "properties" : {
-    "key" : "{}"
+    "key" : { }
   }
 }}]
          
@@ -72,7 +47,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<QueryResult> 
          */
-        public class func analyze(funnelQuery funnelQuery: FunnelQuery) -> RequestBuilder<QueryResult> {
+        public class func funnelAnalyzerAnalyze(funnelQuery funnelQuery: FunnelQuery) -> RequestBuilder<QueryResult> {
             let path = "/funnel/analyze"
             let URLString = SwaggerClientAPI.basePath + path
             

@@ -1,6 +1,6 @@
 {
   "name": "",
-  "version": "0.2",
+  "version": "0.4",
   "description": "An analytics platform API that lets you create your own analytics services.",
   "main": "index.js",
   "keywords": [
@@ -10,6 +10,7 @@
   "private": true,
   "dependencies": {
     "connect": "^3.2.0",
-    "swagger-tools": "0.8.*"
+    "js-yaml": "^3.3.0",
+    "swagger-tools": "0.9.*"
   }
 }

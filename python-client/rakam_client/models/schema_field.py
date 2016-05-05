@@ -39,7 +39,6 @@ class SchemaField(object):
         self.swagger_types = {
             'name': 'str',
             'type': 'str',
-            'nullable': 'bool',
             'unique': 'bool',
             'descriptive_name': 'str',
             'description': 'str',
@@ -49,7 +48,6 @@ class SchemaField(object):
         self.attribute_map = {
             'name': 'name',
             'type': 'type',
-            'nullable': 'nullable',
             'unique': 'unique',
             'descriptive_name': 'descriptiveName',
             'description': 'description',
@@ -58,8 +56,7 @@ class SchemaField(object):
 
         self._name = None
         self._type = None
-        self._nullable = None
-        self._unique = None
+        self._unique = False
         self._descriptive_name = None
         self._description = None
         self._category = None
@@ -106,35 +103,13 @@ class SchemaField(object):
         :param type: The type of this SchemaField.
         :type: str
         """
-        allowed_values = ["STRING", "LONG", "DOUBLE", "BOOLEAN", "DATE", "TIME", "TIMESTAMP", "ARRAY_STRING", "ARRAY_LONG", "ARRAY_DOUBLE", "ARRAY_BOOLEAN", "ARRAY_DATE", "ARRAY_TIME", "ARRAY_TIMESTAMP"]
+        allowed_values = ["STRING", "INTEGER", "DECIMAL", "DOUBLE", "LONG", "BOOLEAN", "DATE", "TIME", "TIMESTAMP", "BINARY", "ARRAY_STRING", "ARRAY_INTEGER", "ARRAY_DECIMAL", "ARRAY_DOUBLE", "ARRAY_LONG", "ARRAY_BOOLEAN", "ARRAY_DATE", "ARRAY_TIME", "ARRAY_TIMESTAMP", "ARRAY_BINARY", "MAP_STRING", "MAP_INTEGER", "MAP_DECIMAL", "MAP_DOUBLE", "MAP_LONG", "MAP_BOOLEAN", "MAP_DATE", "MAP_TIME", "MAP_TIMESTAMP", "MAP_BINARY"]
         if type not in allowed_values:
             raise ValueError(
                 "Invalid value for `type`, must be one of {0}"
                 .format(allowed_values)
             )
         self._type = type
-
-    @property
-    def nullable(self):
-        """
-        Gets the nullable of this SchemaField.
-
-
-        :return: The nullable of this SchemaField.
-        :rtype: bool
-        """
-        return self._nullable
-
-    @nullable.setter
-    def nullable(self, nullable):
-        """
-        Sets the nullable of this SchemaField.
-
-
-        :param nullable: The nullable of this SchemaField.
-        :type: bool
-        """
-        self._nullable = nullable
 
     @property
     def unique(self):
@@ -255,3 +230,16 @@ class SchemaField(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

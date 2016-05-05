@@ -29,7 +29,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<JsonResponse> 
          */
-        public class func create(continuousQuery continuousQuery: ContinuousQuery) -> RequestBuilder<JsonResponse> {
+        public class func continuousQueryCreate(continuousQuery continuousQuery: ContinuousQuery) -> RequestBuilder<JsonResponse> {
             let path = "/continuous-query/create"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -55,21 +55,61 @@ extension SwaggerClientAPI {
 }}]
          
          - parameter project: (form) 
-         - parameter name: (form) 
+         - parameter tableName: (form) 
 
          - returns: RequestBuilder<JsonResponse> 
          */
-        public class func delete(project project: String?, name: String?) -> RequestBuilder<JsonResponse> {
+        public class func continuousQueryDelete(project project: String?, tableName: String?) -> RequestBuilder<JsonResponse> {
             let path = "/continuous-query/delete"
             let URLString = SwaggerClientAPI.basePath + path
             
             let nillableParameters: [String:AnyObject?] = [
                 "project": project,
-                "name": name
+                "tableName": tableName
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
             let requestBuilder: RequestBuilder<JsonResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
+        }
+    
+        /**
+         
+         Get continuous query
+         
+         - POST /continuous-query/get
+         - 
+         - API Key:
+           - type: apiKey read_key 
+           - name: read_key
+         - examples: [{contentType=application/json, example={
+  "query" : "aeiou",
+  "name" : "aeiou",
+  "options" : {
+    "key" : { }
+  },
+  "project" : "aeiou",
+  "partitionKeys" : [ "aeiou" ],
+  "tableName" : "aeiou"
+}}]
+         
+         - parameter project: (form) 
+         - parameter tableName: (form) 
+
+         - returns: RequestBuilder<ContinuousQuery> 
+         */
+        public class func continuousQueryGet(project project: String?, tableName: String?) -> RequestBuilder<ContinuousQuery> {
+            let path = "/continuous-query/get"
+            let URLString = SwaggerClientAPI.basePath + path
+            
+            let nillableParameters: [String:AnyObject?] = [
+                "project": project,
+                "tableName": tableName
+            ]
+            let parameters = APIHelper.rejectNil(nillableParameters)
+
+            let requestBuilder: RequestBuilder<ContinuousQuery>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
             return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
         }
@@ -84,22 +124,21 @@ extension SwaggerClientAPI {
            - type: apiKey read_key 
            - name: read_key
          - examples: [{contentType=application/json, example=[ {
-  "collections" : [ "aeiou" ],
+  "query" : "aeiou",
   "name" : "aeiou",
   "options" : {
-    "key" : "{}"
+    "key" : { }
   },
   "project" : "aeiou",
   "partitionKeys" : [ "aeiou" ],
-  "tableName" : "aeiou",
-  "rawQuery" : "aeiou"
+  "tableName" : "aeiou"
 } ]}]
          
          - parameter project: (form) 
 
          - returns: RequestBuilder<[ContinuousQuery]> 
          */
-        public class func listQueries(project project: String?) -> RequestBuilder<[ContinuousQuery]> {
+        public class func continuousQueryListQueries(project project: String?) -> RequestBuilder<[ContinuousQuery]> {
             let path = "/continuous-query/list"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -125,7 +164,6 @@ extension SwaggerClientAPI {
          - examples: [{contentType=application/json, example=[ {
   "name" : "aeiou",
   "fields" : [ {
-    "nullable" : true,
     "descriptiveName" : "aeiou",
     "unique" : true,
     "name" : "aeiou",
@@ -136,15 +174,17 @@ extension SwaggerClientAPI {
 } ]}]
          
          - parameter project: (form) 
+         - parameter names: (form) 
 
          - returns: RequestBuilder<[Collection]> 
          */
-        public class func schema(project project: String?) -> RequestBuilder<[Collection]> {
+        public class func continuousQuerySchema(project project: String?, names: [String]?) -> RequestBuilder<[Collection]> {
             let path = "/continuous-query/schema"
             let URLString = SwaggerClientAPI.basePath + path
             
             let nillableParameters: [String:AnyObject?] = [
-                "project": project
+                "project": project,
+                "names": names
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
@@ -162,22 +202,14 @@ extension SwaggerClientAPI {
          - API Key:
            - type: apiKey read_key 
            - name: read_key
-         - examples: [{contentType=application/json, example=[ {
-  "nullable" : true,
-  "descriptiveName" : "aeiou",
-  "unique" : true,
-  "name" : "aeiou",
-  "description" : "aeiou",
-  "type" : "aeiou",
-  "category" : "aeiou"
-} ]}]
+         - examples: [{contentType=application/json, example=true}]
          
          - parameter project: (form) 
          - parameter query: (form) 
 
-         - returns: RequestBuilder<[SchemaField]> 
+         - returns: RequestBuilder<Bool> 
          */
-        public class func test(project project: String?, query: String?) -> RequestBuilder<[SchemaField]> {
+        public class func continuousQueryTest(project project: String?, query: String?) -> RequestBuilder<Bool> {
             let path = "/continuous-query/test"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -187,7 +219,7 @@ extension SwaggerClientAPI {
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
-            let requestBuilder: RequestBuilder<[SchemaField]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+            let requestBuilder: RequestBuilder<Bool>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
             return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
         }

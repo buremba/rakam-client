@@ -87,7 +87,7 @@ class JsonResponse implements ArrayAccess
       * $success 
       * @var bool
       */
-    protected $success;
+    protected $success = false;
     
     /**
       * $message 

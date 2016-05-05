@@ -18,6 +18,8 @@ public class AutomationRule: JSONEncodable {
     public var id: Int?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

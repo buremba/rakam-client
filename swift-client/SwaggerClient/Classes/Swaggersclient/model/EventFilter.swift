@@ -11,14 +11,18 @@ import Foundation
 public class EventFilter: JSONEncodable {
 
     public var collection: String?
+    public var timeframe: Timeframe?
     public var aggregation: EventFilterAggregation?
     public var filterExpression: String?
     
+
+    public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["collection"] = self.collection
+        nillableDictionary["timeframe"] = self.timeframe?.encodeToJSON()
         nillableDictionary["aggregation"] = self.aggregation?.encodeToJSON()
         nillableDictionary["filterExpression"] = self.filterExpression
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]

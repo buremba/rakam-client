@@ -54,7 +54,7 @@ class QueryResult implements ArrayAccess
         'metadata' => '\client.model\SchemaField[]',
         'result' => 'object[][]',
         'error' => '\client.model\QueryError',
-        'properties' => 'map[string,object]',
+        'properties' => 'map[string,\client.model\InlineResponse200]',
         'failed' => 'bool'
     );
   
@@ -115,7 +115,7 @@ class QueryResult implements ArrayAccess
     
     /**
       * $properties 
-      * @var map[string,object]
+      * @var map[string,\client.model\InlineResponse200]
       */
     protected $properties;
     
@@ -123,7 +123,7 @@ class QueryResult implements ArrayAccess
       * $failed 
       * @var bool
       */
-    protected $failed;
+    protected $failed = false;
     
 
     /**
@@ -206,7 +206,7 @@ class QueryResult implements ArrayAccess
     
     /**
      * Gets properties
-     * @return map[string,object]
+     * @return map[string,\client.model\InlineResponse200]
      */
     public function getProperties()
     {
@@ -215,7 +215,7 @@ class QueryResult implements ArrayAccess
   
     /**
      * Sets properties
-     * @param map[string,object] $properties 
+     * @param map[string,\client.model\InlineResponse200] $properties 
      * @return $this
      */
     public function setProperties($properties)

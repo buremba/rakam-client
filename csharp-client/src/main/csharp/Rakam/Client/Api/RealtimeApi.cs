@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 using RestSharp;
 using Rakam.Client.Client;
 using Rakam.Client.Model;
@@ -20,16 +21,9 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="project"></param>
-        /// <param name="name"></param>
-        /// <param name="aggregation"></param>
-        /// <param name="tableName"></param>
-        /// <param name="collections"></param>
-        /// <param name="filter"></param>
-        /// <param name="measure"></param>
-        /// <param name="dimensions"></param>
+        /// <param name="realTimeReport"></param>
         /// <returns>JsonResponse</returns>
-        JsonResponse Create (string project, string name, string aggregation, string tableName, List<string> collections, string filter, string measure, List<string> dimensions);
+        JsonResponse RealtimeCreate (RealTimeReport realTimeReport);
   
         /// <summary>
         /// Create report
@@ -37,16 +31,29 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="project"></param>
-        /// <param name="name"></param>
-        /// <param name="aggregation"></param>
-        /// <param name="tableName"></param>
-        /// <param name="collections"></param>
-        /// <param name="filter"></param>
-        /// <param name="measure"></param>
-        /// <param name="dimensions"></param>
-        /// <returns>JsonResponse</returns>
-        System.Threading.Tasks.Task<JsonResponse> CreateAsync (string project, string name, string aggregation, string tableName, List<string> collections, string filter, string measure, List<string> dimensions);
+        /// <param name="realTimeReport"></param>
+        /// <returns>ApiResponse of JsonResponse</returns>
+        ApiResponse<JsonResponse> RealtimeCreateWithHttpInfo (RealTimeReport realTimeReport);
+
+        /// <summary>
+        /// Create report
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="realTimeReport"></param>
+        /// <returns>Task of JsonResponse</returns>
+        System.Threading.Tasks.Task<JsonResponse> RealtimeCreateAsync (RealTimeReport realTimeReport);
+
+        /// <summary>
+        /// Create report
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="realTimeReport"></param>
+        /// <returns>Task of ApiResponse (JsonResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<JsonResponse>> RealtimeCreateAsyncWithHttpInfo (RealTimeReport realTimeReport);
         
         /// <summary>
         /// Delete report
@@ -55,9 +62,9 @@ namespace Rakam.Client.Api
         /// 
         /// </remarks>
         /// <param name="project"></param>
-        /// <param name="name"></param>
+        /// <param name="tableName"></param>
         /// <returns>JsonResponse</returns>
-        JsonResponse Delete (string project, string name);
+        JsonResponse RealtimeDelete (string project = null, string tableName = null);
   
         /// <summary>
         /// Delete report
@@ -66,9 +73,31 @@ namespace Rakam.Client.Api
         /// 
         /// </remarks>
         /// <param name="project"></param>
-        /// <param name="name"></param>
-        /// <returns>JsonResponse</returns>
-        System.Threading.Tasks.Task<JsonResponse> DeleteAsync (string project, string name);
+        /// <param name="tableName"></param>
+        /// <returns>ApiResponse of JsonResponse</returns>
+        ApiResponse<JsonResponse> RealtimeDeleteWithHttpInfo (string project = null, string tableName = null);
+
+        /// <summary>
+        /// Delete report
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="project"></param>
+        /// <param name="tableName"></param>
+        /// <returns>Task of JsonResponse</returns>
+        System.Threading.Tasks.Task<JsonResponse> RealtimeDeleteAsync (string project = null, string tableName = null);
+
+        /// <summary>
+        /// Delete report
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="project"></param>
+        /// <param name="tableName"></param>
+        /// <returns>Task of ApiResponse (JsonResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<JsonResponse>> RealtimeDeleteAsyncWithHttpInfo (string project = null, string tableName = null);
         
         /// <summary>
         /// Get report
@@ -76,17 +105,9 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="project"></param>
-        /// <param name="tableName"></param>
-        /// <param name="filter"></param>
-        /// <param name="aggregation"></param>
-        /// <param name="measure"></param>
-        /// <param name="dimensions"></param>
-        /// <param name="aggregate"></param>
-        /// <param name="dateStart"></param>
-        /// <param name="dateEnd"></param>
-        /// <returns>Object</returns>
-        Object Get (string project, string tableName, string filter, string aggregation, string measure, List<string> dimensions, bool? aggregate, DateTime? dateStart, DateTime? dateEnd);
+        /// <param name="realtimeGet"></param>
+        /// <returns>RealTimeQueryResult</returns>
+        RealTimeQueryResult RealtimeGet (RealtimeGet realtimeGet);
   
         /// <summary>
         /// Get report
@@ -94,37 +115,69 @@ namespace Rakam.Client.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="project"></param>
-        /// <param name="tableName"></param>
-        /// <param name="filter"></param>
-        /// <param name="aggregation"></param>
-        /// <param name="measure"></param>
-        /// <param name="dimensions"></param>
-        /// <param name="aggregate"></param>
-        /// <param name="dateStart"></param>
-        /// <param name="dateEnd"></param>
-        /// <returns>Object</returns>
-        System.Threading.Tasks.Task<Object> GetAsync (string project, string tableName, string filter, string aggregation, string measure, List<string> dimensions, bool? aggregate, DateTime? dateStart, DateTime? dateEnd);
+        /// <param name="realtimeGet"></param>
+        /// <returns>ApiResponse of RealTimeQueryResult</returns>
+        ApiResponse<RealTimeQueryResult> RealtimeGetWithHttpInfo (RealtimeGet realtimeGet);
+
+        /// <summary>
+        /// Get report
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="realtimeGet"></param>
+        /// <returns>Task of RealTimeQueryResult</returns>
+        System.Threading.Tasks.Task<RealTimeQueryResult> RealtimeGetAsync (RealtimeGet realtimeGet);
+
+        /// <summary>
+        /// Get report
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="realtimeGet"></param>
+        /// <returns>Task of ApiResponse (RealTimeQueryResult)</returns>
+        System.Threading.Tasks.Task<ApiResponse<RealTimeQueryResult>> RealtimeGetAsyncWithHttpInfo (RealtimeGet realtimeGet);
         
         /// <summary>
-        /// List reports
+        /// List queries
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <param name="project"></param>
-        /// <returns></returns>
-        List<RealTimeReport> ListReports (string project);
+        /// <returns>List&lt;ContinuousQuery&gt;</returns>
+        List<ContinuousQuery> RealtimeList (string project = null);
   
         /// <summary>
-        /// List reports
+        /// List queries
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <param name="project"></param>
-        /// <returns></returns>
-        System.Threading.Tasks.Task<List<RealTimeReport>> ListReportsAsync (string project);
+        /// <returns>ApiResponse of List&lt;ContinuousQuery&gt;</returns>
+        ApiResponse<List<ContinuousQuery>> RealtimeListWithHttpInfo (string project = null);
+
+        /// <summary>
+        /// List queries
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="project"></param>
+        /// <returns>Task of List&lt;ContinuousQuery&gt;</returns>
+        System.Threading.Tasks.Task<List<ContinuousQuery>> RealtimeListAsync (string project = null);
+
+        /// <summary>
+        /// List queries
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="project"></param>
+        /// <returns>Task of ApiResponse (List&lt;ContinuousQuery&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<ContinuousQuery>>> RealtimeListAsyncWithHttpInfo (string project = null);
         
     }
   
@@ -136,466 +189,174 @@ namespace Rakam.Client.Api
         /// <summary>
         /// Initializes a new instance of the <see cref="RealtimeApi"/> class.
         /// </summary>
-        /// <param name="apiClient"> an instance of ApiClient (optional)</param>
-        /// <returns></returns>
-        public RealtimeApi(ApiClient apiClient = null)
-        {
-            if (apiClient == null) // use the default one in Configuration
-                this.ApiClient = Configuration.DefaultApiClient; 
-            else
-                this.ApiClient = apiClient;
-        }
-    
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RealtimeApi"/> class.
-        /// </summary>
         /// <returns></returns>
         public RealtimeApi(String basePath)
         {
-            this.ApiClient = new ApiClient(basePath);
+            this.Configuration = new Configuration(new ApiClient(basePath));
         }
     
         /// <summary>
-        /// Sets the base path of the API client.
+        /// Initializes a new instance of the <see cref="RealtimeApi"/> class
+        /// using Configuration object
         /// </summary>
-        /// <param name="basePath">The base path</param>
-        /// <value>The base path</value>
-        public void SetBasePath(String basePath)
+        /// <param name="configuration">An instance of Configuration</param>
+        /// <returns></returns>
+        public RealtimeApi(Configuration configuration = null)
         {
-            this.ApiClient.BasePath = basePath;
+            if (configuration == null) // use the default one in Configuration
+                this.Configuration = Configuration.Default; 
+            else
+                this.Configuration = configuration;
         }
-    
+
         /// <summary>
         /// Gets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
         public String GetBasePath()
         {
-            return this.ApiClient.BasePath;
+            return this.Configuration.ApiClient.RestClient.BaseUrl.ToString();
         }
-    
+
         /// <summary>
-        /// Gets or sets the API client.
+        /// Sets the base path of the API client.
         /// </summary>
-        /// <value>An instance of the ApiClient</value>
-        public ApiClient ApiClient {get; set;}
-    
-        
-        /// <summary>
-        /// Create report 
-        /// </summary>
-        /// <param name="project"></param> 
-        /// <param name="name"></param> 
-        /// <param name="aggregation"></param> 
-        /// <param name="tableName"></param> 
-        /// <param name="collections"></param> 
-        /// <param name="filter"></param> 
-        /// <param name="measure"></param> 
-        /// <param name="dimensions"></param> 
-        /// <returns>JsonResponse</returns>            
-        public JsonResponse Create (string project, string name, string aggregation, string tableName, List<string> collections, string filter, string measure, List<string> dimensions)
+        /// <value>The base path</value>
+        [Obsolete("SetBasePath is deprecated, please do 'Configuraiton.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
+        public void SetBasePath(String basePath)
         {
-            
-    
-            var path = "/realtime/create";
-    
-            var pathParams = new Dictionary<String, String>();
-            var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
-            var formParams = new Dictionary<String, String>();
-            var fileParams = new Dictionary<String, FileParameter>();
-            String postBody = null;
-
-            // to determine the Accept header
-            String[] http_header_accepts = new String[] {
-                "application/json"
-            };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
-            if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            pathParams.Add("format", "json");
-            
-            
-            
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
-            if (name != null) formParams.Add("name", ApiClient.ParameterToString(name)); // form parameter
-            if (aggregation != null) formParams.Add("aggregation", ApiClient.ParameterToString(aggregation)); // form parameter
-            if (tableName != null) formParams.Add("table_name", ApiClient.ParameterToString(tableName)); // form parameter
-            if (collections != null) formParams.Add("collections", ApiClient.ParameterToString(collections)); // form parameter
-            if (filter != null) formParams.Add("filter", ApiClient.ParameterToString(filter)); // form parameter
-            if (measure != null) formParams.Add("measure", ApiClient.ParameterToString(measure)); // form parameter
-            if (dimensions != null) formParams.Add("dimensions", ApiClient.ParameterToString(dimensions)); // form parameter
-            
-            
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] { "read_key" };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-    
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling Create: " + response.Content, response.Content);
-            else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling Create: " + response.ErrorMessage, response.ErrorMessage);
-    
-            return (JsonResponse) ApiClient.Deserialize(response.Content, typeof(JsonResponse), response.Headers);
+            // do nothing
         }
     
         /// <summary>
-        /// Create report 
+        /// Gets or sets the configuration object
         /// </summary>
-        /// <param name="project"></param>
-        /// <param name="name"></param>
-        /// <param name="aggregation"></param>
-        /// <param name="tableName"></param>
-        /// <param name="collections"></param>
-        /// <param name="filter"></param>
-        /// <param name="measure"></param>
-        /// <param name="dimensions"></param>
-        /// <returns>JsonResponse</returns>
-        public async System.Threading.Tasks.Task<JsonResponse> CreateAsync (string project, string name, string aggregation, string tableName, List<string> collections, string filter, string measure, List<string> dimensions)
+        /// <value>An instance of the Configuration</value>
+        public Configuration Configuration {get; set;}
+
+        /// <summary>
+        /// Gets the default header.
+        /// </summary>
+        /// <returns>Dictionary of HTTP header</returns>
+        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
+        public Dictionary<String, String> DefaultHeader()
         {
-            
-    
-            var path = "/realtime/create";
-    
-            var pathParams = new Dictionary<String, String>();
-            var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
-            var formParams = new Dictionary<String, String>();
-            var fileParams = new Dictionary<String, FileParameter>();
-            String postBody = null;
-
-            // to determine the Accept header
-            String[] http_header_accepts = new String[] {
-                "application/json"
-            };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
-            if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            pathParams.Add("format", "json");
-            
-            
-            
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
-            if (name != null) formParams.Add("name", ApiClient.ParameterToString(name)); // form parameter
-            if (aggregation != null) formParams.Add("aggregation", ApiClient.ParameterToString(aggregation)); // form parameter
-            if (tableName != null) formParams.Add("table_name", ApiClient.ParameterToString(tableName)); // form parameter
-            if (collections != null) formParams.Add("collections", ApiClient.ParameterToString(collections)); // form parameter
-            if (filter != null) formParams.Add("filter", ApiClient.ParameterToString(filter)); // form parameter
-            if (measure != null) formParams.Add("measure", ApiClient.ParameterToString(measure)); // form parameter
-            if (dimensions != null) formParams.Add("dimensions", ApiClient.ParameterToString(dimensions)); // form parameter
-            
-            
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] { "read_key" };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling Create: " + response.Content, response.Content);
-
-            return (JsonResponse) ApiClient.Deserialize(response.Content, typeof(JsonResponse), response.Headers);
+            return this.Configuration.DefaultHeader;
         }
-        
+
         /// <summary>
-        /// Delete report 
+        /// Add default header.
         /// </summary>
-        /// <param name="project"></param> 
-        /// <param name="name"></param> 
-        /// <returns>JsonResponse</returns>            
-        public JsonResponse Delete (string project, string name)
-        {
-            
-    
-            var path = "/realtime/delete";
-    
-            var pathParams = new Dictionary<String, String>();
-            var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
-            var formParams = new Dictionary<String, String>();
-            var fileParams = new Dictionary<String, FileParameter>();
-            String postBody = null;
-
-            // to determine the Accept header
-            String[] http_header_accepts = new String[] {
-                "application/json"
-            };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
-            if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            pathParams.Add("format", "json");
-            
-            
-            
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
-            if (name != null) formParams.Add("name", ApiClient.ParameterToString(name)); // form parameter
-            
-            
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] { "read_key" };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-    
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling Delete: " + response.Content, response.Content);
-            else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling Delete: " + response.ErrorMessage, response.ErrorMessage);
-    
-            return (JsonResponse) ApiClient.Deserialize(response.Content, typeof(JsonResponse), response.Headers);
-        }
-    
-        /// <summary>
-        /// Delete report 
-        /// </summary>
-        /// <param name="project"></param>
-        /// <param name="name"></param>
-        /// <returns>JsonResponse</returns>
-        public async System.Threading.Tasks.Task<JsonResponse> DeleteAsync (string project, string name)
-        {
-            
-    
-            var path = "/realtime/delete";
-    
-            var pathParams = new Dictionary<String, String>();
-            var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
-            var formParams = new Dictionary<String, String>();
-            var fileParams = new Dictionary<String, FileParameter>();
-            String postBody = null;
-
-            // to determine the Accept header
-            String[] http_header_accepts = new String[] {
-                "application/json"
-            };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
-            if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            pathParams.Add("format", "json");
-            
-            
-            
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
-            if (name != null) formParams.Add("name", ApiClient.ParameterToString(name)); // form parameter
-            
-            
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] { "read_key" };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling Delete: " + response.Content, response.Content);
-
-            return (JsonResponse) ApiClient.Deserialize(response.Content, typeof(JsonResponse), response.Headers);
-        }
-        
-        /// <summary>
-        /// Get report 
-        /// </summary>
-        /// <param name="project"></param> 
-        /// <param name="tableName"></param> 
-        /// <param name="filter"></param> 
-        /// <param name="aggregation"></param> 
-        /// <param name="measure"></param> 
-        /// <param name="dimensions"></param> 
-        /// <param name="aggregate"></param> 
-        /// <param name="dateStart"></param> 
-        /// <param name="dateEnd"></param> 
-        /// <returns>Object</returns>            
-        public Object Get (string project, string tableName, string filter, string aggregation, string measure, List<string> dimensions, bool? aggregate, DateTime? dateStart, DateTime? dateEnd)
-        {
-            
-    
-            var path = "/realtime/get";
-    
-            var pathParams = new Dictionary<String, String>();
-            var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
-            var formParams = new Dictionary<String, String>();
-            var fileParams = new Dictionary<String, FileParameter>();
-            String postBody = null;
-
-            // to determine the Accept header
-            String[] http_header_accepts = new String[] {
-                "application/json"
-            };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
-            if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            pathParams.Add("format", "json");
-            
-            
-            
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
-            if (tableName != null) formParams.Add("table_name", ApiClient.ParameterToString(tableName)); // form parameter
-            if (filter != null) formParams.Add("filter", ApiClient.ParameterToString(filter)); // form parameter
-            if (aggregation != null) formParams.Add("aggregation", ApiClient.ParameterToString(aggregation)); // form parameter
-            if (measure != null) formParams.Add("measure", ApiClient.ParameterToString(measure)); // form parameter
-            if (dimensions != null) formParams.Add("dimensions", ApiClient.ParameterToString(dimensions)); // form parameter
-            if (aggregate != null) formParams.Add("aggregate", ApiClient.ParameterToString(aggregate)); // form parameter
-            if (dateStart != null) formParams.Add("date_start", ApiClient.ParameterToString(dateStart)); // form parameter
-            if (dateEnd != null) formParams.Add("date_end", ApiClient.ParameterToString(dateEnd)); // form parameter
-            
-            
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] { "read_key" };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-    
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling Get: " + response.Content, response.Content);
-            else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling Get: " + response.ErrorMessage, response.ErrorMessage);
-    
-            return (Object) ApiClient.Deserialize(response.Content, typeof(Object), response.Headers);
-        }
-    
-        /// <summary>
-        /// Get report 
-        /// </summary>
-        /// <param name="project"></param>
-        /// <param name="tableName"></param>
-        /// <param name="filter"></param>
-        /// <param name="aggregation"></param>
-        /// <param name="measure"></param>
-        /// <param name="dimensions"></param>
-        /// <param name="aggregate"></param>
-        /// <param name="dateStart"></param>
-        /// <param name="dateEnd"></param>
-        /// <returns>Object</returns>
-        public async System.Threading.Tasks.Task<Object> GetAsync (string project, string tableName, string filter, string aggregation, string measure, List<string> dimensions, bool? aggregate, DateTime? dateStart, DateTime? dateEnd)
-        {
-            
-    
-            var path = "/realtime/get";
-    
-            var pathParams = new Dictionary<String, String>();
-            var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
-            var formParams = new Dictionary<String, String>();
-            var fileParams = new Dictionary<String, FileParameter>();
-            String postBody = null;
-
-            // to determine the Accept header
-            String[] http_header_accepts = new String[] {
-                "application/json"
-            };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
-            if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            pathParams.Add("format", "json");
-            
-            
-            
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
-            if (tableName != null) formParams.Add("table_name", ApiClient.ParameterToString(tableName)); // form parameter
-            if (filter != null) formParams.Add("filter", ApiClient.ParameterToString(filter)); // form parameter
-            if (aggregation != null) formParams.Add("aggregation", ApiClient.ParameterToString(aggregation)); // form parameter
-            if (measure != null) formParams.Add("measure", ApiClient.ParameterToString(measure)); // form parameter
-            if (dimensions != null) formParams.Add("dimensions", ApiClient.ParameterToString(dimensions)); // form parameter
-            if (aggregate != null) formParams.Add("aggregate", ApiClient.ParameterToString(aggregate)); // form parameter
-            if (dateStart != null) formParams.Add("date_start", ApiClient.ParameterToString(dateStart)); // form parameter
-            if (dateEnd != null) formParams.Add("date_end", ApiClient.ParameterToString(dateEnd)); // form parameter
-            
-            
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] { "read_key" };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling Get: " + response.Content, response.Content);
-
-            return (Object) ApiClient.Deserialize(response.Content, typeof(Object), response.Headers);
-        }
-        
-        /// <summary>
-        /// List reports 
-        /// </summary>
-        /// <param name="project"></param> 
-        /// <returns></returns>            
-        public List<RealTimeReport> ListReports (string project)
-        {
-            
-    
-            var path = "/realtime/list";
-    
-            var pathParams = new Dictionary<String, String>();
-            var queryParams = new Dictionary<String, String>();
-            var headerParams = new Dictionary<String, String>();
-            var formParams = new Dictionary<String, String>();
-            var fileParams = new Dictionary<String, FileParameter>();
-            String postBody = null;
-
-            // to determine the Accept header
-            String[] http_header_accepts = new String[] {
-                "application/json"
-            };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
-            if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            pathParams.Add("format", "json");
-            
-            
-            
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
-            
-            
-    
-            // authentication setting, if any
-            String[] authSettings = new String[] { "read_key" };
-    
-            // make the HTTP request
-            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-    
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling ListReports: " + response.Content, response.Content);
-            else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling ListReports: " + response.ErrorMessage, response.ErrorMessage);
-    
-            return (List<RealTimeReport>) ApiClient.Deserialize(response.Content, typeof(List<RealTimeReport>), response.Headers);
-        }
-    
-        /// <summary>
-        /// List reports 
-        /// </summary>
-        /// <param name="project"></param>
+        /// <param name="key">Header field name.</param>
+        /// <param name="value">Header field value.</param>
         /// <returns></returns>
-        public async System.Threading.Tasks.Task<List<RealTimeReport>> ListReportsAsync (string project)
+        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
+        public void AddDefaultHeader(string key, string value)
+        {
+            this.Configuration.AddDefaultHeader(key, value);
+        }
+   
+        
+        /// <summary>
+        /// Create report 
+        /// </summary>
+        /// <param name="realTimeReport"></param> 
+        /// <returns>JsonResponse</returns>
+        public JsonResponse RealtimeCreate (RealTimeReport realTimeReport)
+        {
+             ApiResponse<JsonResponse> response = RealtimeCreateWithHttpInfo(realTimeReport);
+             return response.Data;
+        }
+
+        /// <summary>
+        /// Create report 
+        /// </summary>
+        /// <param name="realTimeReport"></param> 
+        /// <returns>ApiResponse of JsonResponse</returns>
+        public ApiResponse< JsonResponse > RealtimeCreateWithHttpInfo (RealTimeReport realTimeReport)
         {
             
+            // verify the required parameter 'realTimeReport' is set
+            if (realTimeReport == null) throw new ApiException(400, "Missing required parameter 'realTimeReport' when calling RealtimeCreate");
+            
     
-            var path = "/realtime/list";
+            var path_ = "/realtime/create";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            
+            postBody = Configuration.ApiClient.Serialize(realTimeReport); // http body (model) parameter
+            
+
+            
+            // authentication (master_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("master_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["master_key"] = apiKeyValue;
+            }
+            
+    
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+    
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling RealtimeCreate: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling RealtimeCreate: " + response.ErrorMessage, response.ErrorMessage);
+    
+            return new ApiResponse<JsonResponse>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (JsonResponse) Configuration.ApiClient.Deserialize(response, typeof(JsonResponse)));
+            
+        }
+    
+        /// <summary>
+        /// Create report 
+        /// </summary>
+        /// <param name="realTimeReport"></param>
+        /// <returns>Task of JsonResponse</returns>
+        public async System.Threading.Tasks.Task<JsonResponse> RealtimeCreateAsync (RealTimeReport realTimeReport)
+        {
+             ApiResponse<JsonResponse> response = await RealtimeCreateAsyncWithHttpInfo(realTimeReport);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        /// Create report 
+        /// </summary>
+        /// <param name="realTimeReport"></param>
+        /// <returns>Task of ApiResponse (JsonResponse)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<JsonResponse>> RealtimeCreateAsyncWithHttpInfo (RealTimeReport realTimeReport)
+        {
+            // verify the required parameter 'realTimeReport' is set
+            if (realTimeReport == null) throw new ApiException(400, "Missing required parameter 'realTimeReport' when calling RealtimeCreate");
+            
+    
+            var path_ = "/realtime/create";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
@@ -608,9 +369,9 @@ namespace Rakam.Client.Api
             String[] http_header_accepts = new String[] {
                 "application/json"
             };
-            String http_header_accept = ApiClient.SelectHeaderAccept(http_header_accepts);
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
             if (http_header_accept != null)
-                headerParams.Add("Accept", ApiClient.SelectHeaderAccept(http_header_accepts));
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
 
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
@@ -618,19 +379,486 @@ namespace Rakam.Client.Api
             
             
             
-            if (project != null) formParams.Add("project", ApiClient.ParameterToString(project)); // form parameter
             
+            postBody = Configuration.ApiClient.Serialize(realTimeReport); // http body (model) parameter
+            
+
+            
+            // authentication (master_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("master_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["master_key"] = apiKeyValue;
+            }
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling RealtimeCreate: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling RealtimeCreate: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<JsonResponse>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (JsonResponse) Configuration.ApiClient.Deserialize(response, typeof(JsonResponse)));
+            
+        }
+        
+        /// <summary>
+        /// Delete report 
+        /// </summary>
+        /// <param name="project"></param> 
+        /// <param name="tableName"></param> 
+        /// <returns>JsonResponse</returns>
+        public JsonResponse RealtimeDelete (string project = null, string tableName = null)
+        {
+             ApiResponse<JsonResponse> response = RealtimeDeleteWithHttpInfo(project, tableName);
+             return response.Data;
+        }
+
+        /// <summary>
+        /// Delete report 
+        /// </summary>
+        /// <param name="project"></param> 
+        /// <param name="tableName"></param> 
+        /// <returns>ApiResponse of JsonResponse</returns>
+        public ApiResponse< JsonResponse > RealtimeDeleteWithHttpInfo (string project = null, string tableName = null)
+        {
             
     
-            // authentication setting, if any
-            String[] authSettings = new String[] { "read_key" };
+            var path_ = "/realtime/delete";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            if (project != null) formParams.Add("project", Configuration.ApiClient.ParameterToString(project)); // form parameter
+            if (tableName != null) formParams.Add("table_name", Configuration.ApiClient.ParameterToString(tableName)); // form parameter
+            
+            
+
+            
+            // authentication (master_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("master_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["master_key"] = apiKeyValue;
+            }
+            
     
             // make the HTTP request
-            IRestResponse response = (IRestResponse) await ApiClient.CallApiAsync(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams, authSettings);
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling ListReports: " + response.Content, response.Content);
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
 
-            return (List<RealTimeReport>) ApiClient.Deserialize(response.Content, typeof(List<RealTimeReport>), response.Headers);
+            int statusCode = (int) response.StatusCode;
+    
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling RealtimeDelete: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling RealtimeDelete: " + response.ErrorMessage, response.ErrorMessage);
+    
+            return new ApiResponse<JsonResponse>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (JsonResponse) Configuration.ApiClient.Deserialize(response, typeof(JsonResponse)));
+            
+        }
+    
+        /// <summary>
+        /// Delete report 
+        /// </summary>
+        /// <param name="project"></param>
+        /// <param name="tableName"></param>
+        /// <returns>Task of JsonResponse</returns>
+        public async System.Threading.Tasks.Task<JsonResponse> RealtimeDeleteAsync (string project = null, string tableName = null)
+        {
+             ApiResponse<JsonResponse> response = await RealtimeDeleteAsyncWithHttpInfo(project, tableName);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        /// Delete report 
+        /// </summary>
+        /// <param name="project"></param>
+        /// <param name="tableName"></param>
+        /// <returns>Task of ApiResponse (JsonResponse)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<JsonResponse>> RealtimeDeleteAsyncWithHttpInfo (string project = null, string tableName = null)
+        {
+            
+    
+            var path_ = "/realtime/delete";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>();
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            if (project != null) formParams.Add("project", Configuration.ApiClient.ParameterToString(project)); // form parameter
+            if (tableName != null) formParams.Add("table_name", Configuration.ApiClient.ParameterToString(tableName)); // form parameter
+            
+            
+
+            
+            // authentication (master_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("master_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["master_key"] = apiKeyValue;
+            }
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling RealtimeDelete: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling RealtimeDelete: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<JsonResponse>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (JsonResponse) Configuration.ApiClient.Deserialize(response, typeof(JsonResponse)));
+            
+        }
+        
+        /// <summary>
+        /// Get report 
+        /// </summary>
+        /// <param name="realtimeGet"></param> 
+        /// <returns>RealTimeQueryResult</returns>
+        public RealTimeQueryResult RealtimeGet (RealtimeGet realtimeGet)
+        {
+             ApiResponse<RealTimeQueryResult> response = RealtimeGetWithHttpInfo(realtimeGet);
+             return response.Data;
+        }
+
+        /// <summary>
+        /// Get report 
+        /// </summary>
+        /// <param name="realtimeGet"></param> 
+        /// <returns>ApiResponse of RealTimeQueryResult</returns>
+        public ApiResponse< RealTimeQueryResult > RealtimeGetWithHttpInfo (RealtimeGet realtimeGet)
+        {
+            
+            // verify the required parameter 'realtimeGet' is set
+            if (realtimeGet == null) throw new ApiException(400, "Missing required parameter 'realtimeGet' when calling RealtimeGet");
+            
+    
+            var path_ = "/realtime/get";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            
+            postBody = Configuration.ApiClient.Serialize(realtimeGet); // http body (model) parameter
+            
+
+            
+            // authentication (read_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("read_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["read_key"] = apiKeyValue;
+            }
+            
+    
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+    
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling RealtimeGet: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling RealtimeGet: " + response.ErrorMessage, response.ErrorMessage);
+    
+            return new ApiResponse<RealTimeQueryResult>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (RealTimeQueryResult) Configuration.ApiClient.Deserialize(response, typeof(RealTimeQueryResult)));
+            
+        }
+    
+        /// <summary>
+        /// Get report 
+        /// </summary>
+        /// <param name="realtimeGet"></param>
+        /// <returns>Task of RealTimeQueryResult</returns>
+        public async System.Threading.Tasks.Task<RealTimeQueryResult> RealtimeGetAsync (RealtimeGet realtimeGet)
+        {
+             ApiResponse<RealTimeQueryResult> response = await RealtimeGetAsyncWithHttpInfo(realtimeGet);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        /// Get report 
+        /// </summary>
+        /// <param name="realtimeGet"></param>
+        /// <returns>Task of ApiResponse (RealTimeQueryResult)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<RealTimeQueryResult>> RealtimeGetAsyncWithHttpInfo (RealtimeGet realtimeGet)
+        {
+            // verify the required parameter 'realtimeGet' is set
+            if (realtimeGet == null) throw new ApiException(400, "Missing required parameter 'realtimeGet' when calling RealtimeGet");
+            
+    
+            var path_ = "/realtime/get";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>();
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            
+            postBody = Configuration.ApiClient.Serialize(realtimeGet); // http body (model) parameter
+            
+
+            
+            // authentication (read_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("read_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["read_key"] = apiKeyValue;
+            }
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling RealtimeGet: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling RealtimeGet: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<RealTimeQueryResult>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (RealTimeQueryResult) Configuration.ApiClient.Deserialize(response, typeof(RealTimeQueryResult)));
+            
+        }
+        
+        /// <summary>
+        /// List queries 
+        /// </summary>
+        /// <param name="project"></param> 
+        /// <returns>List&lt;ContinuousQuery&gt;</returns>
+        public List<ContinuousQuery> RealtimeList (string project = null)
+        {
+             ApiResponse<List<ContinuousQuery>> response = RealtimeListWithHttpInfo(project);
+             return response.Data;
+        }
+
+        /// <summary>
+        /// List queries 
+        /// </summary>
+        /// <param name="project"></param> 
+        /// <returns>ApiResponse of List&lt;ContinuousQuery&gt;</returns>
+        public ApiResponse< List<ContinuousQuery> > RealtimeListWithHttpInfo (string project = null)
+        {
+            
+    
+            var path_ = "/realtime/list";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            if (project != null) formParams.Add("project", Configuration.ApiClient.ParameterToString(project)); // form parameter
+            
+            
+
+            
+            // authentication (read_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("read_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["read_key"] = apiKeyValue;
+            }
+            
+    
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+    
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling RealtimeList: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling RealtimeList: " + response.ErrorMessage, response.ErrorMessage);
+    
+            return new ApiResponse<List<ContinuousQuery>>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (List<ContinuousQuery>) Configuration.ApiClient.Deserialize(response, typeof(List<ContinuousQuery>)));
+            
+        }
+    
+        /// <summary>
+        /// List queries 
+        /// </summary>
+        /// <param name="project"></param>
+        /// <returns>Task of List&lt;ContinuousQuery&gt;</returns>
+        public async System.Threading.Tasks.Task<List<ContinuousQuery>> RealtimeListAsync (string project = null)
+        {
+             ApiResponse<List<ContinuousQuery>> response = await RealtimeListAsyncWithHttpInfo(project);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        /// List queries 
+        /// </summary>
+        /// <param name="project"></param>
+        /// <returns>Task of ApiResponse (List&lt;ContinuousQuery&gt;)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<List<ContinuousQuery>>> RealtimeListAsyncWithHttpInfo (string project = null)
+        {
+            
+    
+            var path_ = "/realtime/list";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>();
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+            // to determine the Accept header
+            String[] http_header_accepts = new String[] {
+                "application/json"
+            };
+            String http_header_accept = Configuration.ApiClient.SelectHeaderAccept(http_header_accepts);
+            if (http_header_accept != null)
+                headerParams.Add("Accept", Configuration.ApiClient.SelectHeaderAccept(http_header_accepts));
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            
+            if (project != null) formParams.Add("project", Configuration.ApiClient.ParameterToString(project)); // form parameter
+            
+            
+
+            
+            // authentication (read_key) required
+            
+            var apiKeyValue = Configuration.GetApiKeyWithPrefix("read_key");
+            if (!String.IsNullOrEmpty(apiKeyValue))
+            {
+                headerParams["read_key"] = apiKeyValue;
+            }
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, pathParams);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling RealtimeList: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling RealtimeList: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<List<ContinuousQuery>>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (List<ContinuousQuery>) Configuration.ApiClient.Deserialize(response, typeof(List<ContinuousQuery>)));
+            
         }
         
     }

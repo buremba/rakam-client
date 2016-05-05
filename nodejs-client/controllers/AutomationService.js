@@ -1,8 +1,13 @@
 'use strict';
 
-exports.activateRule = function(project, id) {
+exports.automationActivateRule = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * project (String)
+   * id (Integer)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = {
   "success" : true,
@@ -11,13 +16,23 @@ exports.activateRule = function(project, id) {
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }
-exports.addRule = function(automationRule) {
+exports.automationAddRule = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * automationRule (AutomationRule)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = {
   "success" : true,
@@ -26,13 +41,24 @@ exports.addRule = function(automationRule) {
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }
-exports.deactivateRule = function(project, id) {
+exports.automationDeactivateRule = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * project (String)
+   * id (Integer)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = {
   "success" : true,
@@ -41,13 +67,23 @@ exports.deactivateRule = function(project, id) {
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }
-exports.listRules = function(project) {
+exports.automationListRules = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * project (String)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = [ {
   "is_active" : true,
@@ -71,13 +107,24 @@ exports.listRules = function(project) {
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }
-exports.removeRule = function(project, id) {
+exports.automationRemoveRule = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * project (String)
+   * id (Integer)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = {
   "success" : true,
@@ -86,7 +133,13 @@ exports.removeRule = function(project, id) {
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }

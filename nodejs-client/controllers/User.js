@@ -6,133 +6,50 @@ var url = require('url');
 var User = require('./UserService');
 
 
-module.exports.batchCreate = function batchCreate (req, res, next) {
-  var batchCreate = req.swagger.params['BatchCreate'].value;
-  
-
-  var result = User.batchCreate(batchCreate);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.userBatchCreate = function userBatchCreate (req, res, next) {
+  User.userBatchCreate(req.swagger.params, res, next);
 };
 
-module.exports.create = function create (req, res, next) {
-  var user = req.swagger.params['User'].value;
-  
-
-  var result = User.create(user);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.userCreate = function userCreate (req, res, next) {
+  User.userCreate(req.swagger.params, res, next);
 };
 
-module.exports.getUser = function getUser (req, res, next) {
-  var project = req.swagger.params['project'].value;
-  var user = req.swagger.params['user'].value;
-  
-
-  var result = User.getUser(project, user);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.userCreateSegment = function userCreateSegment (req, res, next) {
+  User.userCreateSegment(req.swagger.params, res, next);
 };
 
-module.exports.getEvents = function getEvents (req, res, next) {
-  var project = req.swagger.params['project'].value;
-  var user = req.swagger.params['user'].value;
-  var limit = req.swagger.params['limit'].value;
-  var offset = req.swagger.params['offset'].value;
-  
-
-  var result = User.getEvents(project, user, limit, offset);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.userGetUser = function userGetUser (req, res, next) {
+  User.userGetUser(req.swagger.params, res, next);
 };
 
-module.exports.incrementUserProperty = function incrementUserProperty (req, res, next) {
-  var project = req.swagger.params['project'].value;
-  var user = req.swagger.params['user'].value;
-  
-
-  var result = User.incrementUserProperty(project, user);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.userGetEvents = function userGetEvents (req, res, next) {
+  User.userGetEvents(req.swagger.params, res, next);
 };
 
-module.exports.getMetadata = function getMetadata (req, res, next) {
-  var project = req.swagger.params['project'].value;
-  
-
-  var result = User.getMetadata(project);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.userIncrementProperty = function userIncrementProperty (req, res, next) {
+  User.userIncrementProperty(req.swagger.params, res, next);
 };
 
-module.exports.searchUsers = function searchUsers (req, res, next) {
-  var searchUsers = req.swagger.params['SearchUsers'].value;
-  
-
-  var result = User.searchUsers(searchUsers);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.userMergeUser = function userMergeUser (req, res, next) {
+  User.userMergeUser(req.swagger.params, res, next);
 };
 
-module.exports.setUserPropertiesOnce = function setUserPropertiesOnce (req, res, next) {
-  var setUserProperties = req.swagger.params['SetUserProperties'].value;
-  
-
-  var result = User.setUserPropertiesOnce(setUserProperties);
-
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.userGetMetadata = function userGetMetadata (req, res, next) {
+  User.userGetMetadata(req.swagger.params, res, next);
 };
 
-module.exports.setUserProperties = function setUserProperties (req, res, next) {
-  var setUserProperties = req.swagger.params['SetUserProperties'].value;
-  
+module.exports.userSearchUsers = function userSearchUsers (req, res, next) {
+  User.userSearchUsers(req.swagger.params, res, next);
+};
 
-  var result = User.setUserProperties(setUserProperties);
+module.exports.userSetProperties = function userSetProperties (req, res, next) {
+  User.userSetProperties(req.swagger.params, res, next);
+};
 
-  if(typeof result !== 'undefined') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result || {}, null, 2));
-  }
-  else
-    res.end();
+module.exports.userSetPropertiesOnce = function userSetPropertiesOnce (req, res, next) {
+  User.userSetPropertiesOnce(req.swagger.params, res, next);
+};
+
+module.exports.userUnsetProperty = function userUnsetProperty (req, res, next) {
+  User.userUnsetProperty(req.swagger.params, res, next);
 };

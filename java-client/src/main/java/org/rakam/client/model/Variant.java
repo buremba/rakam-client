@@ -1,15 +1,16 @@
 package org.rakam.client.model;
 
-import org.rakam.StringUtil;
-
-
-
-import io.swagger.annotations.*;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
-@ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+
+
+
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class Variant   {
   
   private String name = null;
@@ -19,6 +20,7 @@ public class Variant   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("name")
   public String getName() {
@@ -31,6 +33,7 @@ public class Variant   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("weight")
   public Integer getWeight() {
@@ -43,6 +46,7 @@ public class Variant   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("data")
   public Object getData() {
@@ -55,14 +59,45 @@ public class Variant   {
   
 
   @Override
-  public String toString()  {
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Variant variant = (Variant) o;
+    return Objects.equals(name, variant.name) &&
+        Objects.equals(weight, variant.weight) &&
+        Objects.equals(data, variant.data);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, weight, data);
+  }
+
+  @Override
+  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Variant {\n");
     
-    sb.append("    name: ").append(StringUtil.toIndentedString(name)).append("\n");
-    sb.append("    weight: ").append(StringUtil.toIndentedString(weight)).append("\n");
-    sb.append("    data: ").append(StringUtil.toIndentedString(data)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    weight: ").append(toIndentedString(weight)).append("\n");
+    sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
   }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+

@@ -45,7 +45,7 @@ class UserApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def batch_create(self, batch_create, **kwargs):
+    def user_batch_create(self, **kwargs):
         """
         Create new user
         
@@ -56,20 +56,17 @@ class UserApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.batch_create(batch_create, callback=callback_function)
+        >>> thread = api.user_batch_create(user_batch_create=user_batch_create_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param BatchCreate batch_create:  (required)
+        :param UserBatchCreate user_batch_create:  (required)
         :return: list[str]
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'batch_create' is set
-        if batch_create is None:
-            raise ValueError("Missing the required parameter `batch_create` when calling `batch_create`")
 
-        all_params = ['batch_create']
+        all_params = ['user_batch_create']
         all_params.append('callback')
 
         params = locals()
@@ -77,10 +74,14 @@ class UserApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method batch_create" % key
+                    " to method user_batch_create" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'user_batch_create' is set
+        if ('user_batch_create' not in params) or (params['user_batch_create'] is None):
+            raise ValueError("Missing the required parameter `user_batch_create` when calling `user_batch_create`")
 
         resource_path = '/user/batch/create'.replace('{format}', 'json')
         method = 'POST'
@@ -95,8 +96,8 @@ class UserApi(object):
         files = {}
 
         body_params = None
-        if 'batch_create' in params:
-            body_params = params['batch_create']
+        if 'user_batch_create' in params:
+            body_params = params['user_batch_create']
 
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
@@ -123,7 +124,7 @@ class UserApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def create(self, user, **kwargs):
+    def user_create(self, **kwargs):
         """
         Create new user
         
@@ -134,7 +135,7 @@ class UserApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.create(user, callback=callback_function)
+        >>> thread = api.user_create(user=user_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -143,9 +144,6 @@ class UserApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'user' is set
-        if user is None:
-            raise ValueError("Missing the required parameter `user` when calling `create`")
 
         all_params = ['user']
         all_params.append('callback')
@@ -155,10 +153,14 @@ class UserApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method create" % key
+                    " to method user_create" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'user' is set
+        if ('user' not in params) or (params['user'] is None):
+            raise ValueError("Missing the required parameter `user` when calling `user_create`")
 
         resource_path = '/user/create'.replace('{format}', 'json')
         method = 'POST'
@@ -201,7 +203,86 @@ class UserApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def get_user(self, **kwargs):
+    def user_create_segment(self, **kwargs):
+        """
+        Get events of the user
+        
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.user_create_segment(user_create_segment=user_create_segment_value, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param UserCreateSegment user_create_segment:  (required)
+        :return: JsonResponse
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['user_create_segment']
+        all_params.append('callback')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method user_create_segment" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        # verify the required parameter 'user_create_segment' is set
+        if ('user_create_segment' not in params) or (params['user_create_segment'] is None):
+            raise ValueError("Missing the required parameter `user_create_segment` when calling `user_create_segment`")
+
+        resource_path = '/user/create_segment'.replace('{format}', 'json')
+        method = 'POST'
+
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = {}
+        files = {}
+
+        body_params = None
+        if 'user_create_segment' in params:
+            body_params = params['user_create_segment']
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['read_key']
+
+        response = self.api_client.call_api(resource_path, method,
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=files,
+                                            response_type='JsonResponse',
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'))
+        return response
+
+    def user_get_user(self, **kwargs):
         """
         Get user
         
@@ -212,7 +293,7 @@ class UserApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get_user(callback=callback_function)
+        >>> thread = api.user_get_user(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -231,10 +312,11 @@ class UserApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get_user" % key
+                    " to method user_get_user" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/user/get'.replace('{format}', 'json')
         method = 'POST'
@@ -265,7 +347,7 @@ class UserApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = []
+        auth_settings = ['read_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,
@@ -279,7 +361,7 @@ class UserApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def get_events(self, **kwargs):
+    def user_get_events(self, **kwargs):
         """
         Get events of the user
         
@@ -290,14 +372,14 @@ class UserApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get_events(callback=callback_function)
+        >>> thread = api.user_get_events(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str project: 
         :param str user: 
         :param int limit: 
-        :param int offset: 
+        :param datetime offset: 
         :return: list[CollectionEvent]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -311,10 +393,11 @@ class UserApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get_events" % key
+                    " to method user_get_events" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/user/get_events'.replace('{format}', 'json')
         method = 'POST'
@@ -349,7 +432,7 @@ class UserApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = []
+        auth_settings = ['read_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,
@@ -363,7 +446,7 @@ class UserApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def increment_user_property(self, **kwargs):
+    def user_increment_property(self, **kwargs):
         """
         Set user property
         
@@ -374,18 +457,17 @@ class UserApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.increment_user_property(callback=callback_function)
+        >>> thread = api.user_increment_property(user_increment_property=user_increment_property_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str project: 
-        :param str user: 
+        :param UserIncrementProperty user_increment_property:  (required)
         :return: JsonResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['project', 'user']
+        all_params = ['user_increment_property']
         all_params.append('callback')
 
         params = locals()
@@ -393,12 +475,16 @@ class UserApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method increment_user_property" % key
+                    " to method user_increment_property" % key
                 )
             params[key] = val
         del params['kwargs']
 
-        resource_path = '/user/increment'.replace('{format}', 'json')
+        # verify the required parameter 'user_increment_property' is set
+        if ('user_increment_property' not in params) or (params['user_increment_property'] is None):
+            raise ValueError("Missing the required parameter `user_increment_property` when calling `user_increment_property`")
+
+        resource_path = '/user/increment_property'.replace('{format}', 'json')
         method = 'POST'
 
         path_params = {}
@@ -409,12 +495,10 @@ class UserApi(object):
 
         form_params = {}
         files = {}
-        if 'project' in params:
-            form_params['project'] = params['project']
-        if 'user' in params:
-            form_params['user'] = params['user']
 
         body_params = None
+        if 'user_increment_property' in params:
+            body_params = params['user_increment_property']
 
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
@@ -441,7 +525,86 @@ class UserApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def get_metadata(self, **kwargs):
+    def user_merge_user(self, **kwargs):
+        """
+        Merge user with anonymous id
+        
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.user_merge_user(user_merge_user=user_merge_user_value, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param UserMergeUser user_merge_user:  (required)
+        :return: bool
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['user_merge_user']
+        all_params.append('callback')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method user_merge_user" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        # verify the required parameter 'user_merge_user' is set
+        if ('user_merge_user' not in params) or (params['user_merge_user'] is None):
+            raise ValueError("Missing the required parameter `user_merge_user` when calling `user_merge_user`")
+
+        resource_path = '/user/merge'.replace('{format}', 'json')
+        method = 'POST'
+
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = {}
+        files = {}
+
+        body_params = None
+        if 'user_merge_user' in params:
+            body_params = params['user_merge_user']
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['read_key']
+
+        response = self.api_client.call_api(resource_path, method,
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=files,
+                                            response_type='bool',
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'))
+        return response
+
+    def user_get_metadata(self, **kwargs):
         """
         Get user storage metadata
         
@@ -452,7 +615,7 @@ class UserApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get_metadata(callback=callback_function)
+        >>> thread = api.user_get_metadata(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -470,10 +633,11 @@ class UserApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get_metadata" % key
+                    " to method user_get_metadata" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/user/metadata'.replace('{format}', 'json')
         method = 'POST'
@@ -502,7 +666,7 @@ class UserApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = []
+        auth_settings = ['read_key']
 
         response = self.api_client.call_api(resource_path, method,
                                             path_params,
@@ -516,7 +680,7 @@ class UserApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def search_users(self, search_users, **kwargs):
+    def user_search_users(self, **kwargs):
         """
         Search users
         
@@ -527,20 +691,17 @@ class UserApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.search_users(search_users, callback=callback_function)
+        >>> thread = api.user_search_users(user_search_users=user_search_users_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param SearchUsers search_users:  (required)
+        :param UserSearchUsers user_search_users:  (required)
         :return: QueryResult
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'search_users' is set
-        if search_users is None:
-            raise ValueError("Missing the required parameter `search_users` when calling `search_users`")
 
-        all_params = ['search_users']
+        all_params = ['user_search_users']
         all_params.append('callback')
 
         params = locals()
@@ -548,10 +709,14 @@ class UserApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method search_users" % key
+                    " to method user_search_users" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'user_search_users' is set
+        if ('user_search_users' not in params) or (params['user_search_users'] is None):
+            raise ValueError("Missing the required parameter `user_search_users` when calling `user_search_users`")
 
         resource_path = '/user/search'.replace('{format}', 'json')
         method = 'POST'
@@ -566,8 +731,87 @@ class UserApi(object):
         files = {}
 
         body_params = None
-        if 'search_users' in params:
-            body_params = params['search_users']
+        if 'user_search_users' in params:
+            body_params = params['user_search_users']
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['read_key']
+
+        response = self.api_client.call_api(resource_path, method,
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=files,
+                                            response_type='QueryResult',
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'))
+        return response
+
+    def user_set_properties(self, **kwargs):
+        """
+        Set user properties
+        
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.user_set_properties(set_user_properties=set_user_properties_value, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param SetUserProperties set_user_properties:  (required)
+        :return: int
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['set_user_properties']
+        all_params.append('callback')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method user_set_properties" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        # verify the required parameter 'set_user_properties' is set
+        if ('set_user_properties' not in params) or (params['set_user_properties'] is None):
+            raise ValueError("Missing the required parameter `set_user_properties` when calling `user_set_properties`")
+
+        resource_path = '/user/set_properties'.replace('{format}', 'json')
+        method = 'POST'
+
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = {}
+        files = {}
+
+        body_params = None
+        if 'set_user_properties' in params:
+            body_params = params['set_user_properties']
 
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
@@ -589,12 +833,12 @@ class UserApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=files,
-                                            response_type='QueryResult',
+                                            response_type='int',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'))
         return response
 
-    def set_user_properties_once(self, set_user_properties, **kwargs):
+    def user_set_properties_once(self, **kwargs):
         """
         Set user properties once
         
@@ -605,7 +849,7 @@ class UserApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.set_user_properties_once(set_user_properties, callback=callback_function)
+        >>> thread = api.user_set_properties_once(set_user_properties=set_user_properties_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -614,9 +858,6 @@ class UserApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'set_user_properties' is set
-        if set_user_properties is None:
-            raise ValueError("Missing the required parameter `set_user_properties` when calling `set_user_properties_once`")
 
         all_params = ['set_user_properties']
         all_params.append('callback')
@@ -626,12 +867,16 @@ class UserApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method set_user_properties_once" % key
+                    " to method user_set_properties_once" % key
                 )
             params[key] = val
         del params['kwargs']
 
-        resource_path = '/user/set_once'.replace('{format}', 'json')
+        # verify the required parameter 'set_user_properties' is set
+        if ('set_user_properties' not in params) or (params['set_user_properties'] is None):
+            raise ValueError("Missing the required parameter `set_user_properties` when calling `user_set_properties_once`")
+
+        resource_path = '/user/set_properties_once'.replace('{format}', 'json')
         method = 'POST'
 
         path_params = {}
@@ -672,9 +917,9 @@ class UserApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def set_user_properties(self, set_user_properties, **kwargs):
+    def user_unset_property(self, **kwargs):
         """
-        Set user properties
+        Unset user property
         
 
         This method makes a synchronous HTTP request by default. To make an
@@ -683,20 +928,17 @@ class UserApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.set_user_properties(set_user_properties, callback=callback_function)
+        >>> thread = api.user_unset_property(user_unset_property=user_unset_property_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param SetUserProperties set_user_properties:  (required)
-        :return: int
+        :param UserUnsetProperty user_unset_property:  (required)
+        :return: JsonResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'set_user_properties' is set
-        if set_user_properties is None:
-            raise ValueError("Missing the required parameter `set_user_properties` when calling `set_user_properties`")
 
-        all_params = ['set_user_properties']
+        all_params = ['user_unset_property']
         all_params.append('callback')
 
         params = locals()
@@ -704,12 +946,16 @@ class UserApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method set_user_properties" % key
+                    " to method user_unset_property" % key
                 )
             params[key] = val
         del params['kwargs']
 
-        resource_path = '/user/set_property'.replace('{format}', 'json')
+        # verify the required parameter 'user_unset_property' is set
+        if ('user_unset_property' not in params) or (params['user_unset_property'] is None):
+            raise ValueError("Missing the required parameter `user_unset_property` when calling `user_unset_property`")
+
+        resource_path = '/user/unset_properties'.replace('{format}', 'json')
         method = 'POST'
 
         path_params = {}
@@ -722,8 +968,8 @@ class UserApi(object):
         files = {}
 
         body_params = None
-        if 'set_user_properties' in params:
-            body_params = params['set_user_properties']
+        if 'user_unset_property' in params:
+            body_params = params['user_unset_property']
 
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
@@ -745,7 +991,7 @@ class UserApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=files,
-                                            response_type='int',
+                                            response_type='JsonResponse',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'))
         return response

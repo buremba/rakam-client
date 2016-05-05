@@ -1,24 +1,19 @@
 package org.rakam.client.api;
 
+import com.sun.jersey.api.client.GenericType;
+
 import org.rakam.ApiException;
 import org.rakam.ApiClient;
 import org.rakam.Configuration;
 import org.rakam.Pair;
-import org.rakam.TypeRef;
-
-import org.rakam.client.model.*;
-
-import java.util.*;
 
 import java.util.*;
 import java.util.Map;
 import org.rakam.client.model.JsonResponse;
 
-import java.io.File;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class UsermailboxApi {
   private ApiClient apiClient;
 
@@ -49,9 +44,8 @@ public class UsermailboxApi {
    * @param offset 
    * @return List<List<Message>>
    */
-  public List<List<Message>> get (String project, String user, Integer parent, Integer limit, Long offset) throws ApiException {
+  public List<List<Message>> userMailboxGet(String project, String user, Integer parent, Integer limit, Long offset) throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/user/mailbox/get".replaceAll("\\{format\\}","json");
@@ -90,15 +84,9 @@ public class UsermailboxApi {
     String[] authNames = new String[] { "read_key" };
 
     
-
+    GenericType<List<List<Message>>> returnType = new GenericType<List<List<Message>>>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<List<List<Message>>>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
   /**
@@ -107,9 +95,8 @@ public class UsermailboxApi {
    * @param project 
    * @return List<Map<String, Object>>
    */
-  public List<Map<String, Object>> getConnectedUsers (String project) throws ApiException {
+  public List<Map<String, Object>> userMailboxGetConnectedUsers(String project) throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/user/mailbox/get_online_users".replaceAll("\\{format\\}","json");
@@ -140,15 +127,9 @@ public class UsermailboxApi {
     String[] authNames = new String[] { "read_key" };
 
     
-
+    GenericType<List<Map<String, Object>>> returnType = new GenericType<List<Map<String, Object>>>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<List<Map<String, Object>>>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
   /**
@@ -159,9 +140,8 @@ public class UsermailboxApi {
    * @param messageIds 
    * @return JsonResponse
    */
-  public JsonResponse markAsRead (String project, String user, List<String> messageIds) throws ApiException {
+  public JsonResponse userMailboxMarkAsRead(String project, String user, List<Integer> messageIds) throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/user/mailbox/mark_as_read".replaceAll("\\{format\\}","json");
@@ -196,15 +176,9 @@ public class UsermailboxApi {
     String[] authNames = new String[] { "write_key" };
 
     
-
+    GenericType<JsonResponse> returnType = new GenericType<JsonResponse>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<JsonResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
 }

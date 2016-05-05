@@ -1,56 +1,33 @@
 package org.rakam.client.model;
 
-import org.rakam.StringUtil;
-import java.util.*;
-
-
-
-import io.swagger.annotations.*;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.util.*;
+import org.rakam.client.model.Measure;
 
 
-@ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+
+
+
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class RealTimeReport   {
   
   private String project = null;
   private String name = null;
-
-public enum AggregationEnum {
-  COUNT("COUNT"),
-  COUNT_UNIQUE("COUNT_UNIQUE"),
-  SUM("SUM"),
-  MINIMUM("MINIMUM"),
-  MAXIMUM("MAXIMUM"),
-  APPROXIMATE_UNIQUE("APPROXIMATE_UNIQUE"),
-  VARIANCE("VARIANCE"),
-  POPULATION_VARIANCE("POPULATION_VARIANCE"),
-  STANDARD_DEVIATION("STANDARD_DEVIATION"),
-  AVERAGE("AVERAGE");
-
-  private String value;
-
-  AggregationEnum(String value) {
-    this.value = value;
-  }
-
-  @Override
-  public String toString() {
-    return value;
-  }
-}
-
-  private AggregationEnum aggregation = null;
+  private List<Measure> measures = new ArrayList<Measure>();
   private String tableName = null;
   private List<String> collections = new ArrayList<String>();
   private String filter = null;
-  private String measure = null;
   private List<String> dimensions = new ArrayList<String>();
 
   
   /**
    **/
-  @ApiModelProperty(required = true, value = "")
+  
+  @ApiModelProperty(value = "")
   @JsonProperty("project")
   public String getProject() {
     return project;
@@ -62,7 +39,8 @@ public enum AggregationEnum {
   
   /**
    **/
-  @ApiModelProperty(required = true, value = "")
+  
+  @ApiModelProperty(value = "")
   @JsonProperty("name")
   public String getName() {
     return name;
@@ -74,19 +52,21 @@ public enum AggregationEnum {
   
   /**
    **/
-  @ApiModelProperty(required = true, value = "")
-  @JsonProperty("aggregation")
-  public AggregationEnum getAggregation() {
-    return aggregation;
+  
+  @ApiModelProperty(value = "")
+  @JsonProperty("measures")
+  public List<Measure> getMeasures() {
+    return measures;
   }
-  public void setAggregation(AggregationEnum aggregation) {
-    this.aggregation = aggregation;
+  public void setMeasures(List<Measure> measures) {
+    this.measures = measures;
   }
 
   
   /**
    **/
-  @ApiModelProperty(required = true, value = "")
+  
+  @ApiModelProperty(value = "")
   @JsonProperty("table_name")
   public String getTableName() {
     return tableName;
@@ -98,6 +78,7 @@ public enum AggregationEnum {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("collections")
   public List<String> getCollections() {
@@ -110,6 +91,7 @@ public enum AggregationEnum {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("filter")
   public String getFilter() {
@@ -122,18 +104,7 @@ public enum AggregationEnum {
   
   /**
    **/
-  @ApiModelProperty(value = "")
-  @JsonProperty("measure")
-  public String getMeasure() {
-    return measure;
-  }
-  public void setMeasure(String measure) {
-    this.measure = measure;
-  }
-
   
-  /**
-   **/
   @ApiModelProperty(value = "")
   @JsonProperty("dimensions")
   public List<String> getDimensions() {
@@ -146,19 +117,53 @@ public enum AggregationEnum {
   
 
   @Override
-  public String toString()  {
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    RealTimeReport realTimeReport = (RealTimeReport) o;
+    return Objects.equals(project, realTimeReport.project) &&
+        Objects.equals(name, realTimeReport.name) &&
+        Objects.equals(measures, realTimeReport.measures) &&
+        Objects.equals(tableName, realTimeReport.tableName) &&
+        Objects.equals(collections, realTimeReport.collections) &&
+        Objects.equals(filter, realTimeReport.filter) &&
+        Objects.equals(dimensions, realTimeReport.dimensions);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(project, name, measures, tableName, collections, filter, dimensions);
+  }
+
+  @Override
+  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class RealTimeReport {\n");
     
-    sb.append("    project: ").append(StringUtil.toIndentedString(project)).append("\n");
-    sb.append("    name: ").append(StringUtil.toIndentedString(name)).append("\n");
-    sb.append("    aggregation: ").append(StringUtil.toIndentedString(aggregation)).append("\n");
-    sb.append("    tableName: ").append(StringUtil.toIndentedString(tableName)).append("\n");
-    sb.append("    collections: ").append(StringUtil.toIndentedString(collections)).append("\n");
-    sb.append("    filter: ").append(StringUtil.toIndentedString(filter)).append("\n");
-    sb.append("    measure: ").append(StringUtil.toIndentedString(measure)).append("\n");
-    sb.append("    dimensions: ").append(StringUtil.toIndentedString(dimensions)).append("\n");
+    sb.append("    project: ").append(toIndentedString(project)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    measures: ").append(toIndentedString(measures)).append("\n");
+    sb.append("    tableName: ").append(toIndentedString(tableName)).append("\n");
+    sb.append("    collections: ").append(toIndentedString(collections)).append("\n");
+    sb.append("    filter: ").append(toIndentedString(filter)).append("\n");
+    sb.append("    dimensions: ").append(toIndentedString(dimensions)).append("\n");
     sb.append("}");
     return sb.toString();
   }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+

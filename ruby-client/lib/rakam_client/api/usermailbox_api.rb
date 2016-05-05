@@ -4,8 +4,8 @@ module RakamClient
   class UsermailboxApi
     attr_accessor :api_client
 
-    def initialize(api_client = nil)
-      @api_client = api_client || Configuration.api_client
+    def initialize(api_client = ApiClient.default)
+      @api_client = api_client
     end
 
     # Get user mailbox
@@ -17,9 +17,23 @@ module RakamClient
     # @option opts [Integer] :limit 
     # @option opts [Integer] :offset 
     # @return [Array<Array<Message>>]
-    def get(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: UsermailboxApi#get ..."
+    def user_mailbox_get(opts = {})
+      data, status_code, headers = user_mailbox_get_with_http_info(opts)
+      return data
+    end
+
+    # Get user mailbox
+    # Returns the last mails sent to the user
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :project 
+    # @option opts [String] :user 
+    # @option opts [Integer] :parent 
+    # @option opts [Integer] :limit 
+    # @option opts [Integer] :offset 
+    # @return [Array<(Array<Array<Message>>, Fixnum, Hash)>] Array<Array<Message>> data, response status code and response headers
+    def user_mailbox_get_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: UsermailboxApi#user_mailbox_get ..."
       end
       
       # resource path
@@ -52,17 +66,17 @@ module RakamClient
       
 
       auth_names = ['read_key']
-      result = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'Array<Array<Message>>')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: UsermailboxApi#get. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: UsermailboxApi#user_mailbox_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
     # Get connected users
@@ -70,9 +84,19 @@ module RakamClient
     # @param [Hash] opts the optional parameters
     # @option opts [String] :project 
     # @return [Array<Hash<String, Object>>]
-    def get_connected_users(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: UsermailboxApi#get_connected_users ..."
+    def user_mailbox_get_connected_users(opts = {})
+      data, status_code, headers = user_mailbox_get_connected_users_with_http_info(opts)
+      return data
+    end
+
+    # Get connected users
+    # 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :project 
+    # @return [Array<(Array<Hash<String, Object>>, Fixnum, Hash)>] Array<Hash<String, Object>> data, response status code and response headers
+    def user_mailbox_get_connected_users_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: UsermailboxApi#user_mailbox_get_connected_users ..."
       end
       
       # resource path
@@ -101,17 +125,17 @@ module RakamClient
       
 
       auth_names = ['read_key']
-      result = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'Array<Hash<String, Object>>')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: UsermailboxApi#get_connected_users. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: UsermailboxApi#user_mailbox_get_connected_users\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
     # Mark mail as read
@@ -119,11 +143,23 @@ module RakamClient
     # @param [Hash] opts the optional parameters
     # @option opts [String] :project 
     # @option opts [String] :user 
-    # @option opts [Array<String>] :message_ids 
+    # @option opts [Array<Integer>] :message_ids 
     # @return [JsonResponse]
-    def mark_as_read(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: UsermailboxApi#mark_as_read ..."
+    def user_mailbox_mark_as_read(opts = {})
+      data, status_code, headers = user_mailbox_mark_as_read_with_http_info(opts)
+      return data
+    end
+
+    # Mark mail as read
+    # Marks the specified mails as read.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :project 
+    # @option opts [String] :user 
+    # @option opts [Array<Integer>] :message_ids 
+    # @return [Array<(JsonResponse, Fixnum, Hash)>] JsonResponse data, response status code and response headers
+    def user_mailbox_mark_as_read_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: UsermailboxApi#user_mailbox_mark_as_read ..."
       end
       
       # resource path
@@ -147,24 +183,24 @@ module RakamClient
       form_params = {}
       form_params["project"] = opts[:'project'] if opts[:'project']
       form_params["user"] = opts[:'user'] if opts[:'user']
-      form_params["message_ids"] = opts[:'message_ids'] if opts[:'message_ids']
+      form_params["message_ids"] = @api_client.build_collection_param(opts[:'message_ids'], :multi) if opts[:'message_ids']
 
       # http body (model)
       post_body = nil
       
 
       auth_names = ['write_key']
-      result = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'JsonResponse')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: UsermailboxApi#mark_as_read. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: UsermailboxApi#user_mailbox_mark_as_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
   end
 end

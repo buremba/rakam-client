@@ -23,7 +23,6 @@ extension SwaggerClientAPI {
          - examples: [{contentType=application/json, example={
   "result" : [ [ "{}" ] ],
   "metadata" : [ {
-    "nullable" : true,
     "descriptiveName" : "aeiou",
     "unique" : true,
     "name" : "aeiou",
@@ -33,13 +32,14 @@ extension SwaggerClientAPI {
   } ],
   "failed" : true,
   "error" : {
-    "query" : "aeiou",
+    "charPositionInLine" : 123,
     "sqlState" : "aeiou",
     "errorCode" : 123,
-    "message" : "aeiou"
+    "message" : "aeiou",
+    "errorLine" : 123
   },
   "properties" : {
-    "key" : "{}"
+    "key" : { }
   }
 }}]
          
@@ -47,7 +47,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<QueryResult> 
          */
-        public class func execute(retentionQuery retentionQuery: RetentionQuery) -> RequestBuilder<QueryResult> {
+        public class func retentionAnalyzerExecute(retentionQuery retentionQuery: RetentionQuery) -> RequestBuilder<QueryResult> {
             let path = "/retention/analyze"
             let URLString = SwaggerClientAPI.basePath + path
             

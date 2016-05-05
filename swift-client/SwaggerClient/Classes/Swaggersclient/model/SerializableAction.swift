@@ -12,13 +12,15 @@ public class SerializableAction: JSONEncodable {
 
     public enum SwaggerType: String { 
         case Client = "client"
-        case User_action = "user_action"
+        case UserAction = "user_action"
         case Event = "event"
     }
     
     public var type: SwaggerType?
     public var value: String?
     
+
+    public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {

@@ -15,6 +15,30 @@ extension SwaggerClientAPI {
          
          List installed modules
          
+         - GET /admin/configurations
+         - 
+         - API Key:
+           - type: apiKey master_key 
+           - name: master_key
+
+         - returns: RequestBuilder<Void> 
+         */
+        public class func adminGetConfigurations() -> RequestBuilder<Void> {
+            let path = "/admin/configurations"
+            let URLString = SwaggerClientAPI.basePath + path
+            
+            let nillableParameters: [String:AnyObject?] = [:]
+            let parameters = APIHelper.rejectNil(nillableParameters)
+
+            let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+            return requestBuilder.init(method: "GET", URLString: URLString, parameters: parameters, isBody: true)
+        }
+    
+        /**
+         
+         List installed modules for ui
+         
          - GET /admin/modules
          - 
          - API Key:
@@ -23,7 +47,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<Void> 
          */
-        public class func getModules() -> RequestBuilder<Void> {
+        public class func adminModules() -> RequestBuilder<Void> {
             let path = "/admin/modules"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -33,6 +57,59 @@ extension SwaggerClientAPI {
             let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
             return requestBuilder.init(method: "GET", URLString: URLString, parameters: parameters, isBody: true)
+        }
+    
+        /**
+         
+         Get types
+         
+         - GET /admin/types
+         - 
+         - API Key:
+           - type: apiKey master_key 
+           - name: master_key
+
+         - returns: RequestBuilder<Void> 
+         */
+        public class func adminGetTypes() -> RequestBuilder<Void> {
+            let path = "/admin/types"
+            let URLString = SwaggerClientAPI.basePath + path
+            
+            let nillableParameters: [String:AnyObject?] = [:]
+            let parameters = APIHelper.rejectNil(nillableParameters)
+
+            let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+            return requestBuilder.init(method: "GET", URLString: URLString, parameters: parameters, isBody: true)
+        }
+    
+        /**
+         
+         Get collection names
+         
+         - POST /project/collection
+         - 
+         - API Key:
+           - type: apiKey read_key 
+           - name: read_key
+         - examples: [{contentType=application/json, example=[ "aeiou" ]}]
+         
+         - parameter project: (form) 
+
+         - returns: RequestBuilder<[String]> 
+         */
+        public class func projectCollections(project project: String?) -> RequestBuilder<[String]> {
+            let path = "/project/collection"
+            let URLString = SwaggerClientAPI.basePath + path
+            
+            let nillableParameters: [String:AnyObject?] = [
+                "project": project
+            ]
+            let parameters = APIHelper.rejectNil(nillableParameters)
+
+            let requestBuilder: RequestBuilder<[String]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
         }
     
         /**
@@ -53,12 +130,44 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<JsonResponse> 
          */
-        public class func createProject(name name: String?) -> RequestBuilder<JsonResponse> {
+        public class func projectCreateProject(name name: String?) -> RequestBuilder<JsonResponse> {
             let path = "/project/create"
             let URLString = SwaggerClientAPI.basePath + path
             
             let nillableParameters: [String:AnyObject?] = [
                 "name": name
+            ]
+            let parameters = APIHelper.rejectNil(nillableParameters)
+
+            let requestBuilder: RequestBuilder<JsonResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
+        }
+    
+        /**
+         
+         Delete project
+         
+         - POST /project/delete
+         - 
+         - API Key:
+           - type: apiKey master_key 
+           - name: master_key
+         - examples: [{contentType=application/json, example={
+  "success" : true,
+  "message" : "aeiou"
+}}]
+         
+         - parameter project: (form) 
+
+         - returns: RequestBuilder<JsonResponse> 
+         */
+        public class func projectDeleteProject(project project: String?) -> RequestBuilder<JsonResponse> {
+            let path = "/project/delete"
+            let URLString = SwaggerClientAPI.basePath + path
+            
+            let nillableParameters: [String:AnyObject?] = [
+                "project": project
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
@@ -79,7 +188,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<Void> 
          */
-        public class func getProjects() -> RequestBuilder<Void> {
+        public class func projectGetProjects() -> RequestBuilder<Void> {
             let path = "/project/list"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -103,7 +212,6 @@ extension SwaggerClientAPI {
          - examples: [{contentType=application/json, example=[ {
   "name" : "aeiou",
   "fields" : [ {
-    "nullable" : true,
     "descriptiveName" : "aeiou",
     "unique" : true,
     "name" : "aeiou",
@@ -114,19 +222,96 @@ extension SwaggerClientAPI {
 } ]}]
          
          - parameter project: (form) 
+         - parameter names: (form) 
 
          - returns: RequestBuilder<[Collection]> 
          */
-        public class func schema(project project: String?) -> RequestBuilder<[Collection]> {
+        public class func projectSchema(project project: String?, names: [String]?) -> RequestBuilder<[Collection]> {
             let path = "/project/schema"
             let URLString = SwaggerClientAPI.basePath + path
             
             let nillableParameters: [String:AnyObject?] = [
-                "project": project
+                "project": project,
+                "names": names
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
             let requestBuilder: RequestBuilder<[Collection]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
+        }
+    
+        /**
+         
+         Add fields to collections
+         
+         - POST /project/schema/add
+         - 
+         - API Key:
+           - type: apiKey master_key 
+           - name: master_key
+         - examples: [{contentType=application/json, example=[ {
+  "descriptiveName" : "aeiou",
+  "unique" : true,
+  "name" : "aeiou",
+  "description" : "aeiou",
+  "type" : "aeiou",
+  "category" : "aeiou"
+} ]}]
+         
+         - parameter projectAddFieldsToSchema: (body) 
+
+         - returns: RequestBuilder<[SchemaField]> 
+         */
+        public class func projectAddFieldsToSchema(projectAddFieldsToSchema projectAddFieldsToSchema: Project_AddFieldsToSchema) -> RequestBuilder<[SchemaField]> {
+            let path = "/project/schema/add"
+            let URLString = SwaggerClientAPI.basePath + path
+            
+            let parameters = projectAddFieldsToSchema.encodeToJSON() as? [String:AnyObject]
+
+            let requestBuilder: RequestBuilder<[SchemaField]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+            return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: true)
+        }
+    
+        /**
+         
+         Add fields to collections by transforming other schemas
+         
+         - POST /project/schema/add/custom
+         - 
+         - API Key:
+           - type: apiKey master_key 
+           - name: master_key
+         - examples: [{contentType=application/json, example=[ {
+  "descriptiveName" : "aeiou",
+  "unique" : true,
+  "name" : "aeiou",
+  "description" : "aeiou",
+  "type" : "aeiou",
+  "category" : "aeiou"
+} ]}]
+         
+         - parameter project: (form) 
+         - parameter collection: (form) 
+         - parameter schemaType: (form) 
+         - parameter schema: (form) 
+
+         - returns: RequestBuilder<[SchemaField]> 
+         */
+        public class func projectAddCustomFieldsToSchema(project project: String?, collection: String?, schemaType: String?, schema: String?) -> RequestBuilder<[SchemaField]> {
+            let path = "/project/schema/add/custom"
+            let URLString = SwaggerClientAPI.basePath + path
+            
+            let nillableParameters: [String:AnyObject?] = [
+                "project": project,
+                "collection": collection,
+                "schemaType": schemaType,
+                "schema": schema
+            ]
+            let parameters = APIHelper.rejectNil(nillableParameters)
+
+            let requestBuilder: RequestBuilder<[SchemaField]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
             return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
         }

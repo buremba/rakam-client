@@ -53,11 +53,10 @@ class RealTimeReport implements ArrayAccess
     static $swaggerTypes = array(
         'project' => 'string',
         'name' => 'string',
-        'aggregation' => 'string',
+        'measures' => '\client.model\Measure[]',
         'table_name' => 'string',
         'collections' => 'string[]',
         'filter' => 'string',
-        'measure' => 'string',
         'dimensions' => 'string[]'
     );
   
@@ -68,11 +67,10 @@ class RealTimeReport implements ArrayAccess
     static $attributeMap = array(
         'project' => 'project',
         'name' => 'name',
-        'aggregation' => 'aggregation',
+        'measures' => 'measures',
         'table_name' => 'table_name',
         'collections' => 'collections',
         'filter' => 'filter',
-        'measure' => 'measure',
         'dimensions' => 'dimensions'
     );
   
@@ -83,11 +81,10 @@ class RealTimeReport implements ArrayAccess
     static $setters = array(
         'project' => 'setProject',
         'name' => 'setName',
-        'aggregation' => 'setAggregation',
+        'measures' => 'setMeasures',
         'table_name' => 'setTableName',
         'collections' => 'setCollections',
         'filter' => 'setFilter',
-        'measure' => 'setMeasure',
         'dimensions' => 'setDimensions'
     );
   
@@ -98,11 +95,10 @@ class RealTimeReport implements ArrayAccess
     static $getters = array(
         'project' => 'getProject',
         'name' => 'getName',
-        'aggregation' => 'getAggregation',
+        'measures' => 'getMeasures',
         'table_name' => 'getTableName',
         'collections' => 'getCollections',
         'filter' => 'getFilter',
-        'measure' => 'getMeasure',
         'dimensions' => 'getDimensions'
     );
   
@@ -120,10 +116,10 @@ class RealTimeReport implements ArrayAccess
     protected $name;
     
     /**
-      * $aggregation 
-      * @var string
+      * $measures 
+      * @var \client.model\Measure[]
       */
-    protected $aggregation;
+    protected $measures;
     
     /**
       * $table_name 
@@ -144,12 +140,6 @@ class RealTimeReport implements ArrayAccess
     protected $filter;
     
     /**
-      * $measure 
-      * @var string
-      */
-    protected $measure;
-    
-    /**
       * $dimensions 
       * @var string[]
       */
@@ -165,11 +155,10 @@ class RealTimeReport implements ArrayAccess
         if ($data != null) {
             $this->project = $data["project"];
             $this->name = $data["name"];
-            $this->aggregation = $data["aggregation"];
+            $this->measures = $data["measures"];
             $this->table_name = $data["table_name"];
             $this->collections = $data["collections"];
             $this->filter = $data["filter"];
-            $this->measure = $data["measure"];
             $this->dimensions = $data["dimensions"];
         }
     }
@@ -217,26 +206,23 @@ class RealTimeReport implements ArrayAccess
     }
     
     /**
-     * Gets aggregation
-     * @return string
+     * Gets measures
+     * @return \client.model\Measure[]
      */
-    public function getAggregation()
+    public function getMeasures()
     {
-        return $this->aggregation;
+        return $this->measures;
     }
   
     /**
-     * Sets aggregation
-     * @param string $aggregation 
+     * Sets measures
+     * @param \client.model\Measure[] $measures 
      * @return $this
      */
-    public function setAggregation($aggregation)
+    public function setMeasures($measures)
     {
-        $allowed_values = array("COUNT", "COUNT_UNIQUE", "SUM", "MINIMUM", "MAXIMUM", "APPROXIMATE_UNIQUE", "VARIANCE", "POPULATION_VARIANCE", "STANDARD_DEVIATION", "AVERAGE");
-        if (!in_array($aggregation, $allowed_values)) {
-            throw new \InvalidArgumentException("Invalid value for 'aggregation', must be one of 'COUNT', 'COUNT_UNIQUE', 'SUM', 'MINIMUM', 'MAXIMUM', 'APPROXIMATE_UNIQUE', 'VARIANCE', 'POPULATION_VARIANCE', 'STANDARD_DEVIATION', 'AVERAGE'");
-        }
-        $this->aggregation = $aggregation;
+        
+        $this->measures = $measures;
         return $this;
     }
     
@@ -300,27 +286,6 @@ class RealTimeReport implements ArrayAccess
     {
         
         $this->filter = $filter;
-        return $this;
-    }
-    
-    /**
-     * Gets measure
-     * @return string
-     */
-    public function getMeasure()
-    {
-        return $this->measure;
-    }
-  
-    /**
-     * Sets measure
-     * @param string $measure 
-     * @return $this
-     */
-    public function setMeasure($measure)
-    {
-        
-        $this->measure = $measure;
         return $this;
     }
     

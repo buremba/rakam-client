@@ -1,50 +1,51 @@
 package org.rakam.client.model;
 
-import org.rakam.StringUtil;
-
-
-
-import io.swagger.annotations.*;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
-@ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+
+
+
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class EventFilterAggregation   {
   
   private String field = null;
   private Long minimum = null;
   private Long maximum = null;
 
-public enum TypeEnum {
-  COUNT("COUNT"),
-  COUNT_UNIQUE("COUNT_UNIQUE"),
-  SUM("SUM"),
-  MINIMUM("MINIMUM"),
-  MAXIMUM("MAXIMUM"),
-  APPROXIMATE_UNIQUE("APPROXIMATE_UNIQUE"),
-  VARIANCE("VARIANCE"),
-  POPULATION_VARIANCE("POPULATION_VARIANCE"),
-  STANDARD_DEVIATION("STANDARD_DEVIATION"),
-  AVERAGE("AVERAGE");
 
-  private String value;
+  public enum TypeEnum {
+    COUNT("COUNT"),
+    COUNT_UNIQUE("COUNT_UNIQUE"),
+    SUM("SUM"),
+    MINIMUM("MINIMUM"),
+    MAXIMUM("MAXIMUM"),
+    AVERAGE("AVERAGE"),
+    APPROXIMATE_UNIQUE("APPROXIMATE_UNIQUE");
 
-  TypeEnum(String value) {
-    this.value = value;
+    private String value;
+
+    TypeEnum(String value) {
+      this.value = value;
+    }
+
+    @Override
+    @JsonValue
+    public String toString() {
+      return value;
+    }
   }
-
-  @Override
-  public String toString() {
-    return value;
-  }
-}
 
   private TypeEnum type = null;
 
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("field")
   public String getField() {
@@ -57,6 +58,7 @@ public enum TypeEnum {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("minimum")
   public Long getMinimum() {
@@ -69,6 +71,7 @@ public enum TypeEnum {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("maximum")
   public Long getMaximum() {
@@ -81,6 +84,7 @@ public enum TypeEnum {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("type")
   public TypeEnum getType() {
@@ -93,15 +97,47 @@ public enum TypeEnum {
   
 
   @Override
-  public String toString()  {
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    EventFilterAggregation eventFilterAggregation = (EventFilterAggregation) o;
+    return Objects.equals(field, eventFilterAggregation.field) &&
+        Objects.equals(minimum, eventFilterAggregation.minimum) &&
+        Objects.equals(maximum, eventFilterAggregation.maximum) &&
+        Objects.equals(type, eventFilterAggregation.type);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(field, minimum, maximum, type);
+  }
+
+  @Override
+  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class EventFilterAggregation {\n");
     
-    sb.append("    field: ").append(StringUtil.toIndentedString(field)).append("\n");
-    sb.append("    minimum: ").append(StringUtil.toIndentedString(minimum)).append("\n");
-    sb.append("    maximum: ").append(StringUtil.toIndentedString(maximum)).append("\n");
-    sb.append("    type: ").append(StringUtil.toIndentedString(type)).append("\n");
+    sb.append("    field: ").append(toIndentedString(field)).append("\n");
+    sb.append("    minimum: ").append(toIndentedString(minimum)).append("\n");
+    sb.append("    maximum: ").append(toIndentedString(maximum)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
   }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+

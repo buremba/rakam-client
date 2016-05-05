@@ -15,6 +15,8 @@ public class EventList: JSONEncodable {
     public var events: [Event]?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

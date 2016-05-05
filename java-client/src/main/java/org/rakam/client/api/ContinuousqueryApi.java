@@ -1,25 +1,19 @@
 package org.rakam.client.api;
 
+import com.sun.jersey.api.client.GenericType;
+
 import org.rakam.ApiException;
 import org.rakam.ApiClient;
 import org.rakam.Configuration;
 import org.rakam.Pair;
-import org.rakam.TypeRef;
-
-import org.rakam.client.model.*;
-
-import java.util.*;
 
 import org.rakam.client.model.ContinuousQuery;
 import org.rakam.client.model.JsonResponse;
 import org.rakam.client.model.Collection;
-import org.rakam.client.model.SchemaField;
 
-import java.io.File;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class ContinuousqueryApi {
   private ApiClient apiClient;
 
@@ -46,13 +40,12 @@ public class ContinuousqueryApi {
    * @param continuousQuery 
    * @return JsonResponse
    */
-  public JsonResponse create (ContinuousQuery continuousQuery) throws ApiException {
+  public JsonResponse continuousQueryCreate(ContinuousQuery continuousQuery) throws ApiException {
     Object postBody = continuousQuery;
-    byte[] postBinaryBody = null;
     
      // verify the required parameter 'continuousQuery' is set
      if (continuousQuery == null) {
-        throw new ApiException(400, "Missing the required parameter 'continuousQuery' when calling create");
+        throw new ApiException(400, "Missing the required parameter 'continuousQuery' when calling continuousQueryCreate");
      }
      
     // create path and map variables
@@ -82,27 +75,20 @@ public class ContinuousqueryApi {
     String[] authNames = new String[] { "master_key" };
 
     
-
+    GenericType<JsonResponse> returnType = new GenericType<JsonResponse>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<JsonResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
   /**
    * Delete stream
    * 
    * @param project 
-   * @param name 
+   * @param tableName 
    * @return JsonResponse
    */
-  public JsonResponse delete (String project, String name) throws ApiException {
+  public JsonResponse continuousQueryDelete(String project, String tableName) throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/continuous-query/delete".replaceAll("\\{format\\}","json");
@@ -118,8 +104,8 @@ public class ContinuousqueryApi {
 
     if (project != null)
       formParams.put("project", project);
-    if (name != null)
-      formParams.put("name", name);
+    if (tableName != null)
+      formParams.put("table_name", tableName);
     
 
     final String[] accepts = {
@@ -135,15 +121,55 @@ public class ContinuousqueryApi {
     String[] authNames = new String[] { "master_key" };
 
     
+    GenericType<JsonResponse> returnType = new GenericType<JsonResponse>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
+    
+  }
+  
+  /**
+   * Get continuous query
+   * 
+   * @param project 
+   * @param tableName 
+   * @return ContinuousQuery
+   */
+  public ContinuousQuery continuousQueryGet(String project, String tableName) throws ApiException {
+    Object postBody = null;
+    
+    // create path and map variables
+    String path = "/continuous-query/get".replaceAll("\\{format\\}","json");
+
+    // query params
+    List<Pair> queryParams = new ArrayList<Pair>();
+    Map<String, String> headerParams = new HashMap<String, String>();
+    Map<String, Object> formParams = new HashMap<String, Object>();
 
     
-    
-    TypeRef returnType = new TypeRef<JsonResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
+
     
 
+    if (project != null)
+      formParams.put("project", project);
+    if (tableName != null)
+      formParams.put("table_name", tableName);
+    
 
+    final String[] accepts = {
+      "application/json"
+    };
+    final String accept = apiClient.selectHeaderAccept(accepts);
+
+    final String[] contentTypes = {
+      "application/json"
+    };
+    final String contentType = apiClient.selectHeaderContentType(contentTypes);
+
+    String[] authNames = new String[] { "read_key" };
+
+    
+    GenericType<ContinuousQuery> returnType = new GenericType<ContinuousQuery>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
+    
   }
   
   /**
@@ -152,9 +178,8 @@ public class ContinuousqueryApi {
    * @param project 
    * @return List<ContinuousQuery>
    */
-  public List<ContinuousQuery> listQueries (String project) throws ApiException {
+  public List<ContinuousQuery> continuousQueryListQueries(String project) throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/continuous-query/list".replaceAll("\\{format\\}","json");
@@ -185,26 +210,20 @@ public class ContinuousqueryApi {
     String[] authNames = new String[] { "read_key" };
 
     
-
+    GenericType<List<ContinuousQuery>> returnType = new GenericType<List<ContinuousQuery>>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<List<ContinuousQuery>>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
   /**
    * Get query schema
    * 
    * @param project 
+   * @param names 
    * @return List<Collection>
    */
-  public List<Collection> schema (String project) throws ApiException {
+  public List<Collection> continuousQuerySchema(String project, List<String> names) throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/continuous-query/schema".replaceAll("\\{format\\}","json");
@@ -220,6 +239,8 @@ public class ContinuousqueryApi {
 
     if (project != null)
       formParams.put("project", project);
+    if (names != null)
+      formParams.put("names", names);
     
 
     final String[] accepts = {
@@ -235,15 +256,9 @@ public class ContinuousqueryApi {
     String[] authNames = new String[] { "read_key" };
 
     
-
+    GenericType<List<Collection>> returnType = new GenericType<List<Collection>>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<List<Collection>>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
   /**
@@ -251,11 +266,10 @@ public class ContinuousqueryApi {
    * 
    * @param project 
    * @param query 
-   * @return List<SchemaField>
+   * @return Boolean
    */
-  public List<SchemaField> test (String project, String query) throws ApiException {
+  public Boolean continuousQueryTest(String project, String query) throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/continuous-query/test".replaceAll("\\{format\\}","json");
@@ -288,15 +302,9 @@ public class ContinuousqueryApi {
     String[] authNames = new String[] { "read_key" };
 
     
-
+    GenericType<Boolean> returnType = new GenericType<Boolean>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<List<SchemaField>>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
 }

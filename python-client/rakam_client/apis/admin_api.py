@@ -45,7 +45,7 @@ class AdminApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def get_modules(self, **kwargs):
+    def admin_get_configurations(self, **kwargs):
         """
         List installed modules
         
@@ -56,7 +56,7 @@ class AdminApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get_modules(callback=callback_function)
+        >>> thread = api.admin_get_configurations(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -73,10 +73,84 @@ class AdminApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get_modules" % key
+                    " to method admin_get_configurations" % key
                 )
             params[key] = val
         del params['kwargs']
+
+
+        resource_path = '/admin/configurations'.replace('{format}', 'json')
+        method = 'GET'
+
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = {}
+        files = {}
+
+        body_params = None
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['master_key']
+
+        response = self.api_client.call_api(resource_path, method,
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=files,
+                                            response_type=None,
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'))
+        return response
+
+    def admin_modules(self, **kwargs):
+        """
+        List installed modules for ui
+        
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.admin_modules(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = []
+        all_params.append('callback')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method admin_modules" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
 
         resource_path = '/admin/modules'.replace('{format}', 'json')
         method = 'GET'
@@ -117,7 +191,156 @@ class AdminApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def create_project(self, **kwargs):
+    def admin_get_types(self, **kwargs):
+        """
+        Get types
+        
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.admin_get_types(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = []
+        all_params.append('callback')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method admin_get_types" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+
+        resource_path = '/admin/types'.replace('{format}', 'json')
+        method = 'GET'
+
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = {}
+        files = {}
+
+        body_params = None
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['master_key']
+
+        response = self.api_client.call_api(resource_path, method,
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=files,
+                                            response_type=None,
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'))
+        return response
+
+    def project_collections(self, **kwargs):
+        """
+        Get collection names
+        
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.project_collections(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project: 
+        :return: list[str]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['project']
+        all_params.append('callback')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method project_collections" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+
+        resource_path = '/project/collection'.replace('{format}', 'json')
+        method = 'POST'
+
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = {}
+        files = {}
+        if 'project' in params:
+            form_params['project'] = params['project']
+
+        body_params = None
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['read_key']
+
+        response = self.api_client.call_api(resource_path, method,
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=files,
+                                            response_type='list[str]',
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'))
+        return response
+
+    def project_create_project(self, **kwargs):
         """
         Create project
         
@@ -128,7 +351,7 @@ class AdminApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.create_project(callback=callback_function)
+        >>> thread = api.project_create_project(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -146,10 +369,11 @@ class AdminApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method create_project" % key
+                    " to method project_create_project" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/project/create'.replace('{format}', 'json')
         method = 'POST'
@@ -192,7 +416,83 @@ class AdminApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def get_projects(self, **kwargs):
+    def project_delete_project(self, **kwargs):
+        """
+        Delete project
+        
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.project_delete_project(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project: 
+        :return: JsonResponse
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['project']
+        all_params.append('callback')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method project_delete_project" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+
+        resource_path = '/project/delete'.replace('{format}', 'json')
+        method = 'POST'
+
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = {}
+        files = {}
+        if 'project' in params:
+            form_params['project'] = params['project']
+
+        body_params = None
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['master_key']
+
+        response = self.api_client.call_api(resource_path, method,
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=files,
+                                            response_type='JsonResponse',
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'))
+        return response
+
+    def project_get_projects(self, **kwargs):
         """
         List created projects
         
@@ -203,7 +503,7 @@ class AdminApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get_projects(callback=callback_function)
+        >>> thread = api.project_get_projects(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -220,10 +520,11 @@ class AdminApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get_projects" % key
+                    " to method project_get_projects" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/project/list'.replace('{format}', 'json')
         method = 'GET'
@@ -264,7 +565,7 @@ class AdminApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def schema(self, **kwargs):
+    def project_schema(self, **kwargs):
         """
         Get collection schema
         
@@ -275,17 +576,18 @@ class AdminApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.schema(callback=callback_function)
+        >>> thread = api.project_schema(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str project: 
+        :param list[str] names: 
         :return: list[Collection]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['project']
+        all_params = ['project', 'names']
         all_params.append('callback')
 
         params = locals()
@@ -293,10 +595,11 @@ class AdminApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method schema" % key
+                    " to method project_schema" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/project/schema'.replace('{format}', 'json')
         method = 'POST'
@@ -311,6 +614,8 @@ class AdminApi(object):
         files = {}
         if 'project' in params:
             form_params['project'] = params['project']
+        if 'names' in params:
+            form_params['names'] = params['names']
 
         body_params = None
 
@@ -335,6 +640,170 @@ class AdminApi(object):
                                             post_params=form_params,
                                             files=files,
                                             response_type='list[Collection]',
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'))
+        return response
+
+    def project_add_fields_to_schema(self, **kwargs):
+        """
+        Add fields to collections
+        
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.project_add_fields_to_schema(project_add_fields_to_schema=project_add_fields_to_schema_value, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param ProjectAddFieldsToSchema project_add_fields_to_schema:  (required)
+        :return: list[SchemaField]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['project_add_fields_to_schema']
+        all_params.append('callback')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method project_add_fields_to_schema" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        # verify the required parameter 'project_add_fields_to_schema' is set
+        if ('project_add_fields_to_schema' not in params) or (params['project_add_fields_to_schema'] is None):
+            raise ValueError("Missing the required parameter `project_add_fields_to_schema` when calling `project_add_fields_to_schema`")
+
+        resource_path = '/project/schema/add'.replace('{format}', 'json')
+        method = 'POST'
+
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = {}
+        files = {}
+
+        body_params = None
+        if 'project_add_fields_to_schema' in params:
+            body_params = params['project_add_fields_to_schema']
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['master_key']
+
+        response = self.api_client.call_api(resource_path, method,
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=files,
+                                            response_type='list[SchemaField]',
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'))
+        return response
+
+    def project_add_custom_fields_to_schema(self, **kwargs):
+        """
+        Add fields to collections by transforming other schemas
+        
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.project_add_custom_fields_to_schema(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project: 
+        :param str collection: 
+        :param str schema_type: 
+        :param str schema: 
+        :return: list[SchemaField]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['project', 'collection', 'schema_type', 'schema']
+        all_params.append('callback')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method project_add_custom_fields_to_schema" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+
+        resource_path = '/project/schema/add/custom'.replace('{format}', 'json')
+        method = 'POST'
+
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = {}
+        files = {}
+        if 'project' in params:
+            form_params['project'] = params['project']
+        if 'collection' in params:
+            form_params['collection'] = params['collection']
+        if 'schema_type' in params:
+            form_params['schema_type'] = params['schema_type']
+        if 'schema' in params:
+            form_params['schema'] = params['schema']
+
+        body_params = None
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['master_key']
+
+        response = self.api_client.call_api(resource_path, method,
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=files,
+                                            response_type='list[SchemaField]',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'))
         return response

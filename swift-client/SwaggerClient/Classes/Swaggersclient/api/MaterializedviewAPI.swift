@@ -29,7 +29,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<JsonResponse> 
          */
-        public class func create(materializedView materializedView: MaterializedView) -> RequestBuilder<JsonResponse> {
+        public class func materializedViewCreate(materializedView materializedView: MaterializedView) -> RequestBuilder<JsonResponse> {
             let path = "/materialized-view/create"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -55,17 +55,17 @@ extension SwaggerClientAPI {
 }}]
          
          - parameter project: (form) 
-         - parameter name: (form) 
+         - parameter tableName: (form) 
 
          - returns: RequestBuilder<JsonResponse> 
          */
-        public class func delete(project project: String?, name: String?) -> RequestBuilder<JsonResponse> {
+        public class func materializedViewDelete(project project: String?, tableName: String?) -> RequestBuilder<JsonResponse> {
             let path = "/materialized-view/delete"
             let URLString = SwaggerClientAPI.basePath + path
             
             let nillableParameters: [String:AnyObject?] = [
                 "project": project,
-                "name": name
+                "tableName": tableName
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
@@ -80,24 +80,38 @@ extension SwaggerClientAPI {
          
          - POST /materialized-view/get
          - 
-         - examples: [{contentType=application/json, example="{}"}]
+         - API Key:
+           - type: apiKey read_key 
+           - name: read_key
+         - examples: [{contentType=application/json, example={
+  "updateInterval" : "aeiou",
+  "query" : "aeiou",
+  "lastUpdate" : "2016-05-05T23:48:14.187+0000",
+  "name" : "aeiou",
+  "options" : {
+    "key" : { }
+  },
+  "project" : "aeiou",
+  "incremental" : true,
+  "tableName" : "aeiou"
+}}]
          
          - parameter project: (form) 
-         - parameter name: (form) 
+         - parameter tableName: (form) 
 
-         - returns: RequestBuilder<String> 
+         - returns: RequestBuilder<MaterializedView> 
          */
-        public class func get(project project: String?, name: String?) -> RequestBuilder<String> {
+        public class func materializedViewGet(project project: String?, tableName: String?) -> RequestBuilder<MaterializedView> {
             let path = "/materialized-view/get"
             let URLString = SwaggerClientAPI.basePath + path
             
             let nillableParameters: [String:AnyObject?] = [
                 "project": project,
-                "name": name
+                "tableName": tableName
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
-            let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+            let requestBuilder: RequestBuilder<MaterializedView>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
             return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
         }
@@ -108,13 +122,27 @@ extension SwaggerClientAPI {
          
          - POST /materialized-view/list
          - 
-         - examples: [{contentType=application/json, example="{}"}]
+         - API Key:
+           - type: apiKey read_key 
+           - name: read_key
+         - examples: [{contentType=application/json, example=[ {
+  "updateInterval" : "aeiou",
+  "query" : "aeiou",
+  "lastUpdate" : "2016-05-05T23:48:14.191+0000",
+  "name" : "aeiou",
+  "options" : {
+    "key" : { }
+  },
+  "project" : "aeiou",
+  "incremental" : true,
+  "tableName" : "aeiou"
+} ]}]
          
          - parameter project: (form) 
 
-         - returns: RequestBuilder<String> 
+         - returns: RequestBuilder<[MaterializedView]> 
          */
-        public class func listViews(project project: String?) -> RequestBuilder<String> {
+        public class func materializedViewListViews(project project: String?) -> RequestBuilder<[MaterializedView]> {
             let path = "/materialized-view/list"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -123,7 +151,7 @@ extension SwaggerClientAPI {
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
-            let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+            let requestBuilder: RequestBuilder<[MaterializedView]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
             return requestBuilder.init(method: "POST", URLString: URLString, parameters: parameters, isBody: false)
         }
@@ -134,10 +162,12 @@ extension SwaggerClientAPI {
          
          - POST /materialized-view/schema
          - 
+         - API Key:
+           - type: apiKey read_key 
+           - name: read_key
          - examples: [{contentType=application/json, example=[ {
   "name" : "aeiou",
   "fields" : [ {
-    "nullable" : true,
     "descriptiveName" : "aeiou",
     "unique" : true,
     "name" : "aeiou",
@@ -148,15 +178,17 @@ extension SwaggerClientAPI {
 } ]}]
          
          - parameter project: (form) 
+         - parameter names: (form) 
 
          - returns: RequestBuilder<[MaterializedViewSchema]> 
          */
-        public class func schema(project project: String?) -> RequestBuilder<[MaterializedViewSchema]> {
+        public class func materializedViewSchema(project project: String?, names: [String]?) -> RequestBuilder<[MaterializedViewSchema]> {
             let path = "/materialized-view/schema"
             let URLString = SwaggerClientAPI.basePath + path
             
             let nillableParameters: [String:AnyObject?] = [
-                "project": project
+                "project": project,
+                "names": names
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
@@ -177,7 +209,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<Void> 
          */
-        public class func update() -> RequestBuilder<Void> {
+        public class func materializedViewUpdate() -> RequestBuilder<Void> {
             let path = "/materialized-view/update"
             let URLString = SwaggerClientAPI.basePath + path
             

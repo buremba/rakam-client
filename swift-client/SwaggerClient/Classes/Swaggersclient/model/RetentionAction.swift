@@ -13,6 +13,8 @@ public class RetentionAction: JSONEncodable {
     public var collection: String?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

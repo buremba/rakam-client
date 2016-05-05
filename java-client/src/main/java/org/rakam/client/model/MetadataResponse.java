@@ -1,17 +1,18 @@
 package org.rakam.client.model;
 
-import org.rakam.StringUtil;
-import org.rakam.client.model.SchemaField;
-import java.util.*;
-
-
-
-import io.swagger.annotations.*;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.util.*;
+import org.rakam.client.model.SchemaField;
 
 
-@ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+
+
+
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class MetadataResponse   {
   
   private List<SchemaField> columns = new ArrayList<SchemaField>();
@@ -20,6 +21,7 @@ public class MetadataResponse   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("columns")
   public List<SchemaField> getColumns() {
@@ -32,6 +34,7 @@ public class MetadataResponse   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("identifierColumn")
   public String getIdentifierColumn() {
@@ -44,13 +47,43 @@ public class MetadataResponse   {
   
 
   @Override
-  public String toString()  {
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    MetadataResponse metadataResponse = (MetadataResponse) o;
+    return Objects.equals(columns, metadataResponse.columns) &&
+        Objects.equals(identifierColumn, metadataResponse.identifierColumn);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(columns, identifierColumn);
+  }
+
+  @Override
+  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class MetadataResponse {\n");
     
-    sb.append("    columns: ").append(StringUtil.toIndentedString(columns)).append("\n");
-    sb.append("    identifierColumn: ").append(StringUtil.toIndentedString(identifierColumn)).append("\n");
+    sb.append("    columns: ").append(toIndentedString(columns)).append("\n");
+    sb.append("    identifierColumn: ").append(toIndentedString(identifierColumn)).append("\n");
     sb.append("}");
     return sb.toString();
   }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+

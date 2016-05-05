@@ -141,7 +141,7 @@ class EventFilterAggregation(object):
         :param type: The type of this EventFilterAggregation.
         :type: str
         """
-        allowed_values = ["COUNT", "COUNT_UNIQUE", "SUM", "MINIMUM", "MAXIMUM", "APPROXIMATE_UNIQUE", "VARIANCE", "POPULATION_VARIANCE", "STANDARD_DEVIATION", "AVERAGE"]
+        allowed_values = ["COUNT", "COUNT_UNIQUE", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "APPROXIMATE_UNIQUE"]
         if type not in allowed_values:
             raise ValueError(
                 "Invalid value for `type`, must be one of {0}"
@@ -180,3 +180,16 @@ class EventFilterAggregation(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

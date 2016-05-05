@@ -45,7 +45,7 @@ class RecipeApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def export(self, **kwargs):
+    def recipe_export(self, **kwargs):
         """
         Export recipe
         
@@ -56,17 +56,16 @@ class RecipeApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.export(callback=callback_function)
+        >>> thread = api.recipe_export(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str project: 
-        :return: Recipe
+        :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['project']
+        all_params = []
         all_params.append('callback')
 
         params = locals()
@@ -74,10 +73,11 @@ class RecipeApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method export" % key
+                    " to method recipe_export" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/recipe/export'.replace('{format}', 'json')
         method = 'POST'
@@ -90,8 +90,6 @@ class RecipeApi(object):
 
         form_params = {}
         files = {}
-        if 'project' in params:
-            form_params['project'] = params['project']
 
         body_params = None
 
@@ -115,12 +113,12 @@ class RecipeApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=files,
-                                            response_type='Recipe',
+                                            response_type=None,
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'))
         return response
 
-    def install(self, **kwargs):
+    def recipe_install(self, **kwargs):
         """
         Install recipe
         
@@ -131,11 +129,11 @@ class RecipeApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.install(callback=callback_function)
+        >>> thread = api.recipe_install(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :return: JsonResponse
+        :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -148,10 +146,11 @@ class RecipeApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method install" % key
+                    " to method recipe_install" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/recipe/install'.replace('{format}', 'json')
         method = 'POST'
@@ -187,7 +186,7 @@ class RecipeApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=files,
-                                            response_type='JsonResponse',
+                                            response_type=None,
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'))
         return response

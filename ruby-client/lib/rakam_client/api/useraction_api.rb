@@ -4,22 +4,32 @@ module RakamClient
   class UseractionApi
     attr_accessor :api_client
 
-    def initialize(api_client = nil)
-      @api_client = api_client || Configuration.api_client
+    def initialize(api_client = ApiClient.default)
+      @api_client = api_client
     end
 
     # Apply batch operation
     # 
-    # @param batch_send_emails 
+    # @param user_email_action_batch 
     # @param [Hash] opts the optional parameters
     # @return [Integer]
-    def batch_send_emails(batch_send_emails, opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: UseractionApi#batch_send_emails ..."
+    def user_email_action_batch(user_email_action_batch, opts = {})
+      data, status_code, headers = user_email_action_batch_with_http_info(user_email_action_batch, opts)
+      return data
+    end
+
+    # Apply batch operation
+    # 
+    # @param user_email_action_batch 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Integer, Fixnum, Hash)>] Integer data, response status code and response headers
+    def user_email_action_batch_with_http_info(user_email_action_batch, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: UseractionApi#user_email_action_batch ..."
       end
       
-      # verify the required parameter 'batch_send_emails' is set
-      fail "Missing the required parameter 'batch_send_emails' when calling batch_send_emails" if batch_send_emails.nil?
+      # verify the required parameter 'user_email_action_batch' is set
+      fail "Missing the required parameter 'user_email_action_batch' when calling user_email_action_batch" if user_email_action_batch.nil?
       
       # resource path
       path = "/user/action/email/batch".sub('{format}','json')
@@ -42,35 +52,45 @@ module RakamClient
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(batch_send_emails)
+      post_body = @api_client.object_to_http_body(user_email_action_batch)
       
 
-      auth_names = []
-      result = @api_client.call_api(:POST, path,
+      auth_names = ['read_key']
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'Integer')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: UseractionApi#batch_send_emails. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: UseractionApi#user_email_action_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
     # Perform action for single user
     # 
-    # @param send 
+    # @param user_email_action_send 
     # @param [Hash] opts the optional parameters
     # @return [BOOLEAN]
-    def send(send, opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: UseractionApi#send ..."
+    def user_email_action_send(user_email_action_send, opts = {})
+      data, status_code, headers = user_email_action_send_with_http_info(user_email_action_send, opts)
+      return data
+    end
+
+    # Perform action for single user
+    # 
+    # @param user_email_action_send 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(BOOLEAN, Fixnum, Hash)>] BOOLEAN data, response status code and response headers
+    def user_email_action_send_with_http_info(user_email_action_send, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: UseractionApi#user_email_action_send ..."
       end
       
-      # verify the required parameter 'send' is set
-      fail "Missing the required parameter 'send' when calling send" if send.nil?
+      # verify the required parameter 'user_email_action_send' is set
+      fail "Missing the required parameter 'user_email_action_send' when calling user_email_action_send" if user_email_action_send.nil?
       
       # resource path
       path = "/user/action/email/single".sub('{format}','json')
@@ -93,21 +113,21 @@ module RakamClient
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(send)
+      post_body = @api_client.object_to_http_body(user_email_action_send)
       
 
-      auth_names = []
-      result = @api_client.call_api(:POST, path,
+      auth_names = ['read_key']
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'BOOLEAN')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: UseractionApi#send. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: UseractionApi#user_email_action_send\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
     # Send message to user
@@ -120,9 +140,24 @@ module RakamClient
     # @option opts [String] :message 
     # @option opts [Integer] :timestamp 
     # @return [Message]
-    def send_1(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: UseractionApi#send_1 ..."
+    def user_mailbox_action_send(opts = {})
+      data, status_code, headers = user_mailbox_action_send_with_http_info(opts)
+      return data
+    end
+
+    # Send message to user
+    # Sends a mail to users mailbox
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :project 
+    # @option opts [String] :from_user 
+    # @option opts [String] :to_user 
+    # @option opts [Integer] :parent 
+    # @option opts [String] :message 
+    # @option opts [Integer] :timestamp 
+    # @return [Array<(Message, Fixnum, Hash)>] Message data, response status code and response headers
+    def user_mailbox_action_send_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: UseractionApi#user_mailbox_action_send ..."
       end
       
       # resource path
@@ -156,31 +191,41 @@ module RakamClient
       
 
       auth_names = ['write_key']
-      result = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'Message')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: UseractionApi#send_1. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: UseractionApi#user_mailbox_action_send\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
     # Apply batch operation
     # 
-    # @param batch_send_messages 
+    # @param user_mailbox_action_batch_send_messages 
     # @param [Hash] opts the optional parameters
     # @return [Integer]
-    def batch_send_messages(batch_send_messages, opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: UseractionApi#batch_send_messages ..."
+    def user_mailbox_action_batch_send_messages(user_mailbox_action_batch_send_messages, opts = {})
+      data, status_code, headers = user_mailbox_action_batch_send_messages_with_http_info(user_mailbox_action_batch_send_messages, opts)
+      return data
+    end
+
+    # Apply batch operation
+    # 
+    # @param user_mailbox_action_batch_send_messages 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Integer, Fixnum, Hash)>] Integer data, response status code and response headers
+    def user_mailbox_action_batch_send_messages_with_http_info(user_mailbox_action_batch_send_messages, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: UseractionApi#user_mailbox_action_batch_send_messages ..."
       end
       
-      # verify the required parameter 'batch_send_messages' is set
-      fail "Missing the required parameter 'batch_send_messages' when calling batch_send_messages" if batch_send_messages.nil?
+      # verify the required parameter 'user_mailbox_action_batch_send_messages' is set
+      fail "Missing the required parameter 'user_mailbox_action_batch_send_messages' when calling user_mailbox_action_batch_send_messages" if user_mailbox_action_batch_send_messages.nil?
       
       # resource path
       path = "/user/action/mailbox/batch".sub('{format}','json')
@@ -203,21 +248,21 @@ module RakamClient
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(batch_send_messages)
+      post_body = @api_client.object_to_http_body(user_mailbox_action_batch_send_messages)
       
 
-      auth_names = []
-      result = @api_client.call_api(:POST, path,
+      auth_names = ['read_key']
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'Integer')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: UseractionApi#batch_send_messages. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: UseractionApi#user_mailbox_action_batch_send_messages\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
   end
 end

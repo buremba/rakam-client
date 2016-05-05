@@ -4,8 +4,8 @@ module RakamClient
   class MaterializedviewApi
     attr_accessor :api_client
 
-    def initialize(api_client = nil)
-      @api_client = api_client || Configuration.api_client
+    def initialize(api_client = ApiClient.default)
+      @api_client = api_client
     end
 
     # Create view
@@ -13,13 +13,23 @@ module RakamClient
     # @param materialized_view 
     # @param [Hash] opts the optional parameters
     # @return [JsonResponse]
-    def create(materialized_view, opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: MaterializedviewApi#create ..."
+    def materialized_view_create(materialized_view, opts = {})
+      data, status_code, headers = materialized_view_create_with_http_info(materialized_view, opts)
+      return data
+    end
+
+    # Create view
+    # 
+    # @param materialized_view 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(JsonResponse, Fixnum, Hash)>] JsonResponse data, response status code and response headers
+    def materialized_view_create_with_http_info(materialized_view, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: MaterializedviewApi#materialized_view_create ..."
       end
       
       # verify the required parameter 'materialized_view' is set
-      fail "Missing the required parameter 'materialized_view' when calling create" if materialized_view.nil?
+      fail "Missing the required parameter 'materialized_view' when calling materialized_view_create" if materialized_view.nil?
       
       # resource path
       path = "/materialized-view/create".sub('{format}','json')
@@ -46,28 +56,39 @@ module RakamClient
       
 
       auth_names = ['master_key']
-      result = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'JsonResponse')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: MaterializedviewApi#create. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MaterializedviewApi#materialized_view_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
     # Delete materialized view
     # 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :project 
-    # @option opts [String] :name 
+    # @option opts [String] :table_name 
     # @return [JsonResponse]
-    def delete(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: MaterializedviewApi#delete ..."
+    def materialized_view_delete(opts = {})
+      data, status_code, headers = materialized_view_delete_with_http_info(opts)
+      return data
+    end
+
+    # Delete materialized view
+    # 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :project 
+    # @option opts [String] :table_name 
+    # @return [Array<(JsonResponse, Fixnum, Hash)>] JsonResponse data, response status code and response headers
+    def materialized_view_delete_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: MaterializedviewApi#materialized_view_delete ..."
       end
       
       # resource path
@@ -90,35 +111,46 @@ module RakamClient
       # form parameters
       form_params = {}
       form_params["project"] = opts[:'project'] if opts[:'project']
-      form_params["name"] = opts[:'name'] if opts[:'name']
+      form_params["table_name"] = opts[:'table_name'] if opts[:'table_name']
 
       # http body (model)
       post_body = nil
       
 
       auth_names = ['master_key']
-      result = @api_client.call_api(:POST, path,
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'JsonResponse')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: MaterializedviewApi#delete. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MaterializedviewApi#materialized_view_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
     # Get view
     # 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :project 
-    # @option opts [String] :name 
-    # @return [Object]
-    def get(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: MaterializedviewApi#get ..."
+    # @option opts [String] :table_name 
+    # @return [MaterializedView]
+    def materialized_view_get(opts = {})
+      data, status_code, headers = materialized_view_get_with_http_info(opts)
+      return data
+    end
+
+    # Get view
+    # 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :project 
+    # @option opts [String] :table_name 
+    # @return [Array<(MaterializedView, Fixnum, Hash)>] MaterializedView data, response status code and response headers
+    def materialized_view_get_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: MaterializedviewApi#materialized_view_get ..."
       end
       
       # resource path
@@ -141,34 +173,44 @@ module RakamClient
       # form parameters
       form_params = {}
       form_params["project"] = opts[:'project'] if opts[:'project']
-      form_params["name"] = opts[:'name'] if opts[:'name']
+      form_params["table_name"] = opts[:'table_name'] if opts[:'table_name']
 
       # http body (model)
       post_body = nil
       
 
-      auth_names = []
-      result = @api_client.call_api(:POST, path,
+      auth_names = ['read_key']
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Object')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: MaterializedviewApi#get. Result: #{result.inspect}"
+        :return_type => 'MaterializedView')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MaterializedviewApi#materialized_view_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
     # List views
     # 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :project 
-    # @return [Object]
-    def list_views(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: MaterializedviewApi#list_views ..."
+    # @return [Array<MaterializedView>]
+    def materialized_view_list_views(opts = {})
+      data, status_code, headers = materialized_view_list_views_with_http_info(opts)
+      return data
+    end
+
+    # List views
+    # 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :project 
+    # @return [Array<(Array<MaterializedView>, Fixnum, Hash)>] Array<MaterializedView> data, response status code and response headers
+    def materialized_view_list_views_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: MaterializedviewApi#materialized_view_list_views ..."
       end
       
       # resource path
@@ -196,28 +238,40 @@ module RakamClient
       post_body = nil
       
 
-      auth_names = []
-      result = @api_client.call_api(:POST, path,
+      auth_names = ['read_key']
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Object')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: MaterializedviewApi#list_views. Result: #{result.inspect}"
+        :return_type => 'Array<MaterializedView>')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MaterializedviewApi#materialized_view_list_views\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
     # Get schemas
     # 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :project 
+    # @option opts [Array<String>] :names 
     # @return [Array<MaterializedViewSchema>]
-    def schema(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: MaterializedviewApi#schema ..."
+    def materialized_view_schema(opts = {})
+      data, status_code, headers = materialized_view_schema_with_http_info(opts)
+      return data
+    end
+
+    # Get schemas
+    # 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :project 
+    # @option opts [Array<String>] :names 
+    # @return [Array<(Array<MaterializedViewSchema>, Fixnum, Hash)>] Array<MaterializedViewSchema> data, response status code and response headers
+    def materialized_view_schema_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: MaterializedviewApi#materialized_view_schema ..."
       end
       
       # resource path
@@ -240,32 +294,42 @@ module RakamClient
       # form parameters
       form_params = {}
       form_params["project"] = opts[:'project'] if opts[:'project']
+      form_params["names"] = @api_client.build_collection_param(opts[:'names'], :multi) if opts[:'names']
 
       # http body (model)
       post_body = nil
       
 
-      auth_names = []
-      result = @api_client.call_api(:POST, path,
+      auth_names = ['read_key']
+      data, status_code, headers = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
         :return_type => 'Array<MaterializedViewSchema>')
-      if Configuration.debugging
-        Configuration.logger.debug "API called: MaterializedviewApi#schema. Result: #{result.inspect}"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MaterializedviewApi#materialized_view_schema\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return result
+      return data, status_code, headers
     end
 
     # Update view
     # 
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def update(opts = {})
-      if Configuration.debugging
-        Configuration.logger.debug "Calling API: MaterializedviewApi#update ..."
+    def materialized_view_update(opts = {})
+      materialized_view_update_with_http_info(opts)
+      return nil
+    end
+
+    # Update view
+    # 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def materialized_view_update_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: MaterializedviewApi#materialized_view_update ..."
       end
       
       # resource path
@@ -293,16 +357,16 @@ module RakamClient
       
 
       auth_names = ['master_key']
-      @api_client.call_api(:GET, path,
+      data, status_code, headers = @api_client.call_api(:GET, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names)
-      if Configuration.debugging
-        Configuration.logger.debug "API called: MaterializedviewApi#update"
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MaterializedviewApi#materialized_view_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return nil
+      return data, status_code, headers
     end
   end
 end

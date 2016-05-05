@@ -1,8 +1,16 @@
 'use strict';
 
-exports.get = function(project, user, parent, limit, offset) {
+exports.userMailboxGet = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * project (String)
+   * user (String)
+   * parent (Integer)
+   * limit (Integer)
+   * offset (Long)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = [ [ {
   "to_user" : "{}",
@@ -17,13 +25,23 @@ exports.get = function(project, user, parent, limit, offset) {
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }
-exports.getConnectedUsers = function(project) {
+exports.userMailboxGetConnectedUsers = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * project (String)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = [ {
   "key" : "{}"
@@ -31,13 +49,25 @@ exports.getConnectedUsers = function(project) {
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }
-exports.markAsRead = function(project, user, messageIds) {
+exports.userMailboxMarkAsRead = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+   * project (String)
+   * user (String)
+   * messageIds (List)
+   **/
 
-  var examples = {};
+var examples = {};
   
   examples['application/json'] = {
   "success" : true,
@@ -46,7 +76,13 @@ exports.markAsRead = function(project, user, messageIds) {
   
 
   
-  if(Object.keys(examples).length > 0)
-    return examples[Object.keys(examples)[0]];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
   
 }

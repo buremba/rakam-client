@@ -14,6 +14,8 @@ public class MetadataResponse: JSONEncodable {
     public var identifierColumn: String?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

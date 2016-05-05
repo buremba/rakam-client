@@ -54,7 +54,8 @@ class QueryError implements ArrayAccess
         'message' => 'string',
         'sql_state' => 'string',
         'error_code' => 'int',
-        'query' => 'string'
+        'error_line' => 'int',
+        'char_position_in_line' => 'int'
     );
   
     /** 
@@ -65,7 +66,8 @@ class QueryError implements ArrayAccess
         'message' => 'message',
         'sql_state' => 'sqlState',
         'error_code' => 'errorCode',
-        'query' => 'query'
+        'error_line' => 'errorLine',
+        'char_position_in_line' => 'charPositionInLine'
     );
   
     /**
@@ -76,7 +78,8 @@ class QueryError implements ArrayAccess
         'message' => 'setMessage',
         'sql_state' => 'setSqlState',
         'error_code' => 'setErrorCode',
-        'query' => 'setQuery'
+        'error_line' => 'setErrorLine',
+        'char_position_in_line' => 'setCharPositionInLine'
     );
   
     /**
@@ -87,7 +90,8 @@ class QueryError implements ArrayAccess
         'message' => 'getMessage',
         'sql_state' => 'getSqlState',
         'error_code' => 'getErrorCode',
-        'query' => 'getQuery'
+        'error_line' => 'getErrorLine',
+        'char_position_in_line' => 'getCharPositionInLine'
     );
   
     
@@ -110,10 +114,16 @@ class QueryError implements ArrayAccess
     protected $error_code;
     
     /**
-      * $query 
-      * @var string
+      * $error_line 
+      * @var int
       */
-    protected $query;
+    protected $error_line;
+    
+    /**
+      * $char_position_in_line 
+      * @var int
+      */
+    protected $char_position_in_line;
     
 
     /**
@@ -126,7 +136,8 @@ class QueryError implements ArrayAccess
             $this->message = $data["message"];
             $this->sql_state = $data["sql_state"];
             $this->error_code = $data["error_code"];
-            $this->query = $data["query"];
+            $this->error_line = $data["error_line"];
+            $this->char_position_in_line = $data["char_position_in_line"];
         }
     }
     
@@ -194,23 +205,44 @@ class QueryError implements ArrayAccess
     }
     
     /**
-     * Gets query
-     * @return string
+     * Gets error_line
+     * @return int
      */
-    public function getQuery()
+    public function getErrorLine()
     {
-        return $this->query;
+        return $this->error_line;
     }
   
     /**
-     * Sets query
-     * @param string $query 
+     * Sets error_line
+     * @param int $error_line 
      * @return $this
      */
-    public function setQuery($query)
+    public function setErrorLine($error_line)
     {
         
-        $this->query = $query;
+        $this->error_line = $error_line;
+        return $this;
+    }
+    
+    /**
+     * Gets char_position_in_line
+     * @return int
+     */
+    public function getCharPositionInLine()
+    {
+        return $this->char_position_in_line;
+    }
+  
+    /**
+     * Sets char_position_in_line
+     * @param int $char_position_in_line 
+     * @return $this
+     */
+    public function setCharPositionInLine($char_position_in_line)
+    {
+        
+        $this->char_position_in_line = $char_position_in_line;
         return $this;
     }
     

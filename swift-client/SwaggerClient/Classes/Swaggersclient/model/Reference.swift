@@ -11,13 +11,15 @@ import Foundation
 public class Reference: JSONEncodable {
 
     public enum SwaggerType: String { 
-        case COLUMN = "COLUMN"
-        case REFERENCE = "REFERENCE"
+        case Column = "COLUMN"
+        case Reference = "REFERENCE"
     }
     
     public var type: SwaggerType?
     public var value: String?
     
+
+    public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {

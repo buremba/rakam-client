@@ -141,7 +141,7 @@ class Message implements ArrayAccess
       * $seen 
       * @var bool
       */
-    protected $seen;
+    protected $seen = false;
     
     /**
       * $time 

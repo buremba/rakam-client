@@ -11,37 +11,53 @@ import Foundation
 public class SchemaField: JSONEncodable {
 
     public enum SwaggerType: String { 
-        case STRING = "STRING"
-        case LONG = "LONG"
-        case DOUBLE = "DOUBLE"
-        case BOOLEAN = "BOOLEAN"
-        case DATE = "DATE"
-        case TIME = "TIME"
-        case TIMESTAMP = "TIMESTAMP"
-        case ARRAY_STRING = "ARRAY_STRING"
-        case ARRAY_LONG = "ARRAY_LONG"
-        case ARRAY_DOUBLE = "ARRAY_DOUBLE"
-        case ARRAY_BOOLEAN = "ARRAY_BOOLEAN"
-        case ARRAY_DATE = "ARRAY_DATE"
-        case ARRAY_TIME = "ARRAY_TIME"
-        case ARRAY_TIMESTAMP = "ARRAY_TIMESTAMP"
+        case String = "STRING"
+        case Integer = "INTEGER"
+        case Decimal = "DECIMAL"
+        case Double = "DOUBLE"
+        case Long = "LONG"
+        case Boolean = "BOOLEAN"
+        case Date = "DATE"
+        case Time = "TIME"
+        case Timestamp = "TIMESTAMP"
+        case Binary = "BINARY"
+        case ArrayString = "ARRAY_STRING"
+        case ArrayInteger = "ARRAY_INTEGER"
+        case ArrayDecimal = "ARRAY_DECIMAL"
+        case ArrayDouble = "ARRAY_DOUBLE"
+        case ArrayLong = "ARRAY_LONG"
+        case ArrayBoolean = "ARRAY_BOOLEAN"
+        case ArrayDate = "ARRAY_DATE"
+        case ArrayTime = "ARRAY_TIME"
+        case ArrayTimestamp = "ARRAY_TIMESTAMP"
+        case ArrayBinary = "ARRAY_BINARY"
+        case MapString = "MAP_STRING"
+        case MapInteger = "MAP_INTEGER"
+        case MapDecimal = "MAP_DECIMAL"
+        case MapDouble = "MAP_DOUBLE"
+        case MapLong = "MAP_LONG"
+        case MapBoolean = "MAP_BOOLEAN"
+        case MapDate = "MAP_DATE"
+        case MapTime = "MAP_TIME"
+        case MapTimestamp = "MAP_TIMESTAMP"
+        case MapBinary = "MAP_BINARY"
     }
     
     public var name: String?
     public var type: SwaggerType?
-    public var nullable: Bool?
     public var unique: Bool?
     public var descriptiveName: String?
     public var description: String?
     public var category: String?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["name"] = self.name
         nillableDictionary["type"] = self.type?.rawValue
-        nillableDictionary["nullable"] = self.nullable
         nillableDictionary["unique"] = self.unique
         nillableDictionary["descriptiveName"] = self.descriptiveName
         nillableDictionary["description"] = self.description

@@ -1,24 +1,21 @@
 package org.rakam.client.api;
 
+import com.sun.jersey.api.client.GenericType;
+
 import org.rakam.ApiException;
 import org.rakam.ApiClient;
 import org.rakam.Configuration;
 import org.rakam.Pair;
-import org.rakam.TypeRef;
 
-import org.rakam.client.model.*;
+import org.rakam.client.model.RealTimeReport;
+import org.rakam.client.model.JsonResponse;
+import org.rakam.client.model.RealTimeQueryResult;
+import org.rakam.client.model.RealtimeGet;
+import org.rakam.client.model.ContinuousQuery;
 
 import java.util.*;
 
-import org.rakam.client.model.JsonResponse;
-import java.util.Date;
-import org.rakam.client.model.RealTimeReport;
-
-import java.io.File;
-import java.util.Map;
-import java.util.HashMap;
-
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class RealtimeApi {
   private ApiClient apiClient;
 
@@ -42,20 +39,17 @@ public class RealtimeApi {
   /**
    * Create report
    * 
-   * @param project 
-   * @param name 
-   * @param aggregation 
-   * @param tableName 
-   * @param collections 
-   * @param filter 
-   * @param measure 
-   * @param dimensions 
+   * @param realTimeReport 
    * @return JsonResponse
    */
-  public JsonResponse create (String project, String name, String aggregation, String tableName, List<String> collections, String filter, String measure, List<String> dimensions) throws ApiException {
-    Object postBody = null;
-    byte[] postBinaryBody = null;
+  public JsonResponse realtimeCreate(RealTimeReport realTimeReport) throws ApiException {
+    Object postBody = realTimeReport;
     
+     // verify the required parameter 'realTimeReport' is set
+     if (realTimeReport == null) {
+        throw new ApiException(400, "Missing the required parameter 'realTimeReport' when calling realtimeCreate");
+     }
+     
     // create path and map variables
     String path = "/realtime/create".replaceAll("\\{format\\}","json");
 
@@ -68,22 +62,6 @@ public class RealtimeApi {
 
     
 
-    if (project != null)
-      formParams.put("project", project);
-    if (name != null)
-      formParams.put("name", name);
-    if (aggregation != null)
-      formParams.put("aggregation", aggregation);
-    if (tableName != null)
-      formParams.put("table_name", tableName);
-    if (collections != null)
-      formParams.put("collections", collections);
-    if (filter != null)
-      formParams.put("filter", filter);
-    if (measure != null)
-      formParams.put("measure", measure);
-    if (dimensions != null)
-      formParams.put("dimensions", dimensions);
     
 
     final String[] accepts = {
@@ -96,30 +74,23 @@ public class RealtimeApi {
     };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
 
-    String[] authNames = new String[] { "read_key" };
+    String[] authNames = new String[] { "master_key" };
 
     
-
+    GenericType<JsonResponse> returnType = new GenericType<JsonResponse>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<JsonResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
   /**
    * Delete report
    * 
    * @param project 
-   * @param name 
+   * @param tableName 
    * @return JsonResponse
    */
-  public JsonResponse delete (String project, String name) throws ApiException {
+  public JsonResponse realtimeDelete(String project, String tableName) throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/realtime/delete".replaceAll("\\{format\\}","json");
@@ -135,8 +106,8 @@ public class RealtimeApi {
 
     if (project != null)
       formParams.put("project", project);
-    if (name != null)
-      formParams.put("name", name);
+    if (tableName != null)
+      formParams.put("table_name", tableName);
     
 
     final String[] accepts = {
@@ -149,38 +120,28 @@ public class RealtimeApi {
     };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
 
-    String[] authNames = new String[] { "read_key" };
+    String[] authNames = new String[] { "master_key" };
 
     
-
+    GenericType<JsonResponse> returnType = new GenericType<JsonResponse>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<JsonResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
   /**
    * Get report
    * 
-   * @param project 
-   * @param tableName 
-   * @param filter 
-   * @param aggregation 
-   * @param measure 
-   * @param dimensions 
-   * @param aggregate 
-   * @param dateStart 
-   * @param dateEnd 
-   * @return Object
+   * @param realtimeGet 
+   * @return RealTimeQueryResult
    */
-  public Object get (String project, String tableName, String filter, String aggregation, String measure, List<String> dimensions, Boolean aggregate, Date dateStart, Date dateEnd) throws ApiException {
-    Object postBody = null;
-    byte[] postBinaryBody = null;
+  public RealTimeQueryResult realtimeGet(RealtimeGet realtimeGet) throws ApiException {
+    Object postBody = realtimeGet;
     
+     // verify the required parameter 'realtimeGet' is set
+     if (realtimeGet == null) {
+        throw new ApiException(400, "Missing the required parameter 'realtimeGet' when calling realtimeGet");
+     }
+     
     // create path and map variables
     String path = "/realtime/get".replaceAll("\\{format\\}","json");
 
@@ -193,24 +154,6 @@ public class RealtimeApi {
 
     
 
-    if (project != null)
-      formParams.put("project", project);
-    if (tableName != null)
-      formParams.put("table_name", tableName);
-    if (filter != null)
-      formParams.put("filter", filter);
-    if (aggregation != null)
-      formParams.put("aggregation", aggregation);
-    if (measure != null)
-      formParams.put("measure", measure);
-    if (dimensions != null)
-      formParams.put("dimensions", dimensions);
-    if (aggregate != null)
-      formParams.put("aggregate", aggregate);
-    if (dateStart != null)
-      formParams.put("date_start", dateStart);
-    if (dateEnd != null)
-      formParams.put("date_end", dateEnd);
     
 
     final String[] accepts = {
@@ -226,26 +169,19 @@ public class RealtimeApi {
     String[] authNames = new String[] { "read_key" };
 
     
-
+    GenericType<RealTimeQueryResult> returnType = new GenericType<RealTimeQueryResult>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<Object>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
   /**
-   * List reports
+   * List queries
    * 
    * @param project 
-   * @return List<RealTimeReport>
+   * @return List<ContinuousQuery>
    */
-  public List<RealTimeReport> listReports (String project) throws ApiException {
+  public List<ContinuousQuery> realtimeList(String project) throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/realtime/list".replaceAll("\\{format\\}","json");
@@ -276,15 +212,9 @@ public class RealtimeApi {
     String[] authNames = new String[] { "read_key" };
 
     
-
+    GenericType<List<ContinuousQuery>> returnType = new GenericType<List<ContinuousQuery>>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<List<RealTimeReport>>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
 }

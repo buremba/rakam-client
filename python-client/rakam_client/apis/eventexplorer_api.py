@@ -45,7 +45,7 @@ class EventexplorerApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def execute(self, execute, **kwargs):
+    def event_explorer_analyze(self, **kwargs):
         """
         Perform simple query on event data
         
@@ -56,20 +56,17 @@ class EventexplorerApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.execute(execute, callback=callback_function)
+        >>> thread = api.event_explorer_analyze(analyze_request=analyze_request_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param Execute execute:  (required)
+        :param AnalyzeRequest analyze_request:  (required)
         :return: QueryResult
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'execute' is set
-        if execute is None:
-            raise ValueError("Missing the required parameter `execute` when calling `execute`")
 
-        all_params = ['execute']
+        all_params = ['analyze_request']
         all_params.append('callback')
 
         params = locals()
@@ -77,10 +74,14 @@ class EventexplorerApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method execute" % key
+                    " to method event_explorer_analyze" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'analyze_request' is set
+        if ('analyze_request' not in params) or (params['analyze_request'] is None):
+            raise ValueError("Missing the required parameter `analyze_request` when calling `event_explorer_analyze`")
 
         resource_path = '/event-explorer/analyze'.replace('{format}', 'json')
         method = 'POST'
@@ -95,8 +96,8 @@ class EventexplorerApi(object):
         files = {}
 
         body_params = None
-        if 'execute' in params:
-            body_params = params['execute']
+        if 'analyze_request' in params:
+            body_params = params['analyze_request']
 
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
@@ -123,7 +124,7 @@ class EventexplorerApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def get_event_dimensions(self, **kwargs):
+    def event_explorer_get_extra_dimensions(self, **kwargs):
         """
         Event statistics
         
@@ -134,12 +135,12 @@ class EventexplorerApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get_event_dimensions(callback=callback_function)
+        >>> thread = api.event_explorer_get_extra_dimensions(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str project: 
-        :return: list[str]
+        :return: dict(str, list[str])
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -152,85 +153,11 @@ class EventexplorerApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get_event_dimensions" % key
+                    " to method event_explorer_get_extra_dimensions" % key
                 )
             params[key] = val
         del params['kwargs']
 
-        resource_path = '/event-explorer/event_dimensions'.replace('{format}', 'json')
-        method = 'POST'
-
-        path_params = {}
-
-        query_params = {}
-
-        header_params = {}
-
-        form_params = {}
-        files = {}
-        if 'project' in params:
-            form_params['project'] = params['project']
-
-        body_params = None
-
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.\
-            select_header_accept(['application/json'])
-        if not header_params['Accept']:
-            del header_params['Accept']
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json'])
-
-        # Authentication setting
-        auth_settings = ['read_key']
-
-        response = self.api_client.call_api(resource_path, method,
-                                            path_params,
-                                            query_params,
-                                            header_params,
-                                            body=body_params,
-                                            post_params=form_params,
-                                            files=files,
-                                            response_type='list[str]',
-                                            auth_settings=auth_settings,
-                                            callback=params.get('callback'))
-        return response
-
-    def get_extra_dimensions(self, **kwargs):
-        """
-        Event statistics
-        
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_extra_dimensions(callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param str project: 
-        :return: list[str]
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['project']
-        all_params.append('callback')
-
-        params = locals()
-        for key, val in iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method get_extra_dimensions" % key
-                )
-            params[key] = val
-        del params['kwargs']
 
         resource_path = '/event-explorer/extra_dimensions'.replace('{format}', 'json')
         method = 'POST'
@@ -268,12 +195,103 @@ class EventexplorerApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=files,
-                                            response_type='list[str]',
+                                            response_type='dict(str, list[str])',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'))
         return response
 
-    def get_event_statistics(self, **kwargs):
+    def event_explorer_create_pre_computed_table(self, **kwargs):
+        """
+        Create Pre-computed table
+        
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.event_explorer_create_pre_computed_table(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project: 
+        :param list[str] collections: 
+        :param list[str] dimensions: 
+        :param list[str] aggregations: 
+        :param list[str] measures: 
+        :param str table_name: 
+        :return: PreCalculatedTable
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['project', 'collections', 'dimensions', 'aggregations', 'measures', 'table_name']
+        all_params.append('callback')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method event_explorer_create_pre_computed_table" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+
+        resource_path = '/event-explorer/pre_calculate'.replace('{format}', 'json')
+        method = 'POST'
+
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = {}
+        files = {}
+        if 'project' in params:
+            form_params['project'] = params['project']
+        if 'collections' in params:
+            form_params['collections'] = params['collections']
+        if 'dimensions' in params:
+            form_params['dimensions'] = params['dimensions']
+        if 'aggregations' in params:
+            form_params['aggregations'] = params['aggregations']
+        if 'measures' in params:
+            form_params['measures'] = params['measures']
+        if 'table_name' in params:
+            form_params['tableName'] = params['table_name']
+
+        body_params = None
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['master_key']
+
+        response = self.api_client.call_api(resource_path, method,
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=files,
+                                            response_type='PreCalculatedTable',
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'))
+        return response
+
+    def event_explorer_get_event_statistics(self, **kwargs):
         """
         Event statistics
         
@@ -284,7 +302,7 @@ class EventexplorerApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get_event_statistics(callback=callback_function)
+        >>> thread = api.event_explorer_get_event_statistics(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -306,10 +324,11 @@ class EventexplorerApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get_event_statistics" % key
+                    " to method event_explorer_get_event_statistics" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/event-explorer/statistics'.replace('{format}', 'json')
         method = 'POST'

@@ -52,12 +52,11 @@ class FunnelQuery implements ArrayAccess
       */
     static $swaggerTypes = array(
         'project' => 'string',
-        'connector_field' => 'string',
         'steps' => '\client.model\FunnelStep[]',
         'dimension' => 'string',
         'start_date' => '\DateTime',
-        'end_date' => '\DateTime',
-        'enable_other_grouping' => 'bool'
+        'window' => '\client.model\FunnelWindow',
+        'end_date' => '\DateTime'
     );
   
     /** 
@@ -66,12 +65,11 @@ class FunnelQuery implements ArrayAccess
       */
     static $attributeMap = array(
         'project' => 'project',
-        'connector_field' => 'connector_field',
         'steps' => 'steps',
         'dimension' => 'dimension',
         'start_date' => 'startDate',
-        'end_date' => 'endDate',
-        'enable_other_grouping' => 'enableOtherGrouping'
+        'window' => 'window',
+        'end_date' => 'endDate'
     );
   
     /**
@@ -80,12 +78,11 @@ class FunnelQuery implements ArrayAccess
       */
     static $setters = array(
         'project' => 'setProject',
-        'connector_field' => 'setConnectorField',
         'steps' => 'setSteps',
         'dimension' => 'setDimension',
         'start_date' => 'setStartDate',
-        'end_date' => 'setEndDate',
-        'enable_other_grouping' => 'setEnableOtherGrouping'
+        'window' => 'setWindow',
+        'end_date' => 'setEndDate'
     );
   
     /**
@@ -94,12 +91,11 @@ class FunnelQuery implements ArrayAccess
       */
     static $getters = array(
         'project' => 'getProject',
-        'connector_field' => 'getConnectorField',
         'steps' => 'getSteps',
         'dimension' => 'getDimension',
         'start_date' => 'getStartDate',
-        'end_date' => 'getEndDate',
-        'enable_other_grouping' => 'getEnableOtherGrouping'
+        'window' => 'getWindow',
+        'end_date' => 'getEndDate'
     );
   
     
@@ -108,12 +104,6 @@ class FunnelQuery implements ArrayAccess
       * @var string
       */
     protected $project;
-    
-    /**
-      * $connector_field 
-      * @var string
-      */
-    protected $connector_field;
     
     /**
       * $steps 
@@ -134,16 +124,16 @@ class FunnelQuery implements ArrayAccess
     protected $start_date;
     
     /**
+      * $window 
+      * @var \client.model\FunnelWindow
+      */
+    protected $window;
+    
+    /**
       * $end_date 
       * @var \DateTime
       */
     protected $end_date;
-    
-    /**
-      * $enable_other_grouping 
-      * @var bool
-      */
-    protected $enable_other_grouping;
     
 
     /**
@@ -154,12 +144,11 @@ class FunnelQuery implements ArrayAccess
     {
         if ($data != null) {
             $this->project = $data["project"];
-            $this->connector_field = $data["connector_field"];
             $this->steps = $data["steps"];
             $this->dimension = $data["dimension"];
             $this->start_date = $data["start_date"];
+            $this->window = $data["window"];
             $this->end_date = $data["end_date"];
-            $this->enable_other_grouping = $data["enable_other_grouping"];
         }
     }
     
@@ -181,27 +170,6 @@ class FunnelQuery implements ArrayAccess
     {
         
         $this->project = $project;
-        return $this;
-    }
-    
-    /**
-     * Gets connector_field
-     * @return string
-     */
-    public function getConnectorField()
-    {
-        return $this->connector_field;
-    }
-  
-    /**
-     * Sets connector_field
-     * @param string $connector_field 
-     * @return $this
-     */
-    public function setConnectorField($connector_field)
-    {
-        
-        $this->connector_field = $connector_field;
         return $this;
     }
     
@@ -269,6 +237,27 @@ class FunnelQuery implements ArrayAccess
     }
     
     /**
+     * Gets window
+     * @return \client.model\FunnelWindow
+     */
+    public function getWindow()
+    {
+        return $this->window;
+    }
+  
+    /**
+     * Sets window
+     * @param \client.model\FunnelWindow $window 
+     * @return $this
+     */
+    public function setWindow($window)
+    {
+        
+        $this->window = $window;
+        return $this;
+    }
+    
+    /**
      * Gets end_date
      * @return \DateTime
      */
@@ -286,27 +275,6 @@ class FunnelQuery implements ArrayAccess
     {
         
         $this->end_date = $end_date;
-        return $this;
-    }
-    
-    /**
-     * Gets enable_other_grouping
-     * @return bool
-     */
-    public function getEnableOtherGrouping()
-    {
-        return $this->enable_other_grouping;
-    }
-  
-    /**
-     * Sets enable_other_grouping
-     * @param bool $enable_other_grouping 
-     * @return $this
-     */
-    public function setEnableOtherGrouping($enable_other_grouping)
-    {
-        
-        $this->enable_other_grouping = $enable_other_grouping;
         return $this;
     }
     

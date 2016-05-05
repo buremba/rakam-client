@@ -1,0 +1,2900 @@
+---
+swagger: "2.0"
+info:
+  description: "An analytics platform API that lets you create your own analytics\
+    \ services."
+  version: "0.4"
+  title: "Rakam API Documentation"
+  contact:
+    email: "contact@rakam.com"
+  license:
+    name: "Apache License 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "api.rakam.io"
+basePath: ""
+tags:
+- name: "ab-testing"
+  description: "A/B Testing Module"
+  externalDocs:
+    description: "Rakam Documentation"
+    url: "https://rakam.io/doc"
+- name: "funnel"
+  description: "Funnel Analyzer module"
+  externalDocs:
+    description: "Rakam Documentation"
+    url: "https://rakam.io/doc"
+- name: "realtime"
+  description: ""
+  externalDocs:
+    description: "Rakam Documentation"
+    url: "https://rakam.io/doc"
+- name: "retention"
+  description: "Retention Analyzer module"
+  externalDocs:
+    description: "Rakam Documentation"
+    url: "https://rakam.io/doc"
+- name: "event-stream"
+  description: "Event Stream Module"
+  externalDocs:
+    description: "Rakam Documentation"
+    url: "https://rakam.io/doc"
+- name: "user"
+  description: "User module for Rakam"
+  externalDocs:
+    description: "Rakam Documentation"
+    url: "https://rakam.io/doc"
+- name: "user-mailbox"
+  description: ""
+  externalDocs:
+    description: "Rakam Documentation"
+    url: "https://rakam.io/doc"
+- name: "admin"
+  description: "System related actions"
+  externalDocs:
+    description: "Rakam Documentation"
+    url: "https://rakam.io/doc"
+- name: "event"
+  description: "Event Analyzer"
+  externalDocs:
+    description: "Rakam Documentation"
+    url: "https://rakam.io/doc"
+- name: "materialized-view"
+  description: "Materialized view"
+  externalDocs:
+    description: "Rakam Documentation"
+    url: "https://rakam.io/doc"
+- name: "continuous-query"
+  description: "Continuous query"
+  externalDocs:
+    description: "Rakam Documentation"
+    url: "https://rakam.io/doc"
+paths:
+  /ab-testing/create:
+    post:
+      tags:
+      - "ab-testing"
+      summary: "Create test"
+      description: ""
+      operationId: "abTesting_Create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "ABTestingReport"
+        required: true
+        schema:
+          $ref: "#/definitions/ABTestingReport"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+      security:
+      - master_key: []
+  /ab-testing/delete:
+    post:
+      tags:
+      - "ab-testing"
+      summary: "Delete report"
+      description: ""
+      operationId: "abTesting_Delete"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "id"
+        in: "formData"
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+      security:
+      - master_key: []
+  /ab-testing/get:
+    post:
+      tags:
+      - "ab-testing"
+      summary: "Get report"
+      description: ""
+      operationId: "abTesting_Get"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "id"
+        in: "formData"
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ABTestingReport"
+      security:
+      - read_key: []
+  /ab-testing/list:
+    post:
+      tags:
+      - "ab-testing"
+      summary: "List reports"
+      description: ""
+      operationId: "abTesting_List"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ABTestingReport"
+      security:
+      - read_key: []
+  /ab-testing/update:
+    post:
+      tags:
+      - "ab-testing"
+      summary: "Update report"
+      description: ""
+      operationId: "abTesting_Update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "ABTestingReport"
+        required: true
+        schema:
+          $ref: "#/definitions/ABTestingReport"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ABTestingReport"
+      security:
+      - master_key: []
+  /admin/configurations:
+    get:
+      tags:
+      - "admin"
+      summary: "List installed modules"
+      description: ""
+      operationId: "admin_GetConfigurations"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
+      security:
+      - master_key: []
+  /admin/modules:
+    get:
+      tags:
+      - "admin"
+      summary: "List installed modules for ui"
+      description: ""
+      operationId: "admin_Modules"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
+      security:
+      - master_key: []
+  /admin/types:
+    get:
+      tags:
+      - "admin"
+      summary: "Get types"
+      description: ""
+      operationId: "admin_GetTypes"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
+      security:
+      - master_key: []
+  /automation/activate:
+    post:
+      tags:
+      - "automation"
+      summary: "Activate rule"
+      description: ""
+      operationId: "automation_ActivateRule"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "id"
+        in: "formData"
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+      security:
+      - master_key: []
+  /automation/add:
+    post:
+      tags:
+      - "automation"
+      summary: "Add scenario"
+      description: ""
+      operationId: "automation_AddRule"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "AutomationRule"
+        required: true
+        schema:
+          $ref: "#/definitions/AutomationRule"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+      security:
+      - master_key: []
+  /automation/deactivate:
+    post:
+      tags:
+      - "automation"
+      summary: "Deactivate rule"
+      description: ""
+      operationId: "automation_DeactivateRule"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "id"
+        in: "formData"
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+      security:
+      - master_key: []
+  /automation/list:
+    post:
+      tags:
+      - "automation"
+      summary: "List scenarios"
+      description: ""
+      operationId: "automation_ListRules"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/AutomationRule"
+      security:
+      - read_key: []
+  /automation/remove:
+    post:
+      tags:
+      - "automation"
+      summary: "Remove rule"
+      description: ""
+      operationId: "automation_RemoveRule"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "id"
+        in: "formData"
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+      security:
+      - master_key: []
+  /continuous-query/create:
+    post:
+      tags:
+      - "continuous-query"
+      summary: "Create stream"
+      description: ""
+      operationId: "continuousQuery_Create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "ContinuousQuery"
+        required: true
+        schema:
+          $ref: "#/definitions/ContinuousQuery"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+        400:
+          description: "Project does not exist."
+      security:
+      - master_key: []
+  /continuous-query/delete:
+    post:
+      tags:
+      - "continuous-query"
+      summary: "Delete stream"
+      description: ""
+      operationId: "continuousQuery_Delete"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "table_name"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+        400:
+          description: "Project does not exist."
+      security:
+      - master_key: []
+  /continuous-query/get:
+    post:
+      tags:
+      - "continuous-query"
+      summary: "Get continuous query"
+      description: ""
+      operationId: "continuousQuery_Get"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "table_name"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ContinuousQuery"
+        400:
+          description: "Project does not exist."
+      security:
+      - read_key: []
+  /continuous-query/list:
+    post:
+      tags:
+      - "continuous-query"
+      summary: "List queries"
+      description: ""
+      operationId: "continuousQuery_ListQueries"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ContinuousQuery"
+        400:
+          description: "Project does not exist."
+      security:
+      - read_key: []
+  /continuous-query/schema:
+    post:
+      tags:
+      - "continuous-query"
+      summary: "Get query schema"
+      description: ""
+      operationId: "continuousQuery_Schema"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "names"
+        in: "formData"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Collection"
+        400:
+          description: "Project does not exist."
+      security:
+      - read_key: []
+  /continuous-query/test:
+    post:
+      tags:
+      - "continuous-query"
+      summary: "Test continuous query"
+      description: ""
+      operationId: "continuousQuery_Test"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "query"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "boolean"
+        400:
+          description: "Project does not exist."
+      security:
+      - read_key: []
+  /event-explorer/analyze:
+    post:
+      tags:
+      - "event-explorer"
+      summary: "Perform simple query on event data"
+      description: ""
+      operationId: "eventExplorer_Analyze"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "AnalyzeRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/AnalyzeRequest"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/QueryResult"
+      security:
+      - read_key: []
+  /event-explorer/extra_dimensions:
+    post:
+      tags:
+      - "event-explorer"
+      summary: "Event statistics"
+      description: ""
+      operationId: "eventExplorer_GetExtraDimensions"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+            additionalProperties:
+              type: "array"
+              items:
+                type: "string"
+      security:
+      - read_key: []
+  /event-explorer/pre_calculate:
+    post:
+      tags:
+      - "event-explorer"
+      summary: "Create Pre-computed table"
+      description: ""
+      operationId: "eventExplorer_CreatePreComputedTable"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "collections"
+        in: "formData"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "dimensions"
+        in: "formData"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "aggregations"
+        in: "formData"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+          enum:
+          - "COUNT"
+          - "COUNT_UNIQUE"
+          - "SUM"
+          - "MINIMUM"
+          - "MAXIMUM"
+          - "AVERAGE"
+          - "APPROXIMATE_UNIQUE"
+        collectionFormat: "multi"
+      - name: "measures"
+        in: "formData"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "tableName"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PreCalculatedTable"
+      security:
+      - master_key: []
+  /event-explorer/statistics:
+    post:
+      tags:
+      - "event-explorer"
+      summary: "Event statistics"
+      description: ""
+      operationId: "eventExplorer_GetEventStatistics"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "collections"
+        in: "formData"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "dimension"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "startDate"
+        in: "formData"
+        required: false
+        type: "string"
+        format: "date"
+      - name: "endDate"
+        in: "formData"
+        required: false
+        type: "string"
+        format: "date"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/QueryResult"
+      security:
+      - read_key: []
+  /event/batch:
+    post:
+      tags:
+      - "event"
+      summary: "Collect multiple events"
+      description: ""
+      operationId: "collectEvent_BatchEvents"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "EventList"
+        required: true
+        schema:
+          $ref: "#/definitions/EventList"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "integer"
+            format: "int32"
+        400:
+          description: "Project does not exist."
+        409:
+          description: "The content is partially updated."
+      security:
+      - write_key: []
+  /event/bulk:
+    post:
+      tags:
+      - "event"
+      summary: "Send Bulk events"
+      description: ""
+      operationId: "collectEvent_BulkEvents"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "EventList"
+        required: true
+        schema:
+          $ref: "#/definitions/EventList"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "integer"
+            format: "int32"
+        400:
+          description: "Project does not exist."
+        409:
+          description: "The content is partially updated."
+      security:
+      - master_key: []
+  /event/bulk/commit:
+    post:
+      tags:
+      - "event"
+      summary: "Commit Bulk events"
+      description: ""
+      operationId: "collectEvent_CommitBulkEvents"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "collection"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/QueryResult"
+      security:
+      - master_key: []
+  /event/bulk/remote:
+    post:
+      tags:
+      - "event"
+      summary: "Send Bulk events"
+      description: ""
+      operationId: "collectEvent_BulkEventsRemote"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "EventList"
+        required: true
+        schema:
+          $ref: "#/definitions/EventList"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "integer"
+            format: "int32"
+        400:
+          description: "Project does not exist."
+        409:
+          description: "The content is partially updated."
+      security:
+      - master_key: []
+  /event/collect:
+    post:
+      tags:
+      - "event"
+      summary: "Collect event"
+      description: ""
+      operationId: "collectEvent_CollectEvent"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "Event"
+        required: true
+        schema:
+          $ref: "#/definitions/Event"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "integer"
+            format: "int32"
+        400:
+          description: "Project does not exist."
+      security:
+      - write_key: []
+  /funnel/analyze:
+    post:
+      tags:
+      - "funnel"
+      summary: "Execute query"
+      description: ""
+      operationId: "funnelAnalyzer_Analyze"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "FunnelQuery"
+        required: true
+        schema:
+          $ref: "#/definitions/FunnelQuery"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/QueryResult"
+      security:
+      - read_key: []
+  /materialized-view/create:
+    post:
+      tags:
+      - "materialized-view"
+      summary: "Create view"
+      description: ""
+      operationId: "materializedView_Create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "MaterializedView"
+        required: true
+        schema:
+          $ref: "#/definitions/MaterializedView"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+        400:
+          description: "Project does not exist."
+      security:
+      - master_key: []
+  /materialized-view/delete:
+    post:
+      tags:
+      - "materialized-view"
+      summary: "Delete materialized view"
+      description: ""
+      operationId: "materializedView_Delete"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "table_name"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+        400:
+          description: "Project does not exist."
+      security:
+      - master_key: []
+  /materialized-view/get:
+    post:
+      tags:
+      - "materialized-view"
+      summary: "Get view"
+      description: ""
+      operationId: "materializedView_Get"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "table_name"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MaterializedView"
+        400:
+          description: "Project does not exist."
+      security:
+      - read_key: []
+  /materialized-view/list:
+    post:
+      tags:
+      - "materialized-view"
+      summary: "List views"
+      description: ""
+      operationId: "materializedView_ListViews"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/MaterializedView"
+        400:
+          description: "Project does not exist."
+      security:
+      - read_key: []
+  /materialized-view/schema:
+    post:
+      tags:
+      - "materialized-view"
+      summary: "Get schemas"
+      description: ""
+      operationId: "materializedView_Schema"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "names"
+        in: "formData"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/MaterializedViewSchema"
+        400:
+          description: "Project does not exist."
+      security:
+      - read_key: []
+  /materialized-view/update:
+    get:
+      tags:
+      - "materialized-view"
+      summary: "Update view"
+      description: ""
+      operationId: "materializedView_Update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        400:
+          description: "Project does not exist."
+      security:
+      - master_key: []
+  /project/collection:
+    post:
+      tags:
+      - "admin"
+      summary: "Get collection names"
+      description: ""
+      operationId: "project_Collections"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        400:
+          description: "Project does not exist."
+      security:
+      - read_key: []
+  /project/create:
+    post:
+      tags:
+      - "admin"
+      summary: "Create project"
+      description: ""
+      operationId: "project_CreateProject"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+      security:
+      - master_key: []
+  /project/delete:
+    post:
+      tags:
+      - "admin"
+      summary: "Delete project"
+      description: ""
+      operationId: "project_DeleteProject"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+      security:
+      - master_key: []
+  /project/list:
+    get:
+      tags:
+      - "admin"
+      summary: "List created projects"
+      description: ""
+      operationId: "project_GetProjects"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
+      security:
+      - read_key: []
+  /project/schema:
+    post:
+      tags:
+      - "admin"
+      summary: "Get collection schema"
+      description: ""
+      operationId: "project_Schema"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "names"
+        in: "formData"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Collection"
+        400:
+          description: "Project does not exist."
+      security:
+      - read_key: []
+  /project/schema/add:
+    post:
+      tags:
+      - "admin"
+      summary: "Add fields to collections"
+      description: ""
+      operationId: "project_AddFieldsToSchema"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "project_AddFieldsToSchema"
+        required: true
+        schema:
+          $ref: "#/definitions/project_AddFieldsToSchema"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/SchemaField"
+        400:
+          description: "Project does not exist."
+      security:
+      - master_key: []
+  /project/schema/add/custom:
+    post:
+      tags:
+      - "admin"
+      summary: "Add fields to collections by transforming other schemas"
+      description: ""
+      operationId: "project_AddCustomFieldsToSchema"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "collection"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "schema_type"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "schema"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/SchemaField"
+        400:
+          description: "Project does not exist."
+      security:
+      - master_key: []
+  /query/execute:
+    post:
+      tags:
+      - "event"
+      summary: "Analyze events"
+      description: ""
+      operationId: "query_Execute"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "query"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "limit"
+        in: "formData"
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/QueryResult"
+      security:
+      - read_key: []
+  /query/explain:
+    post:
+      tags:
+      - "event"
+      summary: "Explain query"
+      description: ""
+      operationId: "query_Explain"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "query"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+      security:
+      - read_key: []
+  /query/metadata:
+    post:
+      tags:
+      - "event"
+      summary: "Test query"
+      description: ""
+      operationId: "query_Metadata"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "query"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/SchemaField"
+        400:
+          description: "Project does not exist."
+      security:
+      - read_key: []
+  /realtime/create:
+    post:
+      tags:
+      - "realtime"
+      summary: "Create report"
+      description: ""
+      operationId: "realtime_Create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "RealTimeReport"
+        required: true
+        schema:
+          $ref: "#/definitions/RealTimeReport"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+      security:
+      - master_key: []
+  /realtime/delete:
+    post:
+      tags:
+      - "realtime"
+      summary: "Delete report"
+      description: ""
+      operationId: "realtime_Delete"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "table_name"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+      security:
+      - master_key: []
+  /realtime/get:
+    post:
+      tags:
+      - "realtime"
+      summary: "Get report"
+      description: ""
+      operationId: "realtime_Get"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "realtime_Get"
+        required: true
+        schema:
+          $ref: "#/definitions/realtime_Get"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/RealTimeQueryResult"
+        400:
+          description: "Report does not exist."
+      security:
+      - read_key: []
+  /realtime/list:
+    post:
+      tags:
+      - "realtime"
+      summary: "List queries"
+      description: ""
+      operationId: "realtime_List"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ContinuousQuery"
+        400:
+          description: "Project does not exist."
+      security:
+      - read_key: []
+  /recipe/export:
+    post:
+      tags:
+      - "recipe"
+      summary: "Export recipe"
+      description: ""
+      operationId: "recipe_Export"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
+      security:
+      - master_key: []
+  /recipe/install:
+    post:
+      tags:
+      - "recipe"
+      summary: "Install recipe"
+      description: ""
+      operationId: "recipe_Install"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
+      security:
+      - master_key: []
+  /retention/analyze:
+    post:
+      tags:
+      - "retention"
+      summary: "Execute query"
+      description: ""
+      operationId: "retentionAnalyzer_Execute"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "RetentionQuery"
+        required: true
+        schema:
+          $ref: "#/definitions/RetentionQuery"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/QueryResult"
+      security:
+      - read_key: []
+  /user/action/email/batch:
+    post:
+      tags:
+      - "user-action"
+      summary: "Apply batch operation"
+      description: ""
+      operationId: "userEmailAction_Batch"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "userEmailAction_Batch"
+        required: true
+        schema:
+          $ref: "#/definitions/userEmailAction_Batch"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "integer"
+            format: "int64"
+        400:
+          description: "Project does not exist."
+      security:
+      - read_key: []
+  /user/action/email/single:
+    post:
+      tags:
+      - "user-action"
+      summary: "Perform action for single user"
+      description: ""
+      operationId: "userEmailAction_Send"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "userEmailAction_Send"
+        required: true
+        schema:
+          $ref: "#/definitions/userEmailAction_Send"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "boolean"
+        400:
+          description: "Project does not exist."
+      security:
+      - read_key: []
+  /user/action/mailbox/action/mailbox/single:
+    post:
+      tags:
+      - "user-action"
+      summary: "Send message to user"
+      description: "Sends a mail to users mailbox"
+      operationId: "userMailboxAction_Send"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "from_user"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "to_user"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "parent"
+        in: "formData"
+        required: false
+        type: "integer"
+        format: "int32"
+      - name: "message"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "timestamp"
+        in: "formData"
+        required: false
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Message"
+        400:
+          description: "Project does not exist."
+        404:
+          description: "User does not exist."
+      security:
+      - write_key: []
+  /user/action/mailbox/batch:
+    post:
+      tags:
+      - "user-action"
+      summary: "Apply batch operation"
+      description: ""
+      operationId: "userMailboxAction_BatchSendMessages"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "userMailboxAction_BatchSendMessages"
+        required: true
+        schema:
+          $ref: "#/definitions/userMailboxAction_BatchSendMessages"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "integer"
+            format: "int64"
+        400:
+          description: "Project does not exist."
+      security:
+      - read_key: []
+  /user/batch/create:
+    post:
+      tags:
+      - "user"
+      summary: "Create new user"
+      description: ""
+      operationId: "user_BatchCreate"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "user_BatchCreate"
+        required: true
+        schema:
+          $ref: "#/definitions/user_BatchCreate"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        400:
+          description: "Project does not exist."
+  /user/create:
+    post:
+      tags:
+      - "user"
+      summary: "Create new user"
+      description: ""
+      operationId: "user_Create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "User"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+        400:
+          description: "Project does not exist."
+  /user/create_segment:
+    post:
+      tags:
+      - "user"
+      summary: "Get events of the user"
+      description: ""
+      operationId: "user_CreateSegment"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "user_CreateSegment"
+        required: true
+        schema:
+          $ref: "#/definitions/user_CreateSegment"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+        400:
+          description: "User does not exist."
+      security:
+      - read_key: []
+  /user/get:
+    post:
+      tags:
+      - "user"
+      summary: "Get user"
+      description: ""
+      operationId: "user_GetUser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "user"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/User"
+        400:
+          description: "User does not exist."
+      security:
+      - read_key: []
+  /user/get_events:
+    post:
+      tags:
+      - "user"
+      summary: "Get events of the user"
+      description: ""
+      operationId: "user_GetEvents"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "user"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "limit"
+        in: "formData"
+        required: false
+        type: "integer"
+        format: "int32"
+      - name: "offset"
+        in: "formData"
+        required: false
+        type: "string"
+        format: "date-time"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/CollectionEvent"
+        400:
+          description: "User does not exist."
+      security:
+      - read_key: []
+  /user/increment_property:
+    post:
+      tags:
+      - "user"
+      summary: "Set user property"
+      description: ""
+      operationId: "user_IncrementProperty"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "user_IncrementProperty"
+        required: true
+        schema:
+          $ref: "#/definitions/user_IncrementProperty"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+        400:
+          description: "User does not exist."
+  /user/mailbox/get:
+    post:
+      tags:
+      - "user-mailbox"
+      summary: "Get user mailbox"
+      description: "Returns the last mails sent to the user"
+      operationId: "userMailbox_Get"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "user"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "parent"
+        in: "formData"
+        required: false
+        type: "integer"
+        format: "int32"
+      - name: "limit"
+        in: "formData"
+        required: false
+        type: "integer"
+        format: "int32"
+      - name: "offset"
+        in: "formData"
+        required: false
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              type: "array"
+              items:
+                $ref: "#/definitions/Message"
+        400:
+          description: "Project does not exist."
+        404:
+          description: "User does not exist."
+      security:
+      - read_key: []
+  /user/mailbox/get_online_users:
+    post:
+      tags:
+      - "user-mailbox"
+      summary: "Get connected users"
+      description: ""
+      operationId: "userMailbox_GetConnectedUsers"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              type: "object"
+              additionalProperties:
+                type: "object"
+                properties: {}
+        400:
+          description: "Project does not exist."
+      security:
+      - read_key: []
+  /user/mailbox/mark_as_read:
+    post:
+      tags:
+      - "user-mailbox"
+      summary: "Mark mail as read"
+      description: "Marks the specified mails as read."
+      operationId: "userMailbox_MarkAsRead"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "user"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "message_ids"
+        in: "formData"
+        required: false
+        type: "array"
+        items:
+          type: "integer"
+          format: "int32"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+        400:
+          description: "Project does not exist."
+        404:
+          description: "User does not exist."
+      security:
+      - write_key: []
+  /user/merge:
+    post:
+      tags:
+      - "user"
+      summary: "Merge user with anonymous id"
+      description: ""
+      operationId: "user_MergeUser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "user_MergeUser"
+        required: true
+        schema:
+          $ref: "#/definitions/user_MergeUser"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "boolean"
+        400:
+          description: "User does not exist."
+      security:
+      - read_key: []
+  /user/metadata:
+    post:
+      tags:
+      - "user"
+      summary: "Get user storage metadata"
+      description: ""
+      operationId: "user_GetMetadata"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MetadataResponse"
+        400:
+          description: "Project does not exist."
+      security:
+      - read_key: []
+  /user/search:
+    post:
+      tags:
+      - "user"
+      summary: "Search users"
+      description: ""
+      operationId: "user_SearchUsers"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "user_SearchUsers"
+        required: true
+        schema:
+          $ref: "#/definitions/user_SearchUsers"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/QueryResult"
+        400:
+          description: "Project does not exist."
+      security:
+      - read_key: []
+  /user/set_properties:
+    post:
+      tags:
+      - "user"
+      summary: "Set user properties"
+      description: ""
+      operationId: "user_SetProperties"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "SetUserProperties"
+        required: true
+        schema:
+          $ref: "#/definitions/SetUserProperties"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "integer"
+            format: "int32"
+        400:
+          description: "User does not exist."
+  /user/set_properties_once:
+    post:
+      tags:
+      - "user"
+      summary: "Set user properties once"
+      description: ""
+      operationId: "user_SetPropertiesOnce"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "SetUserProperties"
+        required: true
+        schema:
+          $ref: "#/definitions/SetUserProperties"
+      responses:
+        400:
+          description: "User does not exist."
+  /user/unset_properties:
+    post:
+      tags:
+      - "user"
+      summary: "Unset user property"
+      description: ""
+      operationId: "user_UnsetProperty"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "user_UnsetProperty"
+        required: true
+        schema:
+          $ref: "#/definitions/user_UnsetProperty"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/JsonResponse"
+        400:
+          description: "User does not exist."
+securityDefinitions:
+  read_key:
+    type: "apiKey"
+    name: "read_key"
+    in: "header"
+  master_key:
+    type: "apiKey"
+    name: "master_key"
+    in: "header"
+  write_key:
+    type: "apiKey"
+    name: "write_key"
+    in: "header"
+definitions:
+  JsonResponse:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+        default: false
+      message:
+        type: "string"
+  FunnelWindow:
+    type: "object"
+    properties:
+      value:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+        enum:
+        - "DAY"
+        - "WEEK"
+        - "MONTH"
+  Goal:
+    type: "object"
+    properties:
+      collection:
+        type: "string"
+      filter:
+        type: "string"
+  ContinuousQuery:
+    type: "object"
+    required:
+    - "name"
+    - "project"
+    - "query"
+    properties:
+      project:
+        type: "string"
+      name:
+        type: "string"
+      query:
+        type: "string"
+      options:
+        type: "object"
+        additionalProperties:
+          $ref: "#/definitions/inline_response_200"
+      tableName:
+        type: "string"
+      partitionKeys:
+        type: "array"
+        items:
+          type: "string"
+  user_SearchUsers:
+    properties:
+      project:
+        type: "string"
+      columns:
+        type: "array"
+        items:
+          type: "string"
+      filter:
+        type: "string"
+      event_filters:
+        type: "array"
+        items:
+          $ref: "#/definitions/EventFilter"
+      sorting:
+        $ref: "#/definitions/Sorting"
+      offset:
+        type: "string"
+      limit:
+        type: "integer"
+        format: "int32"
+  Measure:
+    type: "object"
+    required:
+    - "aggregation"
+    - "column"
+    properties:
+      column:
+        type: "string"
+      aggregation:
+        type: "string"
+        enum:
+        - "COUNT"
+        - "COUNT_UNIQUE"
+        - "SUM"
+        - "MINIMUM"
+        - "MAXIMUM"
+        - "AVERAGE"
+        - "APPROXIMATE_UNIQUE"
+  QueryError:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+      sqlState:
+        type: "string"
+      errorCode:
+        type: "integer"
+        format: "int32"
+      errorLine:
+        type: "integer"
+        format: "int32"
+      charPositionInLine:
+        type: "integer"
+        format: "int32"
+  EventFilterAggregation:
+    type: "object"
+    properties:
+      field:
+        type: "string"
+      minimum:
+        type: "integer"
+        format: "int64"
+      maximum:
+        type: "integer"
+        format: "int64"
+      type:
+        type: "string"
+        enum:
+        - "COUNT"
+        - "COUNT_UNIQUE"
+        - "SUM"
+        - "MINIMUM"
+        - "MAXIMUM"
+        - "AVERAGE"
+        - "APPROXIMATE_UNIQUE"
+  FunnelQuery:
+    properties:
+      project:
+        type: "string"
+      steps:
+        type: "array"
+        items:
+          $ref: "#/definitions/FunnelStep"
+      dimension:
+        type: "string"
+      startDate:
+        type: "string"
+        format: "date"
+      window:
+        $ref: "#/definitions/FunnelWindow"
+      endDate:
+        type: "string"
+        format: "date"
+  Threshold:
+    type: "object"
+    properties:
+      aggregation:
+        type: "string"
+        enum:
+        - "count"
+        - "sum"
+      fieldName:
+        type: "string"
+      value:
+        type: "integer"
+        format: "int64"
+  Timeframe:
+    type: "object"
+    properties:
+      start:
+        type: "string"
+        format: "date-time"
+      end:
+        type: "string"
+        format: "date-time"
+  CollectionEvent:
+    type: "object"
+    properties:
+      collection:
+        type: "string"
+      properties:
+        type: "object"
+        additionalProperties:
+          $ref: "#/definitions/inline_response_200"
+  RealTimeReport:
+    properties:
+      project:
+        type: "string"
+      name:
+        type: "string"
+      measures:
+        type: "array"
+        items:
+          $ref: "#/definitions/Measure"
+      table_name:
+        type: "string"
+      collections:
+        type: "array"
+        items:
+          type: "string"
+      filter:
+        type: "string"
+      dimensions:
+        type: "array"
+        items:
+          type: "string"
+  userEmailAction_Send:
+    properties:
+      project:
+        type: "string"
+      user:
+        type: "string"
+      config:
+        $ref: "#/definitions/EmailActionConfig"
+  RetentionAction:
+    type: "object"
+    properties:
+      collection:
+        type: "string"
+        readOnly: true
+  ScenarioStep:
+    type: "object"
+    properties:
+      collection:
+        type: "string"
+      filter:
+        type: "string"
+      threshold:
+        $ref: "#/definitions/Threshold"
+  Variant:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      weight:
+        type: "integer"
+        format: "int32"
+      data:
+        type: "object"
+        properties: {}
+  MaterializedViewSchema:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      fields:
+        type: "array"
+        items:
+          $ref: "#/definitions/SchemaField"
+  ExecuteQuery:
+    type: "object"
+    required:
+    - "project"
+    - "query"
+    properties:
+      project:
+        type: "string"
+      query:
+        type: "string"
+      limit:
+        type: "integer"
+        format: "int32"
+  user_CreateSegment:
+    properties:
+      project:
+        type: "string"
+      name:
+        type: "string"
+      table_name:
+        type: "string"
+      filter_expression:
+        type: "string"
+      event_filters:
+        type: "array"
+        items:
+          $ref: "#/definitions/EventFilter"
+      cache_eviction:
+        type: "string"
+  Collection:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      fields:
+        type: "array"
+        items:
+          $ref: "#/definitions/SchemaField"
+  project_AddFieldsToSchema:
+    properties:
+      project:
+        type: "string"
+      collection:
+        type: "string"
+      fields:
+        type: "array"
+        items:
+          $ref: "#/definitions/SchemaField"
+  FunnelStep:
+    type: "object"
+    properties:
+      collection:
+        type: "string"
+        readOnly: true
+  User:
+    type: "object"
+    required:
+    - "api"
+    - "id"
+    - "project"
+    - "properties"
+    properties:
+      project:
+        type: "string"
+      id:
+        type: "string"
+      api:
+        $ref: "#/definitions/UserContext"
+      properties:
+        type: "object"
+        additionalProperties:
+          $ref: "#/definitions/inline_response_200"
+  Message:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+      content:
+        type: "string"
+      from_user:
+        type: "object"
+        properties: {}
+      to_user:
+        type: "object"
+        properties: {}
+      parentId:
+        type: "integer"
+        format: "int32"
+      seen:
+        type: "boolean"
+        default: false
+      time:
+        type: "integer"
+        format: "int64"
+      project:
+        type: "string"
+  user_UnsetProperty:
+    properties:
+      project:
+        type: "string"
+      api:
+        $ref: "#/definitions/UserContext"
+      user:
+        type: "string"
+      property:
+        type: "array"
+        items:
+          type: "string"
+  RealTimeQueryResult:
+    type: "object"
+    properties:
+      start:
+        type: "integer"
+        format: "int64"
+      end:
+        type: "integer"
+        format: "int64"
+      result:
+        type: "object"
+        properties: {}
+  QueryResult:
+    type: "object"
+    properties:
+      metadata:
+        type: "array"
+        items:
+          $ref: "#/definitions/SchemaField"
+      result:
+        type: "array"
+        items:
+          type: "array"
+          items:
+            type: "object"
+            properties: {}
+      error:
+        $ref: "#/definitions/QueryError"
+      properties:
+        type: "object"
+        additionalProperties:
+          $ref: "#/definitions/inline_response_200"
+      failed:
+        type: "boolean"
+        default: false
+  SetUserProperties:
+    properties:
+      project:
+        type: "string"
+      user:
+        type: "string"
+      api:
+        $ref: "#/definitions/UserContext"
+      properties:
+        type: "object"
+        additionalProperties:
+          $ref: "#/definitions/inline_response_200"
+  MetadataResponse:
+    type: "object"
+    properties:
+      columns:
+        type: "array"
+        items:
+          $ref: "#/definitions/SchemaField"
+      identifierColumn:
+        type: "string"
+  realtime_Get:
+    properties:
+      project:
+        type: "string"
+      table_name:
+        type: "string"
+      filter:
+        type: "string"
+      measure:
+        $ref: "#/definitions/Measure"
+      dimensions:
+        type: "array"
+        items:
+          type: "string"
+      aggregate:
+        type: "boolean"
+      date_start:
+        type: "string"
+        format: "date-time"
+      date_end:
+        type: "string"
+        format: "date-time"
+  AnalyzeRequest:
+    properties:
+      project:
+        type: "string"
+      measure:
+        $ref: "#/definitions/Measure"
+      grouping:
+        $ref: "#/definitions/Reference"
+      segment:
+        $ref: "#/definitions/Reference"
+      filterExpression:
+        type: "string"
+      startDate:
+        type: "string"
+        format: "date"
+      endDate:
+        type: "string"
+        format: "date"
+      collections:
+        type: "array"
+        items:
+          type: "string"
+  PreCalculatedTable:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      tableName:
+        type: "string"
+  user_MergeUser:
+    properties:
+      project:
+        type: "string"
+      user:
+        type: "string"
+      api:
+        $ref: "#/definitions/UserContext"
+      anonymous_id:
+        type: "string"
+      created_at:
+        type: "string"
+        format: "date-time"
+      merged_at:
+        type: "string"
+        format: "date-time"
+  OLAPTable:
+    type: "object"
+    required:
+    - "aggregations"
+    - "collections"
+    - "dimensions"
+    - "measures"
+    - "project"
+    - "tableName"
+    properties:
+      project:
+        type: "string"
+      collections:
+        type: "array"
+        items:
+          type: "string"
+      dimensions:
+        type: "array"
+        items:
+          type: "string"
+      aggregations:
+        type: "array"
+        items:
+          type: "string"
+          enum:
+          - "COUNT"
+          - "COUNT_UNIQUE"
+          - "SUM"
+          - "MINIMUM"
+          - "MAXIMUM"
+          - "AVERAGE"
+          - "APPROXIMATE_UNIQUE"
+      measures:
+        type: "array"
+        items:
+          type: "string"
+      tableName:
+        type: "string"
+  ABTestingReport:
+    type: "object"
+    required:
+    - "goal"
+    - "name"
+    - "project"
+    - "variants"
+    properties:
+      project:
+        type: "string"
+      name:
+        type: "string"
+      variants:
+        type: "array"
+        items:
+          $ref: "#/definitions/Variant"
+      goal:
+        $ref: "#/definitions/Goal"
+      options:
+        type: "object"
+        properties: {}
+      id:
+        type: "integer"
+        format: "int32"
+      collectionName:
+        type: "string"
+      connectorField:
+        type: "string"
+  user_IncrementProperty:
+    properties:
+      project:
+        type: "string"
+      api:
+        $ref: "#/definitions/UserContext"
+      user:
+        type: "string"
+      property:
+        type: "string"
+      ?
+      : type: "number"
+        format: "double"
+  Reference:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+        enum:
+        - "COLUMN"
+        - "REFERENCE"
+      value:
+        type: "string"
+  UserContext:
+    type: "object"
+    properties:
+      writeKey:
+        type: "string"
+      apiVersion:
+        type: "string"
+  SerializableAction:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+        enum:
+        - "client"
+        - "user_action"
+        - "event"
+      value:
+        type: "object"
+        properties: {}
+  EmailActionConfig:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      content:
+        type: "string"
+      columnName:
+        type: "string"
+      defaultValues:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      richText:
+        type: "boolean"
+        default: false
+  EventFilter:
+    type: "object"
+    properties:
+      collection:
+        type: "string"
+      timeframe:
+        $ref: "#/definitions/Timeframe"
+      aggregation:
+        $ref: "#/definitions/EventFilterAggregation"
+      filterExpression:
+        type: "string"
+  Sorting:
+    type: "object"
+    properties:
+      column:
+        type: "string"
+      order:
+        type: "string"
+        enum:
+        - "asc"
+        - "desc"
+  SchemaField:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        readOnly: true
+      type:
+        type: "string"
+        readOnly: true
+        enum:
+        - "STRING"
+        - "INTEGER"
+        - "DECIMAL"
+        - "DOUBLE"
+        - "LONG"
+        - "BOOLEAN"
+        - "DATE"
+        - "TIME"
+        - "TIMESTAMP"
+        - "BINARY"
+        - "ARRAY_STRING"
+        - "ARRAY_INTEGER"
+        - "ARRAY_DECIMAL"
+        - "ARRAY_DOUBLE"
+        - "ARRAY_LONG"
+        - "ARRAY_BOOLEAN"
+        - "ARRAY_DATE"
+        - "ARRAY_TIME"
+        - "ARRAY_TIMESTAMP"
+        - "ARRAY_BINARY"
+        - "MAP_STRING"
+        - "MAP_INTEGER"
+        - "MAP_DECIMAL"
+        - "MAP_DOUBLE"
+        - "MAP_LONG"
+        - "MAP_BOOLEAN"
+        - "MAP_DATE"
+        - "MAP_TIME"
+        - "MAP_TIMESTAMP"
+        - "MAP_BINARY"
+      unique:
+        type: "boolean"
+        readOnly: true
+        default: false
+      descriptiveName:
+        type: "string"
+        readOnly: true
+      description:
+        type: "string"
+        readOnly: true
+      category:
+        type: "string"
+        readOnly: true
+  AutomationRule:
+    type: "object"
+    required:
+    - "actions"
+    - "project"
+    - "scenarios"
+    properties:
+      project:
+        type: "string"
+      is_active:
+        type: "boolean"
+        default: false
+      scenarios:
+        type: "array"
+        items:
+          $ref: "#/definitions/ScenarioStep"
+      actions:
+        type: "array"
+        items:
+          $ref: "#/definitions/SerializableAction"
+      custom_data:
+        type: "string"
+      id:
+        type: "integer"
+        format: "int32"
+  EventContext:
+    type: "object"
+    required:
+    - "apiVersion"
+    - "checksum"
+    - "uploadTime"
+    - "writeKey"
+    properties:
+      writeKey:
+        type: "string"
+      apiVersion:
+        type: "string"
+      uploadTime:
+        type: "integer"
+        format: "int64"
+      checksum:
+        type: "string"
+  userEmailAction_Batch:
+    properties:
+      project:
+        type: "string"
+      filter:
+        type: "string"
+      event_filters:
+        type: "array"
+        items:
+          $ref: "#/definitions/EventFilter"
+      config:
+        $ref: "#/definitions/EmailActionConfig"
+  EventList:
+    properties:
+      api:
+        $ref: "#/definitions/EventContext"
+      project:
+        type: "string"
+      events:
+        type: "array"
+        items:
+          $ref: "#/definitions/Event"
+  user_BatchCreate:
+    properties:
+      project:
+        type: "string"
+      users:
+        type: "array"
+        items:
+          $ref: "#/definitions/User"
+  MailAction:
+    type: "object"
+    required:
+    - "message"
+    - "variables"
+    properties:
+      message:
+        type: "string"
+      variables:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      fromUser:
+        type: "string"
+  Event:
+    type: "object"
+    required:
+    - "api"
+    - "collection"
+    - "project"
+    - "properties"
+    properties:
+      project:
+        type: "string"
+        readOnly: true
+      collection:
+        type: "string"
+        readOnly: true
+      api:
+        $ref: "#/definitions/EventContext"
+      properties:
+        type: "object"
+        properties: {}
+  MaterializedView:
+    type: "object"
+    required:
+    - "name"
+    - "project"
+    - "query"
+    properties:
+      project:
+        type: "string"
+      name:
+        type: "string"
+      query:
+        type: "string"
+      incremental:
+        type: "boolean"
+        default: false
+      options:
+        type: "object"
+        additionalProperties:
+          $ref: "#/definitions/inline_response_200"
+      tableName:
+        type: "string"
+      updateInterval:
+        type: "string"
+      lastUpdate:
+        type: "string"
+        format: "date-time"
+  RetentionQuery:
+    properties:
+      project:
+        type: "string"
+      first_action:
+        $ref: "#/definitions/RetentionAction"
+      returning_action:
+        $ref: "#/definitions/RetentionAction"
+      dimension:
+        type: "string"
+      date_unit:
+        type: "string"
+        enum:
+        - "DAY"
+        - "WEEK"
+        - "MONTH"
+      period:
+        type: "integer"
+        format: "int32"
+      startDate:
+        type: "string"
+        format: "date"
+      endDate:
+        type: "string"
+        format: "date"
+  userMailboxAction_BatchSendMessages:
+    properties:
+      project:
+        type: "string"
+      filter:
+        type: "string"
+      event_filters:
+        type: "array"
+        items:
+          $ref: "#/definitions/EventFilter"
+      config:
+        $ref: "#/definitions/MailAction"
+  inline_response_200: {}

@@ -20,6 +20,8 @@ public class Threshold: JSONEncodable {
     public var value: Int?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

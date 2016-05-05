@@ -39,17 +39,20 @@ class User(object):
         self.swagger_types = {
             'project': 'str',
             'id': 'str',
-            'properties': 'dict(str, object)'
+            'api': 'UserContext',
+            'properties': 'dict(str, InlineResponse200)'
         }
 
         self.attribute_map = {
             'project': 'project',
             'id': 'id',
+            'api': 'api',
             'properties': 'properties'
         }
 
         self._project = None
         self._id = None
+        self._api = None
         self._properties = None
 
     @property
@@ -97,13 +100,35 @@ class User(object):
         self._id = id
 
     @property
+    def api(self):
+        """
+        Gets the api of this User.
+
+
+        :return: The api of this User.
+        :rtype: UserContext
+        """
+        return self._api
+
+    @api.setter
+    def api(self, api):
+        """
+        Sets the api of this User.
+
+
+        :param api: The api of this User.
+        :type: UserContext
+        """
+        self._api = api
+
+    @property
     def properties(self):
         """
         Gets the properties of this User.
 
 
         :return: The properties of this User.
-        :rtype: dict(str, object)
+        :rtype: dict(str, InlineResponse200)
         """
         return self._properties
 
@@ -114,7 +139,7 @@ class User(object):
 
 
         :param properties: The properties of this User.
-        :type: dict(str, object)
+        :type: dict(str, InlineResponse200)
         """
         self._properties = properties
 
@@ -149,3 +174,16 @@ class User(object):
         For `print` and `pprint`
         """
         return self.to_str()
+
+    def __eq__(self, other): 
+        """
+        Returns true if both objects are equal
+        """
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """ 
+        Returns true if both objects are not equal
+        """
+        return not self == other
+

@@ -45,7 +45,7 @@ class UsermailboxApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def get(self, **kwargs):
+    def user_mailbox_get(self, **kwargs):
         """
         Get user mailbox
         Returns the last mails sent to the user
@@ -56,7 +56,7 @@ class UsermailboxApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get(callback=callback_function)
+        >>> thread = api.user_mailbox_get(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -78,10 +78,11 @@ class UsermailboxApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get" % key
+                    " to method user_mailbox_get" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/user/mailbox/get'.replace('{format}', 'json')
         method = 'POST'
@@ -132,7 +133,7 @@ class UsermailboxApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def get_connected_users(self, **kwargs):
+    def user_mailbox_get_connected_users(self, **kwargs):
         """
         Get connected users
         
@@ -143,7 +144,7 @@ class UsermailboxApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.get_connected_users(callback=callback_function)
+        >>> thread = api.user_mailbox_get_connected_users(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -161,10 +162,11 @@ class UsermailboxApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get_connected_users" % key
+                    " to method user_mailbox_get_connected_users" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/user/mailbox/get_online_users'.replace('{format}', 'json')
         method = 'POST'
@@ -207,7 +209,7 @@ class UsermailboxApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def mark_as_read(self, **kwargs):
+    def user_mailbox_mark_as_read(self, **kwargs):
         """
         Mark mail as read
         Marks the specified mails as read.
@@ -218,13 +220,13 @@ class UsermailboxApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.mark_as_read(callback=callback_function)
+        >>> thread = api.user_mailbox_mark_as_read(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str project: 
         :param str user: 
-        :param list[str] message_ids: 
+        :param list[int] message_ids: 
         :return: JsonResponse
                  If the method is called asynchronously,
                  returns the request thread.
@@ -238,10 +240,11 @@ class UsermailboxApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method mark_as_read" % key
+                    " to method user_mailbox_mark_as_read" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/user/mailbox/mark_as_read'.replace('{format}', 'json')
         method = 'POST'

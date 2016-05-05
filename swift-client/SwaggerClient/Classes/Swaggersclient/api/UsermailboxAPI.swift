@@ -39,7 +39,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<[[Message]]> 
          */
-        public class func get(project project: String?, user: String?, parent: Int?, limit: Int?, offset: Int?) -> RequestBuilder<[[Message]]> {
+        public class func userMailboxGet(project project: String?, user: String?, parent: Int?, limit: Int?, offset: Int?) -> RequestBuilder<[[Message]]> {
             let path = "/user/mailbox/get"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -74,7 +74,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<[[String:String]]> 
          */
-        public class func getConnectedUsers(project project: String?) -> RequestBuilder<[[String:String]]> {
+        public class func userMailboxGetConnectedUsers(project project: String?) -> RequestBuilder<[[String:String]]> {
             let path = "/user/mailbox/get_online_users"
             let URLString = SwaggerClientAPI.basePath + path
             
@@ -108,7 +108,7 @@ extension SwaggerClientAPI {
 
          - returns: RequestBuilder<JsonResponse> 
          */
-        public class func markAsRead(project project: String?, user: String?, messageIds: [String]?) -> RequestBuilder<JsonResponse> {
+        public class func userMailboxMarkAsRead(project project: String?, user: String?, messageIds: [Int]?) -> RequestBuilder<JsonResponse> {
             let path = "/user/mailbox/mark_as_read"
             let URLString = SwaggerClientAPI.basePath + path
             

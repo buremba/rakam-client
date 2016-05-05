@@ -15,6 +15,8 @@ public class MailAction: JSONEncodable {
     public var fromUser: String?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

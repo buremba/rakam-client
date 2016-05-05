@@ -45,7 +45,7 @@ class ContinuousqueryApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def create(self, continuous_query, **kwargs):
+    def continuous_query_create(self, **kwargs):
         """
         Create stream
         
@@ -56,7 +56,7 @@ class ContinuousqueryApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.create(continuous_query, callback=callback_function)
+        >>> thread = api.continuous_query_create(continuous_query=continuous_query_value, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -65,9 +65,6 @@ class ContinuousqueryApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        # verify the required parameter 'continuous_query' is set
-        if continuous_query is None:
-            raise ValueError("Missing the required parameter `continuous_query` when calling `create`")
 
         all_params = ['continuous_query']
         all_params.append('callback')
@@ -77,10 +74,14 @@ class ContinuousqueryApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method create" % key
+                    " to method continuous_query_create" % key
                 )
             params[key] = val
         del params['kwargs']
+
+        # verify the required parameter 'continuous_query' is set
+        if ('continuous_query' not in params) or (params['continuous_query'] is None):
+            raise ValueError("Missing the required parameter `continuous_query` when calling `continuous_query_create`")
 
         resource_path = '/continuous-query/create'.replace('{format}', 'json')
         method = 'POST'
@@ -123,7 +124,7 @@ class ContinuousqueryApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def delete(self, **kwargs):
+    def continuous_query_delete(self, **kwargs):
         """
         Delete stream
         
@@ -134,18 +135,18 @@ class ContinuousqueryApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.delete(callback=callback_function)
+        >>> thread = api.continuous_query_delete(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str project: 
-        :param str name: 
+        :param str table_name: 
         :return: JsonResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['project', 'name']
+        all_params = ['project', 'table_name']
         all_params.append('callback')
 
         params = locals()
@@ -153,10 +154,11 @@ class ContinuousqueryApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method delete" % key
+                    " to method continuous_query_delete" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/continuous-query/delete'.replace('{format}', 'json')
         method = 'POST'
@@ -171,8 +173,8 @@ class ContinuousqueryApi(object):
         files = {}
         if 'project' in params:
             form_params['project'] = params['project']
-        if 'name' in params:
-            form_params['name'] = params['name']
+        if 'table_name' in params:
+            form_params['table_name'] = params['table_name']
 
         body_params = None
 
@@ -201,7 +203,86 @@ class ContinuousqueryApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def list_queries(self, **kwargs):
+    def continuous_query_get(self, **kwargs):
+        """
+        Get continuous query
+        
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.continuous_query_get(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project: 
+        :param str table_name: 
+        :return: ContinuousQuery
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['project', 'table_name']
+        all_params.append('callback')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method continuous_query_get" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+
+        resource_path = '/continuous-query/get'.replace('{format}', 'json')
+        method = 'POST'
+
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = {}
+        files = {}
+        if 'project' in params:
+            form_params['project'] = params['project']
+        if 'table_name' in params:
+            form_params['table_name'] = params['table_name']
+
+        body_params = None
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['read_key']
+
+        response = self.api_client.call_api(resource_path, method,
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=files,
+                                            response_type='ContinuousQuery',
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'))
+        return response
+
+    def continuous_query_list_queries(self, **kwargs):
         """
         List queries
         
@@ -212,7 +293,7 @@ class ContinuousqueryApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.list_queries(callback=callback_function)
+        >>> thread = api.continuous_query_list_queries(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -230,10 +311,11 @@ class ContinuousqueryApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method list_queries" % key
+                    " to method continuous_query_list_queries" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/continuous-query/list'.replace('{format}', 'json')
         method = 'POST'
@@ -276,7 +358,7 @@ class ContinuousqueryApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def schema(self, **kwargs):
+    def continuous_query_schema(self, **kwargs):
         """
         Get query schema
         
@@ -287,17 +369,18 @@ class ContinuousqueryApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.schema(callback=callback_function)
+        >>> thread = api.continuous_query_schema(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str project: 
+        :param list[str] names: 
         :return: list[Collection]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['project']
+        all_params = ['project', 'names']
         all_params.append('callback')
 
         params = locals()
@@ -305,10 +388,11 @@ class ContinuousqueryApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method schema" % key
+                    " to method continuous_query_schema" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/continuous-query/schema'.replace('{format}', 'json')
         method = 'POST'
@@ -323,6 +407,8 @@ class ContinuousqueryApi(object):
         files = {}
         if 'project' in params:
             form_params['project'] = params['project']
+        if 'names' in params:
+            form_params['names'] = params['names']
 
         body_params = None
 
@@ -351,7 +437,7 @@ class ContinuousqueryApi(object):
                                             callback=params.get('callback'))
         return response
 
-    def test(self, **kwargs):
+    def continuous_query_test(self, **kwargs):
         """
         Test continuous query
         
@@ -362,13 +448,13 @@ class ContinuousqueryApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.test(callback=callback_function)
+        >>> thread = api.continuous_query_test(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str project: 
         :param str query: 
-        :return: list[SchemaField]
+        :return: bool
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -381,10 +467,11 @@ class ContinuousqueryApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method test" % key
+                    " to method continuous_query_test" % key
                 )
             params[key] = val
         del params['kwargs']
+
 
         resource_path = '/continuous-query/test'.replace('{format}', 'json')
         method = 'POST'
@@ -424,7 +511,7 @@ class ContinuousqueryApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=files,
-                                            response_type='list[SchemaField]',
+                                            response_type='bool',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'))
         return response

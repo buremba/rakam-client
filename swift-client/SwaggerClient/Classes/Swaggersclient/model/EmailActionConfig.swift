@@ -17,6 +17,8 @@ public class EmailActionConfig: JSONEncodable {
     public var richText: Bool?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

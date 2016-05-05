@@ -11,8 +11,10 @@ import Foundation
 public class CollectionEvent: JSONEncodable {
 
     public var collection: String?
-    public var properties: [String:String]?
+    public var properties: [String:Inline_response_200]?
     
+
+    public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {

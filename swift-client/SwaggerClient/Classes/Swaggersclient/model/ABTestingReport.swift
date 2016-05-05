@@ -20,6 +20,8 @@ public class ABTestingReport: JSONEncodable {
     public var connectorField: String?
     
 
+    public init() {}
+
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()

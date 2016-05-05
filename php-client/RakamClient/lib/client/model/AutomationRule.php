@@ -109,7 +109,7 @@ class AutomationRule implements ArrayAccess
       * $is_active 
       * @var bool
       */
-    protected $is_active;
+    protected $is_active = false;
     
     /**
       * $scenarios 

@@ -1,23 +1,18 @@
 package org.rakam.client.api;
 
+import com.sun.jersey.api.client.GenericType;
+
 import org.rakam.ApiException;
 import org.rakam.ApiClient;
 import org.rakam.Configuration;
 import org.rakam.Pair;
-import org.rakam.TypeRef;
 
-import org.rakam.client.model.*;
+import org.rakam.client.model.ABTestingReport;
+import org.rakam.client.model.JsonResponse;
 
 import java.util.*;
 
-import org.rakam.client.model.JsonResponse;
-import org.rakam.client.model.ABTestingReport;
-
-import java.io.File;
-import java.util.Map;
-import java.util.HashMap;
-
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class AbtestingApi {
   private ApiClient apiClient;
 
@@ -41,12 +36,17 @@ public class AbtestingApi {
   /**
    * Create test
    * 
+   * @param aBTestingReport 
    * @return JsonResponse
    */
-  public JsonResponse create () throws ApiException {
-    Object postBody = null;
-    byte[] postBinaryBody = null;
+  public JsonResponse abTestingCreate(ABTestingReport aBTestingReport) throws ApiException {
+    Object postBody = aBTestingReport;
     
+     // verify the required parameter 'aBTestingReport' is set
+     if (aBTestingReport == null) {
+        throw new ApiException(400, "Missing the required parameter 'aBTestingReport' when calling abTestingCreate");
+     }
+     
     // create path and map variables
     String path = "/ab-testing/create".replaceAll("\\{format\\}","json");
 
@@ -74,15 +74,9 @@ public class AbtestingApi {
     String[] authNames = new String[] { "master_key" };
 
     
-
+    GenericType<JsonResponse> returnType = new GenericType<JsonResponse>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<JsonResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
   /**
@@ -92,9 +86,8 @@ public class AbtestingApi {
    * @param id 
    * @return JsonResponse
    */
-  public JsonResponse delete (String project, Integer id) throws ApiException {
+  public JsonResponse abTestingDelete(String project, Integer id) throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/ab-testing/delete".replaceAll("\\{format\\}","json");
@@ -127,15 +120,9 @@ public class AbtestingApi {
     String[] authNames = new String[] { "master_key" };
 
     
-
+    GenericType<JsonResponse> returnType = new GenericType<JsonResponse>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<JsonResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
   /**
@@ -145,9 +132,8 @@ public class AbtestingApi {
    * @param id 
    * @return ABTestingReport
    */
-  public ABTestingReport get (String project, Integer id) throws ApiException {
+  public ABTestingReport abTestingGet(String project, Integer id) throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/ab-testing/get".replaceAll("\\{format\\}","json");
@@ -180,15 +166,9 @@ public class AbtestingApi {
     String[] authNames = new String[] { "read_key" };
 
     
-
+    GenericType<ABTestingReport> returnType = new GenericType<ABTestingReport>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<ABTestingReport>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
   /**
@@ -197,9 +177,8 @@ public class AbtestingApi {
    * @param project 
    * @return List<ABTestingReport>
    */
-  public List<ABTestingReport> list (String project) throws ApiException {
+  public List<ABTestingReport> abTestingList(String project) throws ApiException {
     Object postBody = null;
-    byte[] postBinaryBody = null;
     
     // create path and map variables
     String path = "/ab-testing/list".replaceAll("\\{format\\}","json");
@@ -230,26 +209,25 @@ public class AbtestingApi {
     String[] authNames = new String[] { "read_key" };
 
     
-
+    GenericType<List<ABTestingReport>> returnType = new GenericType<List<ABTestingReport>>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<List<ABTestingReport>>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
   /**
    * Update report
    * 
+   * @param aBTestingReport 
    * @return ABTestingReport
    */
-  public ABTestingReport update () throws ApiException {
-    Object postBody = null;
-    byte[] postBinaryBody = null;
+  public ABTestingReport abTestingUpdate(ABTestingReport aBTestingReport) throws ApiException {
+    Object postBody = aBTestingReport;
     
+     // verify the required parameter 'aBTestingReport' is set
+     if (aBTestingReport == null) {
+        throw new ApiException(400, "Missing the required parameter 'aBTestingReport' when calling abTestingUpdate");
+     }
+     
     // create path and map variables
     String path = "/ab-testing/update".replaceAll("\\{format\\}","json");
 
@@ -277,15 +255,9 @@ public class AbtestingApi {
     String[] authNames = new String[] { "master_key" };
 
     
-
+    GenericType<ABTestingReport> returnType = new GenericType<ABTestingReport>() {};
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     
-    
-    TypeRef returnType = new TypeRef<ABTestingReport>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, accept, contentType, authNames, returnType);
-    
-    
-
-
   }
   
 }

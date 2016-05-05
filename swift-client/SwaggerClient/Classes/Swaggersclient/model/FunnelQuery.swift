@@ -11,24 +11,24 @@ import Foundation
 public class FunnelQuery: JSONEncodable {
 
     public var project: String?
-    public var connector_field: String?
     public var steps: [FunnelStep]?
     public var dimension: String?
     public var startDate: NSDate?
+    public var window: FunnelWindow?
     public var endDate: NSDate?
-    public var enableOtherGrouping: Bool?
     
+
+    public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["project"] = self.project
-        nillableDictionary["connector_field"] = self.connector_field
         nillableDictionary["steps"] = self.steps?.encodeToJSON()
         nillableDictionary["dimension"] = self.dimension
         nillableDictionary["startDate"] = self.startDate?.encodeToJSON()
+        nillableDictionary["window"] = self.window?.encodeToJSON()
         nillableDictionary["endDate"] = self.endDate?.encodeToJSON()
-        nillableDictionary["enableOtherGrouping"] = self.enableOtherGrouping
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

@@ -11,14 +11,14 @@ import Foundation
 public class FunnelStep: JSONEncodable {
 
     public var collection: String?
-    public var filterExpression: String?
     
+
+    public init() {}
 
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["collection"] = self.collection
-        nillableDictionary["filterExpression"] = self.filterExpression
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

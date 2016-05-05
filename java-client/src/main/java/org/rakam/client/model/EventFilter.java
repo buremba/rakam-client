@@ -1,25 +1,29 @@
 package org.rakam.client.model;
 
-import org.rakam.StringUtil;
-import org.rakam.client.model.EventFilterAggregation;
-
-
-
-import io.swagger.annotations.*;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import org.rakam.client.model.EventFilterAggregation;
+import org.rakam.client.model.Timeframe;
 
 
-@ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-12-06T22:11:51.057+02:00")
+
+
+
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-06T02:48:07.215+03:00")
 public class EventFilter   {
   
   private String collection = null;
+  private Timeframe timeframe = null;
   private EventFilterAggregation aggregation = null;
   private String filterExpression = null;
 
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("collection")
   public String getCollection() {
@@ -32,6 +36,20 @@ public class EventFilter   {
   
   /**
    **/
+  
+  @ApiModelProperty(value = "")
+  @JsonProperty("timeframe")
+  public Timeframe getTimeframe() {
+    return timeframe;
+  }
+  public void setTimeframe(Timeframe timeframe) {
+    this.timeframe = timeframe;
+  }
+
+  
+  /**
+   **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("aggregation")
   public EventFilterAggregation getAggregation() {
@@ -44,6 +62,7 @@ public class EventFilter   {
   
   /**
    **/
+  
   @ApiModelProperty(value = "")
   @JsonProperty("filterExpression")
   public String getFilterExpression() {
@@ -56,14 +75,47 @@ public class EventFilter   {
   
 
   @Override
-  public String toString()  {
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    EventFilter eventFilter = (EventFilter) o;
+    return Objects.equals(collection, eventFilter.collection) &&
+        Objects.equals(timeframe, eventFilter.timeframe) &&
+        Objects.equals(aggregation, eventFilter.aggregation) &&
+        Objects.equals(filterExpression, eventFilter.filterExpression);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(collection, timeframe, aggregation, filterExpression);
+  }
+
+  @Override
+  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class EventFilter {\n");
     
-    sb.append("    collection: ").append(StringUtil.toIndentedString(collection)).append("\n");
-    sb.append("    aggregation: ").append(StringUtil.toIndentedString(aggregation)).append("\n");
-    sb.append("    filterExpression: ").append(StringUtil.toIndentedString(filterExpression)).append("\n");
+    sb.append("    collection: ").append(toIndentedString(collection)).append("\n");
+    sb.append("    timeframe: ").append(toIndentedString(timeframe)).append("\n");
+    sb.append("    aggregation: ").append(toIndentedString(aggregation)).append("\n");
+    sb.append("    filterExpression: ").append(toIndentedString(filterExpression)).append("\n");
     sb.append("}");
     return sb.toString();
   }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+
