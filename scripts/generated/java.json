@@ -1,1 +1,10 @@
-{"invokerPackage": "org.rakam", "groupId": "org.rakam", "artifactVersion": "0.2", "sortParamsByRequiredFlag": false, "apiPackage": "org.rakam.client.api", "ensureUniqueParams": false, "modelPackage": "org.rakam.client.model", "artifactId": "rakam-client"}
+{
+  "invokerPackage": "org.rakam",
+  "groupId": "org.rakam",
+  "artifactVersion": "0.2",
+  "sortParamsByRequiredFlag": false,
+  "apiPackage": "org.rakam.client.api",
+  "ensureUniqueParams": false,
+  "modelPackage": "org.rakam.client.model",
+  "artifactId": "rakam-client"
+}
