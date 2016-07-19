@@ -1,35 +1,23 @@
-# Project related
-output/*
-generated/*
-
-# Java
-.idea/
-*.iml
-*.ipr
-*.iws
-.classpath
-.project
-.settings/
-lib/*
-
-.gradle/
-build/
-target/
-
-mods/
-=======
 *.class
-*.log
+config
+dist
 
-# sbt specific
-dist/*
-target/
-lib_managed/
-src_managed/
-project/boot/
-project/plugins/project/
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
 
-# Scala-IDE specific
-.scala_dependencies
+# Package Files #
+*.jar
+*.war
+*.ear
 
-git.properties
+# exclude jar for gradle wrapper
+!gradle/wrapper/*.jar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# build files
+**/target
+target
+.gradle
+build

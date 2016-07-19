@@ -1,0 +1,1 @@
+{"invokerPackage": "io.rakam", "groupId": "io.rakam", "artifactVersion": null, "sortParamsByRequiredFlag": false, "apiPackage": "io.rakam.client.api", "ensureUniqueParams": false, "modelPackage": "io.rakam.client.model", "hideGenerationTimestamp": "true", "artifactId": "rakam-client"}
